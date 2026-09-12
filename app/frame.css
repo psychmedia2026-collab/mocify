@@ -1,4 +1,26 @@
 /* MOCIFY central neon frame — colorful but restrained. Loaded after audit.css. */
+
+/* Keep the existing MOCIFY mark, but give the header brand more presence. */
+.m-header .m-logo {
+  gap: 12px;
+  font-size: 29px;
+  font-weight: 950;
+  letter-spacing: -.05em;
+  text-shadow:
+    0 0 14px rgba(255,255,255,.08),
+    0 0 24px rgba(176,78,255,.10);
+}
+
+.m-header .m-logo img {
+  width: 62px;
+  height: 62px;
+  filter:
+    saturate(1.12)
+    contrast(1.05)
+    drop-shadow(0 0 10px rgba(0,217,255,.18))
+    drop-shadow(0 0 18px rgba(223,45,255,.30));
+}
+
 .m-main-frame {
   position: relative;
   isolation: isolate;
@@ -76,6 +98,16 @@
 }
 
 @media (max-width: 1100px) {
+  .m-header .m-logo {
+    gap: 11px;
+    font-size: 27px;
+  }
+
+  .m-header .m-logo img {
+    width: 58px;
+    height: 58px;
+  }
+
   .m-main-frame {
     width: calc(100% - 10px);
     border-radius: 28px;
@@ -89,6 +121,16 @@
 }
 
 @media (max-width: 620px) {
+  .m-header .m-logo {
+    gap: 8px;
+    font-size: 23px;
+  }
+
+  .m-header .m-logo img {
+    width: 50px;
+    height: 50px;
+  }
+
   .m-main-frame {
     width: calc(100% - 6px);
     margin-top: 4px;
