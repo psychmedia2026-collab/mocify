@@ -56,7 +56,7 @@ export function Shell({ children, active = "", player = true }: { children: Reac
   return <div className={player ? "m-shell has-player" : "m-shell"}>
     <a className="skip-link" href="#main-content">Skip to content</a>
     <Header active={active} />
-    <main id="main-content" tabIndex={-1}>{children}</main>
+    <main id="main-content" className="m-main-frame" tabIndex={-1}>{children}</main>
     <Footer />
     {player && <Player />}
   </div>;
