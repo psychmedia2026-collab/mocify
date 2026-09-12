@@ -30,7 +30,14 @@
 }
 
 .m-header nav {
-  gap: 42px;
+  gap: 46px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.m-header nav a {
+  padding-top: 36px;
+  padding-bottom: 36px;
 }
 
 .m-account {
@@ -41,11 +48,92 @@
   width: min(1300px, calc(100% - 72px));
 }
 
+/* Hero: one cinematic banner, with the image blended into the right side. */
 .home-hero {
-  min-height: 640px;
-  gap: 38px;
-  padding-top: 42px;
-  padding-bottom: 34px;
+  position: relative;
+  display: block;
+  min-height: 545px;
+  margin-top: 30px;
+  margin-bottom: 34px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 26px;
+  background:
+    radial-gradient(circle at 76% 35%, rgba(86,52,255,.14), transparent 35%),
+    radial-gradient(circle at 94% 48%, rgba(255,42,194,.10), transparent 28%),
+    linear-gradient(100deg, rgba(7,7,18,.99) 0%, rgba(8,7,22,.98) 38%, rgba(9,8,25,.91) 61%, rgba(6,6,16,.82) 100%) padding-box,
+    linear-gradient(112deg,
+      rgba(5,221,255,.60) 0%,
+      rgba(91,101,255,.60) 30%,
+      rgba(218,61,255,.66) 64%,
+      rgba(255,71,167,.62) 82%,
+      rgba(255,143,61,.52) 100%) border-box;
+  box-shadow:
+    0 0 18px rgba(0,217,255,.08),
+    0 0 34px rgba(126,80,255,.10),
+    0 0 46px rgba(226,44,215,.07),
+    inset 0 0 55px rgba(87,56,255,.035);
+}
+
+.home-copy {
+  position: relative;
+  z-index: 5;
+  width: 50%;
+  max-width: 625px;
+  padding: 64px 0 64px 58px;
+}
+
+.hero-portrait {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 69%;
+  height: 100%;
+  margin: 0;
+  display: block;
+}
+
+.hero-glow {
+  z-index: 1;
+  inset: 2% -4% -3% 10%;
+  filter: blur(30px);
+  opacity: .78;
+}
+
+.hero-photo {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 72% 38%;
+  border-radius: 0;
+  mix-blend-mode: normal;
+  mask-image: none;
+  -webkit-mask-image: none;
+  filter: saturate(1.08) contrast(1.05);
+}
+
+/* The photo fades into the same dark surface behind the copy instead of ending as a rectangle. */
+.hero-portrait::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg,
+      rgba(7,7,18,1) 0%,
+      rgba(7,7,18,.94) 10%,
+      rgba(7,7,18,.72) 22%,
+      rgba(7,7,18,.34) 37%,
+      rgba(7,7,18,.08) 51%,
+      transparent 64%),
+    linear-gradient(180deg, rgba(4,4,12,.05) 0%, transparent 70%, rgba(4,4,12,.32) 100%);
 }
 
 .feature-strip {
@@ -157,7 +245,8 @@
   }
 
   .m-header nav {
-    gap: 28px;
+    gap: 30px;
+    font-size: 15px;
   }
 
   .m-header .m-logo {
@@ -175,10 +264,18 @@
   }
 
   .home-hero {
-    min-height: 600px;
-    gap: 24px;
-    padding-top: 34px;
-    padding-bottom: 28px;
+    min-height: 520px;
+    margin-top: 24px;
+    margin-bottom: 30px;
+  }
+
+  .home-copy {
+    width: 53%;
+    padding: 54px 0 54px 44px;
+  }
+
+  .hero-portrait {
+    width: 66%;
   }
 
   .feature-strip {
@@ -213,6 +310,40 @@
     width: calc(100% - 32px);
   }
 
+  .home-hero {
+    min-height: 660px;
+    margin-top: 18px;
+    border-radius: 23px;
+  }
+
+  .home-copy {
+    width: 100%;
+    max-width: 680px;
+    padding: 44px 38px 330px;
+  }
+
+  .hero-portrait {
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    height: 58%;
+  }
+
+  .hero-photo {
+    object-position: 72% 28%;
+  }
+
+  .hero-portrait::after {
+    background:
+      linear-gradient(180deg,
+        rgba(7,7,18,1) 0%,
+        rgba(7,7,18,.92) 12%,
+        rgba(7,7,18,.55) 28%,
+        rgba(7,7,18,.14) 48%,
+        transparent 66%),
+      linear-gradient(90deg, rgba(7,7,18,.26), transparent 42%, transparent 100%);
+  }
+
   .home-section {
     padding-top: 44px;
     padding-bottom: 58px;
@@ -220,6 +351,11 @@
 
   .creator-banner {
     padding: 36px;
+  }
+
+  .m-mobile-nav a {
+    font-size: 10px;
+    font-weight: 700;
   }
 }
 
@@ -245,8 +381,22 @@
   }
 
   .home-hero {
-    padding-top: 26px;
-    padding-bottom: 24px;
+    min-height: 615px;
+    margin-top: 12px;
+    margin-bottom: 24px;
+    border-radius: 19px;
+  }
+
+  .home-copy {
+    padding: 34px 24px 285px;
+  }
+
+  .hero-portrait {
+    height: 50%;
+  }
+
+  .hero-photo {
+    object-position: 72% 26%;
   }
 
   .feature-strip {
@@ -264,6 +414,10 @@
 
   .creator-banner {
     padding: 28px 22px;
+  }
+
+  .m-mobile-nav a {
+    font-size: 9px;
   }
 
   .m-main-frame {
