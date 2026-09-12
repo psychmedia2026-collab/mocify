@@ -45,11 +45,13 @@
     inset 0 12px 34px -30px rgba(130,85,255,.40);
 }
 
-/* Matching neon separators between Discover, Popular and For Artists. */
+/* Matching neon separators above Discover and between the homepage content sections. */
+.m-main-frame > .feature-strip + .home-section,
 .m-main-frame > .home-section + .home-section {
   position: relative;
 }
 
+.m-main-frame > .feature-strip + .home-section::before,
 .m-main-frame > .home-section + .home-section::before {
   content: "";
   position: absolute;
@@ -104,6 +106,7 @@
       inset 0 0 22px rgba(89,55,255,.04);
   }
 
+  .m-main-frame > .feature-strip + .home-section::before,
   .m-main-frame > .home-section + .home-section::before {
     left: 4px;
     right: 4px;
