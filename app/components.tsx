@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { featuredTrack, navigation, type Release } from "./data";
+import { featuredTrack, mobileNavigation, navigation, type Release } from "./data";
 
 export function Logo() {
   return <Link className="m-logo" href="/" aria-label="MOCIFY home">
@@ -19,21 +19,25 @@ export function Header({ active = "" }: { active?: string }) {
       <div className="m-account">
         <Link className="m-search" href="/explore" aria-label="Search music">⌕</Link>
         <Link className="m-login" href="/login">Log in</Link>
-        <Link className="m-primary compact" href="/signup">Sign up</Link>
+        <Link className="m-primary compact m-signup" href="/signup">Sign up</Link>
       </div>
     </header>
     <nav className="m-mobile-nav" aria-label="Mobile navigation">
-      {navigation.map(({ label, href, icon }) => <Link key={href} href={href} aria-current={active === label.toLowerCase() ? "page" : undefined}><span aria-hidden="true">{icon}</span>{label}</Link>)}
+      {mobileNavigation.map(({ label, href, icon }) => <Link key={href} href={href} aria-current={active === label.toLowerCase() ? "page" : undefined}><span aria-hidden="true">{icon}</span>{label}</Link>)}
     </nav>
   </>;
 }
 
 export function Player() {
-  return <section className="m-player" aria-label="Music player">
+  return <section className="m-player" aria-label="Music player preview">
     <div className="m-player-inner">
       <Link className="m-player-track" href={featuredTrack.href}><span className="m-player-cover" aria-hidden="true">{featuredTrack.initials}</span><span><b>{featuredTrack.title}</b><small>{featuredTrack.artist}</small></span></Link>
-      <div className="m-controls"><button type="button" aria-label="Previous track">↶</button><button type="button" className="m-play" aria-label="Play track">▶</button><button type="button" aria-label="Next track">↷</button></div>
-      <div className="m-player-right"><span>{featuredTrack.elapsed}</span><i aria-hidden="true"><b /></i><span>{featuredTrack.duration}</span><Link href="/library" aria-label="Open liked tracks">♡</Link></div>
+      <div className="m-controls" aria-label="Playback controls coming soon">
+        <button type="button" disabled title="Playback coming soon" aria-label="Previous track — coming soon">↶</button>
+        <button type="button" disabled className="m-play" title="Playback coming soon" aria-label="Play track — coming soon">▶</button>
+        <button type="button" disabled title="Playback coming soon" aria-label="Next track — coming soon">↷</button>
+      </div>
+      <div className="m-player-right"><span>{featuredTrack.elapsed}</span><i aria-hidden="true"><b style={{width:`${featuredTrack.progress}%`}} /></i><span>{featuredTrack.duration}</span><Link href="/library" aria-label="Open library">♡</Link></div>
     </div>
   </section>;
 }
@@ -43,7 +47,7 @@ export function Footer() {
     <div><Logo /><p>AI MUSIC. INFINITE POSSIBILITIES.</p></div>
     <div><b>Discover</b><Link href="/explore">Explore</Link><Link href="/artists">Artists</Link><Link href="/premium">Premium</Link></div>
     <div><b>Creators</b><Link href="/upload">Upload music</Link><Link href="/signup">Join MOCIFY</Link></div>
-    <div><b>MOCIFY</b><span>About</span><span>Terms</span><span>Privacy</span></div>
+    <div><b>MOCIFY</b><span>About — soon</span><span>Terms — soon</span><span>Privacy — soon</span></div>
     <small>© 2026 MOCIFY</small>
   </footer>;
 }
@@ -58,9 +62,15 @@ export function Shell({ children, active = "", player = true }: { children: Reac
   </div>;
 }
 
+export function ComingSoonButton({ children, className = "m-secondary", label }: { children: React.ReactNode; className?: string; label?: string }) {
+  return <button type="button" className={`${className} prototype-control`} disabled title={label ?? "Coming soon"}>{children}<span className="prototype-badge">SOON</span></button>;
+}
+
 export function ReleaseCard({ r, index }: { r: Release; index: number }) {
-  return <Link id={r.id} className="release-card" href={r.href}>
-    <div className={`release-art ${r.art}`}><span className="release-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span><span className="release-play" aria-hidden="true">▶</span></div>
+  const card = <>
+    <div className={`release-art ${r.art}`}><span className="release-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>{r.detailReady ? <span className="release-play" aria-hidden="true">▶</span> : <span className="release-soon">PREVIEW SOON</span>}</div>
     <small>{r.genre}</small><h3>{r.title}</h3><p>{r.artist}</p>
-  </Link>;
+  </>;
+  if ("href" in r && r.href) return <Link id={r.id} className="release-card" href={r.href}>{card}</Link>;
+  return <article id={r.id} className="release-card release-card-static" aria-label={`${r.title} — preview coming soon`}>{card}</article>;
 }
