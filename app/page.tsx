@@ -27,8 +27,8 @@ export default function Home() {
         <nav className="nav-links" aria-label="Main navigation">
           <a className="active" href="#home">Home</a>
           <a href="#explore">Explore</a>
-          <a href="#create">Create</a>
           <a href="#artists">Artists</a>
+          <a href="#upload">Upload</a>
           <a href="#premium">Premium</a>
         </nav>
 
@@ -58,7 +58,7 @@ export default function Home() {
 
           <div className="hero-actions">
             <button className="gradient-button">Start listening</button>
-            <button className="outline-button">Start creating</button>
+            <button className="outline-button">Upload your music</button>
           </div>
 
           <div className="mini-stats" aria-label="MOCIFY highlights">
@@ -149,13 +149,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="creator-strip" id="create">
+      <section className="creator-strip" id="upload">
         <div>
-          <p className="eyebrow">FOR CREATORS</p>
-          <h2>Your sound. Your identity. Your audience.</h2>
-          <p>Upload your music, build an artist profile and grow inside the MOCIFY universe.</p>
+          <p className="eyebrow">FOR ARTISTS</p>
+          <h2>Bring your music to MOCIFY.</h2>
+          <p>Upload your AI music, build your artist profile and reach listeners inside the MOCIFY universe.</p>
         </div>
-        <button className="gradient-button">Create artist profile</button>
+        <button className="gradient-button">Upload your music</button>
       </section>
 
       <div className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-[#09090d]/90 px-4 py-3 backdrop-blur-2xl">
