@@ -1,0 +1,431 @@
+/* Homepage hero refinements based on the approved MOCIFY reference. Loaded last. */
+
+/* Make the desktop navigation feel closer to the reference. */
+.m-header nav {
+  gap: 48px;
+  font-size: 17px;
+  font-weight: 720;
+}
+
+/* One cinematic hero banner: copy on the left, portrait blended into the right,
+   with the four feature tiles integrated at the bottom. */
+.home-hero {
+  position: relative;
+  display: block;
+  min-height: 660px;
+  margin-top: 30px;
+  margin-bottom: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(139, 89, 255, .42);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 80% 38%, rgba(70, 74, 255, .22), transparent 34%),
+    radial-gradient(circle at 93% 42%, rgba(255, 39, 192, .18), transparent 32%),
+    linear-gradient(100deg, #050610 0%, #060713 34%, #09081a 55%, #090714 100%);
+  box-shadow:
+    0 0 0 1px rgba(0, 218, 255, .06) inset,
+    0 0 20px rgba(0, 217, 255, .10),
+    0 0 42px rgba(113, 73, 255, .12),
+    0 0 70px rgba(226, 44, 215, .08);
+}
+
+.home-hero::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, transparent 0%, transparent 68%, rgba(3, 4, 11, .20) 79%, rgba(3, 4, 11, .62) 100%),
+    radial-gradient(circle at 74% 46%, transparent 0%, transparent 48%, rgba(3, 4, 11, .12) 72%, rgba(3, 4, 11, .42) 100%);
+}
+
+.home-copy {
+  position: relative;
+  z-index: 7;
+  width: 51%;
+  max-width: 670px;
+  padding: 70px 0 190px 58px;
+}
+
+.home-copy h1 {
+  max-width: 660px;
+  font-size: clamp(64px, 6.1vw, 92px);
+  line-height: .95;
+  letter-spacing: -.055em;
+}
+
+.home-copy > p {
+  max-width: 545px;
+  margin-top: 25px;
+  font-size: 17px;
+  line-height: 1.62;
+  color: #e0e0e7;
+}
+
+.home-actions {
+  margin-top: 32px;
+  gap: 28px;
+}
+
+.hero-cta {
+  min-width: 205px;
+  min-height: 54px;
+  border-radius: 15px;
+  box-shadow:
+    0 10px 34px rgba(218,39,255,.30),
+    0 0 34px rgba(255,111,0,.10);
+}
+
+.watch-link {
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.watch-link span {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(175, 108, 255, .72);
+  background: rgba(16, 12, 34, .80);
+  box-shadow: 0 0 22px rgba(145, 77, 255, .18);
+}
+
+.hero-portrait {
+  position: absolute;
+  z-index: 1;
+  inset: 0 0 0 auto;
+  width: 72%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  z-index: 1;
+  inset: 4% -4% 8% 12%;
+  opacity: .95;
+  filter: blur(34px);
+  background:
+    radial-gradient(circle at 53% 44%, rgba(42, 89, 255, .35), transparent 38%),
+    radial-gradient(circle at 74% 48%, rgba(255, 0, 178, .30), transparent 42%),
+    radial-gradient(circle at 94% 56%, rgba(255, 105, 0, .22), transparent 24%);
+}
+
+.hero-photo {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 72% 38%;
+  border-radius: 0;
+  filter: saturate(1.14) contrast(1.06) brightness(1.02);
+}
+
+/* The portrait must feel like part of the banner, not like a separate image box. */
+.hero-portrait::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg,
+      #050610 0%,
+      rgba(5, 6, 16, .98) 10%,
+      rgba(5, 6, 16, .82) 22%,
+      rgba(5, 6, 16, .48) 36%,
+      rgba(5, 6, 16, .16) 50%,
+      transparent 63%),
+    linear-gradient(180deg,
+      rgba(3,4,11,.08) 0%,
+      transparent 65%,
+      rgba(3,4,11,.34) 100%);
+}
+
+/* Feature row integrated into the hero, like the approved reference. */
+.hero-feature-strip {
+  position: absolute;
+  z-index: 8;
+  left: 28px;
+  right: 28px;
+  bottom: 24px;
+  width: auto;
+  margin: 0;
+  padding: 26px 28px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  border: 1px solid rgba(116, 92, 255, .26);
+  border-radius: 19px;
+  background:
+    linear-gradient(105deg, rgba(8, 8, 26, .95), rgba(11, 8, 29, .92));
+  box-shadow:
+    0 18px 38px rgba(0,0,0,.28),
+    0 0 34px rgba(76, 36, 190, .11),
+    inset 0 0 28px rgba(126, 77, 255, .035);
+  backdrop-filter: blur(18px);
+}
+
+.hero-feature-strip .feature-item {
+  min-width: 0;
+  padding: 0 24px;
+}
+
+.hero-feature-strip .feature-item:first-child {
+  padding-left: 4px;
+}
+
+.hero-feature-strip .feature-item:last-child {
+  padding-right: 4px;
+}
+
+.hero-feature-strip .feature-icon {
+  flex-basis: 54px;
+  width: 54px;
+  height: 54px;
+  font-size: 25px;
+  border-color: rgba(183,72,255,.20);
+  box-shadow: 0 0 24px rgba(179, 55, 255, .10);
+}
+
+.hero-feature-strip .feature-item b {
+  font-size: 15px;
+}
+
+.hero-feature-strip .feature-item p {
+  max-width: 190px;
+  margin-top: 6px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: #9b9baa;
+}
+
+/* Discover starts cleanly below the single hero banner. */
+.m-main-frame > .home-hero + .home-section {
+  position: relative;
+}
+
+.m-main-frame > .home-hero + .home-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 12px;
+  right: 12px;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(5,221,255,.56) 10%,
+    rgba(68,120,255,.62) 27%,
+    rgba(130,85,255,.68) 45%,
+    rgba(232,60,255,.68) 66%,
+    rgba(255,58,168,.60) 82%,
+    rgba(255,138,61,.48) 92%,
+    transparent 100%);
+  box-shadow:
+    0 0 8px rgba(0,217,255,.10),
+    0 0 16px rgba(126,80,255,.12),
+    0 0 24px rgba(226,44,215,.08);
+}
+
+@media (max-width: 1100px) {
+  .m-header nav {
+    gap: 30px;
+    font-size: 15.5px;
+  }
+
+  .home-hero {
+    min-height: 640px;
+  }
+
+  .home-copy {
+    width: 54%;
+    padding: 58px 0 185px 44px;
+  }
+
+  .home-copy h1 {
+    font-size: clamp(58px, 7vw, 78px);
+  }
+
+  .hero-portrait {
+    width: 70%;
+  }
+
+  .hero-feature-strip {
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    padding: 22px 18px;
+  }
+
+  .hero-feature-strip .feature-item {
+    padding: 0 16px;
+  }
+
+  .hero-feature-strip .feature-icon {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+  }
+}
+
+@media (max-width: 900px) {
+  .home-hero {
+    min-height: 760px;
+    margin-top: 18px;
+    border-radius: 23px;
+  }
+
+  .home-copy {
+    width: 66%;
+    max-width: 610px;
+    padding: 46px 0 270px 38px;
+  }
+
+  .home-copy h1 {
+    font-size: clamp(54px, 8vw, 70px);
+  }
+
+  .home-copy > p {
+    font-size: 15px;
+  }
+
+  .hero-portrait {
+    width: 78%;
+  }
+
+  .hero-photo {
+    object-position: 72% 34%;
+  }
+
+  .hero-portrait::after {
+    background:
+      linear-gradient(90deg,
+        #050610 0%,
+        rgba(5,6,16,.97) 13%,
+        rgba(5,6,16,.78) 28%,
+        rgba(5,6,16,.36) 45%,
+        rgba(5,6,16,.08) 60%,
+        transparent 72%),
+      linear-gradient(180deg, transparent 0%, transparent 62%, rgba(3,4,11,.48) 100%);
+  }
+
+  .hero-feature-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 0;
+    padding: 22px;
+  }
+
+  .hero-feature-strip .feature-item:nth-child(2) {
+    border-right: 0;
+  }
+
+  .hero-feature-strip .feature-item:nth-child(3) {
+    padding-left: 4px;
+  }
+
+  .hero-feature-strip .feature-item:nth-child(1),
+  .hero-feature-strip .feature-item:nth-child(2) {
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255,255,255,.07);
+  }
+}
+
+@media (max-width: 620px) {
+  .home-hero {
+    min-height: 760px;
+    margin-top: 12px;
+    border-radius: 20px;
+  }
+
+  .home-copy {
+    width: 100%;
+    max-width: none;
+    padding: 34px 22px 330px;
+  }
+
+  .home-copy h1 {
+    max-width: 430px;
+    font-size: clamp(47px, 13.5vw, 62px);
+    line-height: .96;
+  }
+
+  .home-copy > p {
+    max-width: 470px;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+
+  .home-actions {
+    margin-top: 24px;
+    gap: 16px;
+  }
+
+  .hero-cta {
+    min-width: 170px;
+  }
+
+  .watch-link {
+    font-size: 13px;
+  }
+
+  .hero-portrait {
+    top: 180px;
+    width: 100%;
+    height: 410px;
+  }
+
+  .hero-photo {
+    object-position: 72% 28%;
+  }
+
+  .hero-portrait::after {
+    background:
+      linear-gradient(180deg,
+        #050610 0%,
+        rgba(5,6,16,.82) 12%,
+        rgba(5,6,16,.36) 28%,
+        rgba(5,6,16,.06) 44%,
+        transparent 58%,
+        rgba(3,4,11,.36) 100%),
+      linear-gradient(90deg, rgba(5,6,16,.28), transparent 38%, transparent 100%);
+  }
+
+  .hero-feature-strip {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    padding: 16px 14px;
+    border-radius: 15px;
+    gap: 12px 0;
+  }
+
+  .hero-feature-strip .feature-item {
+    gap: 10px;
+    padding: 0 10px;
+  }
+
+  .hero-feature-strip .feature-icon {
+    width: 39px;
+    height: 39px;
+    flex-basis: 39px;
+    font-size: 19px;
+  }
+
+  .hero-feature-strip .feature-item b {
+    font-size: 12px;
+  }
+
+  .hero-feature-strip .feature-item p {
+    display: none;
+  }
+
+  .m-main-frame > .home-hero + .home-section::before {
+    left: 4px;
+    right: 4px;
+    opacity: .78;
+  }
+}
