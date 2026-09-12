@@ -45,6 +45,6 @@ export const artistTracks = releases.filter((release) => release.artist === feat
   id: release.id,
   title: release.title,
   duration: "duration" in release ? release.duration : featuredTrack.duration,
-  href: release.href,
+  href: "href" in release ? release.href : featuredArtist.href,
 }));
 export const genres = ["Manele", "Trap", "Pop", "Afrohouse", "Arabic", "Dance", "R&B", "Electronic", "Rock", "Other"];
