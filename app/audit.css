@@ -1,0 +1,251 @@
+/* MOCIFY quality-audit fixes. Loaded after the visual system so these rules stay explicit. */
+
+/* Prototype states */
+.prototype-control {
+  position: relative;
+  gap: 10px;
+  white-space: nowrap;
+}
+.prototype-control:disabled,
+.settings-row:disabled,
+.track-control:disabled,
+.track-main-control:disabled,
+.m-controls button:disabled {
+  cursor: not-allowed;
+  opacity: .78;
+}
+.prototype-control:disabled:hover {
+  transform: none;
+  filter: none;
+}
+.prototype-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 18px;
+  padding: 2px 6px;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  color: #c9c9d4;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  line-height: 1;
+}
+.release-soon {
+  position: absolute;
+  right: 9px;
+  bottom: 9px;
+  padding: 6px 8px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 999px;
+  background: rgba(4,4,10,.76);
+  color: #d2d2db;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .1em;
+}
+.release-card-static { cursor: default; }
+.release-card-static:hover { transform: none; }
+
+/* Header/mobile reachability */
+@media (max-width:900px) {
+  .m-account .m-search { display: none; }
+  .m-account .m-login {
+    display: inline-flex;
+    align-items: center;
+    min-height: 42px;
+  }
+  .m-mobile-nav a {
+    min-width: 0;
+    padding: 5px 2px;
+  }
+}
+@media (max-width:620px) {
+  .m-account .m-signup { display: none; }
+  .m-login { padding: 9px 13px; }
+  .m-mobile-nav a { font-size: 8px; }
+  .m-mobile-nav span { font-size: 16px; }
+}
+
+/* Contrast and touch targets */
+.m-footer { color: #a0a0ad; }
+.m-footer > small { color: #898996; }
+.m-footer > div:first-child p { color: #9b9ba8; }
+.m-player-track small,
+.m-player-right { color: #a2a2af; }
+.m-controls button,
+.m-player-right > a,
+.track-control,
+.track-main-control {
+  min-width: 44px;
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+.m-controls button { color: #b6b6c2; }
+.m-controls button:disabled { color: #8c8c99; }
+.m-player-right > a {
+  color: #d1d1da;
+  font-size: 18px;
+}
+
+/* Shared WebKit-safe gradients */
+.track-progress {
+  background: linear-gradient(90deg,#7857ff 0%,#ed35c5 58%,#ff963f 100%);
+}
+.upload-icon {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: linear-gradient(145deg,#7457ff 0%,#ed35c5 58%,#ff963f 100%);
+  color: white;
+  font-size: 24px;
+  box-shadow: 0 0 30px rgba(237,53,197,.25);
+}
+
+/* Premium alignment */
+.premium-hero { text-align: center; }
+.premium-hero .page-title,
+.premium-hero .page-lead {
+  margin-left: auto;
+  margin-right: auto;
+}
+.premium-card { min-width: 0; }
+.premium-plan-button {
+  min-height: 50px;
+  margin-top: 24px;
+  white-space: nowrap;
+}
+@media (max-width:820px) and (min-width:768px) {
+  .premium-grid { gap: 12px; }
+  .premium-card { padding: 22px 18px; }
+  .premium-plan-button { padding-left: 12px; padding-right: 12px; font-size: 12px; }
+}
+
+/* Forms */
+.role-option {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+.role-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.role-option span {
+  min-height: 52px;
+  display: grid;
+  place-items: center;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 12px;
+  background: rgba(255,255,255,.025);
+  color: #d8d8df;
+  font-size: 14px;
+  font-weight: 800;
+}
+.role-option input:checked + span {
+  border-color: rgba(244,95,215,.42);
+  background: rgba(237,53,197,.12);
+  color: white;
+  box-shadow: 0 0 24px rgba(237,53,197,.08);
+}
+.role-option input:focus-visible + span {
+  outline: 2px solid var(--cyan);
+  outline-offset: 4px;
+}
+.selected-file {
+  display: block;
+  max-width: 100%;
+  margin-top: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #d9c9ff;
+  font-size: 12px;
+  font-weight: 700;
+}
+.settings-row:disabled { color: inherit; }
+
+/* Search/filter placeholders */
+.prototype-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  min-height: 44px;
+  padding: 11px 16px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 999px;
+  background: rgba(255,255,255,.03);
+  color: #a8a8b4;
+  font-size: 13px;
+}
+.prototype-search b {
+  color: #c1a8ff;
+  font-size: 8px;
+  letter-spacing: .12em;
+}
+.genre-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 16px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 999px;
+  background: rgba(255,255,255,.035);
+  color: #ccccd5;
+  font-size: 12px;
+  font-weight: 700;
+}
+.genre-pill small {
+  color: #9278c7;
+  font-size: 7px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+/* Artist catalog */
+.artist-row {
+  grid-template-columns: repeat(auto-fit,minmax(92px,1fr));
+}
+.artist-card { position: relative; }
+.artist-card-soon { scroll-margin-top: 24px; }
+.artist-soon-badge {
+  position: absolute;
+  top: 26px;
+  right: 26px;
+  background: rgba(5,5,12,.72);
+}
+
+/* Track preview */
+.track-control,
+.track-main-control {
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.035);
+  color: #b0b0bd;
+}
+.track-main-control {
+  width: 56px;
+  height: 56px;
+  border-color: rgba(237,53,197,.45);
+  background: linear-gradient(145deg,rgba(120,87,255,.22),rgba(237,53,197,.24));
+  color: #fff;
+  box-shadow: 0 0 25px rgba(237,53,197,.16);
+}
+
+/* Keep small-screen labels readable without crowding the layout. */
+@media (max-width:430px) {
+  .prototype-badge { font-size: 7px; padding-inline: 5px; }
+  .prototype-control { gap: 7px; }
+  .premium-plan-button { white-space: normal; }
+}
