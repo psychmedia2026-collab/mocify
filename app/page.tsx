@@ -25,12 +25,12 @@ export default function Home(){
 
       <div className="hero-portrait">
         <div className="hero-glow"/>
-        <Image className="hero-photo" src={hero} sizes="(max-width: 410px) 177.78vw, (max-width: 620px) 729px, (max-width: 900px) 996px, 978px" preload alt="Woman wearing futuristic neon headphones"/>
+        <Image className="hero-photo" src={hero} sizes="(max-width: 620px) 100vw, (max-width: 900px) 90vw, 900px" preload alt="Woman wearing futuristic neon headphones"/>
       </div>
-    </section>
 
-    <section className="feature-strip page-wrap">
-      {features.map(([icon,title,text])=><div className="feature-item" key={title}><span className="feature-icon" aria-hidden="true">{icon}</span><div><b>{title}</b><p>{text}</p></div></div>)}
+      <div className="feature-strip hero-feature-strip" aria-label="MOCIFY highlights">
+        {features.map(([icon,title,text])=><div className="feature-item" key={title}><span className="feature-icon" aria-hidden="true">{icon}</span><div><b>{title}</b><p>{text}</p></div></div>)}
+      </div>
     </section>
 
     <section className="home-section page-wrap">
