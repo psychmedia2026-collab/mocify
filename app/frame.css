@@ -45,6 +45,34 @@
     inset 0 12px 34px -30px rgba(130,85,255,.40);
 }
 
+/* Matching neon separators between Discover, Popular and For Artists. */
+.m-main-frame > .home-section + .home-section {
+  position: relative;
+}
+
+.m-main-frame > .home-section + .home-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 12px;
+  right: 12px;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(5,221,255,.56) 10%,
+    rgba(68,120,255,.62) 27%,
+    rgba(130,85,255,.68) 45%,
+    rgba(232,60,255,.68) 66%,
+    rgba(255,58,168,.60) 82%,
+    rgba(255,138,61,.48) 92%,
+    transparent 100%);
+  box-shadow:
+    0 0 8px rgba(0,217,255,.10),
+    0 0 16px rgba(126,80,255,.12),
+    0 0 24px rgba(226,44,215,.08);
+}
+
 @media (max-width: 1100px) {
   .m-main-frame {
     width: calc(100% - 10px);
@@ -74,5 +102,11 @@
       0 0 20px rgba(126,80,255,.10),
       0 0 34px rgba(226,44,215,.075),
       inset 0 0 22px rgba(89,55,255,.04);
+  }
+
+  .m-main-frame > .home-section + .home-section::before {
+    left: 4px;
+    right: 4px;
+    opacity: .78;
   }
 }
