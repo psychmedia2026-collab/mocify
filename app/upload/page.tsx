@@ -1,1 +1,18 @@
-import {Shell} from "../components";export default function Upload(){return <Shell active="upload" player={false}><section className="page-wrap py-20"><p className="page-kicker">FOR ARTISTS</p><h1 className="page-title max-w-4xl">Bring your sound to <span className="gradient-text">MOCIFY.</span></h1><p className="page-lead mt-6">Publish AI-generated music, shape your artist identity and prepare your next release.</p><div className="mx-auto mt-14 max-w-4xl rounded-[34px] border border-white/10 bg-white/[.035] p-6 md:p-10"><div className="rounded-[26px] border border-dashed border-white/15 bg-black/20 p-10 text-center"><div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-violet-600 via-fuchsia-500 to-orange-500 text-2xl">↑</div><h2 className="mt-5 text-3xl font-black">Drop your audio here</h2><p className="mt-2 text-sm text-zinc-500">WAV, FLAC or MP3 · prototype upload</p><button className="m-secondary mt-6">Choose audio file</button></div><div className="mt-8 grid gap-5 md:grid-cols-2">{[['Track title','e.g. Neon Heart'],['Artist name','Your artist identity'],['Genre','Choose a genre'],['AI creation tool','Suno, Udio or other']].map(([l,p])=><label key={l} className="text-sm font-bold">{l}<input className="mt-2 w-full rounded-2xl border border-white/10 bg-black/25 p-4 font-normal outline-none placeholder:text-zinc-700" placeholder={p}/></label>)}</div><label className="mt-5 block text-sm font-bold">AI disclosure<textarea className="mt-2 min-h-28 w-full rounded-2xl border border-white/10 bg-black/25 p-4 font-normal outline-none" placeholder="Tell listeners how AI was used in this release."/></label><div className="mt-7 flex justify-end"><button className="m-primary">Continue to release details →</button></div></div></section></Shell>}
+import {Shell} from "../components";
+
+export default function UploadPage(){
+  return <Shell active="upload" player={false}>
+    <section className="page-wrap grid gap-10 py-16 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+      <div><p className="page-kicker">FOR ARTISTS</p><h1 className="page-title">Bring your sound to <span className="gradient-text">MOCIFY.</span></h1><p className="page-lead mt-6">Upload AI-generated music, shape your artist identity and prepare your release for listeners around the world.</p><div className="mt-8 space-y-3 text-sm text-zinc-400"><p>✦ Build your artist profile</p><p>♫ Publish your releases</p><p>◎ Reach listeners inside MOCIFY</p></div></div>
+
+      <div className="rounded-[26px] border border-fuchsia-500/20 bg-[radial-gradient(circle_at_80%_0%,rgba(236,40,210,.18),transparent_35%),rgba(255,255,255,.025)] p-6 md:p-8">
+        <div className="mb-7 grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-violet-600 via-fuchsia-500 to-orange-400 text-2xl shadow-[0_0_30px_rgba(237,53,197,.25)]">↑</div>
+        <h2 className="text-3xl font-black tracking-[-.04em]">Upload a track</h2><p className="mt-2 text-sm leading-6 text-zinc-500">Prototype flow — storage and publishing will be connected in the backend phase.</p>
+        <div className="mt-7 grid gap-4 md:grid-cols-2"><Field label="Track title" text="Enter track title"/><Field label="Artist name" text="Your artist name"/><Field label="Genre" text="Choose genre"/><Field label="AI creation tool" text="Suno, Udio or other"/></div>
+        <div className="mt-4 rounded-2xl border border-dashed border-violet-400/30 bg-black/25 px-6 py-10 text-center"><b className="text-sm">Drop your audio file here</b><p className="mt-2 text-xs text-zinc-600">WAV, MP3 or FLAC</p></div>
+        <button className="m-primary mt-6 w-full">Continue →</button>
+      </div>
+    </section>
+  </Shell>
+}
+function Field({label,text}:{label:string,text:string}){return <label className="text-xs font-bold text-zinc-300">{label}<div className="mt-2 rounded-xl border border-white/10 bg-black/30 px-4 py-4 font-normal text-zinc-600">{text}</div></label>}
