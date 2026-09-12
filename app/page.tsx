@@ -1,16 +1,20 @@
 const tracks = [
-  { title: "Neon Heart", artist: "AVA-9", tag: "AI Pop" },
-  { title: "Midnight Code", artist: "NOIR//01", tag: "Dark R&B" },
-  { title: "Synthetic Sun", artist: "LUMA", tag: "Electronic" },
+  { title: "Neon Heart", artist: "AVA-9", tag: "AI POP" },
+  { title: "Midnight Code", artist: "NOIR//01", tag: "DARK R&B" },
+  { title: "Synthetic Sun", artist: "LUMA", tag: "ELECTRONIC" },
 ];
 
 export default function Home() {
   return (
     <main className="mocify-shell">
       <header className="topbar">
-        <a className="brand" href="#">
-          <span className="brand-mark" aria-hidden="true">M</span>
-          <span>MOCIFY</span>
+        <a className="brand" href="#home" aria-label="MOCIFY home">
+          <span className="brand-mark" aria-hidden="true">
+            <span className="brand-wing left-wing" />
+            <span className="brand-core" />
+            <span className="brand-wing right-wing" />
+          </span>
+          <span className="brand-word">MOCIFY</span>
         </a>
 
         <nav className="nav-links" aria-label="Main navigation">
@@ -29,15 +33,20 @@ export default function Home() {
 
       <section className="hero" id="home">
         <div className="hero-copy">
-          <p className="eyebrow">THE FUTURE OF MUSIC IS HERE</p>
+          <div className="hero-badge">
+            <span className="hero-badge-dot" />
+            AI MUSIC PLATFORM
+          </div>
+
           <h1>
             AI MUSIC.
             <br />
             <span>INFINITE POSSIBILITIES.</span>
           </h1>
+
           <p className="hero-text">
-            Discover a new generation of artists, sounds and ideas. Stream music,
-            create your own identity and be part of a platform built for AI music.
+            Discover a new generation of artists, sounds and ideas. Stream original AI music,
+            build your identity and join a platform made for the future of music.
           </p>
 
           <div className="hero-actions">
@@ -57,9 +66,18 @@ export default function Home() {
           <div className="orb orb-two" />
           <div className="hero-card">
             <div className="cover-art">
-              <div className="cover-glow" />
-              <span className="cover-logo">M</span>
+              <div className="cover-noise" />
+              <div className="cover-ring ring-one" />
+              <div className="cover-ring ring-two" />
+              <div className="cover-emblem">
+                <span className="cover-bar bar-1" />
+                <span className="cover-bar bar-2" />
+                <span className="cover-bar bar-3" />
+                <span className="cover-bar bar-4" />
+                <span className="cover-bar bar-5" />
+              </div>
             </div>
+
             <div className="now-playing">
               <div>
                 <p>NOW PLAYING</p>
@@ -68,6 +86,7 @@ export default function Home() {
               </div>
               <button className="play-button" aria-label="Play">▶</button>
             </div>
+
             <div className="progress"><span /></div>
           </div>
         </div>
@@ -79,13 +98,14 @@ export default function Home() {
             <p className="eyebrow">DISCOVER</p>
             <h2>Trending on MOCIFY</h2>
           </div>
-          <a href="#">View all →</a>
+          <a href="#explore">View all →</a>
         </div>
 
         <div className="track-grid">
           {tracks.map((track, index) => (
             <article className="track-card" key={track.title}>
               <div className={`track-art art-${index + 1}`}>
+                <span className="track-number">0{index + 1}</span>
                 <button className="card-play" aria-label={`Play ${track.title}`}>▶</button>
               </div>
               <p className="track-tag">{track.tag}</p>
