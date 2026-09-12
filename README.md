@@ -1,0 +1,2 @@
+# mocify
+AI music platform 
