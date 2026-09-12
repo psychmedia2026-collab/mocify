@@ -1,1 +1,37 @@
-const artists=[["AVA-9","AI Pop","A9","from-fuchsia-500 via-violet-600 to-indigo-950","/artist/ava-9"],["NOIR//01","Dark R&B","N1","from-slate-900 via-indigo-950 to-cyan-800","#"],["LUMA","Electronic","LU","from-orange-500 via-pink-600 to-violet-800","#"],["SYNTHA","Future Soul","SY","from-cyan-500 via-blue-700 to-violet-950","#"],["KAI//X","Alternative AI","KX","from-zinc-900 via-fuchsia-900 to-rose-600","#"],["MIRA-7","Ambient","M7","from-sky-500 via-indigo-700 to-slate-950","#"]];export default function ArtistsPage(){return <main className="mocify-shell pb-28"><Header/><section className="mx-auto w-[min(1180px,calc(100%-40px))] pb-12 pt-20"><p className="eyebrow">ARTISTS</p><h1 className="max-w-4xl text-5xl font-black tracking-[-0.06em] md:text-7xl">Meet the voices of a <span className="bg-gradient-to-r from-violet-300 via-fuchsia-400 to-orange-400 bg-clip-text text-transparent">new music era.</span></h1><p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">Discover AI artists, follow their releases and explore the identities behind the music.</p></section><section className="mx-auto grid w-[min(1180px,calc(100%-40px))] gap-5 pb-24 sm:grid-cols-2 lg:grid-cols-3">{artists.map(([name,genre,initials,gradient,href])=><a href={href} key={name} className="group rounded-3xl border border-white/10 bg-white/[0.04] p-3 transition hover:-translate-y-1 hover:bg-white/[0.07]"><div className={`flex aspect-square items-center justify-center rounded-[22px] bg-gradient-to-br ${gradient}`}><div className="grid h-32 w-32 place-items-center rounded-full border border-white/20 bg-black/20 text-4xl font-black">{initials}</div></div><div className="p-4"><p className="eyebrow">{genre}</p><h2 className="text-2xl font-black">{name}</h2><span className="mt-4 inline-block rounded-full border border-white/15 px-5 py-2 text-sm font-bold">View artist</span></div></a>)}</section></main>};function Header(){return <header className="topbar"><a className="brand" href="/"><span className="brand-word">MOCIFY</span></a><nav className="nav-links"><a href="/">Home</a><a href="/explore">Explore</a><a className="active" href="/artists">Artists</a><a href="/upload">Upload</a><a href="/premium">Premium</a></nav><div className="nav-actions"><a className="ghost-button" href="/login">Log in</a><a className="gradient-button small" href="/signup">Join MOCIFY</a></div></header>}
+import Link from "next/link";
+import {Shell} from "../components";
+
+const artists=[
+  ["Andigo","AI POP","AN","from-fuchsia-500 via-purple-700 to-slate-950","/artist/ava-9"],
+  ["Sabrina","DARK POP","SA","from-violet-500 via-pink-700 to-slate-950","/artists"],
+  ["DJ Kairo","ELECTRONIC","DK","from-cyan-400 via-indigo-700 to-slate-950","/artists"],
+  ["Loredana AI","MANALE","LA","from-orange-400 via-pink-700 to-violet-950","/artists"],
+  ["Rami","R&B","RA","from-blue-500 via-violet-800 to-slate-950","/artists"],
+  ["Zeyna","AFROHOUSE","ZE","from-pink-500 via-fuchsia-700 to-violet-950","/artists"],
+  ["SAYNO","TRAP","SY","from-purple-500 via-indigo-800 to-black","/artists"],
+  ["Balkan Vibes","BALKAN","BV","from-cyan-500 via-fuchsia-700 to-slate-950","/artists"],
+];
+
+export default function ArtistsPage(){
+  return <Shell active="artists">
+    <section className="page-wrap py-16">
+      <p className="page-kicker">ARTISTS</p>
+      <div className="mt-3 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+        <div><h1 className="page-title max-w-4xl">The voices of a <span className="gradient-text">new music era.</span></h1><p className="page-lead mt-6">Discover artificial artists with their own sound, visual identity and growing catalog.</p></div>
+        <div className="rounded-full border border-white/10 bg-white/[.03] px-5 py-3 text-sm text-zinc-500">⌕ Search artists</div>
+      </div>
+    </section>
+
+    <section className="page-wrap pb-16">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {artists.map(([name,genre,initials,gradient,href])=><Link href={href} key={name} className="group rounded-2xl border border-white/8 bg-white/[.025] p-4 transition hover:-translate-y-1 hover:border-fuchsia-500/20 hover:bg-white/[.045]">
+          <div className={`relative grid aspect-square place-items-center overflow-hidden rounded-xl bg-gradient-to-br ${gradient}`}>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_25%,rgba(255,255,255,.25),transparent_18%)]"/>
+            <span className="relative grid h-28 w-28 place-items-center rounded-full border border-white/20 bg-black/25 text-3xl font-black backdrop-blur">{initials}</span>
+          </div>
+          <p className="page-kicker mt-4">{genre}</p><h2 className="mt-2 text-xl font-black">{name}</h2><p className="mt-2 text-xs text-zinc-500">View profile →</p>
+        </Link>)}
+      </div>
+    </section>
+  </Shell>
+}
