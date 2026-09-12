@@ -40,7 +40,11 @@ export const releases = [
 
 export type Release = (typeof releases)[number];
 export const featuredTrack = { ...releases[0], duration: "3:28", elapsed: "1:42", progress: 49, initials: "TB" };
-export const likedTracks = releases.slice(0, 3);
+export const likedTracks = [
+  { ...releases[0], href: releases[0].href },
+  { ...releases[1], href: "/explore#bella-ciao" },
+  { ...releases[2], href: "/explore#fara-mine" },
+];
 export const artistTracks = releases.filter((release) => release.artist === featuredArtist.name).map((release) => ({
   id: release.id,
   title: release.title,
