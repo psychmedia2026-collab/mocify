@@ -1,16 +1,8 @@
+import Image from "next/image";
+import hero from "../public/mocify-hero.webp";
+import { artists, releases } from "./data";
 import Link from "next/link";
-import {Shell,releases,ReleaseCard} from "./components";
-
-const artists=[
-  ["Andigo","AN","from-fuchsia-600 to-violet-900"],
-  ["Sabrina","SA","from-violet-500 to-pink-800"],
-  ["DJ Kairo","DK","from-cyan-500 to-indigo-900"],
-  ["Loredana AI","LA","from-orange-500 to-fuchsia-800"],
-  ["Rami","RA","from-indigo-500 to-slate-900"],
-  ["Zeyna","ZE","from-pink-500 to-violet-900"],
-  ["SAYNO","SY","from-purple-500 to-fuchsia-900"],
-  ["Balkan Vibes","BV","from-cyan-500 to-purple-900"],
-];
+import {Shell,ReleaseCard} from "./components";
 
 const features=[
   ["✦","AI Powered","Unique, original music in seconds."],
@@ -31,15 +23,15 @@ export default function Home(){
         </div>
       </div>
 
-      <div className="hero-portrait" aria-label="MOCIFY neon music artwork">
+      <div className="hero-portrait">
         <div className="hero-glow"/>
-        <img className="hero-photo" src="/mocify-hero.webp" alt="Woman wearing futuristic neon headphones"/>
-        <img className="hero-bird" src="/mocify-logo.webp" alt=""/>
+        {/* Cover scales this landscape image by the portrait's height; request enough pixels for that full width. */}
+        <Image className="hero-photo" src={hero} sizes="(max-width: 410px) 177.78vw, (max-width: 620px) 729px, (max-width: 900px) 996px, 978px" preload alt="Woman wearing futuristic neon headphones"/>
       </div>
     </section>
 
     <section className="feature-strip page-wrap">
-      {features.map(([icon,title,text])=><div className="feature-item" key={title}><span className="feature-icon">{icon}</span><div><b>{title}</b><p>{text}</p></div></div>)}
+      {features.map(([icon,title,text])=><div className="feature-item" key={title}><span className="feature-icon" aria-hidden="true">{icon}</span><div><b>{title}</b><p>{text}</p></div></div>)}
     </section>
 
     <section className="home-section page-wrap">
@@ -49,7 +41,7 @@ export default function Home(){
 
     <section className="home-section page-wrap">
       <div className="home-heading"><div><p className="page-kicker">POPULAR</p><h2>Popular Artists</h2></div><Link href="/artists">View all →</Link></div>
-      <div className="artist-row">{artists.map(([name,initials,gradient])=><Link href={name==="Andigo"?"/artist/ava-9":"/artists"} className="artist-mini" key={name}><span className={`artist-avatar bg-gradient-to-br ${gradient}`}>{initials}</span><b>{name}</b></Link>)}</div>
+      <div className="artist-row">{artists.map(({name,initials,avatarGradient,href})=><Link href={href} className="artist-mini" key={name}><span className={`artist-avatar bg-gradient-to-br ${avatarGradient}`}>{initials}</span><b>{name}</b></Link>)}</div>
     </section>
 
     <section className="home-section page-wrap">
