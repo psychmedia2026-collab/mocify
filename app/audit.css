@@ -1,5 +1,42 @@
 /* MOCIFY quality-audit fixes. Loaded after the visual system so these rules stay explicit. */
 
+/* Central app frame */
+.m-main-frame {
+  width: min(1360px, calc(100% - 24px));
+  margin: 14px auto 0;
+  overflow: hidden;
+  border: 1px solid rgba(132, 104, 255, .34);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 82% 8%, rgba(199, 45, 255, .10), transparent 28%),
+    radial-gradient(circle at 10% 18%, rgba(0, 217, 255, .055), transparent 24%),
+    linear-gradient(180deg, rgba(10, 9, 20, .86), rgba(4, 5, 12, .92));
+  box-shadow:
+    0 0 0 1px rgba(0, 217, 255, .05) inset,
+    0 0 26px rgba(101, 65, 255, .14),
+    0 0 52px rgba(226, 44, 215, .07);
+}
+
+@media (max-width:900px) {
+  .m-main-frame {
+    width: calc(100% - 18px);
+    margin-top: 10px;
+    border-radius: 24px;
+  }
+}
+
+@media (max-width:620px) {
+  .m-main-frame {
+    width: calc(100% - 10px);
+    margin-top: 6px;
+    border-radius: 19px;
+    border-color: rgba(132, 104, 255, .24);
+    box-shadow:
+      0 0 0 1px rgba(0, 217, 255, .035) inset,
+      0 0 20px rgba(101, 65, 255, .08);
+  }
+}
+
 /* Prototype states */
 .prototype-control {
   position: relative;
