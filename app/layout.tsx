@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import "./mocify.css";
+import "./audit.css";
 
 const geist = Geist({ variable: "--font-geist", subsets: ["latin"] });
 
