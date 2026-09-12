@@ -25,7 +25,6 @@ export default function Home(){
 
       <div className="hero-portrait">
         <div className="hero-glow"/>
-        {/* Cover scales this landscape image by the portrait's height; request enough pixels for that full width. */}
         <Image className="hero-photo" src={hero} sizes="(max-width: 410px) 177.78vw, (max-width: 620px) 729px, (max-width: 900px) 996px, 978px" preload alt="Woman wearing futuristic neon headphones"/>
       </div>
     </section>
@@ -41,7 +40,7 @@ export default function Home(){
 
     <section className="home-section page-wrap">
       <div className="home-heading"><div><p className="page-kicker">POPULAR</p><h2>Popular Artists</h2></div><Link href="/artists">View all →</Link></div>
-      <div className="artist-row">{artists.map(({name,initials,avatarGradient,href})=><Link href={href} className="artist-mini" key={name}><span className={`artist-avatar bg-gradient-to-br ${avatarGradient}`}>{initials}</span><b>{name}</b></Link>)}</div>
+      <div className="artist-row">{artists.map(({name,initials,avatarCss,href})=><Link href={href} className="artist-mini" key={name}><span className="artist-avatar" style={{background:avatarCss}}>{initials}</span><b>{name}</b></Link>)}</div>
     </section>
 
     <section className="home-section page-wrap">
