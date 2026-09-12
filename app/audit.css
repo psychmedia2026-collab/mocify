@@ -108,6 +108,10 @@
   font-size: 24px;
   box-shadow: 0 0 30px rgba(237,53,197,.25);
 }
+.library-avatar {
+  background: linear-gradient(145deg,#7457ff 0%,#ed35c5 58%,#ff963f 100%);
+  box-shadow: 0 0 28px rgba(237,53,197,.14);
+}
 
 /* Premium alignment */
 .premium-hero { text-align: center; }
