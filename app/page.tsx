@@ -26,7 +26,7 @@ export default function Home() {
 
         <nav className="nav-links" aria-label="Main navigation">
           <a className="active" href="#home">Home</a>
-          <a href="#explore">Explore</a>
+          <a href="/explore">Explore</a>
           <a href="#artists">Artists</a>
           <a href="#upload">Upload</a>
           <a href="#premium">Premium</a>
@@ -57,8 +57,8 @@ export default function Home() {
           </p>
 
           <div className="hero-actions">
-            <button className="gradient-button">Start listening</button>
-            <button className="outline-button">Upload your music</button>
+            <a className="gradient-button" href="/explore">Start listening</a>
+            <a className="outline-button" href="#upload">Upload your music</a>
           </div>
 
           <div className="mini-stats" aria-label="MOCIFY highlights">
@@ -105,7 +105,7 @@ export default function Home() {
             <p className="eyebrow">DISCOVER</p>
             <h2>Trending on MOCIFY</h2>
           </div>
-          <a href="#explore">View all →</a>
+          <a href="/explore">View all →</a>
         </div>
 
         <div className="track-grid">
