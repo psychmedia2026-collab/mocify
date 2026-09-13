@@ -25,7 +25,7 @@ export default function Home(){
 
       <div className="hero-portrait">
         <div className="hero-glow"/>
-        <Image className="hero-photo" src={hero} sizes="(max-width: 620px) 100vw, (max-width: 900px) 90vw, 900px" preload alt="Woman wearing futuristic neon headphones"/>
+        <Image className="hero-photo" src={hero} unoptimized preload alt="Woman wearing futuristic neon headphones"/>
       </div>
 
       <div className="feature-strip hero-feature-strip" aria-label="MOCIFY highlights">
