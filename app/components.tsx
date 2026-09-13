@@ -10,7 +10,7 @@ export function Logo() {
       height={120}
       unoptimized
       alt="MOCIFY"
-      style={{ width: "190px", height: "auto", maxWidth: "42vw" }}
+      style={{ width: "190px", height: "auto", maxWidth: "42vw", filter: "none" }}
     />
   </Link>;
 }
