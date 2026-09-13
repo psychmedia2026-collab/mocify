@@ -1,33 +1,47 @@
 /* Homepage hero refinements based on the approved MOCIFY reference. Loaded last. */
 
-/* Make the desktop navigation feel closer to the reference. */
+/* Keep the navigation bold and readable like the reference. */
 .m-header nav {
   gap: 48px;
   font-size: 17px;
   font-weight: 720;
 }
 
-/* One cinematic hero banner: copy on the left, portrait blended into the right,
-   with the four feature tiles integrated at the bottom. */
+/* On Home, remove the large outer neon frame. The hero itself is the visual frame. */
+.m-main-frame:has(> .home-hero) {
+  width: 100%;
+  margin-top: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.m-main-frame:has(> .home-hero)::before {
+  display: none;
+}
+
+/* One wide cinematic banner, close to the approved reference composition. */
 .home-hero {
   position: relative;
   display: block;
-  min-height: 660px;
-  margin-top: 30px;
-  margin-bottom: 0;
+  width: min(1460px, calc(100% - 56px));
+  min-height: 710px;
+  margin: 24px auto 0;
   padding: 0;
   overflow: hidden;
-  border: 1px solid rgba(139, 89, 255, .42);
-  border-radius: 28px;
+  border: 1px solid rgba(122, 91, 255, .28);
+  border-radius: 25px;
   background:
-    radial-gradient(circle at 80% 38%, rgba(70, 74, 255, .22), transparent 34%),
-    radial-gradient(circle at 93% 42%, rgba(255, 39, 192, .18), transparent 32%),
-    linear-gradient(100deg, #050610 0%, #060713 34%, #09081a 55%, #090714 100%);
+    radial-gradient(circle at 79% 35%, rgba(62, 75, 255, .20), transparent 36%),
+    radial-gradient(circle at 93% 46%, rgba(255, 35, 190, .16), transparent 31%),
+    linear-gradient(100deg, #03050d 0%, #050612 38%, #080718 62%, #080611 100%);
   box-shadow:
-    0 0 0 1px rgba(0, 218, 255, .06) inset,
-    0 0 20px rgba(0, 217, 255, .10),
-    0 0 42px rgba(113, 73, 255, .12),
-    0 0 70px rgba(226, 44, 215, .08);
+    0 0 0 1px rgba(0, 218, 255, .035) inset,
+    0 0 20px rgba(0, 217, 255, .065),
+    0 0 42px rgba(113, 73, 255, .08),
+    0 0 62px rgba(226, 44, 215, .05);
 }
 
 .home-hero::after {
@@ -37,41 +51,41 @@
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(180deg, transparent 0%, transparent 68%, rgba(3, 4, 11, .20) 79%, rgba(3, 4, 11, .62) 100%),
-    radial-gradient(circle at 74% 46%, transparent 0%, transparent 48%, rgba(3, 4, 11, .12) 72%, rgba(3, 4, 11, .42) 100%);
+    linear-gradient(180deg, transparent 0%, transparent 66%, rgba(3, 4, 11, .16) 79%, rgba(3, 4, 11, .50) 100%),
+    radial-gradient(circle at 76% 44%, transparent 0%, transparent 52%, rgba(3, 4, 11, .08) 73%, rgba(3, 4, 11, .30) 100%);
 }
 
 .home-copy {
   position: relative;
   z-index: 7;
-  width: 51%;
-  max-width: 670px;
-  padding: 70px 0 190px 58px;
+  width: 50%;
+  max-width: 690px;
+  padding: 82px 0 200px 68px;
 }
 
 .home-copy h1 {
-  max-width: 660px;
-  font-size: clamp(64px, 6.1vw, 92px);
-  line-height: .95;
+  max-width: 690px;
+  font-size: clamp(68px, 6vw, 94px);
+  line-height: .94;
   letter-spacing: -.055em;
 }
 
 .home-copy > p {
-  max-width: 545px;
-  margin-top: 25px;
+  max-width: 555px;
+  margin-top: 27px;
   font-size: 17px;
   line-height: 1.62;
-  color: #e0e0e7;
+  color: #e2e2e8;
 }
 
 .home-actions {
-  margin-top: 32px;
+  margin-top: 34px;
   gap: 28px;
 }
 
 .hero-cta {
-  min-width: 205px;
-  min-height: 54px;
+  min-width: 210px;
+  min-height: 56px;
   border-radius: 15px;
   box-shadow:
     0 10px 34px rgba(218,39,255,.30),
@@ -84,18 +98,19 @@
 }
 
 .watch-link span {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border: 1px solid rgba(175, 108, 255, .72);
   background: rgba(16, 12, 34, .80);
   box-shadow: 0 0 22px rgba(145, 77, 255, .18);
 }
 
+/* The portrait occupies most of the right side and feels like the banner background. */
 .hero-portrait {
   position: absolute;
   z-index: 1;
   inset: 0 0 0 auto;
-  width: 72%;
+  width: 76%;
   height: 100%;
   margin: 0;
   overflow: hidden;
@@ -104,13 +119,13 @@
 .hero-glow {
   position: absolute;
   z-index: 1;
-  inset: 4% -4% 8% 12%;
-  opacity: .95;
-  filter: blur(34px);
+  inset: 2% -4% 6% 8%;
+  opacity: .96;
+  filter: blur(36px);
   background:
-    radial-gradient(circle at 53% 44%, rgba(42, 89, 255, .35), transparent 38%),
-    radial-gradient(circle at 74% 48%, rgba(255, 0, 178, .30), transparent 42%),
-    radial-gradient(circle at 94% 56%, rgba(255, 105, 0, .22), transparent 24%);
+    radial-gradient(circle at 53% 44%, rgba(42, 89, 255, .36), transparent 39%),
+    radial-gradient(circle at 76% 48%, rgba(255, 0, 178, .32), transparent 43%),
+    radial-gradient(circle at 95% 56%, rgba(255, 105, 0, .23), transparent 25%);
 }
 
 .hero-photo {
@@ -120,12 +135,14 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 72% 38%;
+  object-position: 78% 36%;
   border-radius: 0;
-  filter: saturate(1.14) contrast(1.06) brightness(1.02);
+  filter: saturate(1.15) contrast(1.07) brightness(1.02);
+  transform: scale(1.075);
+  transform-origin: 88% 48%;
 }
 
-/* The portrait must feel like part of the banner, not like a separate image box. */
+/* Wide, soft fade: no visible seam between copy and portrait. */
 .hero-portrait::after {
   content: "";
   position: absolute;
@@ -134,44 +151,45 @@
   pointer-events: none;
   background:
     linear-gradient(90deg,
-      #050610 0%,
-      rgba(5, 6, 16, .98) 10%,
-      rgba(5, 6, 16, .82) 22%,
-      rgba(5, 6, 16, .48) 36%,
-      rgba(5, 6, 16, .16) 50%,
-      transparent 63%),
+      #03050d 0%,
+      rgba(3, 5, 13, .98) 9%,
+      rgba(3, 5, 13, .88) 20%,
+      rgba(3, 5, 13, .66) 32%,
+      rgba(3, 5, 13, .38) 43%,
+      rgba(3, 5, 13, .15) 53%,
+      rgba(3, 5, 13, .035) 62%,
+      transparent 70%),
     linear-gradient(180deg,
-      rgba(3,4,11,.08) 0%,
-      transparent 65%,
-      rgba(3,4,11,.34) 100%);
+      rgba(3,4,11,.05) 0%,
+      transparent 64%,
+      rgba(3,4,11,.28) 100%);
 }
 
-/* Feature row integrated into the hero, like the approved reference. */
+/* Integrated feature strip, tucked close to the lower edge of the banner. */
 .hero-feature-strip {
   position: absolute;
   z-index: 8;
-  left: 28px;
-  right: 28px;
-  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  bottom: 18px;
   width: auto;
   margin: 0;
-  padding: 26px 28px;
+  padding: 27px 30px;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0;
-  border: 1px solid rgba(116, 92, 255, .26);
-  border-radius: 19px;
-  background:
-    linear-gradient(105deg, rgba(8, 8, 26, .95), rgba(11, 8, 29, .92));
+  border: 1px solid rgba(116, 92, 255, .24);
+  border-radius: 18px;
+  background: linear-gradient(105deg, rgba(7, 8, 25, .94), rgba(10, 7, 27, .91));
   box-shadow:
-    0 18px 38px rgba(0,0,0,.28),
-    0 0 34px rgba(76, 36, 190, .11),
-    inset 0 0 28px rgba(126, 77, 255, .035);
+    0 18px 38px rgba(0,0,0,.25),
+    0 0 32px rgba(76, 36, 190, .09),
+    inset 0 0 28px rgba(126, 77, 255, .03);
   backdrop-filter: blur(18px);
 }
 
 .hero-feature-strip .feature-item {
   min-width: 0;
-  padding: 0 24px;
+  padding: 0 25px;
 }
 
 .hero-feature-strip .feature-item:first-child {
@@ -183,9 +201,9 @@
 }
 
 .hero-feature-strip .feature-icon {
-  flex-basis: 54px;
-  width: 54px;
-  height: 54px;
+  flex-basis: 56px;
+  width: 56px;
+  height: 56px;
   font-size: 25px;
   border-color: rgba(183,72,255,.20);
   box-shadow: 0 0 24px rgba(179, 55, 255, .10);
@@ -196,16 +214,17 @@
 }
 
 .hero-feature-strip .feature-item p {
-  max-width: 190px;
+  max-width: 195px;
   margin-top: 6px;
   font-size: 11px;
   line-height: 1.45;
   color: #9b9baa;
 }
 
-/* Discover starts cleanly below the single hero banner. */
+/* Content below the hero keeps breathing room and the subtle separators. */
 .m-main-frame > .home-hero + .home-section {
   position: relative;
+  margin-top: 70px;
 }
 
 .m-main-frame > .home-hero + .home-section::before {
@@ -218,17 +237,17 @@
   pointer-events: none;
   background: linear-gradient(90deg,
     transparent 0%,
-    rgba(5,221,255,.56) 10%,
-    rgba(68,120,255,.62) 27%,
-    rgba(130,85,255,.68) 45%,
-    rgba(232,60,255,.68) 66%,
-    rgba(255,58,168,.60) 82%,
-    rgba(255,138,61,.48) 92%,
+    rgba(5,221,255,.42) 10%,
+    rgba(68,120,255,.48) 27%,
+    rgba(130,85,255,.54) 45%,
+    rgba(232,60,255,.54) 66%,
+    rgba(255,58,168,.46) 82%,
+    rgba(255,138,61,.36) 92%,
     transparent 100%);
   box-shadow:
-    0 0 8px rgba(0,217,255,.10),
-    0 0 16px rgba(126,80,255,.12),
-    0 0 24px rgba(226,44,215,.08);
+    0 0 8px rgba(0,217,255,.08),
+    0 0 16px rgba(126,80,255,.09),
+    0 0 24px rgba(226,44,215,.06);
 }
 
 @media (max-width: 1100px) {
@@ -238,26 +257,27 @@
   }
 
   .home-hero {
-    min-height: 640px;
+    width: calc(100% - 38px);
+    min-height: 660px;
   }
 
   .home-copy {
     width: 54%;
-    padding: 58px 0 185px 44px;
+    padding: 62px 0 190px 46px;
   }
 
   .home-copy h1 {
-    font-size: clamp(58px, 7vw, 78px);
+    font-size: clamp(58px, 7vw, 80px);
   }
 
   .hero-portrait {
-    width: 70%;
+    width: 74%;
   }
 
   .hero-feature-strip {
-    left: 20px;
-    right: 20px;
-    bottom: 20px;
+    left: 18px;
+    right: 18px;
+    bottom: 16px;
     padding: 22px 18px;
   }
 
@@ -273,20 +293,25 @@
 }
 
 @media (max-width: 900px) {
+  .m-main-frame:has(> .home-hero) {
+    width: 100%;
+  }
+
   .home-hero {
-    min-height: 760px;
+    width: calc(100% - 28px);
+    min-height: 770px;
     margin-top: 18px;
-    border-radius: 23px;
+    border-radius: 22px;
   }
 
   .home-copy {
-    width: 66%;
-    max-width: 610px;
-    padding: 46px 0 270px 38px;
+    width: 68%;
+    max-width: 620px;
+    padding: 48px 0 282px 38px;
   }
 
   .home-copy h1 {
-    font-size: clamp(54px, 8vw, 70px);
+    font-size: clamp(54px, 8vw, 72px);
   }
 
   .home-copy > p {
@@ -294,23 +319,24 @@
   }
 
   .hero-portrait {
-    width: 78%;
+    width: 82%;
   }
 
   .hero-photo {
-    object-position: 72% 34%;
+    object-position: 76% 34%;
+    transform: scale(1.045);
   }
 
   .hero-portrait::after {
     background:
       linear-gradient(90deg,
-        #050610 0%,
-        rgba(5,6,16,.97) 13%,
-        rgba(5,6,16,.78) 28%,
-        rgba(5,6,16,.36) 45%,
-        rgba(5,6,16,.08) 60%,
-        transparent 72%),
-      linear-gradient(180deg, transparent 0%, transparent 62%, rgba(3,4,11,.48) 100%);
+        #03050d 0%,
+        rgba(3,5,13,.96) 14%,
+        rgba(3,5,13,.75) 30%,
+        rgba(3,5,13,.36) 47%,
+        rgba(3,5,13,.08) 62%,
+        transparent 74%),
+      linear-gradient(180deg, transparent 0%, transparent 61%, rgba(3,4,11,.44) 100%);
   }
 
   .hero-feature-strip {
@@ -332,19 +358,24 @@
     padding-bottom: 14px;
     border-bottom: 1px solid rgba(255,255,255,.07);
   }
+
+  .m-main-frame > .home-hero + .home-section {
+    margin-top: 56px;
+  }
 }
 
 @media (max-width: 620px) {
   .home-hero {
-    min-height: 760px;
+    width: calc(100% - 18px);
+    min-height: 770px;
     margin-top: 12px;
-    border-radius: 20px;
+    border-radius: 19px;
   }
 
   .home-copy {
     width: 100%;
     max-width: none;
-    padding: 34px 22px 330px;
+    padding: 34px 22px 340px;
   }
 
   .home-copy h1 {
@@ -373,39 +404,40 @@
   }
 
   .hero-portrait {
-    top: 180px;
+    top: 175px;
     width: 100%;
-    height: 410px;
+    height: 430px;
   }
 
   .hero-photo {
-    object-position: 72% 28%;
+    object-position: 75% 28%;
+    transform: scale(1.035);
   }
 
   .hero-portrait::after {
     background:
       linear-gradient(180deg,
-        #050610 0%,
-        rgba(5,6,16,.82) 12%,
-        rgba(5,6,16,.36) 28%,
-        rgba(5,6,16,.06) 44%,
+        #03050d 0%,
+        rgba(3,5,13,.80) 12%,
+        rgba(3,5,13,.34) 28%,
+        rgba(3,5,13,.05) 44%,
         transparent 58%,
-        rgba(3,4,11,.36) 100%),
-      linear-gradient(90deg, rgba(5,6,16,.28), transparent 38%, transparent 100%);
+        rgba(3,4,11,.32) 100%),
+      linear-gradient(90deg, rgba(3,5,13,.22), transparent 38%, transparent 100%);
   }
 
   .hero-feature-strip {
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-    padding: 16px 14px;
-    border-radius: 15px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    padding: 16px 13px;
+    border-radius: 14px;
     gap: 12px 0;
   }
 
   .hero-feature-strip .feature-item {
     gap: 10px;
-    padding: 0 10px;
+    padding: 0 9px;
   }
 
   .hero-feature-strip .feature-icon {
@@ -423,9 +455,13 @@
     display: none;
   }
 
+  .m-main-frame > .home-hero + .home-section {
+    margin-top: 42px;
+  }
+
   .m-main-frame > .home-hero + .home-section::before {
     left: 4px;
     right: 4px;
-    opacity: .78;
+    opacity: .72;
   }
 }
