@@ -4,8 +4,14 @@ import { featuredTrack, mobileNavigation, navigation, type Release } from "./dat
 
 export function Logo() {
   return <Link className="m-logo" href="/" aria-label="MOCIFY home">
-    <Image src="/mocify-logo.webp" width={52} height={52} unoptimized alt="" />
-    <span>MOCIFY</span>
+    <Image
+      src="/mocify-logo-wordmark.webp?v=3"
+      width={2172}
+      height={724}
+      unoptimized
+      alt="MOCIFY"
+      style={{ width: "190px", height: "auto", maxWidth: "42vw", filter: "none" }}
+    />
   </Link>;
 }
 
