@@ -8,7 +8,7 @@ const features=[
   ["✦","AI Powered","Unique, original music in seconds."],
   ["♫","All Genres","From Manele to Afrohouse. Trap to Arabic."],
   ["♢","Royalty Ready","A platform built around new music."],
-  ["◎","For Everyone","Whether you're a listener, artist or creator."],
+  ["◎","For Everyone","Whether you're a listener or artist."],
 ];
 
 export default function Home(){
@@ -16,10 +16,10 @@ export default function Home(){
     <section className="home-hero page-wrap">
       <div className="home-copy">
         <h1>AI MUSIC.<br/><span>INFINITE<br/>POSSIBILITIES.</span></h1>
-        <p>MOCIFY is the AI music platform where a new generation of artists, sounds and ideas can be discovered. Listen, upload and experience music like never before.</p>
+        <p>MOCIFY is the AI music platform where a new generation of artists, sounds and ideas can be discovered. Listen, create, release and experience music like never before.</p>
         <div className="home-actions">
           <Link className="m-primary hero-cta" href="/explore">Start Listening <b>→</b></Link>
-          <Link className="watch-link" href="/explore"><span>▶</span> Explore Music</Link>
+          <Link className="watch-link" href="/studio"><span>◈</span> MOCIFY STUDIO</Link>
         </div>
       </div>
 
@@ -45,8 +45,8 @@ export default function Home(){
 
     <section className="home-section page-wrap">
       <div className="creator-banner">
-        <div><p className="page-kicker">FOR ARTISTS</p><h2>Bring your sound into the MOCIFY universe.</h2><p>Upload your AI music, build your identity and reach listeners in one place.</p></div>
-        <Link className="m-primary" href="/upload">Upload your music →</Link>
+        <div><p className="page-kicker">MOCIFY STUDIO</p><h2>Your workspace for creating, editing and releasing AI music.</h2><p>Build tracks, manage projects, prepare releases, follow analytics and grow your artist profile from one dashboard.</p></div>
+        <Link className="m-primary" href="/studio">Enter MOCIFY STUDIO →</Link>
       </div>
     </section>
   </Shell>
