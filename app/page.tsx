@@ -16,10 +16,10 @@ export default function Home(){
     <section className="home-hero page-wrap">
       <div className="home-copy">
         <h1>AI MUSIC.<br/><span>INFINITE<br/>POSSIBILITIES.</span></h1>
-        <p>MOCIFY is the AI music platform where a new generation of artists, sounds and ideas can be discovered. Listen, create, release and experience music like never before.</p>
+        <p>MOCIFY is the AI music platform where a new generation of artists, sounds and ideas can be discovered. Listen, release and experience music like never before.</p>
         <div className="home-actions">
           <Link className="m-primary hero-cta" href="/explore">Start Listening <b>→</b></Link>
-          <Link className="watch-link" href="/studio"><span>◈</span> MOCIFY STUDIO</Link>
+          <Link className="watch-link" href="/for-artists"><span>◈</span> For Artists</Link>
         </div>
       </div>
 
@@ -45,8 +45,8 @@ export default function Home(){
 
     <section className="home-section page-wrap">
       <div className="creator-banner">
-        <div><p className="page-kicker">MOCIFY STUDIO</p><h2>Your workspace for creating, editing and releasing AI music.</h2><p>Build tracks, manage projects, prepare releases, follow analytics and grow your artist profile from one dashboard.</p></div>
-        <Link className="m-primary" href="/studio">Enter MOCIFY STUDIO →</Link>
+        <div><p className="page-kicker">FOR ARTISTS</p><h2>Release for free. Grow with data. Create with MOCIFY STUDIO.</h2><p>Choose the artist plan that fits you — from simple uploading to analytics and a complete AI creation workspace.</p></div>
+        <Link className="m-primary" href="/for-artists">View artist plans →</Link>
       </div>
     </section>
   </Shell>
