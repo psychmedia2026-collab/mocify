@@ -45,7 +45,7 @@ export function Footer() {
   return <footer className="m-footer">
     <div><Logo /><p>AI MUSIC. INFINITE POSSIBILITIES.</p></div>
     <div><b>Discover</b><Link href="/explore">Explore</Link><Link href="/artists">Artists</Link><Link href="/premium">Premium</Link></div>
-    <div><b>MOCIFY STUDIO</b><Link href="/studio">Open Studio</Link><Link href="/upload">Upload / Release</Link></div>
+    <div><b>For Artists</b><Link href="/for-artists">Artist plans</Link><Link href="/upload">Upload music</Link><Link href="/studio">MOCIFY STUDIO</Link></div>
     <div><b>MOCIFY</b><span>About — soon</span><span>Terms — soon</span><span>Privacy — soon</span></div>
     <small>© 2026 MOCIFY</small>
   </footer>;
