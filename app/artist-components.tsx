@@ -17,8 +17,8 @@ export function ArtistPortalHeader({ active = "" }: { active?: string }) {
     </nav>
     <div className="artist-portal-actions">
       <Link className="artist-back" href="/">← Back to MOCIFY</Link>
-      <Link className="m-secondary compact" href="/login">Artist login</Link>
-      <Link className="m-primary compact" href="/signup">Get started</Link>
+      <Link className="m-secondary compact" href="/for-artists/login">Artist login</Link>
+      <Link className="m-primary compact" href="/for-artists/signup">Get started</Link>
     </div>
   </header>;
 }
