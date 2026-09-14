@@ -3,12 +3,22 @@ export const navigation = [
   { label: "Home", href: "/", icon: "⌂" },
   { label: "Explore", href: "/explore", icon: "⌕" },
   { label: "Artists", href: "/artists", icon: "◉" },
+  { label: "Radio", href: "/radio", icon: "◖" },
   { label: "Premium", href: "/premium", icon: "✦" },
 ];
 
 export const mobileNavigation = [
   ...navigation,
   { label: "Library", href: "/library", icon: "♡" },
+];
+
+export const quickNavigation = [
+  { label: "Home", href: "/", icon: "⌂" },
+  { label: "Explore", href: "/explore", icon: "⌕" },
+  { label: "Artists", href: "/artists", icon: "◉" },
+  { label: "MOCIFY Radio", href: "/radio", icon: "◖" },
+  { label: "Library", href: "/library", icon: "♡" },
+  { label: "Premium", href: "/premium", icon: "✦" },
 ];
 
 export const artists = [
