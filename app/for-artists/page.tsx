@@ -10,7 +10,7 @@ const plans = [
     features: ["Artist profile", "Upload AI music", "Publish releases on MOCIFY", "Basic release management"],
     missing: ["Analytics", "Creation & editing tools"],
     cta: "Start for free",
-    href: "/signup",
+    href: "/for-artists/signup",
   },
   {
     name: "ARTIST PRO",
@@ -20,7 +20,7 @@ const plans = [
     features: ["Everything in Artist Free", "Streams & listener analytics", "Likes, saves & top tracks", "Audience countries", "Growth & earnings dashboard"],
     missing: ["Creation & editing tools"],
     cta: "Choose Artist Pro",
-    href: "/signup",
+    href: "/for-artists/signup",
     featured: true,
   },
   {
@@ -30,8 +30,8 @@ const plans = [
     intro: "The complete MOCIFY workspace for artists who want to create, edit and release.",
     features: ["Everything in Artist Pro", "AI music creation", "Audio editor", "Mix & mastering tools", "Project workspace", "Create → Edit → Master → Release", "Advanced artist tools"],
     missing: [],
-    cta: "Enter MOCIFY STUDIO",
-    href: "/studio",
+    cta: "Get MOCIFY STUDIO",
+    href: "/for-artists/signup",
   },
 ];
 
