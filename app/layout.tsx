@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import "./mocify.css";
 import "./artist-plans.css";
+import "./artist-portal.css";
 import "./audit.css";
 import "./frame.css";
 import "./hero-reference.css";
