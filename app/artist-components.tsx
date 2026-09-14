@@ -13,7 +13,7 @@ export function ArtistPortalHeader({ active = "" }: { active?: string }) {
     <nav aria-label="Artist portal navigation">
       <Link className={active === "plans" ? "active" : ""} href="/for-artists">Plans</Link>
       <Link className={active === "studio" ? "active" : ""} href="/studio">Studio</Link>
-      <Link href="/upload">Upload</Link>
+      <Link className={active === "upload" ? "active" : ""} href="/upload">Upload</Link>
     </nav>
     <div className="artist-portal-actions">
       <Link className="artist-back" href="/">← Back to MOCIFY</Link>
