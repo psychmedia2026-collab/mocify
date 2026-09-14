@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { featuredTrack, mobileNavigation, navigation, type Release } from "./data";
+import ListenerBanner from "./listener-banner";
 
 export function Logo() {
   return <Link className="m-logo" href="/" aria-label="MOCIFY home">
@@ -57,6 +58,7 @@ export function Shell({ children, active = "", player = true }: { children: Reac
     <a className="skip-link" href="#main-content">Skip to content</a>
     <Header active={active} />
     <main id="main-content" className="m-main-frame" tabIndex={-1}>{children}</main>
+    <ListenerBanner />
     <Footer />
     {player && <Player />}
   </div>;
