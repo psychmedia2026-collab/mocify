@@ -41,5 +41,12 @@ export default function Home(){
       <div className="home-heading"><div><p className="page-kicker">POPULAR</p><h2>Popular Artists</h2></div><Link href="/artists">View all →</Link></div>
       <div className="artist-row">{artists.map(({name,initials,avatarCss,href})=><Link href={href} className="artist-mini" key={name}><span className="artist-avatar" style={{background:avatarCss}}>{initials}</span><b>{name}</b></Link>)}</div>
     </section>
+
+    <section className="home-section page-wrap">
+      <div className="creator-banner">
+        <div><p className="page-kicker">YOUR NEXT FAVORITE SOUND</p><h2>Discover something you&apos;ve never heard before.</h2><p>Explore a growing world of AI music, follow artists you love and find new tracks made for your next repeat.</p></div>
+        <Link className="m-primary" href="/explore">Explore music →</Link>
+      </div>
+    </section>
   </Shell>
 }
