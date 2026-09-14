@@ -5,10 +5,10 @@ import Link from "next/link";
 import {Shell,ReleaseCard} from "./components";
 
 const features=[
-  ["✦","AI Powered","Unique, original music in seconds."],
+  ["✦","AI Music","Discover sounds created by a new generation of artists."],
   ["♫","All Genres","From Manele to Afrohouse. Trap to Arabic."],
-  ["♢","Royalty Ready","A platform built around new music."],
-  ["◎","For Everyone","Whether you're a listener or artist."],
+  ["♢","Fresh Discoveries","Find new tracks, artists and sounds."],
+  ["◎","Made to Listen","Explore, play, save and enjoy AI music."],
 ];
 
 export default function Home(){
@@ -16,10 +16,9 @@ export default function Home(){
     <section className="home-hero page-wrap">
       <div className="home-copy">
         <h1>AI MUSIC.<br/><span>INFINITE<br/>POSSIBILITIES.</span></h1>
-        <p>MOCIFY is the AI music platform where a new generation of artists, sounds and ideas can be discovered. Listen, release and experience music like never before.</p>
+        <p>Discover a new generation of AI music. Explore fresh tracks, find artists you love and experience sounds you won&apos;t hear anywhere else.</p>
         <div className="home-actions">
           <Link className="m-primary hero-cta" href="/explore">Start Listening <b>→</b></Link>
-          <Link className="watch-link" href="/for-artists"><span>◈</span> For Artists</Link>
         </div>
       </div>
 
@@ -41,13 +40,6 @@ export default function Home(){
     <section className="home-section page-wrap">
       <div className="home-heading"><div><p className="page-kicker">POPULAR</p><h2>Popular Artists</h2></div><Link href="/artists">View all →</Link></div>
       <div className="artist-row">{artists.map(({name,initials,avatarCss,href})=><Link href={href} className="artist-mini" key={name}><span className="artist-avatar" style={{background:avatarCss}}>{initials}</span><b>{name}</b></Link>)}</div>
-    </section>
-
-    <section className="home-section page-wrap">
-      <div className="creator-banner">
-        <div><p className="page-kicker">FOR ARTISTS</p><h2>Release for free. Grow with data. Create with MOCIFY STUDIO.</h2><p>Choose the artist plan that fits you — from simple uploading to analytics and a complete AI creation workspace.</p></div>
-        <Link className="m-primary" href="/for-artists">View artist plans →</Link>
-      </div>
     </section>
   </Shell>
 }
