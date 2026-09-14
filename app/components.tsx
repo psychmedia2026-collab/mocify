@@ -18,6 +18,7 @@ export function Header({ active = "" }: { active?: string }) {
       <div className="m-account">
         <Link className="m-search" href="/explore" aria-label="Search music">⌕</Link>
         <Link className="m-login" href="/login">Log in</Link>
+        <Link className="m-primary compact" href="/for-artists">UPLOAD YOUR MUSIC</Link>
         <Link className="m-primary compact m-signup" href="/signup">Sign up</Link>
       </div>
     </header>
@@ -45,7 +46,7 @@ export function Footer() {
   return <footer className="m-footer">
     <div><Logo /><p>AI MUSIC. INFINITE POSSIBILITIES.</p></div>
     <div><b>Discover</b><Link href="/explore">Explore</Link><Link href="/artists">Artists</Link><Link href="/premium">Premium</Link></div>
-    <div><b>For Artists</b><Link href="/for-artists">Artist plans</Link><Link href="/upload">Upload music</Link><Link href="/studio">MOCIFY STUDIO</Link></div>
+    <div><b>Creators</b><Link href="/for-artists">Upload your music</Link><Link href="/for-artists">Artist portal</Link></div>
     <div><b>MOCIFY</b><span>About — soon</span><span>Terms — soon</span><span>Privacy — soon</span></div>
     <small>© 2026 MOCIFY</small>
   </footer>;
