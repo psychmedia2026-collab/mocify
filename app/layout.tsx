@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import "./mocify.css";
+import "./artist-plans.css";
 import "./audit.css";
 import "./frame.css";
 import "./hero-reference.css";
