@@ -8,6 +8,7 @@ import "./audit.css";
 import "./frame.css";
 import "./hero-reference.css";
 import "./listener-banner.css";
+import "./listener-navigation.css";
 
 const geist = Geist({ variable: "--font-geist", subsets: ["latin"] });
 
