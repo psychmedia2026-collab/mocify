@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { Shell } from "../components";
+import { ArtistPortalShell } from "../artist-components";
 import styles from "./studio.module.css";
 
 type Plan = "free" | "pro" | "studio";
@@ -43,7 +43,7 @@ export default function StudioPage() {
     return [["24.8K", "Streams"], ["8.2K", "Listeners"], ["€184", "Earnings"]];
   }, [plan]);
 
-  return <Shell active="for artists" player={false}>
+  return <ArtistPortalShell active="studio">
     <section className={`page-wrap ${styles.dashboard}`}>
       <div className={styles.topbar}>
         <div>
@@ -123,5 +123,5 @@ export default function StudioPage() {
 
       <p className={styles.prototypeNote}>Prototype only — the plan switcher is for development preview and will disappear when real artist accounts and subscriptions are connected.</p>
     </section>
-  </Shell>;
+  </ArtistPortalShell>;
 }
