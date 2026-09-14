@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { featuredTrack, mobileNavigation, navigation, type Release } from "./data";
+import { featuredTrack, mobileNavigation, navigation, quickNavigation, type Release } from "./data";
 import ListenerBanner from "./listener-banner";
+import HeaderSearch from "./header-search";
 
 export function Logo() {
   return <Link className="m-logo" href="/" aria-label="MOCIFY home">
@@ -17,7 +18,7 @@ export function Header({ active = "" }: { active?: string }) {
         <Link key={href} className={active === label.toLowerCase() ? "active" : ""} aria-current={active === label.toLowerCase() ? "page" : undefined} href={href}>{label}</Link>
       )}</nav>
       <div className="m-account">
-        <Link className="m-search" href="/explore" aria-label="Search music">⌕</Link>
+        <HeaderSearch />
         <Link className="m-login" href="/login">Log in</Link>
         <Link className="m-primary compact" href="/for-artists">UPLOAD YOUR MUSIC</Link>
         <Link className="m-primary compact m-signup" href="/signup">Sign up</Link>
@@ -27,6 +28,18 @@ export function Header({ active = "" }: { active?: string }) {
       {mobileNavigation.map(({ label, href, icon }) => <Link key={href} href={href} aria-current={active === label.toLowerCase() ? "page" : undefined}><span aria-hidden="true">{icon}</span>{label}</Link>)}
     </nav>
   </>;
+}
+
+export function QuickMenu({ active = "" }: { active?: string }) {
+  return <nav className="listener-quick-menu" aria-label="Quick navigation">
+    {quickNavigation.map(({label,href,icon}) => <Link
+      key={href}
+      href={href}
+      className={active === label.toLowerCase() || (label === "MOCIFY Radio" && active === "radio") ? "active" : ""}
+      aria-label={label}
+      aria-current={active === label.toLowerCase() || (label === "MOCIFY Radio" && active === "radio") ? "page" : undefined}
+    ><span aria-hidden="true">{icon}</span><span>{label}</span></Link>)}
+  </nav>;
 }
 
 export function Player() {
@@ -46,7 +59,7 @@ export function Player() {
 export function Footer() {
   return <footer className="m-footer">
     <div><Logo /><p>AI MUSIC. INFINITE POSSIBILITIES.</p></div>
-    <div><b>Discover</b><Link href="/explore">Explore</Link><Link href="/artists">Artists</Link><Link href="/premium">Premium</Link></div>
+    <div><b>Discover</b><Link href="/explore">Explore</Link><Link href="/artists">Artists</Link><Link href="/radio">MOCIFY Radio</Link><Link href="/premium">Premium</Link></div>
     <div><b>Creators</b><Link href="/for-artists">Upload your music</Link><Link href="/for-artists">Artist portal</Link></div>
     <div><b>MOCIFY</b><span>About — soon</span><span>Terms — soon</span><span>Privacy — soon</span></div>
     <small>© 2026 MOCIFY</small>
@@ -57,6 +70,7 @@ export function Shell({ children, active = "", player = true }: { children: Reac
   return <div className={player ? "m-shell has-player" : "m-shell"}>
     <a className="skip-link" href="#main-content">Skip to content</a>
     <Header active={active} />
+    <QuickMenu active={active} />
     <main id="main-content" className="m-main-frame" tabIndex={-1}>{children}</main>
     <ListenerBanner />
     <Footer />
