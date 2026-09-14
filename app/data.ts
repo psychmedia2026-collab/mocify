@@ -3,7 +3,6 @@ export const navigation = [
   { label: "Home", href: "/", icon: "⌂" },
   { label: "Explore", href: "/explore", icon: "⌕" },
   { label: "Artists", href: "/artists", icon: "◉" },
-  { label: "For Artists", href: "/for-artists", icon: "◈" },
   { label: "Premium", href: "/premium", icon: "✦" },
 ];
 
