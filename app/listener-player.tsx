@@ -3,275 +3,31 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { releases, type Release } from "./data";
 
-export type PlaybackTrack = Pick<Release, "id" | "title" | "artist" | "genre" | "art"> & {
-  href?: string;
-  audioSrc?: string;
-};
-
+export type PlaybackTrack = Pick<Release, "id" | "title" | "artist" | "genre" | "art"> & { href?: string; audioSrc?: string; };
 export type RepeatMode = "off" | "queue" | "track";
 
-const catalogQueue: PlaybackTrack[] = releases.filter((track) => "audioSrc" in track && typeof track.audioSrc === "string").map((track) => ({
-  id: track.id,
-  title: track.title,
-  artist: track.artist,
-  genre: track.genre,
-  art: track.art,
-  href: "href" in track ? track.href : undefined,
-  audioSrc: "audioSrc" in track && typeof track.audioSrc === "string" ? track.audioSrc : undefined,
-}));
+const catalogQueue: PlaybackTrack[] = releases.filter((track) => "audioSrc" in track && typeof track.audioSrc === "string").map((track) => ({ id:track.id,title:track.title,artist:track.artist,genre:track.genre,art:track.art,href:"href" in track?track.href:undefined,audioSrc:"audioSrc" in track&&typeof track.audioSrc==="string"?track.audioSrc:undefined }));
 
-type ListenerPlayerContextValue = {
-  currentTrack: PlaybackTrack;
-  queue: PlaybackTrack[];
-  isPlaying: boolean;
-  currentTime: number;
-  duration: number;
-  volume: number;
-  shuffle: boolean;
-  repeatMode: RepeatMode;
-  autoplay: boolean;
-  hasAudioSource: boolean;
-  status: string;
-  selectTrack: (track: PlaybackTrack, nextQueue?: PlaybackTrack[], autoplay?: boolean) => void;
-  togglePlay: () => void;
-  nextTrack: () => void;
-  previousTrack: () => void;
-  seek: (time: number) => void;
-  setVolume: (value: number) => void;
-  toggleShuffle: () => void;
-  cycleRepeat: () => void;
-  toggleAutoplay: () => void;
-  stopPlayback: () => void;
-};
+type ListenerPlayerContextValue={currentTrack:PlaybackTrack;queue:PlaybackTrack[];isPlaying:boolean;currentTime:number;duration:number;volume:number;shuffle:boolean;repeatMode:RepeatMode;autoplay:boolean;hasAudioSource:boolean;status:string;selectTrack:(track:PlaybackTrack,nextQueue?:PlaybackTrack[],autoplay?:boolean)=>void;togglePlay:()=>void;nextTrack:()=>void;previousTrack:()=>void;seek:(time:number)=>void;setVolume:(value:number)=>void;toggleShuffle:()=>void;cycleRepeat:()=>void;toggleAutoplay:()=>void;stopPlayback:()=>void;sampleSpectrum:(bars:number)=>number[];};
+const ListenerPlayerContext=createContext<ListenerPlayerContextValue|null>(null);
+function trackIndex(track:PlaybackTrack,nextQueue:PlaybackTrack[]){const index=nextQueue.findIndex((item)=>item.id===track.id);return index>=0?index:0;}
 
-const ListenerPlayerContext = createContext<ListenerPlayerContextValue | null>(null);
-
-function trackIndex(track: PlaybackTrack, nextQueue: PlaybackTrack[]) {
-  const index = nextQueue.findIndex((item) => item.id === track.id);
-  return index >= 0 ? index : 0;
+export function ListenerPlayerProvider({children}:{children:React.ReactNode}){
+ const audioRef=useRef<HTMLAudioElement|null>(null),queueRef=useRef<PlaybackTrack[]>(catalogQueue),currentIndexRef=useRef(0),volumeRef=useRef(1),shuffleRef=useRef(false),repeatModeRef=useRef<RepeatMode>("off"),autoplayRef=useRef(true);
+ const audioContextRef=useRef<AudioContext|null>(null),analyserRef=useRef<AnalyserNode|null>(null),spectrumRef=useRef<Uint8Array<ArrayBuffer>|null>(null);
+ const [queue,setQueue]=useState(catalogQueue),[currentIndex,setCurrentIndex]=useState(0),[isPlaying,setIsPlaying]=useState(false),[currentTime,setCurrentTime]=useState(0),[duration,setDuration]=useState(0),[volume,setVolumeState]=useState(1),[shuffle,setShuffle]=useState(false),[repeatMode,setRepeatMode]=useState<RepeatMode>("off"),[autoplay,setAutoplay]=useState(true),[status,setStatus]=useState("Ready to play.");
+ const currentTrack=queue[currentIndex]??catalogQueue[0],hasAudioSource=Boolean(currentTrack.audioSrc);
+ useEffect(()=>{queueRef.current=queue},[queue]);useEffect(()=>{currentIndexRef.current=currentIndex},[currentIndex]);useEffect(()=>{shuffleRef.current=shuffle},[shuffle]);useEffect(()=>{repeatModeRef.current=repeatMode},[repeatMode]);useEffect(()=>{autoplayRef.current=autoplay},[autoplay]);
+ const ensureAudioAnalysis=()=>{const audio=audioRef.current;if(!audio)return;try{if(!audioContextRef.current){const context=new AudioContext();const analyser=context.createAnalyser();analyser.fftSize=256;analyser.smoothingTimeConstant=.78;const source=context.createMediaElementSource(audio);source.connect(analyser);analyser.connect(context.destination);audioContextRef.current=context;analyserRef.current=analyser;spectrumRef.current=new Uint8Array(analyser.frequencyBinCount);}const context=audioContextRef.current;if(context.state==="suspended")void context.resume();}catch{/* Playback must keep working even when Web Audio is unavailable. */}};
+ const sampleSpectrum=useCallback((bars:number)=>{const analyser=analyserRef.current,data=spectrumRef.current;if(!analyser||!data||bars<=0)return Array.from({length:Math.max(0,bars)},()=>0);analyser.getByteFrequencyData(data);const values:number[]=[];const useful=Math.max(1,Math.floor(data.length*.72));for(let bar=0;bar<bars;bar++){const start=Math.floor((bar/bars)*useful),end=Math.max(start+1,Math.floor(((bar+1)/bars)*useful));let total=0;for(let i=start;i<end;i++)total+=data[i];values.push(Math.min(1,(total/(end-start))/210));}return values;},[]);
+ useEffect(()=>{const audio=new Audio();audio.preload="metadata";audio.volume=volumeRef.current;audioRef.current=audio;const onLoadedMetadata=()=>setDuration(Number.isFinite(audio.duration)?audio.duration:0),onTimeUpdate=()=>setCurrentTime(audio.currentTime),onPlay=()=>setIsPlaying(true),onPause=()=>setIsPlaying(false);const onEnded=()=>{if(repeatModeRef.current==="track"){audio.currentTime=0;setCurrentTime(0);void audio.play().catch(()=>{setIsPlaying(false);setStatus("This audio preview is unavailable.")});return}if(!autoplayRef.current&&repeatModeRef.current!=="queue"){setIsPlaying(false);setCurrentTime(audio.duration);return}if(!shuffleRef.current&&repeatModeRef.current!=="queue"&&currentIndexRef.current===queueRef.current.length-1){setIsPlaying(false);setCurrentTime(audio.duration);return}const current=currentIndexRef.current,available=queueRef.current.map((_,i)=>i).filter(i=>i!==current),next=shuffleRef.current&&available.length?available[Math.floor(Math.random()*available.length)]:(current+1)%queueRef.current.length,track=queueRef.current[next];setCurrentIndex(next);setCurrentTime(0);setDuration(0);setStatus(track.audioSrc?"Ready to play.":"Audio previews are not connected yet.");if(!track.audioSrc){setIsPlaying(false);return}audio.src=track.audioSrc;void audio.play().catch(()=>{setIsPlaying(false);setStatus("This audio preview is unavailable.")});};const onError=()=>{setIsPlaying(false);setStatus("This audio preview is unavailable.")};audio.addEventListener("loadedmetadata",onLoadedMetadata);audio.addEventListener("timeupdate",onTimeUpdate);audio.addEventListener("play",onPlay);audio.addEventListener("pause",onPause);audio.addEventListener("ended",onEnded);audio.addEventListener("error",onError);if(catalogQueue[0]?.audioSrc){audio.src=catalogQueue[0].audioSrc;audio.load()}return()=>{audio.pause();void audioContextRef.current?.close();audio.removeEventListener("loadedmetadata",onLoadedMetadata);audio.removeEventListener("timeupdate",onTimeUpdate);audio.removeEventListener("play",onPlay);audio.removeEventListener("pause",onPause);audio.removeEventListener("ended",onEnded);audio.removeEventListener("error",onError)}},[]);
+ const selectTrack=(track:PlaybackTrack,nextQueue=queue,play=false)=>{const nextIndex=trackIndex(track,nextQueue),audio=audioRef.current;setQueue(nextQueue);setCurrentIndex(nextIndex);setCurrentTime(0);setDuration(0);setIsPlaying(false);setStatus(track.audioSrc?"Ready to play.":"Audio previews are not connected yet.");if(!audio)return;audio.pause();audio.currentTime=0;audio.src=track.audioSrc??"";if(track.audioSrc&&play){ensureAudioAnalysis();void audio.play().catch(()=>{setIsPlaying(false);setStatus("This audio preview is unavailable.")})}};
+ const togglePlay=()=>{const audio=audioRef.current;if(!audio||!currentTrack.audioSrc){setStatus("Audio previews are not connected yet.");return}if(audio.getAttribute("src")!==currentTrack.audioSrc){audio.src=currentTrack.audioSrc;audio.load()}if(audio.paused){ensureAudioAnalysis();void audio.play().catch(()=>setStatus("This audio preview is unavailable."))}else audio.pause()};
+ const changeTrack=(direction:1|-1)=>{if(queue.length<2)return;const available=queue.map((_,i)=>i).filter(i=>i!==currentIndex),next=shuffleRef.current&&available.length?available[Math.floor(Math.random()*available.length)]:(currentIndex+direction+queue.length)%queue.length;selectTrack(queue[next],queue,isPlaying)};
+ const seek=(time:number)=>{const audio=audioRef.current;if(!audio||!Number.isFinite(time))return;audio.currentTime=time;setCurrentTime(time)};const setVolume=(value:number)=>{const next=Math.min(1,Math.max(0,value));volumeRef.current=next;setVolumeState(next);if(audioRef.current)audioRef.current.volume=next};
+ const stopPlayback=useCallback(()=>{const audio=audioRef.current;audio?.pause();if(audio){audio.currentTime=0;audio.removeAttribute("src");audio.load()}setQueue(catalogQueue);setCurrentIndex(0);setCurrentTime(0);setDuration(0);setIsPlaying(false);setStatus("Ready to play.")},[]);
+ const value:ListenerPlayerContextValue={currentTrack,queue,isPlaying,currentTime,duration,volume,shuffle,repeatMode,autoplay,hasAudioSource,status,selectTrack,togglePlay,nextTrack:()=>changeTrack(1),previousTrack:()=>changeTrack(-1),seek,setVolume,toggleShuffle:()=>setShuffle(v=>!v),cycleRepeat:()=>setRepeatMode(m=>m==="off"?"queue":m==="queue"?"track":"off"),toggleAutoplay:()=>setAutoplay(v=>!v),stopPlayback,sampleSpectrum};return <ListenerPlayerContext.Provider value={value}>{children}</ListenerPlayerContext.Provider>;
 }
-
-export function ListenerPlayerProvider({ children }: { children: React.ReactNode }) {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const queueRef = useRef<PlaybackTrack[]>(catalogQueue);
-  const currentIndexRef = useRef(0);
-  const volumeRef = useRef(1);
-  const shuffleRef = useRef(false);
-  const repeatModeRef = useRef<RepeatMode>("off");
-  const autoplayRef = useRef(true);
-  const [queue, setQueue] = useState(catalogQueue);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [volume, setVolumeState] = useState(1);
-  const [shuffle, setShuffle] = useState(false);
-  const [repeatMode, setRepeatMode] = useState<RepeatMode>("off");
-  const [autoplay, setAutoplay] = useState(true);
-  const [status, setStatus] = useState("Ready to play.");
-  const currentTrack = queue[currentIndex] ?? catalogQueue[0];
-  const hasAudioSource = Boolean(currentTrack.audioSrc);
-
-  useEffect(() => {
-    queueRef.current = queue;
-  }, [queue]);
-
-  useEffect(() => {
-    currentIndexRef.current = currentIndex;
-  }, [currentIndex]);
-
-  useEffect(() => { shuffleRef.current = shuffle; }, [shuffle]);
-  useEffect(() => { repeatModeRef.current = repeatMode; }, [repeatMode]);
-  useEffect(() => { autoplayRef.current = autoplay; }, [autoplay]);
-
-  useEffect(() => {
-    const audio = new Audio();
-    audio.preload = "metadata";
-    audio.volume = volumeRef.current;
-    audioRef.current = audio;
-
-    const onLoadedMetadata = () => setDuration(Number.isFinite(audio.duration) ? audio.duration : 0);
-    const onTimeUpdate = () => setCurrentTime(audio.currentTime);
-    const onPlay = () => setIsPlaying(true);
-    const onPause = () => setIsPlaying(false);
-    const onEnded = () => {
-      if (repeatModeRef.current === "track") {
-        audio.currentTime = 0;
-        setCurrentTime(0);
-        void audio.play().catch(() => {
-          setIsPlaying(false);
-          setStatus("This audio preview is unavailable.");
-        });
-        return;
-      }
-      if (!autoplayRef.current && repeatModeRef.current !== "queue") {
-        setIsPlaying(false);
-        setCurrentTime(audio.duration);
-        return;
-      }
-      if (!shuffleRef.current && repeatModeRef.current !== "queue" && currentIndexRef.current === queueRef.current.length - 1) {
-        setIsPlaying(false);
-        setCurrentTime(audio.duration);
-        return;
-      }
-      const currentIndex = currentIndexRef.current;
-      const availableIndexes = queueRef.current.map((_, index) => index).filter((index) => index !== currentIndex);
-      const nextIndex = shuffleRef.current && availableIndexes.length > 0
-        ? availableIndexes[Math.floor(Math.random() * availableIndexes.length)]
-        : (currentIndex + 1) % queueRef.current.length;
-      const nextTrack = queueRef.current[nextIndex];
-      setCurrentIndex(nextIndex);
-      setCurrentTime(0);
-      setDuration(0);
-      setStatus(nextTrack.audioSrc ? "Ready to play." : "Audio previews are not connected yet.");
-      if (!nextTrack.audioSrc) {
-        setIsPlaying(false);
-        return;
-      }
-      audio.src = nextTrack.audioSrc;
-      void audio.play().catch(() => {
-        setIsPlaying(false);
-        setStatus("This audio preview is unavailable.");
-      });
-    };
-    const onError = () => {
-      setIsPlaying(false);
-      setStatus("This audio preview is unavailable.");
-    };
-
-    audio.addEventListener("loadedmetadata", onLoadedMetadata);
-    audio.addEventListener("timeupdate", onTimeUpdate);
-    audio.addEventListener("play", onPlay);
-    audio.addEventListener("pause", onPause);
-    audio.addEventListener("ended", onEnded);
-    audio.addEventListener("error", onError);
-    if (catalogQueue[0]?.audioSrc) {
-      audio.src = catalogQueue[0].audioSrc;
-      audio.load();
-    }
-    return () => {
-      audio.pause();
-      audio.removeEventListener("loadedmetadata", onLoadedMetadata);
-      audio.removeEventListener("timeupdate", onTimeUpdate);
-      audio.removeEventListener("play", onPlay);
-      audio.removeEventListener("pause", onPause);
-      audio.removeEventListener("ended", onEnded);
-      audio.removeEventListener("error", onError);
-    };
-  }, []);
-
-  const selectTrack = (track: PlaybackTrack, nextQueue = queue, autoplay = false) => {
-    const nextIndex = trackIndex(track, nextQueue);
-    const audio = audioRef.current;
-    setQueue(nextQueue);
-    setCurrentIndex(nextIndex);
-    setCurrentTime(0);
-    setDuration(0);
-    setIsPlaying(false);
-    setStatus(track.audioSrc ? "Ready to play." : "Audio previews are not connected yet.");
-    if (!audio) return;
-    audio.pause();
-    audio.currentTime = 0;
-    audio.src = track.audioSrc ?? "";
-    if (track.audioSrc && autoplay) void audio.play().catch(() => { setIsPlaying(false); setStatus("This audio preview is unavailable."); });
-  };
-
-  const togglePlay = () => {
-    const audio = audioRef.current;
-    if (!audio || !currentTrack.audioSrc) {
-      setStatus("Audio previews are not connected yet.");
-      return;
-    }
-    if (audio.getAttribute("src") !== currentTrack.audioSrc) {
-      audio.src = currentTrack.audioSrc;
-      audio.load();
-    }
-    if (audio.paused) void audio.play().catch(() => setStatus("This audio preview is unavailable."));
-    else audio.pause();
-  };
-
-  const changeTrack = (direction: 1 | -1) => {
-    if (queue.length < 2) return;
-    const availableIndexes = queue.map((_, index) => index).filter((index) => index !== currentIndex);
-    const nextIndex = shuffleRef.current && availableIndexes.length > 0
-      ? availableIndexes[Math.floor(Math.random() * availableIndexes.length)]
-      : (currentIndex + direction + queue.length) % queue.length;
-    selectTrack(queue[nextIndex], queue, isPlaying);
-  };
-
-  const seek = (time: number) => {
-    const audio = audioRef.current;
-    if (!audio || !Number.isFinite(time)) return;
-    audio.currentTime = time;
-    setCurrentTime(time);
-  };
-
-  const setVolume = (value: number) => {
-    const nextVolume = Math.min(1, Math.max(0, value));
-    volumeRef.current = nextVolume;
-    setVolumeState(nextVolume);
-    if (audioRef.current) audioRef.current.volume = nextVolume;
-  };
-
-  const stopPlayback = useCallback(() => {
-    const audio = audioRef.current;
-    audio?.pause();
-    if (audio) {
-      audio.currentTime = 0;
-      audio.removeAttribute("src");
-      audio.load();
-    }
-    setQueue(catalogQueue);
-    setCurrentIndex(0);
-    setCurrentTime(0);
-    setDuration(0);
-    setIsPlaying(false);
-    setStatus("Ready to play.");
-  }, []);
-
-  const value: ListenerPlayerContextValue = {
-    currentTrack,
-    queue,
-    isPlaying,
-    currentTime,
-    duration,
-    volume,
-    shuffle,
-    repeatMode,
-    autoplay,
-    hasAudioSource,
-    status,
-    selectTrack,
-    togglePlay,
-    nextTrack: () => changeTrack(1),
-    previousTrack: () => changeTrack(-1),
-    seek,
-    setVolume,
-    toggleShuffle: () => setShuffle((value) => !value),
-    cycleRepeat: () => setRepeatMode((mode) => mode === "off" ? "queue" : mode === "queue" ? "track" : "off"),
-    toggleAutoplay: () => setAutoplay((value) => !value),
-    stopPlayback,
-  };
-
-  return <ListenerPlayerContext.Provider value={value}>{children}</ListenerPlayerContext.Provider>;
-}
-
-export function useListenerPlayer() {
-  const context = useContext(ListenerPlayerContext);
-  if (!context) throw new Error("useListenerPlayer must be used within ListenerPlayerProvider");
-  return context;
-}
-
-export function formatTime(seconds: number) {
-  if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
-  const minutes = Math.floor(seconds / 60);
-  const remainder = Math.floor(seconds % 60).toString().padStart(2, "0");
-  return `${minutes}:${remainder}`;
-}
-
-export function TrackPlayButton({ track }: { track: PlaybackTrack }) {
-  const { selectTrack, currentTrack, isPlaying, togglePlay } = useListenerPlayer();
-  const isCurrent = currentTrack.id === track.id;
-  const label = !track.audioSrc ? `${track.title} audio preview unavailable` : isCurrent && isPlaying ? `Pause ${track.title}` : `Play ${track.title}`;
-  return <button type="button" className="release-play-button" aria-label={label} disabled={!track.audioSrc} title={!track.audioSrc ? "Audio preview unavailable" : undefined} onClick={(event) => { event.preventDefault(); event.stopPropagation(); if (isCurrent) togglePlay(); else selectTrack(track, undefined, true); }}>{isCurrent && isPlaying ? "Ⅱ" : "▶"}</button>;
-}
+export function useListenerPlayer(){const context=useContext(ListenerPlayerContext);if(!context)throw new Error("useListenerPlayer must be used within ListenerPlayerProvider");return context}
+export function formatTime(seconds:number){if(!Number.isFinite(seconds)||seconds<0)return"0:00";const minutes=Math.floor(seconds/60),remainder=Math.floor(seconds%60).toString().padStart(2,"0");return`${minutes}:${remainder}`}
+export function TrackPlayButton({track}:{track:PlaybackTrack}){const{selectTrack,currentTrack,isPlaying,togglePlay}=useListenerPlayer(),isCurrent=currentTrack.id===track.id,label=!track.audioSrc?`${track.title} audio preview unavailable`:isCurrent&&isPlaying?`Pause ${track.title}`:`Play ${track.title}`;return <button type="button" className="release-play-button" aria-label={label} disabled={!track.audioSrc} title={!track.audioSrc?"Audio preview unavailable":undefined} onClick={(event)=>{event.preventDefault();event.stopPropagation();if(isCurrent)togglePlay();else selectTrack(track,undefined,true)}}>{isCurrent&&isPlaying?"Ⅱ":"▶"}</button>}
