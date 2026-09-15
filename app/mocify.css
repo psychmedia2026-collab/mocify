@@ -396,6 +396,20 @@
   color: #dfdfe5;
 }
 
+.artist-mini-unavailable {
+  opacity: .72;
+}
+
+.artist-mini-unavailable small {
+  display: block;
+  margin-top: 4px;
+  color: #bca9d5;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
 .artist-avatar {
   width: 65px;
   height: 65px;

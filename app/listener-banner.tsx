@@ -43,13 +43,23 @@ const messages = [
 
 export default function ListenerBanner() {
   const [index, setIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updateMotionPreference = () => setIsPaused(reducedMotion.matches);
+    updateMotionPreference();
+    reducedMotion.addEventListener("change", updateMotionPreference);
+    return () => reducedMotion.removeEventListener("change", updateMotionPreference);
+  }, []);
+
+  useEffect(() => {
+    if (isPaused) return;
     const timer = window.setInterval(() => {
       setIndex((current) => (current + 1) % messages.length);
     }, 7000);
     return () => window.clearInterval(timer);
-  }, []);
+  }, [isPaused]);
 
   const message = messages[index];
 
@@ -60,7 +70,7 @@ export default function ListenerBanner() {
         <strong>MOCIFY</strong>
       </div>
 
-      <div className="listener-banner-copy" key={index}>
+      <div className="listener-banner-copy" key={index} aria-live="polite" aria-atomic="true">
         <p className="page-kicker">{message.kicker}</p>
         <h2>{message.title}</h2>
         <p>{message.text}</p>
@@ -68,7 +78,16 @@ export default function ListenerBanner() {
 
       <div className="listener-banner-side">
         <Link className="m-primary" href={message.href}>{message.cta} →</Link>
-        <div className="listener-banner-dots" aria-label="Banner messages">
+        <div className="listener-banner-controls">
+          <button
+            type="button"
+            className="listener-banner-toggle"
+            onClick={() => setIsPaused((current) => !current)}
+            aria-label={isPaused ? "Resume rotating banner" : "Pause rotating banner"}
+            aria-pressed={isPaused}
+            title={isPaused ? "Resume rotating banner" : "Pause rotating banner"}
+          >{isPaused ? "▶" : "Ⅱ"}</button>
+          <div className="listener-banner-dots" aria-label="Banner messages">
           {messages.map((item, itemIndex) => <button
             key={item.kicker}
             type="button"
@@ -77,6 +96,7 @@ export default function ListenerBanner() {
             aria-label={`Show message ${itemIndex + 1}`}
             aria-current={itemIndex === index ? "true" : undefined}
           />)}
+          </div>
         </div>
       </div>
     </div>

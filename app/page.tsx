@@ -39,7 +39,7 @@ export default function Home(){
 
     <section className="home-section page-wrap">
       <div className="home-heading"><div><p className="page-kicker">POPULAR</p><h2>Popular Artists</h2></div><Link href="/artists">View all →</Link></div>
-      <div className="artist-row">{artists.map(({name,initials,avatarCss,href})=><Link href={href} className="artist-mini" key={name}><span className="artist-avatar" style={{background:avatarCss}}>{initials}</span><b>{name}</b></Link>)}</div>
+      <div className="artist-row">{artists.map(({name,initials,avatarCss,href,profileReady})=>profileReady?<Link href={href} className="artist-mini" key={name}><span className="artist-avatar" style={{background:avatarCss}}>{initials}</span><b>{name}</b></Link>:<div className="artist-mini artist-mini-unavailable" aria-label={`${name} profile coming soon`} key={name}><span className="artist-avatar" style={{background:avatarCss}}>{initials}</span><b>{name}</b><small>Coming soon</small></div>)}</div>
     </section>
   </Shell>
 }
