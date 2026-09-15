@@ -3,7 +3,7 @@ import { mobileNavigation, navigation, quickNavigation, type Release } from "./d
 import ListenerBanner from "./listener-banner";
 import HeaderSearch from "./header-search";
 import { TrackPlayButton } from "./listener-player";
-import Player from "./listener-player-ui";
+import Player from "./listener-player-ui";import LanguageSwitcher from "./i18n/language-switcher";
 
 export function Logo() {
   return <Link className="m-logo" href="/" aria-label="MOCIFY home">
@@ -21,6 +21,7 @@ export function Header({ active = "" }: { active?: string }) {
       )}</nav>
       <div className="m-account">
         <HeaderSearch />
+        <LanguageSwitcher />
         <Link className="m-login" href="/login">Log in</Link>
         <Link className="m-primary compact m-signup" href="/signup">Sign up</Link>
       </div>
