@@ -11,6 +11,7 @@ import "./listener-banner.css";
 import "./listener-navigation.css";
 import "./section-hero.css";
 import "./mockup-reference.css";
+import "./i18n/language-switcher.css";
 import { ListenerPlayerProvider } from "./listener-player";
 import { LanguageProvider } from "./i18n/language-provider";
 
