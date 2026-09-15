@@ -2,9 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
+import { useLanguage } from "./i18n/language-provider";
 
 export default function HeaderSearch() {
   const router = useRouter();
+  const { dictionary } = useLanguage();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -17,9 +19,9 @@ export default function HeaderSearch() {
     <input
       type="search"
       name="q"
-      placeholder="Search music, artists, genres..."
-      aria-label="Search MOCIFY"
+      placeholder={dictionary.common.searchPlaceholder}
+      aria-label={dictionary.common.searchMocify}
     />
-    <button type="submit" aria-label="Search">Search</button>
+    <button type="submit" aria-label={dictionary.common.search}>{dictionary.common.search}</button>
   </form>;
 }
