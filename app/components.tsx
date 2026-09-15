@@ -1,9 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import { mobileNavigation, navigation, quickNavigation, type Release } from "./data";
 import ListenerBanner from "./listener-banner";
 import HeaderSearch from "./header-search";
 import { TrackPlayButton } from "./listener-player";
-import Player from "./listener-player-ui";import LanguageSwitcher from "./i18n/language-switcher";
+import Player from "./listener-player-ui";
+import LanguageSwitcher from "./i18n/language-switcher";
+import { useLanguage } from "./i18n/language-provider";
 
 export function Logo() {
   return <Link className="m-logo" href="/" aria-label="MOCIFY home">
@@ -12,47 +16,65 @@ export function Logo() {
   </Link>;
 }
 
+function navLabel(dictionary: ReturnType<typeof useLanguage>["dictionary"], href: string, fallback: string) {
+  if (href === "/") return dictionary.nav.home;
+  if (href === "/explore") return dictionary.nav.explore;
+  if (href === "/artists") return dictionary.nav.artists;
+  if (href === "/radio") return dictionary.nav.radio;
+  if (href === "/library") return dictionary.nav.library;
+  if (href === "/premium") return dictionary.nav.premium;
+  return fallback;
+}
+
 export function Header({ active = "" }: { active?: string }) {
+  const { dictionary } = useLanguage();
+
   return <>
     <header className="m-header">
       <Logo />
-      <nav aria-label="Main navigation">{navigation.map(({ label, href }) =>
-        <Link key={href} className={active === label.toLowerCase() ? "active" : ""} aria-current={active === label.toLowerCase() ? "page" : undefined} href={href}>{label}</Link>
+      <nav aria-label={dictionary.common.mainNavigation}>{navigation.map(({ label, href }) =>
+        <Link key={href} className={active === label.toLowerCase() ? "active" : ""} aria-current={active === label.toLowerCase() ? "page" : undefined} href={href}>{navLabel(dictionary, href, label)}</Link>
       )}</nav>
       <div className="m-account">
         <HeaderSearch />
         <LanguageSwitcher />
-        <Link className="m-login" href="/login">Log in</Link>
-        <Link className="m-primary compact m-signup" href="/signup">Sign up</Link>
+        <Link className="m-login" href="/login">{dictionary.common.signIn}</Link>
+        <Link className="m-primary compact m-signup" href="/signup">{dictionary.common.signUp}</Link>
       </div>
     </header>
-    <nav className="m-mobile-nav" aria-label="Mobile navigation">
-      {mobileNavigation.map(({ label, href, icon }) => <Link key={href} href={href} aria-current={active === label.toLowerCase() ? "page" : undefined}><span aria-hidden="true">{icon}</span>{label}</Link>)}
+    <nav className="m-mobile-nav" aria-label={dictionary.common.mobileNavigation}>
+      {mobileNavigation.map(({ label, href, icon }) => <Link key={href} href={href} aria-current={active === label.toLowerCase() ? "page" : undefined}><span aria-hidden="true">{icon}</span>{navLabel(dictionary, href, label)}</Link>)}
     </nav>
   </>;
 }
 
 export function QuickMenu({ active = "" }: { active?: string }) {
-  return <nav className="listener-quick-menu" aria-label="Quick navigation">
+  const { dictionary } = useLanguage();
+
+  return <nav className="listener-quick-menu" aria-label={dictionary.common.quickNavigation}>
     {quickNavigation.map(({label,href,icon}) => {
       const selected = active === label.toLowerCase() || (label === "MOCIFY Radio" && active === "radio");
       return <Link key={href} href={href} className={selected ? "active" : ""} aria-current={selected ? "page" : undefined}>
-        <span className="quick-icon" aria-hidden="true">{icon}</span><span className="quick-label">{label === "MOCIFY Radio" ? "Radio" : label}</span>
+        <span className="quick-icon" aria-hidden="true">{icon}</span><span className="quick-label">{navLabel(dictionary, href, label === "MOCIFY Radio" ? "Radio" : label)}</span>
       </Link>;
     })}
     <div className="listener-creator-cta">
-      <span>MAKE MUSIC?</span>
-      <Link href="/for-artists"><span aria-hidden="true">↑</span>Upload Your Music</Link>
+      <span>{dictionary.common.makeMusic}</span>
+      <Link href="/for-artists"><span aria-hidden="true">↑</span>{dictionary.common.uploadMusic}</Link>
     </div>
   </nav>;
 }
 
 export function Footer() {
-  return <footer className="m-footer"><div><Logo /><p>AI MUSIC. INFINITE POSSIBILITIES.</p></div><div><b>Discover</b><Link href="/explore">Explore</Link><Link href="/artists">Artists</Link><Link href="/radio">MOCIFY Radio</Link><Link href="/premium">Premium</Link></div><div><b>Creators</b><Link href="/for-artists">Upload your music</Link><Link href="/for-artists">Artist portal</Link></div><div><b>MOCIFY</b><span>About — soon</span><span>Terms — soon</span><span>Privacy — soon</span></div><small>© 2026 MOCIFY</small></footer>;
+  const { dictionary } = useLanguage();
+
+  return <footer className="m-footer"><div><Logo /><p>AI MUSIC. INFINITE POSSIBILITIES.</p></div><div><b>{dictionary.footer.discover}</b><Link href="/explore">{dictionary.nav.explore}</Link><Link href="/artists">{dictionary.nav.artists}</Link><Link href="/radio">MOCIFY {dictionary.nav.radio}</Link><Link href="/premium">{dictionary.nav.premium}</Link></div><div><b>{dictionary.footer.creators}</b><Link href="/for-artists">{dictionary.common.uploadMusic}</Link><Link href="/for-artists">{dictionary.footer.artistPortal}</Link></div><div><b>MOCIFY</b><span>{dictionary.footer.aboutSoon}</span><span>{dictionary.footer.termsSoon}</span><span>{dictionary.footer.privacySoon}</span></div><small>© 2026 MOCIFY</small></footer>;
 }
 
 export function Shell({ children, active = "", player = true }: { children: React.ReactNode; active?: string; player?: boolean }) {
-  return <div className={player ? "m-shell listener-shell has-player" : "m-shell listener-shell"}><a className="skip-link" href="#main-content">Skip to content</a><Header active={active}/><QuickMenu active={active}/><main id="main-content" className="m-main-frame" tabIndex={-1}>{children}</main><ListenerBanner/><Footer/>{player&&<Player/>}</div>;
+  const { dictionary } = useLanguage();
+
+  return <div className={player ? "m-shell listener-shell has-player" : "m-shell listener-shell"}><a className="skip-link" href="#main-content">{dictionary.common.skipToContent}</a><Header active={active}/><QuickMenu active={active}/><main id="main-content" className="m-main-frame" tabIndex={-1}>{children}</main><ListenerBanner/><Footer/>{player&&<Player/>}</div>;
 }
 
 export function ComingSoonButton({ children, className = "m-secondary", label }: { children: React.ReactNode; className?: string; label?: string }) {return <button type="button" className={`${className} prototype-control`} disabled title={label ?? "Coming soon"}>{children}<span className="prototype-badge">SOON</span></button>;}
