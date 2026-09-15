@@ -37,6 +37,10 @@ export function QuickMenu({ active = "" }: { active?: string }) {
         <span className="quick-icon" aria-hidden="true">{icon}</span><span className="quick-label">{label === "MOCIFY Radio" ? "Radio" : label}</span>
       </Link>;
     })}
+    <div className="listener-creator-cta">
+      <span>MAKE MUSIC?</span>
+      <Link href="/for-artists"><span aria-hidden="true">↑</span>Upload Your Music</Link>
+    </div>
   </nav>;
 }
 
