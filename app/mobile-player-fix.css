@@ -1,0 +1,232 @@
+/* Mobile-only safety layer for the persistent listener player.
+   Keeps the desktop waveform treatment untouched while restoring the compact mobile layout. */
+
+@media (max-width: 900px) {
+  .listener-shell.has-player {
+    --player-height: 92px;
+  }
+
+  .m-player {
+    left: 8px;
+    right: 8px;
+    bottom: calc(var(--mobile-nav-height) + var(--safe-bottom) + 6px);
+    height: var(--player-height);
+    border-radius: 18px;
+  }
+
+  .m-player-inner {
+    width: calc(100% - 20px);
+    height: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: 54px 28px;
+    column-gap: 8px;
+    row-gap: 0;
+    align-items: center;
+  }
+
+  .m-player-track-area {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    gap: 7px;
+  }
+
+  .m-player-cover {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+  }
+
+  .m-player-track-copy b {
+    max-width: 145px;
+    font-size: 11px;
+  }
+
+  .m-player-track-copy small {
+    max-width: 145px;
+    font-size: 9px;
+  }
+
+  .m-player-save {
+    min-width: 32px;
+    min-height: 32px;
+    width: 32px;
+    height: 32px;
+    font-size: 15px;
+  }
+
+  .m-player-center {
+    grid-column: 2;
+    grid-row: 1;
+    display: block;
+    min-width: 116px;
+  }
+
+  .m-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+  }
+
+  .m-controls .m-utility {
+    display: none;
+  }
+
+  .m-controls button:not(.m-utility) {
+    min-width: 30px;
+    min-height: 30px;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    font-size: 11px;
+  }
+
+  .m-controls .m-play {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    font-size: 13px;
+  }
+
+  .m-waveform {
+    display: none;
+  }
+
+  .m-progress-row {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 27px;
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr) 32px;
+    gap: 7px;
+    pointer-events: none;
+    font-size: 8px;
+  }
+
+  .m-progress-row .m-progress {
+    pointer-events: auto;
+  }
+
+  .m-player-tools {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    padding-top: 5px;
+  }
+
+  .m-mobile-utility {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    padding: 0;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 50%;
+    background: rgba(255,255,255,.025);
+    color: #aaa7b8;
+    font-size: 11px;
+  }
+
+  .m-player-tools .m-volume {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .m-player-tools .m-volume input {
+    width: min(90px, 22vw);
+  }
+
+  .m-tool-toggle {
+    min-height: 28px;
+    height: 28px;
+    padding: 0 7px;
+    font-size: 7px;
+  }
+
+  .m-queue-button {
+    width: 28px;
+    height: 28px;
+    font-size: 13px;
+  }
+
+  .m-player-brand,
+  .m-player-status {
+    display: none;
+  }
+
+  .m-mobile-nav {
+    z-index: 61;
+  }
+}
+
+@media (max-width: 620px) {
+  .listener-shell.has-player {
+    --player-height: 88px;
+  }
+
+  .m-player {
+    left: 4px;
+    right: 4px;
+    bottom: calc(var(--mobile-nav-height) + var(--safe-bottom) + 5px);
+    border-radius: 16px;
+  }
+
+  .m-player-inner {
+    width: calc(100% - 14px);
+    grid-template-rows: 52px 26px;
+  }
+
+  .m-player-track-copy b,
+  .m-player-track-copy small {
+    max-width: 112px;
+  }
+
+  .m-player-cover {
+    width: 38px;
+    height: 38px;
+  }
+
+  .m-player-save {
+    width: 29px;
+    height: 29px;
+    min-width: 29px;
+    min-height: 29px;
+  }
+
+  .m-player-center {
+    min-width: 108px;
+  }
+
+  .m-controls button:not(.m-utility) {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+  }
+
+  .m-controls .m-play {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .m-progress-row {
+    bottom: 25px;
+  }
+
+  .m-player-tools .m-volume {
+    display: none;
+  }
+
+  .m-player-tools {
+    justify-content: space-around;
+  }
+}
