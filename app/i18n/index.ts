@@ -13,7 +13,7 @@ const dictionaries = {
   en,
   ro,
   nl,
-} satisfies Record<Locale, typeof en>;
+};
 
 export function getDictionary(locale: string) {
   const safeLocale: Locale = isLocale(locale) ? locale : defaultLocale;
