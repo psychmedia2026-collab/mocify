@@ -1,95 +1,15 @@
+"use client";
+
 import Link from "next/link";
 import { ArtistPortalShell } from "../artist-components";
+import { useLanguage } from "../i18n/language-provider";
 
-const plans = [
-  {
-    name: "ARTIST FREE",
-    price: "€0",
-    period: "forever",
-    intro: "Release your music on MOCIFY without paying a monthly fee.",
-    features: ["Artist profile", "Upload AI music", "Publish releases on MOCIFY", "Basic release management"],
-    missing: ["Analytics", "Creation & editing tools"],
-    cta: "Start for free",
-    href: "/for-artists/signup",
-  },
-  {
-    name: "ARTIST PRO",
-    price: "€7.99",
-    period: "/ month",
-    intro: "For artists who want to understand their audience and grow.",
-    features: ["Everything in Artist Free", "Streams & listener analytics", "Likes, saves & top tracks", "Audience countries", "Growth & earnings dashboard"],
-    missing: ["Creation & editing tools"],
-    cta: "Choose Artist Pro",
-    href: "/for-artists/signup",
-    featured: true,
-  },
-  {
-    name: "MOCIFY STUDIO",
-    price: "€19.99",
-    period: "/ month",
-    intro: "The complete MOCIFY workspace for artists who want to create, edit and release.",
-    features: ["Everything in Artist Pro", "AI music creation", "Audio editor", "Mix & mastering tools", "Project workspace", "Create → Edit → Master → Release", "Advanced artist tools"],
-    missing: [],
-    cta: "Get MOCIFY STUDIO",
-    href: "/for-artists/signup",
-  },
-];
+const wave=[30,58,42,78,50,92,62,46,72,98,64,84,48,70,40,88,56,76,50,68,36,82,58,94];
 
-const wave = [30,58,42,78,50,92,62,46,72,98,64,84,48,70,40,88,56,76,50,68,36,82,58,94];
+const copy={
+ en:{eyebrow:"MOCIFY CREATOR ENVIRONMENT",title:"Release your sound.",accent:"Enter the studio.",hero:"A separate MOCIFY space built for artists and creators. Upload releases, understand your audience and grow into a complete creative workspace with MOCIFY STUDIO.",plansButton:"View artist plans →",studioButton:"Preview MOCIFY STUDIO",preview:"MOCIFY Studio visual preview",project:"Project",untitled:"Untitled 01",tempo:"Tempo",mode:"Mode",creator:"Creator",status:"Status",ready:"Studio ready",built:"BUILT FOR CREATORS",from:"From upload to full studio.",explain:"The listener side of MOCIFY stays focused on discovering and playing music. This portal is the professional side: releases, analytics, earnings and creative tools.",plansLabel:"Artist subscription plans",popular:"POPULAR",journey:"ONE ARTIST JOURNEY",journeyTitle:"Release → Analyze → Create",journeyText:"Start simple and upgrade only when you need more. The full Studio experience stays reserved for creators who want the complete workspace.",release:"Release",analyze:"Analyze",createEdit:"Create + Edit",plans:[{name:"ARTIST FREE",price:"€0",period:"forever",intro:"Release your music on MOCIFY without paying a monthly fee.",features:["Artist profile","Upload AI music","Publish releases on MOCIFY","Basic release management"],missing:["Analytics","Creation & editing tools"],cta:"Start for free"},{name:"ARTIST PRO",price:"€7.99",period:"/ month",intro:"For artists who want to understand their audience and grow.",features:["Everything in Artist Free","Streams & listener analytics","Likes, saves & top tracks","Audience countries","Growth & earnings dashboard"],missing:["Creation & editing tools"],cta:"Choose Artist Pro",featured:true},{name:"MOCIFY STUDIO",price:"€19.99",period:"/ month",intro:"The complete MOCIFY workspace for artists who want to create, edit and release.",features:["Everything in Artist Pro","AI music creation","Audio editor","Mix & mastering tools","Project workspace","Create → Edit → Master → Release","Advanced artist tools"],missing:[],cta:"Get MOCIFY STUDIO"}]},
+ ro:{eyebrow:"MEDIUL MOCIFY PENTRU CREATORI",title:"Lansează-ți sunetul.",accent:"Intră în studio.",hero:"Un spațiu MOCIFY separat, creat pentru artiști și creatori. Încarcă lansări, înțelege-ți publicul și dezvoltă-te într-un spațiu creativ complet cu MOCIFY STUDIO.",plansButton:"Vezi abonamentele pentru artiști →",studioButton:"Previzualizează MOCIFY STUDIO",preview:"Previzualizare vizuală MOCIFY Studio",project:"Proiect",untitled:"Fără titlu 01",tempo:"Tempo",mode:"Mod",creator:"Creator",status:"Stare",ready:"Studio pregătit",built:"CREAT PENTRU CREATORI",from:"De la upload la studio complet.",explain:"Partea MOCIFY pentru ascultători rămâne concentrată pe descoperirea și redarea muzicii. Acest portal este partea profesională: lansări, analize, câștiguri și instrumente creative.",plansLabel:"Abonamente pentru artiști",popular:"POPULAR",journey:"PARCURSUL ARTISTULUI",journeyTitle:"Lansează → Analizează → Creează",journeyText:"Începe simplu și fă upgrade doar când ai nevoie de mai mult. Experiența Studio completă rămâne pentru creatorii care vor întregul spațiu de lucru.",release:"Lansează",analyze:"Analizează",createEdit:"Creează + Editează",plans:[{name:"ARTIST FREE",price:"€0",period:"pentru totdeauna",intro:"Lansează-ți muzica pe MOCIFY fără abonament lunar.",features:["Profil de artist","Încarcă muzică AI","Publică lansări pe MOCIFY","Administrare de bază a lansărilor"],missing:["Analize","Instrumente de creare și editare"],cta:"Începe gratuit"},{name:"ARTIST PRO",price:"€7.99",period:"/ lună",intro:"Pentru artiști care vor să-și înțeleagă publicul și să crească.",features:["Tot din Artist Free","Analize pentru redări și ascultători","Aprecieri, salvări și piese de top","Țările publicului","Panou de creștere și câștiguri"],missing:["Instrumente de creare și editare"],cta:"Alege Artist Pro",featured:true},{name:"MOCIFY STUDIO",price:"€19.99",period:"/ lună",intro:"Spațiul MOCIFY complet pentru artiști care vor să creeze, editeze și lanseze.",features:["Tot din Artist Pro","Creare muzică AI","Editor audio","Instrumente de mixaj și masterizare","Spațiu pentru proiecte","Creează → Editează → Masterizează → Lansează","Instrumente avansate pentru artiști"],missing:[],cta:"Obține MOCIFY STUDIO"}]},
+ nl:{eyebrow:"MOCIFY MAKERSOMGEVING",title:"Breng jouw sound uit.",accent:"Stap de studio in.",hero:"Een aparte MOCIFY-omgeving voor artiesten en makers. Upload releases, begrijp je publiek en groei door naar een complete creatieve werkruimte met MOCIFY STUDIO.",plansButton:"Bekijk artiestenabonnementen →",studioButton:"Bekijk MOCIFY STUDIO",preview:"Visuele preview van MOCIFY Studio",project:"Project",untitled:"Naamloos 01",tempo:"Tempo",mode:"Modus",creator:"Maker",status:"Status",ready:"Studio gereed",built:"GEBOUWD VOOR MAKERS",from:"Van upload naar volledige studio.",explain:"De luisteraarskant van MOCIFY blijft gericht op muziek ontdekken en afspelen. Dit portaal is de professionele kant: releases, analyses, inkomsten en creatieve tools.",plansLabel:"Artiestenabonnementen",popular:"POPULAIR",journey:"ÉÉN ARTIESTENREIS",journeyTitle:"Uitbrengen → Analyseren → Creëren",journeyText:"Begin eenvoudig en upgrade alleen wanneer je meer nodig hebt. De volledige Studio-ervaring blijft voor makers die de complete werkruimte willen.",release:"Uitbrengen",analyze:"Analyseren",createEdit:"Creëren + Bewerken",plans:[{name:"ARTIST FREE",price:"€0",period:"voor altijd",intro:"Breng je muziek uit op MOCIFY zonder maandelijks abonnement.",features:["Artiestenprofiel","AI-muziek uploaden","Releases publiceren op MOCIFY","Basisbeheer van releases"],missing:["Analyses","Creatie- en bewerkingstools"],cta:"Start gratis"},{name:"ARTIST PRO",price:"€7.99",period:"/ maand",intro:"Voor artiesten die hun publiek willen begrijpen en groeien.",features:["Alles van Artist Free","Streams- en luisteraarsanalyses","Likes, saves en toptracks","Landen van je publiek","Dashboard voor groei en inkomsten"],missing:["Creatie- en bewerkingstools"],cta:"Kies Artist Pro",featured:true},{name:"MOCIFY STUDIO",price:"€19.99",period:"/ maand",intro:"De complete MOCIFY-werkruimte voor artiesten die willen creëren, bewerken en uitbrengen.",features:["Alles van Artist Pro","AI-muziek creëren","Audio-editor","Mix- en masteringtools","Projectwerkruimte","Creëren → Bewerken → Masteren → Uitbrengen","Geavanceerde artiestentools"],missing:[],cta:"Neem MOCIFY STUDIO"}]}
+} as const;
 
-export default function ForArtistsPage() {
-  return <ArtistPortalShell active="plans">
-    <section className="artist-portal-hero">
-      <div className="page-wrap artist-portal-hero-grid">
-        <div>
-          <span className="artist-portal-eyebrow"><i />MOCIFY CREATOR ENVIRONMENT</span>
-          <h1>Release your sound.<br/><span>Enter the studio.</span></h1>
-          <p className="artist-portal-hero-copy">A separate MOCIFY space built for artists and creators. Upload releases, understand your audience and grow into a complete creative workspace with MOCIFY STUDIO.</p>
-          <div className="artist-portal-hero-actions">
-            <Link className="m-primary" href="#artist-plans">View artist plans →</Link>
-            <Link className="m-secondary" href="/studio">Preview MOCIFY STUDIO</Link>
-          </div>
-        </div>
-
-        <div className="artist-portal-console" aria-label="MOCIFY Studio visual preview">
-          <div className="artist-console-top"><span>MOCIFY STUDIO / SESSION 01</span><span className="artist-console-lights"><i/><i/><i/></span></div>
-          <div className="artist-console-wave" aria-hidden="true">{wave.map((height,index)=><i key={index} style={{height:`${height}%`}} />)}</div>
-          <div className="artist-console-controls">
-            <span>Project<b>Untitled 01</b></span>
-            <span>Tempo<b>124 BPM</b></span>
-            <span>Mode<b>Creator</b></span>
-            <span>Status<b>Studio ready</b></span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section className="artist-portal-section page-wrap">
-      <div className="artist-portal-section-head">
-        <div><p className="page-kicker">BUILT FOR CREATORS</p><h2>From upload to full studio.</h2></div>
-        <p>The listener side of MOCIFY stays focused on discovering and playing music. This portal is the professional side: releases, analytics, earnings and creative tools.</p>
-      </div>
-    </section>
-
-    <section id="artist-plans" className="artist-plans page-wrap" aria-label="Artist subscription plans">
-      {plans.map((plan) => <article className={`artist-plan-card${plan.featured ? " artist-plan-featured" : ""}`} key={plan.name}>
-        {plan.featured && <span className="artist-plan-badge">POPULAR</span>}
-        <p className="page-kicker">{plan.name}</p>
-        <div className="artist-plan-price"><strong>{plan.price}</strong><span>{plan.period}</span></div>
-        <p className="artist-plan-intro">{plan.intro}</p>
-        <div className="artist-plan-features">
-          {plan.features.map((feature) => <p key={feature}><span>✓</span>{feature}</p>)}
-          {plan.missing.map((feature) => <p className="artist-plan-missing" key={feature}><span>—</span>{feature}</p>)}
-        </div>
-        <Link className={plan.featured ? "m-primary artist-plan-cta" : "m-secondary artist-plan-cta"} href={plan.href}>{plan.cta} →</Link>
-      </article>)}
-    </section>
-
-    <section className="studio-path page-wrap">
-      <p className="page-kicker">ONE ARTIST JOURNEY</p>
-      <h2>Release → Analyze → Create</h2>
-      <p>Start simple and upgrade only when you need more. The full Studio experience stays reserved for creators who want the complete workspace.</p>
-      <div className="studio-path-steps"><span>ARTIST FREE<br/><b>Release</b></span><i>→</i><span>ARTIST PRO<br/><b>Analyze</b></span><i>→</i><span>MOCIFY STUDIO<br/><b>Create + Edit</b></span></div>
-    </section>
-  </ArtistPortalShell>;
-}
+export default function ForArtistsPage(){const{locale}=useLanguage();const t=copy[locale];return <ArtistPortalShell active="plans"><section className="artist-portal-hero"><div className="page-wrap artist-portal-hero-grid"><div><span className="artist-portal-eyebrow"><i/>{t.eyebrow}</span><h1>{t.title}<br/><span>{t.accent}</span></h1><p className="artist-portal-hero-copy">{t.hero}</p><div className="artist-portal-hero-actions"><Link className="m-primary" href="#artist-plans">{t.plansButton}</Link><Link className="m-secondary" href="/studio">{t.studioButton}</Link></div></div><div className="artist-portal-console" aria-label={t.preview}><div className="artist-console-top"><span>MOCIFY STUDIO / SESSION 01</span><span className="artist-console-lights"><i/><i/><i/></span></div><div className="artist-console-wave" aria-hidden="true">{wave.map((height,index)=><i key={index} style={{height:`${height}%`}}/>)}</div><div className="artist-console-controls"><span>{t.project}<b>{t.untitled}</b></span><span>{t.tempo}<b>124 BPM</b></span><span>{t.mode}<b>{t.creator}</b></span><span>{t.status}<b>{t.ready}</b></span></div></div></div></section><section className="artist-portal-section page-wrap"><div className="artist-portal-section-head"><div><p className="page-kicker">{t.built}</p><h2>{t.from}</h2></div><p>{t.explain}</p></div></section><section id="artist-plans" className="artist-plans page-wrap" aria-label={t.plansLabel}>{t.plans.map(plan=><article className={`artist-plan-card${"featured" in plan&&plan.featured?" artist-plan-featured":""}`} key={plan.name}>{"featured" in plan&&plan.featured&&<span className="artist-plan-badge">{t.popular}</span>}<p className="page-kicker">{plan.name}</p><div className="artist-plan-price"><strong>{plan.price}</strong><span>{plan.period}</span></div><p className="artist-plan-intro">{plan.intro}</p><div className="artist-plan-features">{plan.features.map(feature=><p key={feature}><span>✓</span>{feature}</p>)}{plan.missing.map(feature=><p className="artist-plan-missing" key={feature}><span>—</span>{feature}</p>)}</div><Link className={"featured" in plan&&plan.featured?"m-primary artist-plan-cta":"m-secondary artist-plan-cta"} href="/for-artists/signup">{plan.cta} →</Link></article>)}</section><section className="studio-path page-wrap"><p className="page-kicker">{t.journey}</p><h2>{t.journeyTitle}</h2><p>{t.journeyText}</p><div className="studio-path-steps"><span>ARTIST FREE<br/><b>{t.release}</b></span><i>→</i><span>ARTIST PRO<br/><b>{t.analyze}</b></span><i>→</i><span>MOCIFY STUDIO<br/><b>{t.createEdit}</b></span></div></section></ArtistPortalShell>}
