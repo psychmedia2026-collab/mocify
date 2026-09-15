@@ -9,10 +9,25 @@ const en = {
   },
   common: {
     search: "Search",
-    signIn: "Sign in",
+    searchPlaceholder: "Search music, artists, genres...",
+    searchMocify: "Search MOCIFY",
+    signIn: "Log in",
     signUp: "Sign up",
-    uploadMusic: "Upload your music",
+    uploadMusic: "Upload Your Music",
     language: "Language",
+    mainNavigation: "Main navigation",
+    mobileNavigation: "Mobile navigation",
+    quickNavigation: "Quick navigation",
+    skipToContent: "Skip to content",
+    makeMusic: "MAKE MUSIC?",
+  },
+  footer: {
+    discover: "Discover",
+    creators: "Creators",
+    artistPortal: "Artist portal",
+    aboutSoon: "About — soon",
+    termsSoon: "Terms — soon",
+    privacySoon: "Privacy — soon",
   },
 };
 
