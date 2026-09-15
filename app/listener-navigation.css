@@ -57,6 +57,10 @@
   transform: translateY(-50%) translateX(0);
 }
 
+.listener-shell .listener-quick-menu a:hover .quick-label {
+  transform: none;
+}
+
 /* Listener header: keep navigation, search and account actions in separate lanes. */
 .m-header {
   display: flex;
@@ -123,6 +127,11 @@
   color: #7f7f8d;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.m-search-form:focus-within {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
 }
 
 .m-search-form button {

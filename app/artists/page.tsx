@@ -11,7 +11,7 @@ export default function ArtistsPage(){
       <div className="mockup-artist-row">
         {artists.slice(0,8).map(({name,genre,initials,avatarCss,href,profileReady},i)=>{
           const face=<><span className="mockup-artist-avatar" style={{background:avatarCss}}><span className="mockup-avatar-face" aria-hidden="true">{initials}</span>{i<6&&<i/>}</span><b>{name}</b><small>{genre}</small></>;
-          return profileReady?<Link href={href} className="mockup-artist-pill" key={name}>{face}</Link>:<div className="mockup-artist-pill" key={name}>{face}</div>;
+          return profileReady?<Link href={href} className="mockup-artist-pill" key={name}>{face}</Link>:<div id={href.split("#")[1]} className="mockup-artist-pill" key={name}>{face}</div>;
         })}
       </div>
     </section>

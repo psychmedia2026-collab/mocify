@@ -3,3 +3,21 @@
 @media(max-width:1200px){.listener-shell .listener-quick-menu{display:none}.listener-shell .m-main-frame,.listener-shell .listener-banner-wrap,.listener-shell .m-footer{width:calc(100% - 28px);margin-left:auto;margin-right:auto}.listener-shell .m-header{width:calc(100% - 28px)}.mockup-artist-row{grid-template-columns:repeat(4,1fr)}.mockup-benefits{grid-template-columns:repeat(2,1fr)}.mockup-library-row{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:900px){.listener-shell .m-header nav{display:none}.listener-shell .m-search-form{width:220px}.mockup-radio-player{grid-template-columns:48px 1fr auto auto auto}.mockup-radio-volume{display:none}}
 @media(max-width:650px){.listener-shell .m-search-form{display:none}.mockup-artist-row{grid-template-columns:repeat(3,1fr)}.mockup-benefits{grid-template-columns:1fr}.mockup-library-row{grid-template-columns:repeat(2,1fr)}.mockup-radio-player{grid-template-columns:48px 1fr auto}.mockup-radio-control:not(.main){display:none}.listener-plan-grid{grid-template-columns:1fr}.listener-plan-card{padding:22px}}
+
+/* Keep the desktop home frame inside the existing sidebar gutters. */
+@media (min-width: 1201px) {
+  .listener-shell .m-main-frame:has(> .home-hero) {
+    width: calc(100% - (var(--listener-side-space) * 2));
+  }
+}
+
+/* Fit the track preview controls without changing the desktop layout. */
+@media (max-width: 380px) {
+  .track-page > div,
+  .track-page .grid > div {
+    min-width: 0;
+  }
+  .track-page .track-playback-controls {
+    gap: 4px;
+  }
+}

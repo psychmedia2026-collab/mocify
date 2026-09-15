@@ -3,8 +3,10 @@ import Link from "next/link";
 import {Shell,ReleaseCard} from "../components";
 import SectionHero from "../section-hero";
 
-export default async function ExplorePage({searchParams}:{searchParams:Promise<{q?:string}>}){
-  const params=await searchParams; const query=(params.q??"").trim(); const normalized=query.toLocaleLowerCase();
+export default async function ExplorePage({searchParams}:{searchParams:Promise<{q?:string|string[]}>}){
+  const params=await searchParams;
+  const query=(Array.isArray(params.q)?params.q[0]??"":params.q??"").trim();
+  const normalized=query.toLocaleLowerCase();
   const trackMatches=normalized?releases.filter(r=>`${r.title} ${r.artist} ${r.genre}`.toLocaleLowerCase().includes(normalized)):[];
   const artistMatches=normalized?artists.filter(a=>`${a.name} ${a.genre}`.toLocaleLowerCase().includes(normalized)):[];
   const genreMatches=normalized?genres.filter(g=>g.toLocaleLowerCase().includes(normalized)):[]; const totalMatches=trackMatches.length+artistMatches.length+genreMatches.length;

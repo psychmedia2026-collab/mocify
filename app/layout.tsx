@@ -24,7 +24,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title:{default:"MOCIFY — AI Music. Infinite Possibilities.",template:"%s | MOCIFY"},
   description:"Discover AI music, artists and the next generation of sound on MOCIFY.",
-  icons:{icon:"/mocify-logo.webp"},
+  icons:{icon:{url:"/mocify-bird.png?v=2",type:"image/png"}},
 };
 
 export default function RootLayout({children}:{children:React.ReactNode}){

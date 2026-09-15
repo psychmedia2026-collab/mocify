@@ -6,7 +6,7 @@
 .listener-banner {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(220px, .72fr) minmax(0, 1.6fr) auto;
+  grid-template-columns: minmax(max-content, .72fr) minmax(0, 1.6fr) auto;
   align-items: center;
   gap: 34px;
   min-height: 230px;
