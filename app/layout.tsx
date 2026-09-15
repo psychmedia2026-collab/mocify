@@ -11,6 +11,7 @@ import "./listener-banner.css";
 import "./listener-navigation.css";
 import "./section-hero.css";
 import "./mockup-reference.css";
+import { ListenerPlayerProvider } from "./listener-player";
 
 const geist = Geist({ variable: "--font-geist", subsets: ["latin"] });
 
@@ -28,5 +29,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({children}:{children:React.ReactNode}){
-  return <html lang="en" className={geist.variable}><body>{children}</body></html>;
+  return <html lang="en" className={geist.variable}><body><ListenerPlayerProvider>{children}</ListenerPlayerProvider></body></html>;
 }

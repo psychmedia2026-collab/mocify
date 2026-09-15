@@ -12,7 +12,7 @@ const features=[
 ];
 
 export default function Home(){
-  return <Shell active="home" player={false}>
+  return <Shell active="home">
     <section className="home-hero page-wrap">
       <div className="home-copy">
         <h1>AI MUSIC.<br/><span>INFINITE<br/>POSSIBILITIES.</span></h1>

@@ -17,6 +17,147 @@
   .listener-shell .m-account .m-signup { display: none; }
 }
 
+.listener-shell .m-mobile-utility { display: none; }
+
+/* Keep primary listener navigation through the tablet breakpoint. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .listener-shell .m-header { grid-template-columns: auto 1fr auto; gap: 12px; }
+  .listener-shell .m-header nav { display: flex; justify-self: center; gap: 14px; font-size: 12px; }
+  .listener-shell .m-header nav a { padding: 24px 0; }
+  .listener-shell .m-search-form { display: flex; width: 150px; flex-basis: 150px; }
+  .listener-shell .m-account { gap: 6px; }
+  .listener-shell .m-login { padding-inline: 10px; }
+  .listener-shell .m-signup { display: none; }
+  .listener-shell .m-mobile-nav { display: none; }
+}
+
+/* Mobile uses the existing bottom navigation and a compact three-row player. */
+@media (max-width: 767px) {
+  .listener-shell.has-player { --player-height: 112px; }
+  .listener-shell .m-player { left: 6px; right: 6px; bottom: calc(var(--mobile-nav-height) + var(--safe-bottom) + 6px); border-radius: 18px; }
+  .listener-shell .m-player-inner { width: calc(100% - 16px); grid-template-columns: minmax(0,1fr) auto; grid-template-rows: 1fr 28px 30px; gap: 0 8px; }
+  .listener-shell .m-player-track-area { grid-column: 1; grid-row: 1; gap: 6px; }
+  .listener-shell .m-player-center { display: contents; }
+  .listener-shell .m-controls { grid-column: 2; grid-row: 1; gap: 1px; }
+  .listener-shell .m-controls .m-utility { display: none; }
+  .listener-shell .m-controls button:not(.m-utility) { min-width: 34px; min-height: 34px; font-size: 13px; }
+  .listener-shell .m-controls .m-play { width: 42px; height: 42px; }
+  .listener-shell .m-progress-row { grid-column: 1 / -1; grid-row: 2; width: 100%; grid-template-columns: 32px minmax(0,1fr) 32px; gap: 6px; font-size: 9px; }
+  .listener-shell .m-player-tools { grid-column: 1 / -1; grid-row: 3; justify-content: space-between; gap: 4px; }
+  .listener-shell .m-mobile-utility { display: grid; place-items: center; min-width: 30px; min-height: 30px; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; background: rgba(255,255,255,.035); color: #b9b4cf; font-size: 12px; }
+  .listener-shell .m-mobile-utility.active { color: #fff; background: rgba(237,53,197,.13); box-shadow: 0 0 12px rgba(237,53,197,.18); }
+  .listener-shell .m-volume { display: inline-flex; min-width: 0; }
+  .listener-shell .m-volume span { display: none; }
+  .listener-shell .m-volume input { width: 58px; }
+  .listener-shell .m-tool-toggle { min-height: 30px; padding-inline: 7px; font-size: 8px; }
+  .listener-shell .m-queue-button { width: 30px; height: 30px; }
+  .listener-shell .m-player-brand { display: none; }
+}
+
+@media (max-width: 767px) {
+  .listener-shell .m-mobile-nav {
+    border-top-color: rgba(132,104,255,.28);
+    box-shadow: 0 -4px 18px rgba(54,32,112,.16);
+  }
+
+  .listener-shell .m-mobile-nav a {
+    min-height: 44px;
+    color: #b9b8c5;
+    font-size: 9px;
+    font-weight: 700;
+  }
+
+  .listener-shell .m-mobile-nav a > span {
+    color: #e0dfe8;
+    font-size: 18px;
+  }
+
+  .listener-shell .m-mobile-nav a[aria-current="page"] {
+    color: #fff;
+    text-shadow: 0 0 12px rgba(237,53,197,.32);
+  }
+
+  .listener-shell .m-mobile-nav a[aria-current="page"] > span {
+    color: #fff;
+    text-shadow: 0 0 14px rgba(120,87,255,.6);
+  }
+}
+
+/* Listener responsive pass: preserve desktop composition above 1100px. */
+@media (max-width: 1100px) and (min-width: 901px) {
+  .listener-shell .m-header { gap: 12px; }
+  .listener-shell .m-header nav { gap: 14px; font-size: 12px; }
+  .listener-shell .m-search-form { width: 170px; flex-basis: 170px; }
+}
+
+@media (max-width: 900px) {
+  .listener-shell .m-header { grid-template-columns: minmax(0,1fr) auto; grid-template-rows: auto auto; height: auto; row-gap: 10px; padding-top: 10px; padding-bottom: 12px; }
+  .listener-shell .m-account { display: contents; }
+  .listener-shell .m-account .m-login { grid-column: 2; grid-row: 1; min-height: 42px; }
+  .listener-shell .m-account .m-signup { display: none; }
+  .listener-shell .m-search-form { display: flex; grid-column: 1 / -1; grid-row: 2; width: 100%; flex-basis: auto; }
+  .listener-shell .m-header .m-logo { min-width: 0; }
+  .listener-shell .m-header .m-logo span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .listener-shell.has-player { --player-height: 124px; }
+  .listener-shell .m-shell { padding-bottom: calc(var(--mobile-nav-height) + var(--safe-bottom)); }
+  .listener-shell.has-player { padding-bottom: calc(var(--mobile-nav-height) + var(--player-height) + var(--safe-bottom) + 14px); }
+  .listener-shell .home-hero { min-height: 560px; }
+  .listener-shell .home-copy { padding: 36px 28px 260px; }
+  .listener-shell .hero-portrait { height: 52%; }
+  .listener-shell .section-cinematic-copy { padding: 38px 34px; }
+  .listener-shell .section-cinematic-copy h1 { font-size: clamp(38px, 7vw, 54px); }
+  .listener-shell .feature-strip { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 18px; }
+  .listener-shell .feature-item:nth-child(2) { border-right: 0; }
+  .listener-shell .m-player { left: 10px; right: 10px; bottom: calc(var(--mobile-nav-height) + var(--safe-bottom) + 8px); }
+  .listener-shell .m-player-inner { grid-template-columns: minmax(0,1fr) auto; grid-template-rows: 1fr 34px 34px; gap: 0 10px; width: calc(100% - 28px); }
+  .listener-shell .m-player-track-area { grid-column: 1; grid-row: 1; }
+  .listener-shell .m-player-center { display: contents; }
+  .listener-shell .m-controls { grid-column: 2; grid-row: 1; gap: 3px; }
+  .listener-shell .m-controls .m-utility { display: none; }
+  .listener-shell .m-controls button:not(.m-utility) { min-width: 38px; min-height: 38px; }
+  .listener-shell .m-controls .m-play { width: 46px; height: 46px; }
+  .listener-shell .m-progress-row { grid-column: 1 / -1; grid-row: 2; width: 100%; }
+  .listener-shell .m-player-tools { grid-column: 1 / -1; grid-row: 3; justify-content: space-between; gap: 8px; }
+  .listener-shell .m-mobile-utility { display: grid; place-items: center; min-width: 36px; min-height: 36px; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; background: rgba(255,255,255,.035); color: #b9b4cf; font-size: 14px; }
+  .listener-shell .m-mobile-utility.active { color: #fff; background: rgba(237,53,197,.13); box-shadow: 0 0 16px rgba(237,53,197,.2), inset 0 0 0 1px rgba(237,53,197,.28); }
+  .listener-shell .m-volume { display: inline-flex; min-width: 0; }
+  .listener-shell .m-volume input { width: 70px; }
+  .listener-shell .m-tool-toggle { min-height: 36px; }
+  .listener-shell .m-queue-button { width: 36px; height: 36px; }
+  .listener-shell .m-player-brand { display: none; }
+}
+
+@media (max-width: 620px) {
+  .listener-shell.has-player { --player-height: 132px; }
+  .listener-shell .m-header { width: calc(100% - 22px); }
+  .listener-shell .home-hero { min-height: 540px; }
+  .listener-shell .home-copy { padding: 28px 20px 230px; }
+  .listener-shell .hero-portrait { height: 48%; }
+  .listener-shell .feature-strip { grid-template-columns: 1fr; gap: 0; }
+  .listener-shell .feature-item { border-right: 0; }
+  .listener-shell .section-cinematic-hero { min-height: 290px; }
+  .listener-shell .section-cinematic-copy { padding: 30px 22px; }
+  .listener-shell .section-cinematic-copy h1 { font-size: clamp(34px, 10vw, 42px); }
+  .listener-shell .section-cinematic-copy > p:not(.page-kicker) { max-width: 100%; font-size: 13px; }
+  .listener-shell .m-player { left: 6px; right: 6px; bottom: calc(var(--mobile-nav-height) + var(--safe-bottom) + 6px); }
+  .listener-shell .m-player-inner { width: calc(100% - 16px); grid-template-rows: 1fr 34px 36px; }
+  .listener-shell .m-player-cover { width: 44px; height: 44px; }
+  .listener-shell .m-player-track-copy b { max-width: 120px; font-size: 11px; }
+  .listener-shell .m-player-track-copy small { max-width: 120px; font-size: 9px; }
+  .listener-shell .m-player-save { min-width: 34px; min-height: 34px; }
+  .listener-shell .m-controls { gap: 1px; }
+  .listener-shell .m-controls button:not(.m-utility) { min-width: 34px; min-height: 34px; font-size: 13px; }
+  .listener-shell .m-controls .m-play { width: 42px; height: 42px; }
+  .listener-shell .m-progress-row { grid-template-columns: 32px minmax(0,1fr) 32px; gap: 6px; font-size: 9px; }
+  .listener-shell .m-player-tools { gap: 4px; }
+  .listener-shell .m-mobile-utility { min-width: 32px; min-height: 32px; font-size: 12px; }
+  .listener-shell .m-volume span { display: none; }
+  .listener-shell .m-volume input { width: 58px; }
+  .listener-shell .m-tool-toggle { min-height: 32px; padding-inline: 7px; font-size: 8px; }
+  .listener-shell .m-queue-button { width: 32px; height: 32px; }
+  .listener-shell .m-queue-popover { right: -4px; bottom: 38px; width: min(230px, calc(100vw - 24px)); }
+}
+
 /* Keep the desktop home frame inside the existing sidebar gutters. */
 @media (min-width: 1201px) {
   .listener-shell .m-main-frame:has(> .home-hero) {

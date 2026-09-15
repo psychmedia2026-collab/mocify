@@ -36,9 +36,9 @@ export const artists = [
 export const featuredArtist = artists[0];
 
 export const releases = [
-  { id: "toca-bonbon", title: "TOCA BONBON", artist: featuredArtist.name, genre: "Manele · Pop", art: "art-a", href: "/track/toca-bonbon", detailReady: true },
-  { id: "bella-ciao", title: "Bella Ciao", artist: "MOCIFY", genre: "Afrohouse · Arabic", art: "art-b", detailReady: false },
-  { id: "fara-mine", title: "Fără mine", artist: "MOCIFY", genre: "Romanian · Pop", art: "art-c", detailReady: false },
+  { id: "toca-bonbon", title: "Stand By", artist: featuredArtist.name, genre: "Manele · Pop", art: "art-a", href: "/track/toca-bonbon", audioSrc: "/audio/Stand-By.mp3", detailReady: true },
+  { id: "bella-ciao", title: "Doar Una (Remix)", artist: "MOCIFY", genre: "Afrohouse · Arabic", art: "art-b", audioSrc: "/audio/Doar%20Una%20(Remix)%20(Remix).mp3", detailReady: false },
+  { id: "fara-mine", title: "Nooit van mij", artist: "MOCIFY", genre: "Romanian · Pop", art: "art-c", audioSrc: "/audio/Nooit%20van%20mij.mp3", detailReady: false },
   { id: "money-money", title: "Money Money", artist: "MOCIFY", genre: "Manele · Trap", art: "art-d", detailReady: false },
   { id: "kill-the-beat", title: "Kill the Beat", artist: "MOCIFY", genre: "Electronic · Trap", art: "art-e", detailReady: false },
   { id: "afterlight", title: "Afterlight", artist: "MIRA-7", genre: "Ambient", art: "art-f", href: "/artists#artist-list", detailReady: false },

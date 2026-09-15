@@ -14,7 +14,7 @@ const plans=[
   {name:"Premium",price:"€7.99",period:"/ month",text:"The complete MOCIFY listening experience.",features:["No advertising","Higher audio quality","Offline listening","Early access to releases"],cta:"Go Premium",href:"/signup",featured:true},
 ];
 
-export default function PremiumPage(){return <Shell active="premium" player={false}>
+export default function PremiumPage(){return <Shell active="premium">
   <div className="page-wrap mockup-page-top"><SectionHero theme="premium" kicker="PREMIUM" title="Hear More." accent="Interrupt Less." text="Unlock the full MOCIFY experience. Higher quality. More music. No limits." cta="View Plans" href="#listener-plans"/></div>
   <section id="premium-benefits" className="page-wrap mockup-section scroll-mt-24">
     <div className="mockup-heading"><h2>Premium Benefits</h2></div>

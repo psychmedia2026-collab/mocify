@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { featuredTrack, mobileNavigation, navigation, quickNavigation, type Release } from "./data";
+import { mobileNavigation, navigation, quickNavigation, type Release } from "./data";
 import ListenerBanner from "./listener-banner";
 import HeaderSearch from "./header-search";
+import { TrackPlayButton } from "./listener-player";
+import Player from "./listener-player-ui";
 
 export function Logo() {
   return <Link className="m-logo" href="/" aria-label="MOCIFY home">
@@ -44,10 +46,6 @@ export function QuickMenu({ active = "" }: { active?: string }) {
   </nav>;
 }
 
-export function Player() {
-  return <section className="m-player" aria-label="Music player preview"><div className="m-player-inner"><Link className="m-player-track" href={featuredTrack.href}><span className="m-player-cover" aria-hidden="true">{featuredTrack.initials}</span><span><b>{featuredTrack.title}</b><small>{featuredTrack.artist}</small></span></Link><div className="m-controls" aria-label="Playback controls coming soon"><button type="button" aria-label="Previous track" disabled>◀</button><button type="button" aria-label="Play preview" disabled className="m-play">▶</button><button type="button" aria-label="Next track" disabled>▶</button></div><div className="m-player-right"><span>{featuredTrack.elapsed}</span><i aria-hidden="true"><b style={{width:`${featuredTrack.progress}%`}} /></i><span>{featuredTrack.duration}</span><Link href="/library" aria-label="Save to library">♡</Link></div></div></section>;
-}
-
 export function Footer() {
   return <footer className="m-footer"><div><Logo /><p>AI MUSIC. INFINITE POSSIBILITIES.</p></div><div><b>Discover</b><Link href="/explore">Explore</Link><Link href="/artists">Artists</Link><Link href="/radio">MOCIFY Radio</Link><Link href="/premium">Premium</Link></div><div><b>Creators</b><Link href="/for-artists">Upload your music</Link><Link href="/for-artists">Artist portal</Link></div><div><b>MOCIFY</b><span>About — soon</span><span>Terms — soon</span><span>Privacy — soon</span></div><small>© 2026 MOCIFY</small></footer>;
 }
@@ -60,6 +58,6 @@ export function ComingSoonButton({ children, className = "m-secondary", label }:
 
 export function ReleaseCard({ r, index }: { r: Release; index: number }) {
   const card=<><div className={`release-art ${r.art}`}><span className="release-number" aria-hidden="true">{String(index+1).padStart(2,"0")}</span>{r.detailReady?<span className="release-play" aria-hidden="true">▶</span>:<span className="release-soon">PREVIEW SOON</span>}</div><small>{r.genre}</small><h3>{r.title}</h3><p>{r.artist}</p></>;
-  if("href" in r&&r.href)return <Link id={r.id} className="release-card" href={r.href}>{card}</Link>;
-  return <article id={r.id} className="release-card release-card-static">{card}</article>;
+  const content = "href" in r && r.href ? <Link className="release-card-link" href={r.href}>{card}</Link> : card;
+  return <article id={r.id} className={`release-card${"href" in r && r.href ? "" : " release-card-static"}`}>{content}<TrackPlayButton track={r}/></article>;
 }

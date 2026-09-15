@@ -1,18 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { releases } from "../data";
-
-function pickNext(current:number){if(releases.length<2)return 0;let next=current;while(next===current)next=Math.floor(Math.random()*releases.length);return next;}
+import { formatTime, useListenerPlayer } from "../listener-player";
 
 export default function RadioClient(){
-  const [current,setCurrent]=useState(0); const track=releases[current];
+  const { currentTrack, isPlaying, hasAudioSource, status, currentTime, queue, togglePlay, nextTrack, previousTrack } = useListenerPlayer();
   return <div className="mockup-radio-player" aria-label="MOCIFY Radio player">
-    <div className={`mockup-radio-cover ${track.art}`}/>
-    <div className="mockup-radio-track"><b>{track.title}</b><small>{track.artist}</small></div>
-    <button type="button" className="mockup-radio-control" aria-label="Previous" onClick={()=>setCurrent(pickNext(current))}>◀</button>
-    <button type="button" className="mockup-radio-control main" aria-label="Play preview" title="Audio files will be connected later">Ⅱ</button>
-    <button type="button" className="mockup-radio-control" aria-label="Next" onClick={()=>setCurrent(pickNext(current))}>▶</button>
+    <div className={`mockup-radio-cover ${currentTrack.art}`}/>
+    <div className="mockup-radio-track"><b>{currentTrack.title}</b><small>{currentTrack.artist}</small><span role="status">{hasAudioSource ? formatTime(currentTime) : status}</span></div>
+    <button type="button" className="mockup-radio-control" aria-label="Previous track" onClick={previousTrack} disabled={queue.length < 2}>◀</button>
+    <button type="button" className="mockup-radio-control main" aria-label={isPlaying ? "Pause radio" : "Play radio"} title={!hasAudioSource ? "Audio previews are not connected yet" : undefined} onClick={togglePlay} disabled={!hasAudioSource}>{isPlaying ? "Ⅱ" : "▶"}</button>
+    <button type="button" className="mockup-radio-control" aria-label="Next track" onClick={nextTrack} disabled={queue.length < 2}>▶</button>
     <div className="mockup-radio-volume" aria-hidden="true"/>
   </div>;
 }

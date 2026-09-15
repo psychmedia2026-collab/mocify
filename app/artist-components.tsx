@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CreatorPlaybackStop from "./creator-playback-stop";
 
 export function ArtistLogo() {
   return <Link className="artist-brand" href="/for-artists" aria-label="MOCIFY for Artists home">
@@ -25,6 +26,7 @@ export function ArtistPortalHeader({ active = "" }: { active?: string }) {
 
 export function ArtistPortalShell({ children, active = "" }: { children: React.ReactNode; active?: string }) {
   return <div className="artist-portal-shell">
+    <CreatorPlaybackStop />
     <a className="skip-link" href="#artist-main">Skip to content</a>
     <ArtistPortalHeader active={active} />
     <main id="artist-main" tabIndex={-1}>{children}</main>
