@@ -48,7 +48,7 @@ export const releases = [
 ] as const;
 
 export type Release = (typeof releases)[number];
-export const featuredTrack = { ...releases[0], duration: "3:28", elapsed: "1:42", progress: 49, initials: "TB" };
+export const featuredTrack = { ...releases[0], duration: "3:28", elapsed: "1:42", progress: 49, initials: "SB" };
 export const likedTracks = [
   { ...releases[0], href: releases[0].href },
   { ...releases[1], href: "/explore#bella-ciao" },
