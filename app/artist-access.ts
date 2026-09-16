@@ -1,9 +1,11 @@
 export type ArtistPlanTier="free"|"pro"|"max";
-export type ArtistFeature="dashboard"|"music"|"upload"|"releaseScheduling"|"analytics"|"promote"|"earnings"|"studio";
+export type ArtistFeature="dashboard"|"music"|"upload"|"multiArtist"|"releaseScheduling"|"analytics"|"promote"|"earnings"|"studio";
 
 export const ARTIST_ACCOUNT_KEY="mocify-artist-account";
 export const ARTIST_SESSION_KEY="mocify-artist-session";
 export const ARTIST_PLAN_KEY="mocify-artist-plan";
+export const MANAGED_ARTISTS_KEY="mocify-managed-artists";
+export const ACTIVE_ARTIST_KEY="mocify-active-artist";
 
 export const DEMO_ARTIST_ACCOUNTS={
  free:{email:"free@mocify.ai",password:"MocifyFree2026!",artistName:"Free Test Artist",plan:"free" as ArtistPlanTier,role:"artist" as const},
@@ -13,7 +15,7 @@ export const DEMO_ARTIST_ACCOUNTS={
 
 const rank:Record<ArtistPlanTier,number>={free:0,pro:1,max:2};
 export const featureMinimumPlan:Record<ArtistFeature,ArtistPlanTier>={
- dashboard:"free",music:"free",upload:"free",releaseScheduling:"pro",analytics:"pro",promote:"pro",earnings:"pro",studio:"max"
+ dashboard:"free",music:"free",upload:"free",multiArtist:"pro",releaseScheduling:"pro",analytics:"pro",promote:"pro",earnings:"pro",studio:"max"
 };
 
 export function normalizeArtistPlan(value:string|null|undefined):ArtistPlanTier{
@@ -25,6 +27,7 @@ export function hasArtistFeature(plan:ArtistPlanTier,feature:ArtistFeature){retu
 
 export type PrototypeArtistAccount={artistName:string;email:string;passwordHash:string};
 export type PrototypeArtistSession={email:string;artistName:string;createdAt:number;role?:"artist"|"admin"};
+export type ManagedArtist={id:string;name:string;genre:string;concept:string;createdAt:number;primary?:boolean};
 
 export function readArtistAccount():PrototypeArtistAccount|null{
  if(typeof window==="undefined")return null;
@@ -55,6 +58,30 @@ export function matchDemoArtistCredentials(email:string,password:string){
 }
 export function clearArtistSession(){if(typeof window!=="undefined")localStorage.removeItem(ARTIST_SESSION_KEY)}
 export function getStoredArtistPlan(){if(typeof window==="undefined")return"free" as ArtistPlanTier;return normalizeArtistPlan(localStorage.getItem(ARTIST_PLAN_KEY))}
+
+export function readManagedArtists():ManagedArtist[]{
+ if(typeof window==="undefined")return[];
+ try{const raw=localStorage.getItem(MANAGED_ARTISTS_KEY);if(!raw)return[];const parsed=JSON.parse(raw);return Array.isArray(parsed)?parsed.filter(x=>typeof x?.id==="string"&&typeof x?.name==="string"):[]}catch{return[]}
+}
+export function ensurePrimaryArtist(name="Andigo"){
+ if(typeof window==="undefined")return[] as ManagedArtist[];
+ const existing=readManagedArtists();
+ if(existing.length){if(!localStorage.getItem(ACTIVE_ARTIST_KEY))localStorage.setItem(ACTIVE_ARTIST_KEY,existing[0].id);return existing}
+ const primary:ManagedArtist={id:"andigo",name,genre:"AI Pop",concept:"Primary artist profile",createdAt:Date.now(),primary:true};
+ localStorage.setItem(MANAGED_ARTISTS_KEY,JSON.stringify([primary]));
+ localStorage.setItem(ACTIVE_ARTIST_KEY,primary.id);
+ return[primary];
+}
+export function getActiveArtist(){
+ if(typeof window==="undefined")return null;
+ const artists=ensurePrimaryArtist(),activeId=localStorage.getItem(ACTIVE_ARTIST_KEY);
+ return artists.find(x=>x.id===activeId)??artists[0]??null;
+}
+export function setActiveArtist(id:string){
+ if(typeof window==="undefined")return;
+ localStorage.setItem(ACTIVE_ARTIST_KEY,id);
+ window.dispatchEvent(new CustomEvent("mocify-active-artist-change",{detail:id}));
+}
 
 export async function hashArtistPassword(value:string){
  const data=new TextEncoder().encode(value);
