@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ArtistPortalShell } from "../artist-components";
 import ArtistDashboardLayout, { type ArtistPlanTier } from "../artist-dashboard-layout";
-import styles from "./workspace.module.css";
+import styles from "./business-workspace.module.css";
 
 type BusinessSection = "analytics" | "earnings" | "promote";
 
