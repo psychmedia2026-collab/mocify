@@ -5,7 +5,7 @@ import UploadForm from "./UploadForm";
 
 export default function UploadPage(){
   return <ArtistPortalShell active="upload">
-    <section style={{width:"min(1170px, calc(100% - 34px))",maxWidth:"1170px",margin:"0 auto",padding:"16px 0 70px"}}>
+    <section style={{width:"100%",maxWidth:"none",margin:0,padding:"16px 0 70px"}}>
       <ArtistDashboardLayout>
         <div className="mx-1 mt-5 mb-4 overflow-hidden rounded-2xl border border-white/10 bg-[radial-gradient(circle_at_84%_30%,rgba(237,53,197,.16),transparent_18%),radial-gradient(circle_at_74%_45%,rgba(116,56,255,.20),transparent_30%),linear-gradient(120deg,#0a0d1b,#11102b_68%,#150a20)] px-7 py-7">
           <p className="text-[9px] font-black tracking-[.16em] text-fuchsia-400">ARTIST DASHBOARD · RELEASE</p>
