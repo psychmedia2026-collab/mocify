@@ -46,9 +46,9 @@ The artist environment is deliberately separate. The intended production destina
 Listener subscriptions and artist subscriptions are different products.
 
 Listener: Free and Premium.
-Artist: Artist Free, Artist Pro, and MOCIFY STUDIO.
+Artist: Artist Free, Artist Pro, and Artist Max.
 
-Do not mix listener Premium with artist subscriptions. Artist Free covers upload/release; Artist Pro adds analytics; MOCIFY STUDIO adds the full creator environment. Prototype prices/details may change.
+Do not mix listener Premium with artist subscriptions. Artist Free covers the basic artist experience and upload/release. Artist Pro adds Analytics, Earnings and Promote access. Artist Max includes everything in Artist Pro plus exclusive access to MOCIFY STUDIO. MOCIFY STUDIO is a separate creative environment, not a subscription plan. It contains Projects, Create, Editor / Mix and Mastering. Promo Credits are purchased separately for promotion; AI Credits are a monthly Artist Max allowance for Studio generation. Prototype prices and exact credit allowances may change.
 
 ## Visual identity
 
