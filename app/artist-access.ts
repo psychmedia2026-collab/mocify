@@ -4,8 +4,12 @@ export type ArtistFeature="dashboard"|"music"|"upload"|"releaseScheduling"|"anal
 export const ARTIST_ACCOUNT_KEY="mocify-artist-account";
 export const ARTIST_SESSION_KEY="mocify-artist-session";
 export const ARTIST_PLAN_KEY="mocify-artist-plan";
-export const DEMO_ADMIN_EMAIL="admin@mocify.ai";
-export const DEMO_ADMIN_PASSWORD="MocifyAdmin2026!";
+
+export const DEMO_ARTIST_ACCOUNTS={
+ free:{email:"free@mocify.ai",password:"MocifyFree2026!",artistName:"Free Test Artist",plan:"free" as ArtistPlanTier,role:"artist" as const},
+ pro:{email:"pro@mocify.ai",password:"MocifyPro2026!",artistName:"Pro Test Artist",plan:"pro" as ArtistPlanTier,role:"artist" as const},
+ admin:{email:"admin@mocify.ai",password:"MocifyAdmin2026!",artistName:"MOCIFY Admin",plan:"max" as ArtistPlanTier,role:"admin" as const}
+}as const;
 
 const rank:Record<ArtistPlanTier,number>={free:0,pro:1,max:2};
 export const featureMinimumPlan:Record<ArtistFeature,ArtistPlanTier>={
@@ -35,15 +39,20 @@ export function writeArtistSession(account:PrototypeArtistAccount,role:"artist"|
  localStorage.setItem(ARTIST_SESSION_KEY,JSON.stringify(session));
  return session;
 }
-export function writeDemoAdminSession(){
+export function writeDemoSession(key:keyof typeof DEMO_ARTIST_ACCOUNTS){
  if(typeof window==="undefined")return null;
- const session:PrototypeArtistSession={email:DEMO_ADMIN_EMAIL,artistName:"MOCIFY Admin",createdAt:Date.now(),role:"admin"};
+ const account=DEMO_ARTIST_ACCOUNTS[key];
+ const session:PrototypeArtistSession={email:account.email,artistName:account.artistName,createdAt:Date.now(),role:account.role};
  localStorage.setItem(ARTIST_SESSION_KEY,JSON.stringify(session));
- localStorage.setItem(ARTIST_PLAN_KEY,"max");
- window.dispatchEvent(new CustomEvent<ArtistPlanTier>("mocify-plan-change",{detail:"max"}));
+ localStorage.setItem(ARTIST_PLAN_KEY,account.plan);
+ window.dispatchEvent(new CustomEvent<ArtistPlanTier>("mocify-plan-change",{detail:account.plan}));
  return session;
 }
-export function isDemoAdminCredentials(email:string,password:string){return email.trim().toLowerCase()===DEMO_ADMIN_EMAIL&&password===DEMO_ADMIN_PASSWORD}
+export function matchDemoArtistCredentials(email:string,password:string){
+ const normalized=email.trim().toLowerCase();
+ const entry=(Object.entries(DEMO_ARTIST_ACCOUNTS) as [keyof typeof DEMO_ARTIST_ACCOUNTS,(typeof DEMO_ARTIST_ACCOUNTS)[keyof typeof DEMO_ARTIST_ACCOUNTS]][]).find(([,account])=>account.email===normalized&&account.password===password);
+ return entry?.[0]??null;
+}
 export function clearArtistSession(){if(typeof window!=="undefined")localStorage.removeItem(ARTIST_SESSION_KEY)}
 export function getStoredArtistPlan(){if(typeof window==="undefined")return"free" as ArtistPlanTier;return normalizeArtistPlan(localStorage.getItem(ARTIST_PLAN_KEY))}
 
