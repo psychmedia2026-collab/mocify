@@ -4,6 +4,8 @@ export type ArtistFeature="dashboard"|"music"|"upload"|"releaseScheduling"|"anal
 export const ARTIST_ACCOUNT_KEY="mocify-artist-account";
 export const ARTIST_SESSION_KEY="mocify-artist-session";
 export const ARTIST_PLAN_KEY="mocify-artist-plan";
+export const DEMO_ADMIN_EMAIL="admin@mocify.ai";
+export const DEMO_ADMIN_PASSWORD="MocifyAdmin2026!";
 
 const rank:Record<ArtistPlanTier,number>={free:0,pro:1,max:2};
 export const featureMinimumPlan:Record<ArtistFeature,ArtistPlanTier>={
@@ -18,7 +20,7 @@ export function normalizeArtistPlan(value:string|null|undefined):ArtistPlanTier{
 export function hasArtistFeature(plan:ArtistPlanTier,feature:ArtistFeature){return rank[plan]>=rank[featureMinimumPlan[feature]]}
 
 export type PrototypeArtistAccount={artistName:string;email:string;passwordHash:string};
-export type PrototypeArtistSession={email:string;artistName:string;createdAt:number};
+export type PrototypeArtistSession={email:string;artistName:string;createdAt:number;role?:"artist"|"admin"};
 
 export function readArtistAccount():PrototypeArtistAccount|null{
  if(typeof window==="undefined")return null;
@@ -28,11 +30,20 @@ export function readArtistSession():PrototypeArtistSession|null{
  if(typeof window==="undefined")return null;
  try{const raw=localStorage.getItem(ARTIST_SESSION_KEY);if(!raw)return null;const parsed=JSON.parse(raw);if(typeof parsed?.email!=="string")return null;return parsed}catch{return null}
 }
-export function writeArtistSession(account:PrototypeArtistAccount){
- const session:PrototypeArtistSession={email:account.email,artistName:account.artistName,createdAt:Date.now()};
+export function writeArtistSession(account:PrototypeArtistAccount,role:"artist"|"admin"="artist"){
+ const session:PrototypeArtistSession={email:account.email,artistName:account.artistName,createdAt:Date.now(),role};
  localStorage.setItem(ARTIST_SESSION_KEY,JSON.stringify(session));
  return session;
 }
+export function writeDemoAdminSession(){
+ if(typeof window==="undefined")return null;
+ const session:PrototypeArtistSession={email:DEMO_ADMIN_EMAIL,artistName:"MOCIFY Admin",createdAt:Date.now(),role:"admin"};
+ localStorage.setItem(ARTIST_SESSION_KEY,JSON.stringify(session));
+ localStorage.setItem(ARTIST_PLAN_KEY,"max");
+ window.dispatchEvent(new CustomEvent<ArtistPlanTier>("mocify-plan-change",{detail:"max"}));
+ return session;
+}
+export function isDemoAdminCredentials(email:string,password:string){return email.trim().toLowerCase()===DEMO_ADMIN_EMAIL&&password===DEMO_ADMIN_PASSWORD}
 export function clearArtistSession(){if(typeof window!=="undefined")localStorage.removeItem(ARTIST_SESSION_KEY)}
 export function getStoredArtistPlan(){if(typeof window==="undefined")return"free" as ArtistPlanTier;return normalizeArtistPlan(localStorage.getItem(ARTIST_PLAN_KEY))}
 
