@@ -75,10 +75,10 @@ export default function ArtistDashboardLayout({
         <nav aria-label="Artist dashboard">
           {dashboardItems.map((item) => {
             const locked = item.min === "pro" && currentPlan === "free";
-            const active = !locked && itemIsActive(pathname, item.href);
+            const active = itemIsActive(pathname, item.href);
             return (
               <Link
-                href={locked ? "/for-artists" : item.href}
+                href={item.href}
                 key={item.id}
                 className={`${active ? styles.activeNav : ""} ${locked ? styles.lockedNav : ""}`}
                 aria-current={active ? "page" : undefined}
