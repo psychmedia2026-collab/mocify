@@ -54,3 +54,8 @@
 .planLocked{opacity:.46;filter:saturate(.45)}
 .planLocked:hover{transform:none!important;box-shadow:none!important}
 .planLock{margin-left:2px;color:#777b8d;font-size:10px;font-weight:900}
+.proUpgrade{border-color:#42cfff66;background:radial-gradient(circle at 88% 18%,#02d9ff1b,transparent 34%),radial-gradient(circle at 18% 0%,#7438ff2a,transparent 34%),linear-gradient(145deg,#111936,#140d28)}
+.proUpgrade small{display:flex;align-items:center;gap:5px;color:#a8edff}
+.proUpgrade b{display:flex;align-items:center;color:#fff}
+.proUpgrade>a{border-color:#ffb857;background:linear-gradient(90deg,#7c42e8,#c43de3 58%,#ff8b55);box-shadow:0 8px 24px #9b3dff33}
+.proUpgrade>a:hover{filter:brightness(1.08);transform:translateY(-1px)}
