@@ -50,3 +50,7 @@
 .planGlyph{display:inline-grid;place-items:center;width:20px;height:20px;margin-right:6px;border-radius:50%;font-size:13px;vertical-align:middle}
 .planStatusPro .planGlyph{color:#9be8ff;background:#12334a;border:1px solid #3fc8ff44}
 .planStatusMax .planGlyph{color:#ffd474;background:#4b2916;border:1px solid #ffb34a55;box-shadow:0 0 13px #ffb34a22}
+.planSwitcher button:disabled{cursor:not-allowed}
+.planLocked{opacity:.46;filter:saturate(.45)}
+.planLocked:hover{transform:none!important;box-shadow:none!important}
+.planLock{margin-left:2px;color:#777b8d;font-size:10px;font-weight:900}
