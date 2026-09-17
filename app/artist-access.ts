@@ -6,6 +6,8 @@ export const ARTIST_SESSION_KEY="mocify-artist-session";
 export const ARTIST_PLAN_KEY="mocify-artist-plan";
 export const MANAGED_ARTISTS_KEY="mocify-managed-artists";
 export const ACTIVE_ARTIST_KEY="mocify-active-artist";
+export const ARTIST_BILLING_END_KEY="mocify-artist-billing-period-end";
+export const ARTIST_PENDING_PLAN_KEY="mocify-artist-pending-plan";
 
 export const DEMO_ARTIST_ACCOUNTS={
  free:{email:"free@mocify.ai",password:"MocifyFree2026!",artistName:"Free Test Artist",plan:"free" as ArtistPlanTier,role:"artist" as const},
@@ -24,6 +26,9 @@ export function normalizeArtistPlan(value:string|null|undefined):ArtistPlanTier{
  return"free";
 }
 export function hasArtistFeature(plan:ArtistPlanTier,feature:ArtistFeature){return rank[plan]>=rank[featureMinimumPlan[feature]]}
+export function artistPlanRank(plan:ArtistPlanTier){return rank[plan]}
+export function isArtistUpgrade(from:ArtistPlanTier,to:ArtistPlanTier){return rank[to]>rank[from]}
+export function isArtistDowngrade(from:ArtistPlanTier,to:ArtistPlanTier){return rank[to]<rank[from]}
 
 export type PrototypeArtistAccount={artistName:string;email:string;passwordHash:string};
 export type PrototypeArtistSession={email:string;artistName:string;createdAt:number;role?:"artist"|"admin"};
@@ -48,6 +53,8 @@ export function writeDemoSession(key:keyof typeof DEMO_ARTIST_ACCOUNTS){
  const session:PrototypeArtistSession={email:account.email,artistName:account.artistName,createdAt:Date.now(),role:account.role};
  localStorage.setItem(ARTIST_SESSION_KEY,JSON.stringify(session));
  localStorage.setItem(ARTIST_PLAN_KEY,account.plan);
+ localStorage.removeItem(ARTIST_PENDING_PLAN_KEY);
+ if(account.plan==="free")localStorage.removeItem(ARTIST_BILLING_END_KEY);else ensureArtistBillingEnd();
  window.dispatchEvent(new CustomEvent<ArtistPlanTier>("mocify-plan-change",{detail:account.plan}));
  return session;
 }
@@ -57,7 +64,62 @@ export function matchDemoArtistCredentials(email:string,password:string){
  return entry?.[0]??null;
 }
 export function clearArtistSession(){if(typeof window!=="undefined")localStorage.removeItem(ARTIST_SESSION_KEY)}
-export function getStoredArtistPlan(){if(typeof window==="undefined")return"free" as ArtistPlanTier;return normalizeArtistPlan(localStorage.getItem(ARTIST_PLAN_KEY))}
+export function getStoredArtistPlan(){if(typeof window==="undefined")return"free" as ArtistPlanTier;applyPendingArtistPlanChange();return normalizeArtistPlan(localStorage.getItem(ARTIST_PLAN_KEY))}
+export function ensureArtistBillingEnd(){
+ if(typeof window==="undefined")return 0;
+ const current=normalizeArtistPlan(localStorage.getItem(ARTIST_PLAN_KEY));
+ if(current==="free"){localStorage.removeItem(ARTIST_BILLING_END_KEY);return 0}
+ const saved=Number(localStorage.getItem(ARTIST_BILLING_END_KEY));
+ if(Number.isFinite(saved)&&saved>Date.now())return saved;
+ const next=Date.now()+30*24*60*60*1000;
+ localStorage.setItem(ARTIST_BILLING_END_KEY,String(next));
+ return next;
+}
+export function getArtistBillingEnd(){
+ if(typeof window==="undefined")return 0;
+ return ensureArtistBillingEnd();
+}
+export function getPendingArtistPlan():ArtistPlanTier|null{
+ if(typeof window==="undefined")return null;
+ const value=localStorage.getItem(ARTIST_PENDING_PLAN_KEY);
+ return value==="free"||value==="pro"||value==="max"?value:null;
+}
+export function changeArtistPlanImmediate(target:ArtistPlanTier){
+ if(typeof window==="undefined")return;
+ const current=normalizeArtistPlan(localStorage.getItem(ARTIST_PLAN_KEY));
+ const existingEnd=current==="free"?0:ensureArtistBillingEnd();
+ localStorage.setItem(ARTIST_PLAN_KEY,target);
+ localStorage.removeItem(ARTIST_PENDING_PLAN_KEY);
+ if(target==="free")localStorage.removeItem(ARTIST_BILLING_END_KEY);
+ else if(current==="free"||!existingEnd)localStorage.setItem(ARTIST_BILLING_END_KEY,String(Date.now()+30*24*60*60*1000));
+ else localStorage.setItem(ARTIST_BILLING_END_KEY,String(existingEnd));
+ window.dispatchEvent(new CustomEvent<ArtistPlanTier>("mocify-plan-change",{detail:target}));
+}
+export function scheduleArtistDowngrade(target:ArtistPlanTier){
+ if(typeof window==="undefined")return;
+ const current=normalizeArtistPlan(localStorage.getItem(ARTIST_PLAN_KEY));
+ if(!isArtistDowngrade(current,target))return;
+ ensureArtistBillingEnd();
+ localStorage.setItem(ARTIST_PENDING_PLAN_KEY,target);
+ window.dispatchEvent(new Event("mocify-plan-schedule-change"));
+}
+export function cancelArtistPendingPlan(){
+ if(typeof window==="undefined")return;
+ localStorage.removeItem(ARTIST_PENDING_PLAN_KEY);
+ window.dispatchEvent(new Event("mocify-plan-schedule-change"));
+}
+export function applyPendingArtistPlanChange(){
+ if(typeof window==="undefined")return;
+ const pending=getPendingArtistPlan();
+ if(!pending)return;
+ const end=Number(localStorage.getItem(ARTIST_BILLING_END_KEY));
+ if(!Number.isFinite(end)||Date.now()<end)return;
+ localStorage.setItem(ARTIST_PLAN_KEY,pending);
+ localStorage.removeItem(ARTIST_PENDING_PLAN_KEY);
+ if(pending==="free")localStorage.removeItem(ARTIST_BILLING_END_KEY);
+ else localStorage.setItem(ARTIST_BILLING_END_KEY,String(Date.now()+30*24*60*60*1000));
+ window.dispatchEvent(new CustomEvent<ArtistPlanTier>("mocify-plan-change",{detail:pending}));
+}
 
 export function readManagedArtists():ManagedArtist[]{
  if(typeof window==="undefined")return[];
