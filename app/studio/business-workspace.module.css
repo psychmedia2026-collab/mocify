@@ -2,3 +2,5 @@
 /* Keep business hero titles aligned with kicker and description. */
 .hero h1{gap:0;letter-spacing:-.045em}
 .hero h1 span{display:none}
+.hero p{display:flex;align-items:center;gap:8px}
+.heroPlanIcon{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;border:1px solid #ffffff22;background:#151725;color:#fff;font-size:14px;letter-spacing:0;box-shadow:0 0 14px #7438ff22}
