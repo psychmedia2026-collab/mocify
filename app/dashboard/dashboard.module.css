@@ -59,3 +59,7 @@
 .proUpgrade b{display:flex;align-items:center;color:#fff}
 .proUpgrade>a{border-color:#ffb857;background:linear-gradient(90deg,#7c42e8,#c43de3 58%,#ff8b55);box-shadow:0 8px 24px #9b3dff33}
 .proUpgrade>a:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.managePlanSecondary{display:block!important;margin-top:8px!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;color:#8f93a4!important;text-align:center!important;font-size:10px!important;font-weight:750!important}
+.managePlanSecondary:hover{color:#fff!important;transform:none!important;filter:none!important}
+.managePlanLink{display:inline-flex;margin-top:10px;color:#d9b6ff;text-decoration:none;font-size:11px;font-weight:800}
+.managePlanLink:hover{color:#fff}
