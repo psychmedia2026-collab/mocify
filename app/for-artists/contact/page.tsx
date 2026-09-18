@@ -9,19 +9,19 @@ export default function ArtistContactPage(){
   const[email,setEmail]=useState("");
   const[subject,setSubject]=useState("");
   const[message,setMessage]=useState("");
-  const t=locale==="nl"?{
-    kicker:"MOCIFY SUPPORT",title:"Contact",intro:"Heb je een vraag over je artiestenaccount, releases, promotie of MOCIFY Studio? Stuur ons een bericht.",
-    name:"Naam",email:"E-mail",subject:"Onderwerp",message:"Bericht",send:"Bericht versturen",back:"Terug naar Dashboard",
-    note:"Dit prototype opent je e-mailapp. Later koppelen we dit formulier rechtstreeks aan MOCIFY Support."
-  }:locale==="ro"?{
-    kicker:"MOCIFY SUPPORT",title:"Contact",intro:"Ai o întrebare despre contul de artist, lansări, promovare sau MOCIFY Studio? Trimite-ne un mesaj.",
-    name:"Nume",email:"E-mail",subject:"Subiect",message:"Mesaj",send:"Trimite mesaj",back:"Înapoi la Dashboard",
-    note:"Acest prototip deschide aplicația de e-mail. Ulterior formularul va fi conectat direct la MOCIFY Support."
-  }:{
-    kicker:"MOCIFY SUPPORT",title:"Contact",intro:"Have a question about your artist account, releases, promotion or MOCIFY Studio? Send us a message.",
-    name:"Name",email:"Email",subject:"Subject",message:"Message",send:"Send message",back:"Back to Dashboard",
-    note:"This prototype opens your email app. Later this form will connect directly to MOCIFY Support."
-  };
+  const translations={
+    en:{kicker:"MOCIFY SUPPORT",title:"Contact",intro:"Have a question about your artist account, releases, promotion or MOCIFY Studio? Send us a message.",name:"Name",email:"Email",subject:"Subject",message:"Message",send:"Send message",back:"Back to Dashboard",note:"This prototype opens your email app. Later this form will connect directly to MOCIFY Support."},
+    nl:{kicker:"MOCIFY SUPPORT",title:"Contact",intro:"Heb je een vraag over je artiestenaccount, releases, promotie of MOCIFY Studio? Stuur ons een bericht.",name:"Naam",email:"E-mail",subject:"Onderwerp",message:"Bericht",send:"Bericht versturen",back:"Terug naar Dashboard",note:"Dit prototype opent je e-mailapp. Later koppelen we dit formulier rechtstreeks aan MOCIFY Support."},
+    ro:{kicker:"MOCIFY SUPPORT",title:"Contact",intro:"Ai o întrebare despre contul de artist, lansări, promovare sau MOCIFY Studio? Trimite-ne un mesaj.",name:"Nume",email:"E-mail",subject:"Subiect",message:"Mesaj",send:"Trimite mesaj",back:"Înapoi la Dashboard",note:"Acest prototip deschide aplicația de e-mail. Ulterior formularul va fi conectat direct la MOCIFY Support."},
+    de:{kicker:"MOCIFY SUPPORT",title:"Kontakt",intro:"Fragen zu Künstlerkonto, Releases, Promotion oder MOCIFY Studio? Schreib uns.",name:"Name",email:"E-Mail",subject:"Betreff",message:"Nachricht",send:"Nachricht senden",back:"Zurück zum Dashboard",note:"Dieser Prototyp öffnet deine E-Mail-App. Später wird das Formular direkt mit MOCIFY Support verbunden."},
+    fr:{kicker:"MOCIFY SUPPORT",title:"Contact",intro:"Une question sur votre compte artiste, vos sorties, la promotion ou MOCIFY Studio ? Envoyez-nous un message.",name:"Nom",email:"E-mail",subject:"Objet",message:"Message",send:"Envoyer",back:"Retour au Dashboard",note:"Ce prototype ouvre votre application e-mail. Le formulaire sera ensuite relié directement au support MOCIFY."},
+    es:{kicker:"MOCIFY SUPPORT",title:"Contacto",intro:"¿Tienes una pregunta sobre tu cuenta de artista, lanzamientos, promoción o MOCIFY Studio? Envíanos un mensaje.",name:"Nombre",email:"Correo",subject:"Asunto",message:"Mensaje",send:"Enviar mensaje",back:"Volver al panel",note:"Este prototipo abre tu aplicación de correo. Más adelante el formulario se conectará con MOCIFY Support."},
+    it:{kicker:"MOCIFY SUPPORT",title:"Contatti",intro:"Hai una domanda sul tuo account artista, release, promozione o MOCIFY Studio? Scrivici.",name:"Nome",email:"E-mail",subject:"Oggetto",message:"Messaggio",send:"Invia messaggio",back:"Torna alla Dashboard",note:"Questo prototipo apre la tua app e-mail. In seguito il modulo sarà collegato direttamente al supporto MOCIFY."},
+    pt:{kicker:"MOCIFY SUPPORT",title:"Contacto",intro:"Tens uma pergunta sobre a conta de artista, lançamentos, promoção ou MOCIFY Studio? Envia-nos uma mensagem.",name:"Nome",email:"E-mail",subject:"Assunto",message:"Mensagem",send:"Enviar mensagem",back:"Voltar ao Dashboard",note:"Este protótipo abre a aplicação de e-mail. Mais tarde o formulário será ligado diretamente ao suporte MOCIFY."},
+    pl:{kicker:"MOCIFY SUPPORT",title:"Kontakt",intro:"Masz pytanie o konto artysty, wydania, promocję lub MOCIFY Studio? Napisz do nas.",name:"Imię",email:"E-mail",subject:"Temat",message:"Wiadomość",send:"Wyślij wiadomość",back:"Wróć do panelu",note:"Ten prototyp otwiera aplikację pocztową. Później formularz zostanie połączony bezpośrednio z MOCIFY Support."},
+    tr:{kicker:"MOCIFY SUPPORT",title:"İletişim",intro:"Sanatçı hesabın, yayınlar, tanıtım veya MOCIFY Studio hakkında sorunun mu var? Bize mesaj gönder.",name:"Ad",email:"E-posta",subject:"Konu",message:"Mesaj",send:"Mesaj gönder",back:"Panele dön",note:"Bu prototip e-posta uygulamanı açar. Daha sonra form doğrudan MOCIFY Support'a bağlanacaktır."}
+  } as const;
+  const t=translations[locale]??translations.en;
   const submit=(e:FormEvent)=>{e.preventDefault();const mailSubject=encodeURIComponent(subject||"MOCIFY Artist Portal contact");const body=encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);window.location.href=`mailto:contact@mocify.ai?subject=${mailSubject}&body=${body}`};
   return <ArtistPortalShell active="studio"><section className="artist-contact-page"><div className="artist-contact-wrap"><div className="artist-contact-intro"><p>{t.kicker}</p><h1>{t.title}</h1><span>{t.intro}</span><a href="/dashboard">← {t.back}</a></div><form className="artist-contact-form" onSubmit={submit}><div className="artist-contact-row"><label><span>{t.name}</span><input required value={name} onChange={e=>setName(e.target.value)}/></label><label><span>{t.email}</span><input required type="email" value={email} onChange={e=>setEmail(e.target.value)}/></label></div><label><span>{t.subject}</span><input value={subject} onChange={e=>setSubject(e.target.value)}/></label><label><span>{t.message}</span><textarea required rows={7} value={message} onChange={e=>setMessage(e.target.value)}/></label><button type="submit">{t.send} →</button><small>{t.note}</small></form></div></section></ArtistPortalShell>
 }
