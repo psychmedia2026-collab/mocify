@@ -54,3 +54,33 @@
   .artist-m-save,.artist-m-more{display:none}.artist-m-center{grid-column:2;transform:none}.artist-m-controls{gap:3px}.artist-m-controls button{width:28px;height:28px;min-width:28px;min-height:28px}.artist-m-controls button:first-child,.artist-m-controls button:last-child{display:none}.artist-m-controls .artist-m-play{width:42px;height:42px;min-width:42px;min-height:42px}
   .artist-m-tools,.artist-m-timeline{display:none!important}.artist-portal-shell:has(.artist-m-player){padding-bottom:104px}.artist-dashboard-page{padding-bottom:120px!important}
 }
+.artist-m-minimize{position:absolute;z-index:80;right:10px;top:8px;width:28px;height:24px;border:1px solid rgba(255,255,255,.08);border-radius:8px;background:rgba(255,255,255,.04);color:#b9b5c7;font:inherit;font-size:14px;font-weight:900;cursor:pointer;display:grid;place-items:center}
+.artist-m-minimize:hover{background:rgba(255,255,255,.08);color:#fff}
+.artist-m-mini-controls{display:none}
+
+.artist-m-player.minimized{
+  left:auto;right:20px;bottom:20px;width:360px;height:92px;transform:none;border-radius:18px
+}
+.artist-m-player.minimized .artist-m-player-inner{padding:10px 12px;display:block;height:100%}
+.artist-m-player.minimized .artist-m-player-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;height:100%}
+.artist-m-player.minimized .artist-m-track-area{min-width:0}
+.artist-m-player.minimized .artist-m-track{gap:10px}
+.artist-m-player.minimized .artist-m-cover{width:54px;height:54px;min-width:54px;border-radius:8px}
+.artist-m-player.minimized .artist-m-track b{max-width:125px;font-size:12px}
+.artist-m-player.minimized .artist-m-track small{max-width:125px;font-size:9px;margin-top:3px}
+.artist-m-player.minimized .artist-m-save,
+.artist-m-player.minimized .artist-m-more-wrap,
+.artist-m-player.minimized .artist-m-center,
+.artist-m-player.minimized .artist-m-tools>.artist-m-volume,
+.artist-m-player.minimized .artist-m-tools>.artist-m-cast,
+.artist-m-player.minimized .artist-m-tools>.artist-m-queue-wrap,
+.artist-m-player.minimized .artist-m-tools>.artist-m-brand,
+.artist-m-player.minimized .artist-m-timeline{display:none!important}
+.artist-m-player.minimized .artist-m-tools{display:flex!important;justify-content:flex-end!important;align-items:center!important}
+.artist-m-player.minimized .artist-m-mini-controls{display:flex;align-items:center;gap:6px}
+.artist-m-player.minimized .artist-m-mini-controls button{display:grid;place-items:center;width:30px;height:30px;min-width:30px;border:0;background:transparent;color:#ddd8e8;cursor:pointer}
+.artist-m-player.minimized .artist-m-mini-controls button:disabled{opacity:.3}
+.artist-m-player.minimized .artist-m-mini-controls .artist-m-mini-play{width:42px;height:42px;min-width:42px;border:1px solid rgba(185,111,255,.9);border-radius:50%;background:rgba(8,9,18,.96);box-shadow:0 0 14px rgba(171,69,255,.22);color:#fff}
+.artist-m-player.minimized .artist-m-minimize{right:7px;top:5px;width:24px;height:22px;font-size:12px}
+.artist-portal-shell:has(.artist-m-player.minimized){padding-bottom:20px!important}
+.artist-dashboard-page:has(~ .artist-m-player.minimized){padding-bottom:70px!important}
