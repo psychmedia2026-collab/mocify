@@ -15,6 +15,7 @@ import "./i18n/language-switcher.css";
 import "./mobile-player-fix.css";
 import "./player-visualizer.css";
 import "./artist-dashboard-shell.css";
+import "./artist-player.css";
 import { ListenerPlayerProvider } from "./listener-player";
 import { LanguageProvider } from "./i18n/language-provider";
 
