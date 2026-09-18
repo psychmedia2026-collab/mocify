@@ -13,3 +13,45 @@
 
 @media (prefers-reduced-motion:reduce){.m-wave-column,.m-wave-column>i,.m-wave-glow,.m-wave-progress,.m-wave-playhead{transition:none!important}}
 @media(max-width:900px){.mocify-signature-wave{display:none!important}}
+/* Desktop player arrangement: track info -> tall wave -> playback controls -> tools */
+@media (min-width:901px){
+  .listener-shell .m-player-inner{
+    display:grid!important;
+    grid-template-columns:minmax(280px,1.05fr) minmax(340px,1.4fr) auto minmax(260px,.9fr)!important;
+    align-items:center!important;
+    gap:0 26px!important;
+  }
+  .listener-shell .m-player-track-area{grid-column:1!important;min-width:0}
+  .listener-shell .m-player-wave-area{
+    grid-column:2!important;
+    display:grid!important;
+    grid-template-rows:78px 20px!important;
+    align-items:center!important;
+    min-width:0;
+  }
+  .listener-shell .m-player-center{grid-column:3!important;display:block!important}
+  .listener-shell .m-player-tools{grid-column:4!important;justify-content:flex-end!important}
+  .listener-shell .mocify-signature-wave{
+    width:100%!important;
+    height:78px!important;
+    margin:0!important;
+    border-radius:14px!important;
+    background:radial-gradient(ellipse at 50% 50%,rgba(113,70,255,.18),transparent 72%)!important;
+  }
+  .listener-shell .m-wave-bars{inset:0 3px!important;gap:1.8px!important}
+  .listener-shell .m-wave-column{max-width:8px!important}
+  .listener-shell .m-wave-column>i{height:calc(var(--level,8%)*.88)!important}
+  .listener-shell .m-wave-column>i.reflection{height:calc(var(--level,8%)*.52)!important}
+  .listener-shell .m-progress-row{
+    width:100%!important;
+    grid-template-columns:34px minmax(0,1fr) 34px!important;
+    gap:7px!important;
+    margin:0!important;
+    font-size:8px!important;
+  }
+}
+
+/* Keep the existing compact mobile player behavior intact. */
+@media (max-width:900px){
+  .listener-shell .m-player-wave-area{display:contents!important}
+}
