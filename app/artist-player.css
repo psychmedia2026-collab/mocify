@@ -180,12 +180,6 @@
     font-size:10px!important;
   }
 
-  /* Create a dedicated right rail while the mini player is open. */
-  .artist-portal-shell:has(.artist-m-player.minimized) .artist-dashboard-frame{
-    width:min(calc(var(--artist-shell-width) - 270px),calc(100vw - var(--artist-shell-gutter) - 270px))!important;
-    margin-left:max(calc((100vw - var(--artist-shell-width))/2),20px)!important;
-    margin-right:270px!important;
-  }
 }
 
 /* On smaller desktop widths, keep the content full width and park the mini-player low/right. */
