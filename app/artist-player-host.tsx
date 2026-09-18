@@ -32,7 +32,7 @@ export default function ArtistPlayerHost(){
       removeEventListener("mocify-artist-session-change",sync);
       removeEventListener("storage",sync);
     };
-  },[]);
+  },[pathname]);
 
   if(!loggedIn||!isArtistWorkspace(pathname))return null;
   return <ArtistPlayer/>;
