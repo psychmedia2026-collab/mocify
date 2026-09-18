@@ -45,6 +45,7 @@ export default function ArtistPlayer(){
  const [repeat,setRepeat]=useState<RepeatMode>("off");
  const [queueOpen,setQueueOpen]=useState(false);
  const [moreOpen,setMoreOpen]=useState(false);
+ const [minimized,setMinimized]=useState(false);
  const [favoriteIds,setFavoriteIds]=useState<string[]>([]);
  const [spectrum,setSpectrum]=useState<number[]>(()=>Array.from({length:BAR_COUNT},()=>0));
  const audioRef=useRef<HTMLAudioElement|null>(null);
@@ -67,6 +68,8 @@ export default function ArtistPlayer(){
  useEffect(()=>{loadArtist();const sync=()=>loadArtist();addEventListener("mocify-active-artist-change",sync);return()=>removeEventListener("mocify-active-artist-change",sync)},[]);
  useEffect(()=>{queueRef.current=queue},[queue]);useEffect(()=>{indexRef.current=index},[index]);useEffect(()=>{repeatRef.current=repeat},[repeat]);useEffect(()=>{shuffleRef.current=shuffle},[shuffle]);
  useEffect(()=>{try{const raw=localStorage.getItem("mocify-artist-favorite-track-ids");const parsed=raw?JSON.parse(raw):[];if(Array.isArray(parsed))setFavoriteIds(parsed.filter((x):x is string=>typeof x==="string"))}catch{}},[]);
+ useEffect(()=>{try{setMinimized(localStorage.getItem("mocify-artist-player-minimized")==="1")}catch{}},[]);
+ const setMinimizedPersist=(value:boolean)=>{setMinimized(value);try{localStorage.setItem("mocify-artist-player-minimized",value?"1":"0")}catch{}};
 
  useEffect(()=>{
   const audio=new Audio();audio.preload="metadata";audio.volume=1;audioRef.current=audio;
@@ -105,8 +108,9 @@ export default function ArtistPlayer(){
  if(!track)return null;
  const envelope=(i:number)=>Math.min(1,.18+.34*Math.abs(Math.sin(i*.29+.7))+.22*Math.abs(Math.sin(i*.071+1.3))+.12*Math.abs(Math.sin(i*.83)));
 
- return <section className="artist-m-player" aria-label={`${artistName} music player`}>
+ return <section className={minimized?"artist-m-player minimized":"artist-m-player"} aria-label={`${artistName} music player`}>
   <div className="artist-m-player-inner">
+  <button type="button" className="artist-m-minimize" onClick={()=>setMinimizedPersist(!minimized)} aria-label={minimized?"Expand player":"Minimize player"} title={minimized?"Expand player":"Minimize player"}>{minimized?"↗":"—"}</button>
    <div className="artist-m-player-top">
     <div className="artist-m-track-area">
      <Link className="artist-m-track" href={track.href??"/studio/music"}><span className={`artist-m-cover ${track.art}`} aria-hidden="true"/><span><b>{track.title}</b><small>{track.artist}</small></span></Link>
@@ -125,6 +129,7 @@ export default function ArtistPlayer(){
      <button type="button" className="artist-m-cast" onClick={requestDevice} aria-label="Connect playback device"><Icon name="cast"/></button>
      <div className="artist-m-queue-wrap"><button type="button" className="artist-m-queue" onClick={()=>setQueueOpen(v=>!v)} aria-expanded={queueOpen} aria-label="Queue"><Icon name="queue"/></button>{queueOpen&&<div className="artist-m-queue-menu"><b>{artistName}</b>{queue.map((t,i)=><button type="button" className={i===index?"current":""} key={t.id} onClick={()=>{select(i,true);setQueueOpen(false)}}><span>{t.title}</span><small>{t.artist}</small></button>)}</div>}</div>
      <div className="artist-m-brand"><img src="/mocify-bird.png?v=2" alt="" aria-hidden="true"/><span><b>MOCIFY</b><small>ARTIST PLAYBACK</small></span></div>
+     <div className="artist-m-mini-controls"><button type="button" onClick={prev} disabled={queue.length<2} aria-label="Previous track"><Icon name="prev"/></button><button type="button" className="artist-m-mini-play" onClick={togglePlay} aria-label={playing?"Pause":"Play"}><Icon name={playing?"pause":"play"}/></button><button type="button" onClick={next} disabled={queue.length<2} aria-label="Next track"><Icon name="next"/></button></div>
     </div>
    </div>
    <div className="artist-m-timeline"><span>{fmt(currentTime)}</span><div className="artist-m-wave" onPointerDown={seekFrom} role="slider" tabIndex={0} aria-valuemin={0} aria-valuemax={Math.round(duration||0)} aria-valuenow={Math.round(currentTime)} aria-label="Seek through track"><div className="artist-m-bars" aria-hidden="true">{spectrum.map((level,i)=>{const pct=i/(BAR_COUNT-1)*100,played=pct<=progress,height=Math.round(12+Math.min(1,envelope(i)+(playing?level*.22:0))*88);return <i key={i} className={played?"played":""} style={{"--h":`${height}%`} as React.CSSProperties}/>})}</div><span className="artist-m-playhead" style={{left:`${progress}%`}}/></div><span>{fmt(duration)}</span></div>
