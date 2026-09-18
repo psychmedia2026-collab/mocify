@@ -45,6 +45,7 @@ export function readArtistSession():PrototypeArtistSession|null{
 export function writeArtistSession(account:PrototypeArtistAccount,role:"artist"|"admin"="artist"){
  const session:PrototypeArtistSession={email:account.email,artistName:account.artistName,createdAt:Date.now(),role};
  localStorage.setItem(ARTIST_SESSION_KEY,JSON.stringify(session));
+ window.dispatchEvent(new Event("mocify-artist-session-change"));
  return session;
 }
 export function writeDemoSession(key:keyof typeof DEMO_ARTIST_ACCOUNTS){
@@ -52,6 +53,7 @@ export function writeDemoSession(key:keyof typeof DEMO_ARTIST_ACCOUNTS){
  const account=DEMO_ARTIST_ACCOUNTS[key];
  const session:PrototypeArtistSession={email:account.email,artistName:account.artistName,createdAt:Date.now(),role:account.role};
  localStorage.setItem(ARTIST_SESSION_KEY,JSON.stringify(session));
+ window.dispatchEvent(new Event("mocify-artist-session-change"));
  localStorage.setItem(ARTIST_PLAN_KEY,account.plan);
  localStorage.removeItem(ARTIST_PENDING_PLAN_KEY);
  if(account.plan==="free")localStorage.removeItem(ARTIST_BILLING_END_KEY);else ensureArtistBillingEnd();
@@ -63,7 +65,7 @@ export function matchDemoArtistCredentials(email:string,password:string){
  const entry=(Object.entries(DEMO_ARTIST_ACCOUNTS) as [keyof typeof DEMO_ARTIST_ACCOUNTS,(typeof DEMO_ARTIST_ACCOUNTS)[keyof typeof DEMO_ARTIST_ACCOUNTS]][]).find(([,account])=>account.email===normalized&&account.password===password);
  return entry?.[0]??null;
 }
-export function clearArtistSession(){if(typeof window!=="undefined")localStorage.removeItem(ARTIST_SESSION_KEY)}
+export function clearArtistSession(){if(typeof window!=="undefined"){localStorage.removeItem(ARTIST_SESSION_KEY);window.dispatchEvent(new Event("mocify-artist-session-change"))}}
 export function getStoredArtistPlan(){if(typeof window==="undefined")return"free" as ArtistPlanTier;applyPendingArtistPlanChange();return normalizeArtistPlan(localStorage.getItem(ARTIST_PLAN_KEY))}
 export function ensureArtistBillingEnd(){
  if(typeof window==="undefined")return 0;
