@@ -283,3 +283,55 @@
     pointer-events:none!important;
   }
 }
+/* Player v3 alignment correction: keep the main play control fully inside the dock. */
+@media (min-width:901px){
+  .listener-shell.has-player{--player-height:168px!important}
+
+  .listener-shell .m-player{
+    height:168px!important;
+    min-height:168px!important;
+  }
+
+  .listener-shell .m-player-inner{
+    height:168px!important;
+    grid-template-rows:66px 64px 30px!important;
+    padding:4px 0!important;
+  }
+
+  .listener-shell .m-player-center{
+    grid-row:1!important;
+    align-self:center!important;
+    justify-self:center!important;
+    padding:0!important;
+  }
+
+  .listener-shell .m-controls{
+    height:58px!important;
+    align-items:center!important;
+  }
+
+  .listener-shell .m-controls .m-play{
+    width:52px!important;
+    height:52px!important;
+    min-width:52px!important;
+    min-height:52px!important;
+    margin:0!important;
+  }
+
+  .listener-shell .m-player-wave-area{
+    grid-row:2 / 4!important;
+    grid-template-rows:64px 30px!important;
+  }
+
+  .listener-shell .mocify-signature-wave{
+    height:64px!important;
+  }
+
+  .listener-shell .m-progress-row{
+    align-self:center!important;
+  }
+
+  .listener-shell .m-player-status{
+    bottom:4px!important;
+  }
+}
