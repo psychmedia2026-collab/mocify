@@ -84,3 +84,19 @@
 .artist-m-player.minimized .artist-m-minimize{right:7px;top:5px;width:24px;height:22px;font-size:12px}
 .artist-portal-shell:has(.artist-m-player.minimized){padding-bottom:20px!important}
 .artist-dashboard-page:has(~ .artist-m-player.minimized){padding-bottom:70px!important}
+
+/* Keep minimized Artist player floating on the right side while scrolling. */
+@media (min-width:901px){
+  .artist-m-player.minimized{
+    position:fixed!important;
+    left:auto!important;
+    right:24px!important;
+    top:50%!important;
+    bottom:auto!important;
+    width:360px!important;
+    height:92px!important;
+    transform:translateY(-50%)!important;
+    margin:0!important;
+    z-index:999!important;
+  }
+}
