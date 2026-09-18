@@ -2,17 +2,17 @@
    Geometry follows the approved compact reference.
    Palette/branding follows the existing MOCIFY neon design. */
 
-.mocify-signature-wave{position:relative;height:46px;overflow:hidden;isolation:isolate;background:transparent;touch-action:none;user-select:none}
+.mocify-signature-wave{position:relative;height:48px;overflow:hidden;isolation:isolate;background:transparent;touch-action:none;user-select:none}
 .mocify-signature-wave.is-seekable{cursor:pointer}
 .mocify-signature-wave.is-seekable:focus-visible{outline:2px solid #54dfff;outline-offset:2px}
 .m-wave-glow{position:absolute;inset:50% 2% auto;height:8px;transform:translateY(-50%);border-radius:999px;background:linear-gradient(90deg,#02d9ff,#7857ff 35%,#ed35c5 72%,#ff963f);filter:blur(13px);opacity:.16;pointer-events:none}
 .m-wave-bars{position:absolute;inset:1px 0;display:flex;align-items:center;gap:.55px;pointer-events:none}
-.m-wave-column{flex:1 1 0;min-width:0;max-width:none;height:100%;display:grid;place-items:center;opacity:.52}
-.m-wave-column>i{display:block;width:100%;height:var(--level,20%);min-height:2px;border-radius:999px;background:#34384f}
+.m-wave-column{flex:1 1 0;min-width:0;max-width:none;height:100%;display:grid;place-items:center;opacity:.58}
+.m-wave-column>i{display:block;width:100%;height:var(--level,20%);min-height:2px;border-radius:2px;background:linear-gradient(180deg,#404762,#2c3148)}
 .m-wave-column.played{opacity:1}
-.m-wave-column.played>i{background:linear-gradient(180deg,#9d61ff,#7857ff 36%,#d747ee 72%,#ed35c5);box-shadow:0 0 5px rgba(149,79,255,.28)}
-.m-wave-progress{position:absolute;left:0;top:50%;height:1px;background:linear-gradient(90deg,#7857ff,#ed35c5);opacity:.22;pointer-events:none}
-.m-wave-playhead{position:absolute;z-index:3;top:50%;width:9px;height:9px;border-radius:50%;background:#fff;border:1px solid #a875ff;box-shadow:0 0 0 2px rgba(120,87,255,.16),0 0 10px rgba(237,53,197,.44);transform:translate(-50%,-50%);pointer-events:none}
+.m-wave-column.played>i{background:linear-gradient(180deg,#c06cff 0%,#8d5cff 34%,#7a4dff 62%,#e043d5 100%);box-shadow:0 0 6px rgba(160,79,255,.34)}
+.m-wave-progress{display:none}
+.m-wave-playhead{position:absolute;z-index:3;top:50%;width:10px;height:10px;border-radius:50%;background:#fff;border:1px solid #a875ff;box-shadow:0 0 0 2px rgba(120,87,255,.16),0 0 10px rgba(237,53,197,.44);transform:translate(-50%,-50%);pointer-events:none}
 
 @media (min-width:901px){
   .listener-shell.has-player{--player-height:154px!important}
@@ -44,10 +44,10 @@
     width:100%!important;
     height:100%!important;
     margin:0!important;
-    padding:14px 22px 10px!important;
+    padding:12px 24px 10px!important;
     display:grid!important;
     grid-template-columns:minmax(0,1fr)!important;
-    grid-template-rows:82px 48px!important;
+    grid-template-rows:82px 50px!important;
     gap:0!important;
     position:relative!important
   }
@@ -57,9 +57,9 @@
     grid-row:1!important;
     width:100%!important;
     display:grid!important;
-    grid-template-columns:305px minmax(360px,1fr) 305px!important;
+    grid-template-columns:320px minmax(350px,1fr) 320px!important;
     align-items:center!important;
-    gap:14px!important;
+    gap:12px!important;
     min-width:0!important
   }
 
@@ -78,9 +78,9 @@
   }
 
   .listener-shell .m-player-cover{
-    width:74px!important;
-    height:74px!important;
-    min-width:74px!important;
+    width:76px!important;
+    height:76px!important;
+    min-width:76px!important;
     border-radius:8px!important;
     box-shadow:0 10px 24px rgba(0,0,0,.34)!important
   }
@@ -129,13 +129,13 @@
     display:flex!important;
     align-items:center!important;
     justify-content:center!important;
-    gap:18px!important
+    gap:16px!important
   }
   .listener-shell .m-controls button{
-    width:36px!important;
-    height:36px!important;
-    min-width:36px!important;
-    min-height:36px!important;
+    width:34px!important;
+    height:34px!important;
+    min-width:34px!important;
+    min-height:34px!important;
     padding:0!important;
     display:grid!important;
     place-items:center!important;
@@ -145,13 +145,13 @@
     font-size:15px!important
   }
   .listener-shell .m-controls .m-play{
-    width:58px!important;
-    height:58px!important;
-    min-width:58px!important;
-    min-height:58px!important;
+    width:60px!important;
+    height:60px!important;
+    min-width:60px!important;
+    min-height:60px!important;
     border:2px solid rgba(190,111,255,.95)!important;
     border-radius:50%!important;
-    background:linear-gradient(135deg,#7857ff 0%,#c03cff 52%,#ed35c5 100%)!important;
+    background:rgba(7,8,16,.96)!important;
     color:#fff!important;
     font-size:18px!important;
     box-shadow:0 0 0 3px rgba(120,87,255,.10),0 0 20px rgba(237,53,197,.30)!important
@@ -168,7 +168,7 @@
 
   .listener-shell .m-volume{display:flex!important;align-items:center!important;gap:8px!important}
   .listener-shell .m-volume-mute{width:26px!important;height:26px!important;padding:0!important;border:0!important;background:transparent!important;color:#d5d1dd!important}
-  .listener-shell .m-volume input{width:86px!important;accent-color:#c84ee6!important}
+  .listener-shell .m-volume input{width:88px!important;accent-color:#a764ff!important}
 
   .listener-shell .m-cast-button,
   .listener-shell .m-queue-button{
@@ -192,11 +192,11 @@
     margin-left:2px!important;
     padding-left:14px!important;
     border-left:1px solid rgba(255,255,255,.08)!important;
-    min-width:154px!important
+    min-width:165px!important
   }
-  .listener-shell .m-player-brand img{width:36px!important;height:36px!important;object-fit:contain!important;filter:drop-shadow(0 0 9px rgba(223,45,255,.24))!important}
+  .listener-shell .m-player-brand img{width:38px!important;height:38px!important;object-fit:contain!important;filter:drop-shadow(0 0 9px rgba(223,45,255,.24))!important}
   .listener-shell .m-player-brand span{display:grid!important}
-  .listener-shell .m-player-brand b{font-size:14px!important;font-weight:900!important;letter-spacing:-.035em!important;color:#fff!important}
+  .listener-shell .m-player-brand b{font-size:15px!important;font-weight:900!important;letter-spacing:-.035em!important;color:#fff!important}
   .listener-shell .m-player-brand small{display:block!important;margin-top:2px!important;color:#9e93aa!important;font-size:6px!important;white-space:nowrap!important}
 
   .listener-shell .m-player-timeline{
@@ -204,7 +204,7 @@
     grid-row:2!important;
     width:100%!important;
     display:grid!important;
-    grid-template-columns:38px minmax(0,1fr) 38px!important;
+    grid-template-columns:42px minmax(0,1fr) 42px!important;
     align-items:center!important;
     gap:8px!important;
     width:100%!important;
@@ -212,7 +212,7 @@
   }
   .listener-shell .m-player-time{
     color:#bdb6c8!important;
-    font-size:9px!important;
+    font-size:10px!important;
     font-variant-numeric:tabular-nums!important;
     text-align:center!important
   }
@@ -264,4 +264,21 @@
 
 @media (prefers-reduced-motion:reduce){
   .m-wave-column,.m-wave-column>i,.m-wave-glow,.m-wave-progress,.m-wave-playhead{transition:none!important}
+}
+
+@media (min-width:901px){
+  .listener-shell .m-player-top{height:82px!important}
+  .listener-shell .m-player-track-area{align-self:center!important}
+  .listener-shell .m-player-center{align-self:center!important}
+  .listener-shell .m-player-tools{align-self:center!important}
+  .listener-shell .m-player-timeline{align-self:end!important;height:50px!important}
+  .listener-shell .mocify-signature-wave{height:48px!important}
+  .listener-shell .m-wave-bars{inset:2px 0!important;gap:.45px!important}
+  .listener-shell .m-player-save svg,
+  .listener-shell .m-player-more svg,
+  .listener-shell .m-controls svg,
+  .listener-shell .m-volume-mute svg,
+  .listener-shell .m-cast-button svg,
+  .listener-shell .m-queue-button svg{display:block}
+  .listener-shell .m-player-tools{padding-right:2px!important}
 }
