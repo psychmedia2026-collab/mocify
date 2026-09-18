@@ -6,12 +6,16 @@ import it from "./it";
 import pt from "./pt";
 import pl from "./pl";
 import tr from "./tr";
+import id from "./id";
+import ja from "./ja";
+import ko from "./ko";
+import hi from "./hi";
 
 export const authTranslations: Record<Locale, any> = {
  en:{welcome:"WELCOME BACK",loginTitle:"Listener login",loginText:"Log in to your MOCIFY listening account.",email:"Email",password:"Password",login:"Log in",soon:"SOON",loginSoon:"Login is coming soon",prototype:"Prototype only: your details are not stored or submitted.",newHere:"New here?",createListener:"Create a listener account",join:"JOIN MOCIFY",signupTitle:"Create your listener account",signupText:"Discover music, follow artists and build your own listening experience on MOCIFY.",displayName:"Display name",yourName:"Your name",choosePassword:"Choose a password",create:"Create listener account",createSoon:"Account creation is coming soon",signupPrototype:"Prototype only: account data is not stored yet.",already:"Already have an account?"},
  ro:{welcome:"BINE AI REVENIT",loginTitle:"Autentificare ascultător",loginText:"Autentifică-te în contul tău MOCIFY.",email:"E-mail",password:"Parolă",login:"Autentificare",soon:"ÎN CURÂND",loginSoon:"Autentificarea va fi disponibilă în curând",prototype:"Doar prototip: datele tale nu sunt stocate sau trimise.",newHere:"Ești nou aici?",createListener:"Creează un cont de ascultător",join:"ALĂTURĂ-TE MOCIFY",signupTitle:"Creează-ți contul de ascultător",signupText:"Descoperă muzică, urmărește artiști și construiește-ți propria experiență de ascultare pe MOCIFY.",displayName:"Nume afișat",yourName:"Numele tău",choosePassword:"Alege o parolă",create:"Creează contul",createSoon:"Crearea contului va fi disponibilă în curând",signupPrototype:"Doar prototip: datele contului nu sunt încă stocate.",already:"Ai deja un cont?"},
  nl:{welcome:"WELKOM TERUG",loginTitle:"Inloggen als luisteraar",loginText:"Log in op je MOCIFY-luisteraccount.",email:"E-mail",password:"Wachtwoord",login:"Inloggen",soon:"BINNENKORT",loginSoon:"Inloggen komt binnenkort beschikbaar",prototype:"Alleen prototype: je gegevens worden niet opgeslagen of verzonden.",newHere:"Nieuw hier?",createListener:"Maak een luisteraccount",join:"WORD LID VAN MOCIFY",signupTitle:"Maak je luisteraccount",signupText:"Ontdek muziek, volg artiesten en bouw je eigen luisterervaring op MOCIFY.",displayName:"Weergavenaam",yourName:"Jouw naam",choosePassword:"Kies een wachtwoord",create:"Maak luisteraccount",createSoon:"Account aanmaken komt binnenkort beschikbaar",signupPrototype:"Alleen prototype: accountgegevens worden nog niet opgeslagen.",already:"Heb je al een account?"},
- de:{...de.auth,soon:"BALD"},fr:{...fr.auth,soon:"BIENTÔT"},es:{...es.auth,soon:"PRÓXIMAMENTE"},it:{...it.auth,soon:"PRESTO"},pt:{...pt.auth,soon:"EM BREVE"},pl:{...pl.auth,soon:"WKRÓTCE"},tr:{...tr.auth,soon:"YAKINDA"}
+ de:{...de.auth,soon:"BALD"},fr:{...fr.auth,soon:"BIENTÔT"},es:{...es.auth,soon:"PRÓXIMAMENTE"},it:{...it.auth,soon:"PRESTO"},pt:{...pt.auth,soon:"EM BREVE"},pl:{...pl.auth,soon:"WKRÓTCE"},tr:{...tr.auth,soon:"YAKINDA"},id:{...id.auth,soon:"SEGERA"},ja:{...ja.auth,soon:"近日"},ko:{...ko.auth,soon:"곧"},hi:{...hi.auth,soon:"जल्द"}
 };
 
 export const artistTranslations: Record<Locale, any> = {
@@ -24,5 +28,9 @@ export const artistTranslations: Record<Locale, any> = {
  it:{...it.artist,upgrade:it.artist.upgradeStudio,unlock:it.artist.unlockPro,finish:it.artist.createEditFinish,create:it.artist.createTool,prototype:"VISTA PROTOTIPO"},
  pt:{...pt.artist,upgrade:pt.artist.upgradeStudio,unlock:pt.artist.unlockPro,finish:pt.artist.createEditFinish,create:pt.artist.createTool,prototype:"VISTA PROTÓTIPO"},
  pl:{...pl.artist,upgrade:pl.artist.upgradeStudio,unlock:pl.artist.unlockPro,finish:pl.artist.createEditFinish,create:pl.artist.createTool,prototype:"WIDOK PROTOTYPU"},
- tr:{...tr.artist,upgrade:tr.artist.upgradeStudio,unlock:tr.artist.unlockPro,finish:tr.artist.createEditFinish,create:tr.artist.createTool,prototype:"PROTOTİP GÖRÜNÜMÜ"}
+ tr:{...tr.artist,upgrade:tr.artist.upgradeStudio,unlock:tr.artist.unlockPro,finish:tr.artist.createEditFinish,create:tr.artist.createTool,prototype:"PROTOTİP GÖRÜNÜMÜ"},
+id:{...id.artist,upgrade:id.artist.upgradeStudio,unlock:id.artist.unlockPro,finish:id.artist.createEditFinish,create:id.artist.createTool,prototype:"TAMPILAN PROTOTIPE"},
+ja:{...ja.artist,upgrade:ja.artist.upgradeStudio,unlock:ja.artist.unlockPro,finish:ja.artist.createEditFinish,create:ja.artist.createTool,prototype:"プロトタイプ表示"},
+ko:{...ko.artist,upgrade:ko.artist.upgradeStudio,unlock:ko.artist.unlockPro,finish:ko.artist.createEditFinish,create:ko.artist.createTool,prototype:"프로토타입 보기"},
+hi:{...hi.artist,upgrade:hi.artist.upgradeStudio,unlock:hi.artist.unlockPro,finish:hi.artist.createEditFinish,create:hi.artist.createTool,prototype:"प्रोटोटाइप दृश्य"}
 };
