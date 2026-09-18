@@ -290,3 +290,143 @@
 .m-player-more-menu{position:absolute;z-index:90;left:50%;top:38px;width:158px;padding:7px;border:1px solid rgba(147,105,255,.28);border-radius:11px;background:rgba(8,7,21,.98);box-shadow:0 14px 34px rgba(0,0,0,.34),0 0 18px rgba(120,87,255,.12);transform:translateX(-50%);display:grid;gap:2px}
 .m-player-more-menu button,.m-player-more-menu a{width:100%;padding:9px 10px;border:0;border-radius:8px;background:transparent;color:#dcd8e7;text-align:left;font:inherit;font-size:11px;cursor:pointer}
 .m-player-more-menu button:hover,.m-player-more-menu a:hover{background:rgba(255,255,255,.06);color:#fff}
+/* Listener mini-player: docks directly below the "Upload your music" CTA. */
+.m-player-minimize{
+  position:absolute;z-index:85;right:10px;top:8px;width:28px;height:24px;
+  border:1px solid rgba(255,255,255,.08);border-radius:8px;
+  background:rgba(255,255,255,.04);color:#bdb8cb;font:inherit;font-size:14px;font-weight:900;
+  cursor:pointer;display:grid;place-items:center
+}
+.m-player-minimize:hover{background:rgba(255,255,255,.08);color:#fff}
+.m-player-mini-controls{display:none}
+
+@media (min-width:1181px){
+  .listener-shell .m-player.minimized{
+    position:fixed!important;
+    left:var(--listener-mini-left,18px)!important;
+    right:auto!important;
+    top:var(--listener-mini-top,520px)!important;
+    bottom:auto!important;
+    width:var(--listener-mini-width,170px)!important;
+    min-width:150px!important;
+    max-width:190px!important;
+    height:84px!important;
+    min-height:84px!important;
+    transform:none!important;
+    border-radius:16px!important;
+    z-index:50!important;
+    overflow:hidden!important
+  }
+
+  .listener-shell .m-player.minimized .m-player-inner{
+    height:100%!important;
+    padding:9px 9px 8px!important;
+    display:block!important
+  }
+
+  .listener-shell .m-player.minimized .m-player-top{
+    height:100%!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    align-items:center!important;
+    gap:5px!important
+  }
+
+  .listener-shell .m-player.minimized .m-player-track-area{
+    min-width:0!important;
+    gap:0!important
+  }
+
+  .listener-shell .m-player.minimized .m-player-track{
+    gap:7px!important;
+    min-width:0!important
+  }
+
+  .listener-shell .m-player.minimized .m-player-cover{
+    width:38px!important;
+    height:38px!important;
+    min-width:38px!important;
+    border-radius:7px!important
+  }
+
+  .listener-shell .m-player.minimized .m-player-track-copy b{
+    max-width:74px!important;
+    font-size:9px!important;
+    line-height:1.1!important
+  }
+
+  .listener-shell .m-player.minimized .m-player-track-copy small{
+    max-width:74px!important;
+    margin-top:2px!important;
+    font-size:7px!important
+  }
+
+  .listener-shell .m-player.minimized .m-player-save,
+  .listener-shell .m-player.minimized .m-player-more-wrap,
+  .listener-shell .m-player.minimized .m-player-center,
+  .listener-shell .m-player.minimized .m-player-tools>.m-volume,
+  .listener-shell .m-player.minimized .m-player-tools>.m-cast-button,
+  .listener-shell .m-player.minimized .m-player-tools>.m-queue-wrap,
+  .listener-shell .m-player.minimized .m-player-tools>.m-player-brand,
+  .listener-shell .m-player.minimized .m-player-timeline,
+  .listener-shell .m-player.minimized .m-mobile-progress-row,
+  .listener-shell .m-player.minimized .m-player-status{
+    display:none!important
+  }
+
+  .listener-shell .m-player.minimized .m-player-tools{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    gap:0!important;
+    min-width:0!important;
+    padding:0!important
+  }
+
+  .listener-shell .m-player.minimized .m-player-mini-controls{
+    display:flex!important;
+    align-items:center!important;
+    gap:1px!important;
+    padding-right:15px!important
+  }
+
+  .listener-shell .m-player.minimized .m-player-mini-controls button{
+    width:20px!important;height:20px!important;min-width:20px!important;min-height:20px!important;
+    display:grid!important;place-items:center!important;padding:0!important;border:0!important;
+    background:transparent!important;color:#d9d5e4!important;cursor:pointer!important
+  }
+
+  .listener-shell .m-player.minimized .m-player-mini-controls button:disabled{opacity:.28}
+
+  .listener-shell .m-player.minimized .m-player-mini-controls .m-player-mini-play{
+    width:30px!important;height:30px!important;min-width:30px!important;min-height:30px!important;
+    border:1px solid rgba(190,111,255,.9)!important;border-radius:50%!important;
+    background:rgba(8,9,18,.95)!important;
+    box-shadow:0 0 12px rgba(182,75,255,.20)!important;color:#fff!important
+  }
+
+  .listener-shell .m-player.minimized .m-player-mini-controls svg{
+    width:13px!important;height:13px!important
+  }
+
+  .listener-shell .m-player.minimized .m-player-minimize{
+    right:4px!important;top:4px!important;width:18px!important;height:17px!important;
+    border-radius:6px!important;font-size:9px!important
+  }
+}
+
+/* When the quick menu is hidden, keep the normal full player instead of a detached mini widget. */
+@media (max-width:1180px){
+  .listener-shell .m-player.minimized{
+    left:50%!important;
+    right:auto!important;
+    top:auto!important;
+    bottom:10px!important;
+    width:min(1080px,calc(100vw - 20px))!important;
+    height:154px!important;
+    min-height:154px!important;
+    transform:translateX(-50%)!important
+  }
+  .listener-shell .m-player.minimized .m-player-minimize{display:grid!important}
+  .listener-shell .m-player.minimized .m-player-mini-controls{display:none!important}
+}
