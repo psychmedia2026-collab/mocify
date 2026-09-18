@@ -5,7 +5,7 @@ import { useLanguage } from "./language-provider";
 import { supportedLocales, type Locale } from "./config";
 
 export default function LanguageSwitcher() {
-  const { locale, setLocale } = useLanguage();
+  const { locale, setLocale, dictionary } = useLanguage();
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -60,7 +60,7 @@ export default function LanguageSwitcher() {
 
       {open && (
         <div className="m-language-menu" role="menu">
-          <div className="m-language-menu-title">LANGUAGE</div>
+          <div className="m-language-menu-title">{dictionary.common.language.toUpperCase()}</div>
 
           {supportedLocales.map((language) => (
             <button
