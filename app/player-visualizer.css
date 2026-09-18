@@ -1,151 +1,65 @@
-/* MOCIFY player — exact reference composition, MOCIFY site palette. */
+/* MOCIFY listener player — clean reference rebuild.
+   Geometry follows the approved compact reference.
+   Palette/branding follows the existing MOCIFY neon design. */
 
-.mocify-signature-wave{
-  position:relative;
-  height:50px;
-  margin:0;
-  overflow:hidden;
-  border-radius:0;
-  isolation:isolate;
-  background:transparent;
-  touch-action:none;
-  user-select:none
-}
+.mocify-signature-wave{position:relative;height:46px;overflow:hidden;isolation:isolate;background:transparent;touch-action:none;user-select:none}
 .mocify-signature-wave.is-seekable{cursor:pointer}
 .mocify-signature-wave.is-seekable:focus-visible{outline:2px solid #54dfff;outline-offset:2px}
-
-.m-wave-glow{
-  position:absolute;
-  z-index:0;
-  left:2%;
-  right:2%;
-  top:50%;
-  height:8px;
-  transform:translateY(-50%);
-  border-radius:50%;
-  background:linear-gradient(90deg,#02d9ff 0%,#7857ff 34%,#ed35c5 70%,#ff963f 100%);
-  filter:blur(14px);
-  opacity:.20;
-  pointer-events:none
-}
-
-.m-wave-bars{
-  position:absolute;
-  z-index:2;
-  inset:1px 0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:1px;
-  pointer-events:none
-}
-
-.m-wave-column{
-  position:relative;
-  flex:1 1 0;
-  min-width:1px;
-  max-width:4px;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  opacity:.52
-}
-
-.m-wave-column>i{
-  display:block;
-  width:100%;
-  height:var(--level,20%);
-  min-height:2px;
-  border-radius:999px;
-  background:#34384f;
-  box-shadow:none
-}
-
-.m-wave-column.played{
-  opacity:1
-}
-
-.m-wave-column.played>i{
-  background:linear-gradient(180deg,#9b5dff 0%,#7857ff 32%,#d748ee 68%,#ed35c5 100%);
-  box-shadow:0 0 5px rgba(149,79,255,.28)
-}
-
-.m-wave-progress{
-  position:absolute;
-  z-index:1;
-  left:0;
-  top:50%;
-  height:1px;
-  background:linear-gradient(90deg,#7857ff,#ed35c5);
-  opacity:.28;
-  pointer-events:none
-}
-
-.m-wave-playhead{
-  position:absolute;
-  z-index:5;
-  top:50%;
-  width:10px;
-  height:10px;
-  border-radius:50%;
-  background:#fff;
-  border:1px solid #b783ff;
-  box-shadow:0 0 0 2px rgba(120,87,255,.20),0 0 11px rgba(237,53,197,.50);
-  transform:translate(-50%,-50%);
-  pointer-events:none
-}
-
-.mocify-signature-wave::after{
-  content:"";
-  position:absolute;
-  z-index:3;
-  left:0;
-  right:0;
-  top:50%;
-  height:1px;
-  background:rgba(255,255,255,.025);
-  pointer-events:none
-}
+.m-wave-glow{position:absolute;inset:50% 2% auto;height:8px;transform:translateY(-50%);border-radius:999px;background:linear-gradient(90deg,#02d9ff,#7857ff 35%,#ed35c5 72%,#ff963f);filter:blur(13px);opacity:.16;pointer-events:none}
+.m-wave-bars{position:absolute;inset:1px 0;display:flex;align-items:center;gap:1px;pointer-events:none}
+.m-wave-column{flex:1 1 0;min-width:1px;max-width:4px;height:100%;display:grid;place-items:center;opacity:.52}
+.m-wave-column>i{display:block;width:100%;height:var(--level,20%);min-height:2px;border-radius:999px;background:#34384f}
+.m-wave-column.played{opacity:1}
+.m-wave-column.played>i{background:linear-gradient(180deg,#9d61ff,#7857ff 36%,#d747ee 72%,#ed35c5);box-shadow:0 0 5px rgba(149,79,255,.28)}
+.m-wave-progress{position:absolute;left:0;top:50%;height:1px;background:linear-gradient(90deg,#7857ff,#ed35c5);opacity:.22;pointer-events:none}
+.m-wave-playhead{position:absolute;z-index:3;top:50%;width:9px;height:9px;border-radius:50%;background:#fff;border:1px solid #a875ff;box-shadow:0 0 0 2px rgba(120,87,255,.16),0 0 10px rgba(237,53,197,.44);transform:translate(-50%,-50%);pointer-events:none}
 
 @media (min-width:901px){
   .listener-shell.has-player{--player-height:154px!important}
 
   .listener-shell .m-player{
-    left:10px!important;
-    right:10px!important;
+    position:fixed!important;
+    z-index:60!important;
+    left:50%!important;
+    right:auto!important;
     bottom:10px!important;
+    width:min(1100px,calc(100vw - 20px))!important;
     height:154px!important;
     min-height:154px!important;
+    transform:translateX(-50%)!important;
     padding:0!important;
     border:1px solid transparent!important;
-    border-radius:24px!important;
+    border-radius:22px!important;
     background:
-      linear-gradient(105deg,rgba(4,8,25,.985) 0%,rgba(15,10,46,.985) 48%,rgba(54,8,47,.96) 100%) padding-box,
-      linear-gradient(90deg,rgba(2,217,255,.75) 0%,rgba(120,87,255,.72) 48%,rgba(237,53,197,.78) 100%) border-box!important;
-    box-shadow:0 10px 34px rgba(0,0,0,.34),0 0 28px rgba(120,87,255,.16)!important;
-    backdrop-filter:blur(22px) saturate(1.08)!important
+      linear-gradient(105deg,rgba(4,8,25,.985) 0%,rgba(15,10,46,.985) 50%,rgba(54,8,47,.96) 100%) padding-box,
+      linear-gradient(90deg,rgba(2,217,255,.72),rgba(120,87,255,.70) 48%,rgba(237,53,197,.78)) border-box!important;
+    box-shadow:0 10px 34px rgba(0,0,0,.34),0 0 24px rgba(120,87,255,.14)!important;
+    backdrop-filter:blur(22px) saturate(1.08)!important;
+    overflow:visible!important
   }
 
   .listener-shell .m-player-accent{display:none!important}
 
   .listener-shell .m-player-inner{
-    width:calc(100% - 48px)!important;
-    max-width:none!important;
-    height:154px!important;
-    margin:0 auto!important;
-    padding:14px 0 10px!important;
+    width:100%!important;
+    height:100%!important;
+    margin:0!important;
+    padding:14px 22px 10px!important;
     display:grid!important;
-    grid-template-columns:minmax(330px,1fr) auto minmax(390px,1fr)!important;
-    grid-template-rows:78px 50px!important;
-    column-gap:24px!important;
-    row-gap:0!important;
-    align-items:center!important
+    grid-template-rows:82px 48px!important;
+    gap:0!important;
+    position:relative!important
+  }
+
+  .listener-shell .m-player-top{
+    display:grid!important;
+    grid-template-columns:310px 1fr 310px!important;
+    align-items:center!important;
+    gap:18px!important;
+    min-width:0!important
   }
 
   .listener-shell .m-player-track-area{
-    grid-column:1!important;
-    grid-row:1!important;
     display:flex!important;
     align-items:center!important;
     gap:10px!important;
@@ -164,24 +78,24 @@
     height:74px!important;
     min-width:74px!important;
     border-radius:8px!important;
-    box-shadow:0 10px 26px rgba(0,0,0,.34)!important
+    box-shadow:0 10px 24px rgba(0,0,0,.34)!important
   }
 
+  .listener-shell .m-player-track-copy{min-width:0!important}
   .listener-shell .m-player-track-copy b{
     display:block!important;
-    max-width:160px!important;
+    max-width:145px!important;
     overflow:hidden!important;
     text-overflow:ellipsis!important;
     white-space:nowrap!important;
     font-size:14px!important;
-    line-height:1.1!important;
+    line-height:1.05!important;
     color:#fff!important
   }
-
   .listener-shell .m-player-track-copy small{
     display:block!important;
-    max-width:160px!important;
-    margin-top:5px!important;
+    max-width:145px!important;
+    margin-top:6px!important;
     overflow:hidden!important;
     text-overflow:ellipsis!important;
     white-space:nowrap!important;
@@ -191,40 +105,33 @@
 
   .listener-shell .m-player-save,
   .listener-shell .m-player-more{
-    width:34px!important;
-    height:34px!important;
-    min-width:34px!important;
-    min-height:34px!important;
+    flex:0 0 auto!important;
+    width:32px!important;
+    height:32px!important;
+    min-width:32px!important;
+    min-height:32px!important;
+    padding:0!important;
     display:grid!important;
     place-items:center!important;
-    padding:0!important;
     border:0!important;
     background:transparent!important;
     color:#e5dfef!important
   }
-
   .listener-shell .m-player-save{font-size:22px!important}
-  .listener-shell .m-player-more{font-size:16px!important;letter-spacing:2px!important}
+  .listener-shell .m-player-more{font-size:15px!important;letter-spacing:2px!important}
 
-  .listener-shell .m-player-center{
-    grid-column:2!important;
-    grid-row:1!important;
-    display:block!important;
-    justify-self:center!important
-  }
-
+  .listener-shell .m-player-center{justify-self:center!important}
   .listener-shell .m-controls{
     display:flex!important;
     align-items:center!important;
     justify-content:center!important;
     gap:18px!important
   }
-
   .listener-shell .m-controls button{
-    width:38px!important;
-    height:38px!important;
-    min-width:38px!important;
-    min-height:38px!important;
+    width:36px!important;
+    height:36px!important;
+    min-width:36px!important;
+    min-height:36px!important;
     padding:0!important;
     display:grid!important;
     place-items:center!important;
@@ -233,7 +140,6 @@
     color:#d6d0df!important;
     font-size:15px!important
   }
-
   .listener-shell .m-controls .m-play{
     width:58px!important;
     height:58px!important;
@@ -241,104 +147,62 @@
     min-height:58px!important;
     border:2px solid #9a5cff!important;
     border-radius:50%!important;
-    background:linear-gradient(135deg,rgba(120,87,255,.22),rgba(237,53,197,.18))!important;
+    background:rgba(7,8,16,.92)!important;
     color:#fff!important;
     font-size:18px!important;
-    box-shadow:0 0 0 3px rgba(120,87,255,.10),0 0 18px rgba(237,53,197,.20)!important
+    box-shadow:0 0 0 3px rgba(120,87,255,.10),0 0 18px rgba(237,53,197,.18)!important
   }
-
   .listener-shell .m-controls .m-utility.active{color:#ff63dc!important}
 
   .listener-shell .m-player-tools{
-    grid-column:3!important;
-    grid-row:1!important;
     display:flex!important;
     align-items:center!important;
     justify-content:flex-end!important;
-    gap:14px!important
+    gap:12px!important;
+    min-width:0!important
   }
 
-  .listener-shell .m-volume{
-    display:flex!important;
-    align-items:center!important;
-    gap:8px!important
-  }
-
-  .listener-shell .m-volume-mute{
-    width:28px!important;
-    height:28px!important;
-    padding:0!important;
-    border:0!important;
-    background:transparent!important;
-    color:#d5d1dd!important
-  }
-
-  .listener-shell .m-volume input{
-    width:90px!important;
-    accent-color:#c84ee6!important
-  }
+  .listener-shell .m-volume{display:flex!important;align-items:center!important;gap:8px!important}
+  .listener-shell .m-volume-mute{width:26px!important;height:26px!important;padding:0!important;border:0!important;background:transparent!important;color:#d5d1dd!important}
+  .listener-shell .m-volume input{width:86px!important;accent-color:#c84ee6!important}
 
   .listener-shell .m-cast-button,
   .listener-shell .m-queue-button{
-    width:34px!important;
-    height:34px!important;
-    min-width:34px!important;
-    min-height:34px!important;
+    width:30px!important;
+    height:30px!important;
+    min-width:30px!important;
+    min-height:30px!important;
     display:grid!important;
     place-items:center!important;
     padding:0!important;
     border:0!important;
     background:transparent!important;
     color:#d0cad9!important;
-    font-size:17px!important
+    font-size:16px!important
   }
 
   .listener-shell .m-player-brand{
     display:flex!important;
     align-items:center!important;
-    gap:8px!important;
-    min-width:190px!important;
+    gap:7px!important;
     margin-left:2px!important;
-    padding-left:16px!important;
-    border-left:1px solid rgba(255,255,255,.08)!important
+    padding-left:14px!important;
+    border-left:1px solid rgba(255,255,255,.08)!important;
+    min-width:142px!important
   }
-
-  .listener-shell .m-player-brand img{
-    width:42px!important;
-    height:42px!important;
-    object-fit:contain!important;
-    filter:drop-shadow(0 0 10px rgba(223,45,255,.28))!important
-  }
-
-  .listener-shell .m-player-brand span{
-    display:grid!important
-  }
-
-  .listener-shell .m-player-brand b{
-    font-size:16px!important;
-    font-weight:900!important;
-    letter-spacing:-.035em!important;
-    color:#fff!important
-  }
-
-  .listener-shell .m-player-brand small{
-    display:block!important;
-    margin-top:2px!important;
-    color:#9e93aa!important;
-    font-size:7px!important;
-    white-space:nowrap!important
-  }
+  .listener-shell .m-player-brand img{width:36px!important;height:36px!important;object-fit:contain!important;filter:drop-shadow(0 0 9px rgba(223,45,255,.24))!important}
+  .listener-shell .m-player-brand span{display:grid!important}
+  .listener-shell .m-player-brand b{font-size:14px!important;font-weight:900!important;letter-spacing:-.035em!important;color:#fff!important}
+  .listener-shell .m-player-brand small{display:block!important;margin-top:2px!important;color:#9e93aa!important;font-size:6px!important;white-space:nowrap!important}
 
   .listener-shell .m-player-timeline{
-    grid-column:1 / 4!important;
-    grid-row:2!important;
     display:grid!important;
-    grid-template-columns:46px minmax(0,1fr) 46px!important;
+    grid-template-columns:38px minmax(0,1fr) 38px!important;
     align-items:center!important;
-    gap:10px!important;
-    width:100%!important
+    gap:8px!important;
+    width:100%!important;
+    min-width:0!important
   }
-
   .listener-shell .m-player-time{
     color:#bdb6c8!important;
     font-size:9px!important;
@@ -350,7 +214,9 @@
   .listener-shell .m-player-status{display:none!important}
 }
 
+/* Preserve compact mobile player behavior. */
 @media (max-width:900px){
+  .listener-shell .m-player-top{display:contents!important}
   .listener-shell .m-player-timeline{display:none!important}
   .listener-shell .m-player-more,
   .listener-shell .m-cast-button{display:none!important}
@@ -370,11 +236,10 @@
     line-height:1!important;
     pointer-events:none!important
   }
-  .listener-shell .m-mobile-progress-row .m-progress{
-    width:100%!important;
-    height:14px!important;
-    margin:0!important;
-    pointer-events:auto!important
-  }
+  .listener-shell .m-mobile-progress-row .m-progress{width:100%!important;height:14px!important;margin:0!important;pointer-events:auto!important}
   .listener-shell .m-player-status{display:none!important}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .m-wave-column,.m-wave-column>i,.m-wave-glow,.m-wave-progress,.m-wave-playhead{transition:none!important}
 }
