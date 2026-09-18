@@ -42,7 +42,7 @@ export default function RadioClient(){
  const currentBelongs=radioIds.has(currentTrack.id);
 
  const changeCountry=(country:string)=>{setPlayerCountry(country);try{localStorage.setItem(LISTENER_COUNTRY_KEY,country)}catch{}};
- const startRadio=()=>{if(!radioQueue.length)return;if(currentBelongs)togglePlay();else selectTrack(radioQueue[0],radioQueue,true)};
+ const startRadio=()=>{if(!radioQueue.length)return;const first=radioQueue[0];if(currentTrack.id===first.id)togglePlay();else selectTrack(first,radioQueue,true)};
  const playEntry=(track:any)=>{if(currentTrack.id===track.id)togglePlay();else selectTrack(track,radioQueue,true)};
 
  return <div className={styles.radioShell}>
