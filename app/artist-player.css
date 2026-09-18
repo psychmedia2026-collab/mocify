@@ -25,7 +25,7 @@
 .artist-m-more-menu button,.artist-m-more-menu a,.artist-m-queue-menu button{display:block;width:100%;padding:9px 10px;border:0;border-radius:8px;background:transparent;color:#d9d6e2;text-align:left;font:inherit;font-size:11px;text-decoration:none;cursor:pointer}
 .artist-m-more-menu button:hover,.artist-m-more-menu a:hover,.artist-m-queue-menu button:hover,.artist-m-queue-menu button.current{background:rgba(255,255,255,.06);color:#fff}
 .artist-m-queue-menu>b{display:block;padding:5px 10px 8px;color:#b981ff;font-size:10px;letter-spacing:.08em}.artist-m-queue-menu span,.artist-m-queue-menu small{display:block}.artist-m-queue-menu small{margin-top:2px;color:#77798a}
-.artist-m-center{justify-self:center;transform:translate(-18px,16px)}
+.artist-m-center{justify-self:center;transform:translate(-18px,4px)}
 .artist-m-controls{display:flex;align-items:center;justify-content:center;gap:16px}
 .artist-m-controls button{width:34px;height:34px;min-width:34px;min-height:34px}.artist-m-controls button:disabled{opacity:.3;cursor:default}.artist-m-controls button.active{color:#ff63dc}
 .artist-m-controls .artist-m-play{width:60px;height:60px;min-width:60px;min-height:60px;border:2px solid rgba(185,111,255,.96);border-radius:50%;background:rgba(8,9,18,.95);color:#fff;box-shadow:0 0 0 3px rgba(116,56,255,.10),0 0 22px rgba(171,69,255,.30)}
@@ -42,6 +42,8 @@
 .artist-m-bars i{flex:1 1 0;min-width:0;height:var(--h,20%);border-radius:2px;background:linear-gradient(180deg,#42485f,#2c3145);opacity:.62}
 .artist-m-bars i.played{background:linear-gradient(180deg,#6de7ff 0%,#8a6cff 32%,#b84cf0 66%,#ed35c5 100%);opacity:1;box-shadow:0 0 6px rgba(132,72,255,.30)}
 .artist-m-playhead{position:absolute;z-index:3;top:50%;width:10px;height:10px;border-radius:50%;background:#fff;border:1px solid #9d72ff;box-shadow:0 0 0 2px rgba(116,56,255,.18),0 0 10px rgba(237,53,197,.42);transform:translate(-50%,-50%);pointer-events:none}
+/* Reserve space below Artist Portal content so the fixed player never covers the footer. */
+.artist-portal-shell:has(.artist-m-player){padding-bottom:184px;box-sizing:border-box}
 .artist-dashboard-page{padding-bottom:210px!important}
 
 @media(max-width:900px){
@@ -50,5 +52,5 @@
   .artist-m-player-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
   .artist-m-track-area{grid-column:1}.artist-m-track{gap:8px}.artist-m-cover{width:44px;height:44px;min-width:44px}.artist-m-track b,.artist-m-track small{max-width:110px}.artist-m-track b{font-size:10px}.artist-m-track small{font-size:8px;margin-top:2px}
   .artist-m-save,.artist-m-more{display:none}.artist-m-center{grid-column:2;transform:none}.artist-m-controls{gap:3px}.artist-m-controls button{width:28px;height:28px;min-width:28px;min-height:28px}.artist-m-controls button:first-child,.artist-m-controls button:last-child{display:none}.artist-m-controls .artist-m-play{width:42px;height:42px;min-width:42px;min-height:42px}
-  .artist-m-tools,.artist-m-timeline{display:none!important}.artist-dashboard-page{padding-bottom:120px!important}
+  .artist-m-tools,.artist-m-timeline{display:none!important}.artist-portal-shell:has(.artist-m-player){padding-bottom:104px}.artist-dashboard-page{padding-bottom:120px!important}
 }
