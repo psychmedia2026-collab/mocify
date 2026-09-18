@@ -9,7 +9,7 @@ import Player from "./listener-player-ui";
 import LanguageSwitcher from "./i18n/language-switcher";
 import { useLanguage } from "./i18n/language-provider";
 
-const listenerContactLabels={en:"Contact",nl:"Contact",ro:"Contact",de:"Kontakt",fr:"Contact",es:"Contacto",it:"Contatti",pt:"Contacto",pl:"Kontakt",tr:"İletişim"} as const;
+const listenerContactLabels={en:"Contact",nl:"Contact",ro:"Contact",de:"Kontakt",fr:"Contact",es:"Contacto",it:"Contatti",pt:"Contacto",pl:"Kontakt",tr:"İletişim",id:"Kontak",ja:"お問い合わせ",ko:"문의",hi:"संपर्क"} as const;
 
 export function Logo() {return <Link className="m-logo" href="/" aria-label="MOCIFY home"><img src="/mocify-bird.png?v=2" width={52} height={52} alt="" aria-hidden="true"/><span>MOCIFY</span></Link>;}
 function navLabel(dictionary: ReturnType<typeof useLanguage>["dictionary"], href:string, fallback:string){if(href==="/")return dictionary.nav.home;if(href==="/explore")return dictionary.nav.explore;if(href==="/artists")return dictionary.nav.artists;if(href==="/radio")return dictionary.nav.radio;if(href==="/library")return dictionary.nav.library;if(href==="/premium")return dictionary.nav.premium;return fallback;}
