@@ -46,12 +46,16 @@
     margin:0!important;
     padding:14px 22px 10px!important;
     display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
     grid-template-rows:82px 48px!important;
     gap:0!important;
     position:relative!important
   }
 
   .listener-shell .m-player-top{
+    grid-column:1!important;
+    grid-row:1!important;
+    width:100%!important;
     display:grid!important;
     grid-template-columns:310px 1fr 310px!important;
     align-items:center!important;
@@ -196,6 +200,9 @@
   .listener-shell .m-player-brand small{display:block!important;margin-top:2px!important;color:#9e93aa!important;font-size:6px!important;white-space:nowrap!important}
 
   .listener-shell .m-player-timeline{
+    grid-column:1!important;
+    grid-row:2!important;
+    width:100%!important;
     display:grid!important;
     grid-template-columns:38px minmax(0,1fr) 38px!important;
     align-items:center!important;
