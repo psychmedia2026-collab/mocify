@@ -100,3 +100,108 @@
     z-index:999!important;
   }
 }
+/* Mini-player v2: smaller right rail so it does not sit on top of Artist Portal content. */
+@media (min-width:1101px){
+  .artist-m-player.minimized{
+    position:fixed!important;
+    left:auto!important;
+    right:18px!important;
+    top:50%!important;
+    bottom:auto!important;
+    width:252px!important;
+    height:72px!important;
+    transform:translateY(-50%)!important;
+    margin:0!important;
+    border-radius:16px!important;
+    z-index:999!important;
+  }
+
+  .artist-m-player.minimized .artist-m-player-inner{
+    height:100%!important;
+    padding:8px 9px!important;
+  }
+
+  .artist-m-player.minimized .artist-m-player-top{
+    grid-template-columns:minmax(0,1fr) auto!important;
+    gap:6px!important;
+  }
+
+  .artist-m-player.minimized .artist-m-cover{
+    width:44px!important;
+    height:44px!important;
+    min-width:44px!important;
+    border-radius:7px!important;
+  }
+
+  .artist-m-player.minimized .artist-m-track{
+    gap:8px!important;
+  }
+
+  .artist-m-player.minimized .artist-m-track b{
+    max-width:92px!important;
+    font-size:10px!important;
+  }
+
+  .artist-m-player.minimized .artist-m-track small{
+    max-width:92px!important;
+    margin-top:2px!important;
+    font-size:8px!important;
+  }
+
+  .artist-m-player.minimized .artist-m-mini-controls{
+    gap:2px!important;
+    padding-right:18px!important;
+  }
+
+  .artist-m-player.minimized .artist-m-mini-controls button{
+    width:24px!important;
+    height:24px!important;
+    min-width:24px!important;
+  }
+
+  .artist-m-player.minimized .artist-m-mini-controls .artist-m-mini-play{
+    width:34px!important;
+    height:34px!important;
+    min-width:34px!important;
+    min-height:34px!important;
+  }
+
+  .artist-m-player.minimized .artist-m-mini-controls svg{
+    width:15px!important;
+    height:15px!important;
+  }
+
+  .artist-m-player.minimized .artist-m-minimize{
+    right:5px!important;
+    top:4px!important;
+    width:20px!important;
+    height:18px!important;
+    border-radius:6px!important;
+    font-size:10px!important;
+  }
+
+  /* Create a dedicated right rail while the mini player is open. */
+  .artist-portal-shell:has(.artist-m-player.minimized) .artist-dashboard-frame{
+    width:min(calc(var(--artist-shell-width) - 270px),calc(100vw - var(--artist-shell-gutter) - 270px))!important;
+    margin-left:max(calc((100vw - var(--artist-shell-width))/2),20px)!important;
+    margin-right:270px!important;
+  }
+}
+
+/* On smaller desktop widths, keep the content full width and park the mini-player low/right. */
+@media (min-width:901px) and (max-width:1100px){
+  .artist-m-player.minimized{
+    right:14px!important;
+    top:auto!important;
+    bottom:14px!important;
+    width:236px!important;
+    height:68px!important;
+    transform:none!important;
+  }
+  .artist-m-player.minimized .artist-m-cover{width:42px!important;height:42px!important;min-width:42px!important}
+  .artist-m-player.minimized .artist-m-track b{max-width:82px!important;font-size:10px!important}
+  .artist-m-player.minimized .artist-m-track small{max-width:82px!important;font-size:8px!important}
+  .artist-m-player.minimized .artist-m-mini-controls{gap:1px!important;padding-right:16px!important}
+  .artist-m-player.minimized .artist-m-mini-controls button{width:23px!important;height:23px!important;min-width:23px!important}
+  .artist-m-player.minimized .artist-m-mini-controls .artist-m-mini-play{width:32px!important;height:32px!important;min-width:32px!important;min-height:32px!important}
+}
