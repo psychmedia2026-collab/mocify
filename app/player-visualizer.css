@@ -13,3 +13,105 @@
 
 @media (prefers-reduced-motion:reduce){.m-wave-column,.m-wave-column>i,.m-wave-glow,.m-wave-progress,.m-wave-playhead{transition:none!important}}
 @media(max-width:900px){.mocify-signature-wave{display:none!important}}
+/* Player layout v2 — waveform becomes the full-width lower timeline. */
+@media (min-width:901px){
+  .listener-shell.has-player{--player-height:118px}
+  .listener-shell .m-player{height:118px!important;min-height:118px!important}
+  .listener-shell .m-player-inner{
+    display:grid!important;
+    grid-template-columns:minmax(240px,1fr) auto minmax(320px,1fr)!important;
+    grid-template-rows:72px 42px!important;
+    align-items:center!important;
+    gap:0 24px!important;
+    width:calc(100% - 34px)!important;
+    height:118px!important;
+    padding:0!important;
+  }
+  .listener-shell .m-player-track-area{grid-column:1!important;grid-row:1!important;min-width:0}
+  .listener-shell .m-player-center{grid-column:2!important;grid-row:1!important;display:block!important}
+  .listener-shell .m-player-tools{grid-column:3!important;grid-row:1!important;justify-content:flex-end}
+  .listener-shell .m-player-timeline{
+    grid-column:1/-1;
+    grid-row:2;
+    display:grid;
+    grid-template-columns:42px minmax(0,1fr) 42px;
+    align-items:center;
+    gap:10px;
+    min-width:0;
+    width:100%;
+  }
+  .listener-shell .m-player-time{
+    color:#a9abc1;
+    font-size:10px;
+    font-variant-numeric:tabular-nums;
+    text-align:center;
+  }
+  .listener-shell .mocify-signature-wave{
+    display:block!important;
+    width:100%;
+    height:38px;
+    margin:0;
+    border-radius:10px;
+    background:radial-gradient(ellipse at 42% 50%,rgba(113,70,255,.16),transparent 68%);
+  }
+  .listener-shell .m-wave-bars{inset:0 2px;gap:1.6px}
+  .listener-shell .m-wave-column{max-width:8px}
+  .listener-shell .m-wave-playhead{width:9px;height:9px}
+}
+
+/* Mobile follows the same hierarchy: track + controls above, waveform below. */
+@media (max-width:900px){
+  .listener-shell.has-player{--player-height:116px!important}
+  .listener-shell .m-player{
+    height:116px!important;
+    min-height:116px!important;
+  }
+  .listener-shell .m-player-inner{
+    width:calc(100% - 16px)!important;
+    height:116px!important;
+    padding:0!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    grid-template-rows:68px 42px!important;
+    gap:0 8px!important;
+  }
+  .listener-shell .m-player-track-area{grid-column:1!important;grid-row:1!important}
+  .listener-shell .m-player-center{
+    grid-column:2!important;
+    grid-row:1!important;
+    display:block!important;
+    min-width:105px!important;
+  }
+  .listener-shell .m-player-tools,.listener-shell .m-player-brand{display:none!important}
+  .listener-shell .m-player-timeline{
+    grid-column:1/-1;
+    grid-row:2;
+    display:grid!important;
+    grid-template-columns:30px minmax(0,1fr) 30px;
+    align-items:center;
+    gap:6px;
+    width:100%;
+    min-width:0;
+  }
+  .listener-shell .m-player-time{
+    color:#a7a9bb;
+    font-size:8px;
+    font-variant-numeric:tabular-nums;
+    text-align:center;
+  }
+  .listener-shell .mocify-signature-wave{
+    display:block!important;
+    width:100%;
+    height:32px!important;
+    margin:0!important;
+    border-radius:8px;
+    mask-image:linear-gradient(90deg,transparent,#000 2%,#000 98%,transparent);
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 2%,#000 98%,transparent);
+  }
+  .listener-shell .m-wave-bars{inset:0 1px;gap:1px}
+  .listener-shell .m-wave-column{min-width:1px;max-width:5px}
+  .listener-shell .m-wave-playhead{width:7px;height:7px}
+  .listener-shell .m-progress-row{display:none!important}
+  .listener-shell .m-shell.has-player{
+    padding-bottom:calc(116px + var(--mobile-nav-height) + var(--safe-bottom) + 20px)!important;
+  }
+}
