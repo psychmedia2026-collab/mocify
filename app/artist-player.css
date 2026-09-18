@@ -42,9 +42,14 @@
 .artist-m-bars i{flex:1 1 0;min-width:0;height:var(--h,20%);border-radius:2px;background:linear-gradient(180deg,#42485f,#2c3145);opacity:.62}
 .artist-m-bars i.played{background:linear-gradient(180deg,#6de7ff 0%,#8a6cff 32%,#b84cf0 66%,#ed35c5 100%);opacity:1;box-shadow:0 0 6px rgba(132,72,255,.30)}
 .artist-m-playhead{position:absolute;z-index:3;top:50%;width:10px;height:10px;border-radius:50%;background:#fff;border:1px solid #9d72ff;box-shadow:0 0 0 2px rgba(116,56,255,.18),0 0 10px rgba(237,53,197,.42);transform:translate(-50%,-50%);pointer-events:none}
-/* Reserve space below Artist Portal content so the fixed player never covers the footer. */
-.artist-portal-shell:has(.artist-m-player){padding-bottom:184px;box-sizing:border-box}
-.artist-dashboard-page{padding-bottom:210px!important}
+/* Reserve real viewport space below the Artist Portal footer while the full player is open.
+   The persistent player is mounted at root level, so this must be driven from body:has(...). */
+body:has(.artist-m-player:not(.minimized)) .artist-portal-footer-rich{
+  margin-bottom:184px!important;
+}
+body:has(.artist-m-player:not(.minimized)) .artist-dashboard-page{
+  padding-bottom:70px!important;
+}
 
 @media(max-width:900px){
   .artist-m-player{left:8px;right:8px;bottom:8px;width:auto;height:82px;transform:none;border-radius:16px}
@@ -52,7 +57,7 @@
   .artist-m-player-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
   .artist-m-track-area{grid-column:1}.artist-m-track{gap:8px}.artist-m-cover{width:44px;height:44px;min-width:44px}.artist-m-track b,.artist-m-track small{max-width:110px}.artist-m-track b{font-size:10px}.artist-m-track small{font-size:8px;margin-top:2px}
   .artist-m-save,.artist-m-more{display:none}.artist-m-center{grid-column:2;transform:none}.artist-m-controls{gap:3px}.artist-m-controls button{width:28px;height:28px;min-width:28px;min-height:28px}.artist-m-controls button:first-child,.artist-m-controls button:last-child{display:none}.artist-m-controls .artist-m-play{width:42px;height:42px;min-width:42px;min-height:42px}
-  .artist-m-tools,.artist-m-timeline{display:none!important}.artist-portal-shell:has(.artist-m-player){padding-bottom:104px}.artist-dashboard-page{padding-bottom:120px!important}
+  .artist-m-tools,.artist-m-timeline{display:none!important}body:has(.artist-m-player:not(.minimized)) .artist-portal-footer-rich{margin-bottom:104px!important}.artist-dashboard-page{padding-bottom:70px!important}
 }
 .artist-m-minimize{position:absolute;z-index:80;right:10px;top:8px;width:28px;height:24px;border:1px solid rgba(255,255,255,.08);border-radius:8px;background:rgba(255,255,255,.04);color:#b9b5c7;font:inherit;font-size:14px;font-weight:900;cursor:pointer;display:grid;place-items:center}
 .artist-m-minimize:hover{background:rgba(255,255,255,.08);color:#fff}
@@ -82,8 +87,6 @@
 .artist-m-player.minimized .artist-m-mini-controls button:disabled{opacity:.3}
 .artist-m-player.minimized .artist-m-mini-controls .artist-m-mini-play{width:42px;height:42px;min-width:42px;border:1px solid rgba(185,111,255,.9);border-radius:50%;background:rgba(8,9,18,.96);box-shadow:0 0 14px rgba(171,69,255,.22);color:#fff}
 .artist-m-player.minimized .artist-m-minimize{right:7px;top:5px;width:24px;height:22px;font-size:12px}
-.artist-portal-shell:has(.artist-m-player.minimized){padding-bottom:20px!important}
-.artist-dashboard-page:has(~ .artist-m-player.minimized){padding-bottom:70px!important}
 
 /* Keep minimized Artist player floating on the right side while scrolling. */
 @media (min-width:901px){
@@ -198,4 +201,8 @@
   .artist-m-player.minimized .artist-m-mini-controls{gap:1px!important;padding-right:16px!important}
   .artist-m-player.minimized .artist-m-mini-controls button{width:23px!important;height:23px!important;min-width:23px!important}
   .artist-m-player.minimized .artist-m-mini-controls .artist-m-mini-play{width:32px!important;height:32px!important;min-width:32px!important;min-height:32px!important}
+}
+
+body:has(.artist-m-player.minimized) .artist-portal-footer-rich{
+  margin-bottom:0!important;
 }
