@@ -9,6 +9,10 @@ export const supportedLocales = [
   { code: "pt", name: "Portuguese", nativeName: "Português" },
   { code: "pl", name: "Polish", nativeName: "Polski" },
   { code: "tr", name: "Turkish", nativeName: "Türkçe" },
+  { code: "id", name: "Indonesian", nativeName: "Bahasa Indonesia" },
+  { code: "ja", name: "Japanese", nativeName: "日本語" },
+  { code: "ko", name: "Korean", nativeName: "한국어" },
+  { code: "hi", name: "Hindi", nativeName: "हिन्दी" },
 ] as const;
 
 export type Locale = (typeof supportedLocales)[number]["code"];
