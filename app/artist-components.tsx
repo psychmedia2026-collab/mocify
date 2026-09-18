@@ -18,7 +18,11 @@ const artistUiLabels={
  it:{home:"Home MOCIFY per artisti",login:"Accesso artista",logout:"Disconnetti artista",nav:"Navigazione",myArtists:"I miei artisti",myMusic:"La mia musica",promote:"Promuovi",earnings:"Guadagni",plans:"Piani",contact:"Contatti"},
  pt:{home:"Início MOCIFY para artistas",login:"Login de artista",logout:"Sair da conta de artista",nav:"Navegação",myArtists:"Os meus artistas",myMusic:"A minha música",promote:"Promover",earnings:"Ganhos",plans:"Planos",contact:"Contacto"},
  pl:{home:"Strona główna MOCIFY dla artystów",login:"Logowanie artysty",logout:"Wyloguj artystę",nav:"Nawigacja",myArtists:"Moi artyści",myMusic:"Moja muzyka",promote:"Promuj",earnings:"Zarobki",plans:"Plany",contact:"Kontakt"},
- tr:{home:"MOCIFY sanatçı ana sayfası",login:"Sanatçı girişi",logout:"Sanatçı çıkışı",nav:"Navigasyon",myArtists:"Sanatçılarım",myMusic:"Müziğim",promote:"Tanıt",earnings:"Kazançlar",plans:"Planlar",contact:"İletişim"}
+ tr:{home:"MOCIFY sanatçı ana sayfası",login:"Sanatçı girişi",logout:"Sanatçı çıkışı",nav:"Navigasyon",myArtists:"Sanatçılarım",myMusic:"Müziğim",promote:"Tanıt",earnings:"Kazançlar",plans:"Planlar",contact:"İletişim"},
+ id:{home:"Beranda MOCIFY untuk artis",login:"Login artis",logout:"Keluar artis",nav:"Navigasi",myArtists:"Artisku",myMusic:"Musikku",promote:"Promosikan",earnings:"Pendapatan",plans:"Paket",contact:"Kontak"},
+ ja:{home:"MOCIFY アーティストホーム",login:"アーティストログイン",logout:"アーティストログアウト",nav:"ナビゲーション",myArtists:"マイアーティスト",myMusic:"マイミュージック",promote:"プロモーション",earnings:"収益",plans:"プラン",contact:"お問い合わせ"},
+ ko:{home:"MOCIFY 아티스트 홈",login:"아티스트 로그인",logout:"아티스트 로그아웃",nav:"내비게이션",myArtists:"내 아티스트",myMusic:"내 음악",promote:"프로모션",earnings:"수익",plans:"플랜",contact:"문의"},
+ hi:{home:"MOCIFY कलाकार होम",login:"कलाकार लॉगिन",logout:"कलाकार लॉगआउट",nav:"नेविगेशन",myArtists:"मेरे कलाकार",myMusic:"मेरा संगीत",promote:"प्रमोशन",earnings:"कमाई",plans:"प्लान",contact:"संपर्क"}
 } as const;
 
 export function ArtistLogo(){const{locale}=useLanguage();const t=artistTranslations[locale];const ui=artistUiLabels[locale];const homeLabel=ui.home;return <Link className="artist-brand" href="/for-artists" aria-label={homeLabel}><img src="/mocify-bird.png?v=2" width={46} height={46} alt="" aria-hidden="true"/><span><b>MOCIFY</b><small>{t.forArtists}</small></span></Link>;}
