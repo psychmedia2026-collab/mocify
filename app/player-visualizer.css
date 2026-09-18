@@ -6,8 +6,8 @@
 .mocify-signature-wave.is-seekable{cursor:pointer}
 .mocify-signature-wave.is-seekable:focus-visible{outline:2px solid #54dfff;outline-offset:2px}
 .m-wave-glow{position:absolute;inset:50% 2% auto;height:8px;transform:translateY(-50%);border-radius:999px;background:linear-gradient(90deg,#02d9ff,#7857ff 35%,#ed35c5 72%,#ff963f);filter:blur(13px);opacity:.16;pointer-events:none}
-.m-wave-bars{position:absolute;inset:1px 0;display:flex;align-items:center;gap:1px;pointer-events:none}
-.m-wave-column{flex:1 1 0;min-width:1px;max-width:4px;height:100%;display:grid;place-items:center;opacity:.52}
+.m-wave-bars{position:absolute;inset:1px 0;display:flex;align-items:center;gap:.55px;pointer-events:none}
+.m-wave-column{flex:1 1 0;min-width:0;max-width:none;height:100%;display:grid;place-items:center;opacity:.52}
 .m-wave-column>i{display:block;width:100%;height:var(--level,20%);min-height:2px;border-radius:999px;background:#34384f}
 .m-wave-column.played{opacity:1}
 .m-wave-column.played>i{background:linear-gradient(180deg,#9d61ff,#7857ff 36%,#d747ee 72%,#ed35c5);box-shadow:0 0 5px rgba(149,79,255,.28)}
@@ -23,7 +23,7 @@
     left:50%!important;
     right:auto!important;
     bottom:10px!important;
-    width:min(1100px,calc(100vw - 20px))!important;
+    width:min(1080px,calc(100vw - 20px))!important;
     height:154px!important;
     min-height:154px!important;
     transform:translateX(-50%)!important;
@@ -57,9 +57,9 @@
     grid-row:1!important;
     width:100%!important;
     display:grid!important;
-    grid-template-columns:310px 1fr 310px!important;
+    grid-template-columns:305px minmax(360px,1fr) 305px!important;
     align-items:center!important;
-    gap:18px!important;
+    gap:14px!important;
     min-width:0!important
   }
 
@@ -149,12 +149,12 @@
     height:58px!important;
     min-width:58px!important;
     min-height:58px!important;
-    border:2px solid #9a5cff!important;
+    border:2px solid rgba(190,111,255,.95)!important;
     border-radius:50%!important;
-    background:rgba(7,8,16,.92)!important;
+    background:linear-gradient(135deg,#7857ff 0%,#c03cff 52%,#ed35c5 100%)!important;
     color:#fff!important;
     font-size:18px!important;
-    box-shadow:0 0 0 3px rgba(120,87,255,.10),0 0 18px rgba(237,53,197,.18)!important
+    box-shadow:0 0 0 3px rgba(120,87,255,.10),0 0 20px rgba(237,53,197,.30)!important
   }
   .listener-shell .m-controls .m-utility.active{color:#ff63dc!important}
 
@@ -162,7 +162,7 @@
     display:flex!important;
     align-items:center!important;
     justify-content:flex-end!important;
-    gap:12px!important;
+    gap:10px!important;
     min-width:0!important
   }
 
@@ -192,7 +192,7 @@
     margin-left:2px!important;
     padding-left:14px!important;
     border-left:1px solid rgba(255,255,255,.08)!important;
-    min-width:142px!important
+    min-width:154px!important
   }
   .listener-shell .m-player-brand img{width:36px!important;height:36px!important;object-fit:contain!important;filter:drop-shadow(0 0 9px rgba(223,45,255,.24))!important}
   .listener-shell .m-player-brand span{display:grid!important}
@@ -215,6 +215,21 @@
     font-size:9px!important;
     font-variant-numeric:tabular-nums!important;
     text-align:center!important
+  }
+
+  .listener-shell .m-player-timeline .mocify-signature-wave{
+    width:100%!important;
+    min-width:0!important;
+  }
+  .listener-shell .m-player-timeline .m-wave-bars{
+    width:100%!important;
+    justify-content:stretch!important;
+  }
+  .listener-shell .m-player-timeline .m-wave-column{
+    width:auto!important;
+  }
+  .listener-shell .m-player-timeline{
+    padding:0 2px!important;
   }
 
   .listener-shell .m-mobile-progress-row,
