@@ -1,15 +1,13 @@
-/* MOCIFY reference player — layout from approved mockup, site palette preserved. */
+/* MOCIFY player — approved reference layout, existing MOCIFY palette. */
 
 .mocify-signature-wave{
   position:relative;
-  height:44px;
+  height:48px;
   margin:0;
   overflow:hidden;
-  border-radius:10px;
+  border-radius:0;
   isolation:isolate;
-  background:radial-gradient(ellipse at 42% 50%,rgba(120,87,255,.16),transparent 68%);
-  mask-image:linear-gradient(90deg,transparent,#000 2%,#000 98%,transparent);
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 2%,#000 98%,transparent);
+  background:transparent;
   touch-action:none;
   user-select:none
 }
@@ -19,68 +17,67 @@
 .m-wave-glow{
   position:absolute;
   z-index:0;
-  left:3%;
-  right:3%;
+  left:4%;
+  right:4%;
   top:50%;
-  height:8px;
+  height:6px;
+  transform:translateY(-50%);
   border-radius:50%;
-  background:linear-gradient(90deg,#48dcff,#665cff 30%,#bd45ff 57%,#f83bc4 78%,#ff984d);
+  background:linear-gradient(90deg,#7857ff,#ed35c5 62%,#ff963f);
   filter:blur(12px);
-  opacity:.25;
+  opacity:.16;
   pointer-events:none
 }
-.mocify-signature-wave.is-playing .m-wave-glow{opacity:.75;filter:blur(15px)}
 
 .m-wave-bars{
   position:absolute;
   z-index:2;
-  inset:2px 3px;
+  inset:1px 0;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:1.5px;
+  gap:1.25px;
   pointer-events:none
 }
 .m-wave-column{
   position:relative;
-  flex:1;
-  min-width:2px;
-  max-width:7px;
+  flex:1 1 0;
+  min-width:1.5px;
+  max-width:5px;
   height:100%;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   gap:0;
-  opacity:.28;
-  transition:opacity .1s ease,filter .1s ease
+  opacity:.46
 }
 .m-wave-column>i{
   display:block;
   width:100%;
-  height:calc(var(--level,8%)*.48);
-  min-height:1px;
-  border-radius:999px 999px 2px 2px;
-  background:linear-gradient(180deg,#67efff 0%,#54a2ff 23%,#805dff 46%,#d747ee 70%,#ff4fb7 85%,#ff9d4d 100%);
-  box-shadow:0 0 5px rgba(113,87,255,.18)
+  height:calc(var(--level,20%)*.5);
+  min-height:2px;
+  border-radius:999px 999px 1px 1px;
+  background:#313651
 }
 .m-wave-column>i.reflection{
-  height:calc(var(--level,8%)*.48);
-  border-radius:2px 2px 999px 999px;
-  opacity:.56
+  height:calc(var(--level,20%)*.5);
+  border-radius:1px 1px 999px 999px;
+  opacity:1
 }
-.mocify-signature-wave.is-playing .m-wave-column{opacity:.72}
-.m-wave-column.played{opacity:1;filter:drop-shadow(0 0 4px rgba(126,87,255,.42))}
-.m-wave-column.played>i:first-child{box-shadow:0 0 7px rgba(71,218,255,.35),0 0 12px rgba(224,54,219,.28)}
-
+.m-wave-column.played{opacity:1}
+.m-wave-column.played>i{
+  background:linear-gradient(180deg,#8d5cff,#b847ff 54%,#ed35c5);
+  box-shadow:0 0 6px rgba(160,76,255,.22)
+}
 .m-wave-progress{
   position:absolute;
   z-index:1;
   left:0;
   top:50%;
   height:1px;
-  background:linear-gradient(90deg,rgba(69,221,255,.45),rgba(145,75,255,.7),rgba(244,54,201,.76),rgba(255,148,72,.75));
-  box-shadow:0 0 10px rgba(218,50,231,.36);
+  background:linear-gradient(90deg,#7857ff,#ed35c5);
+  opacity:.35;
   pointer-events:none
 }
 .m-wave-playhead{
@@ -91,9 +88,9 @@
   height:8px;
   border-radius:50%;
   background:#fff;
-  box-shadow:0 0 7px #54dfff,0 0 13px #d83de8;
+  border:1px solid #b783ff;
+  box-shadow:0 0 8px rgba(156,88,255,.85);
   transform:translate(-50%,-50%);
-  opacity:.92;
   pointer-events:none
 }
 .mocify-signature-wave::after{
@@ -104,38 +101,39 @@
   right:0;
   top:50%;
   height:1px;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.06) 12%,rgba(255,255,255,.12) 50%,rgba(255,255,255,.06) 88%,transparent);
+  background:rgba(255,255,255,.035);
   pointer-events:none
 }
 
-/* Desktop: exact hierarchy from reference image */
 @media (min-width:901px){
-  .listener-shell.has-player{--player-height:138px!important}
+  .listener-shell.has-player{--player-height:154px!important}
 
   .listener-shell .m-player{
-    left:16px!important;
-    right:16px!important;
-    bottom:14px!important;
-    height:138px!important;
-    min-height:138px!important;
+    left:10px!important;
+    right:10px!important;
+    bottom:10px!important;
+    height:154px!important;
+    min-height:154px!important;
     padding:0!important;
-    border:1px solid rgba(154,105,255,.48)!important;
+    border:1px solid rgba(126,112,162,.34)!important;
     border-radius:24px!important;
-    background:linear-gradient(105deg,rgba(5,10,25,.98),rgba(20,11,48,.97) 48%,rgba(45,10,48,.94))!important;
-    box-shadow:0 -12px 34px rgba(38,18,90,.24),0 0 28px rgba(120,87,255,.20)!important;
-    backdrop-filter:blur(24px) saturate(1.18)!important
+    background:linear-gradient(105deg,rgba(5,8,17,.985),rgba(8,10,20,.985) 62%,rgba(10,11,21,.985))!important;
+    box-shadow:0 10px 34px rgba(0,0,0,.34),0 0 22px rgba(120,87,255,.10)!important;
+    backdrop-filter:blur(22px)!important
   }
 
+  .listener-shell .m-player-accent{display:none!important}
+
   .listener-shell .m-player-inner{
-    position:relative!important;
-    width:calc(100% - 38px)!important;
-    height:138px!important;
+    width:calc(100% - 48px)!important;
+    max-width:none!important;
+    height:154px!important;
     margin:0 auto!important;
-    padding:10px 0 8px!important;
+    padding:14px 0 10px!important;
     display:grid!important;
-    grid-template-columns:minmax(315px,.95fr) auto minmax(380px,1fr)!important;
-    grid-template-rows:72px 44px!important;
-    column-gap:28px!important;
+    grid-template-columns:minmax(320px,1fr) auto minmax(360px,1fr)!important;
+    grid-template-rows:78px 48px!important;
+    column-gap:24px!important;
     row-gap:0!important;
     align-items:center!important
   }
@@ -157,79 +155,77 @@
   }
 
   .listener-shell .m-player-cover{
-    width:64px!important;
-    height:64px!important;
-    min-width:64px!important;
-    border-radius:10px!important;
-    box-shadow:0 10px 24px rgba(0,0,0,.28)!important
+    width:74px!important;
+    height:74px!important;
+    min-width:74px!important;
+    border-radius:8px!important;
+    box-shadow:0 10px 26px rgba(0,0,0,.34)!important
   }
 
-  .listener-shell .m-player-track-copy{min-width:0!important}
   .listener-shell .m-player-track-copy b{
     display:block!important;
-    max-width:170px!important;
+    max-width:160px!important;
     overflow:hidden!important;
     text-overflow:ellipsis!important;
     white-space:nowrap!important;
-    font-size:13px!important;
+    font-size:14px!important;
+    line-height:1.1!important;
     color:#fff!important
   }
+
   .listener-shell .m-player-track-copy small{
     display:block!important;
-    max-width:170px!important;
-    margin-top:4px!important;
+    max-width:160px!important;
+    margin-top:5px!important;
     overflow:hidden!important;
     text-overflow:ellipsis!important;
     white-space:nowrap!important;
     font-size:10px!important;
-    color:#9c98b1!important
+    color:#9e9bad!important
   }
 
   .listener-shell .m-player-save,
   .listener-shell .m-player-more{
-    flex:0 0 auto!important;
-    width:36px!important;
-    height:36px!important;
-    min-width:36px!important;
-    min-height:36px!important;
+    width:34px!important;
+    height:34px!important;
+    min-width:34px!important;
+    min-height:34px!important;
     display:grid!important;
     place-items:center!important;
     padding:0!important;
     border:0!important;
     background:transparent!important;
-    color:#d8d6e3!important;
-    font-size:18px!important
+    color:#dedbe7!important
   }
-  .listener-shell .m-player-more{font-size:15px!important;letter-spacing:2px!important}
+  .listener-shell .m-player-save{font-size:22px!important}
+  .listener-shell .m-player-more{font-size:16px!important;letter-spacing:2px!important}
 
   .listener-shell .m-player-center{
     grid-column:2!important;
     grid-row:1!important;
-    justify-self:center!important;
-    align-self:center!important;
-    display:block!important
+    display:block!important;
+    justify-self:center!important
   }
 
   .listener-shell .m-controls{
     display:flex!important;
     align-items:center!important;
     justify-content:center!important;
-    gap:18px!important;
-    white-space:nowrap!important
+    gap:17px!important
   }
 
   .listener-shell .m-controls button{
-    width:36px!important;
-    height:36px!important;
-    min-width:36px!important;
-    min-height:36px!important;
+    width:38px!important;
+    height:38px!important;
+    min-width:38px!important;
+    min-height:38px!important;
+    padding:0!important;
     display:grid!important;
     place-items:center!important;
-    padding:0!important;
     border:0!important;
     background:transparent!important;
-    color:#c4c0d1!important;
-    font-size:14px!important
+    color:#d0ccd9!important;
+    font-size:15px!important
   }
 
   .listener-shell .m-controls .m-play{
@@ -237,15 +233,15 @@
     height:58px!important;
     min-width:58px!important;
     min-height:58px!important;
-    border:2px solid rgba(159,93,255,.88)!important;
+    border:2px solid #9457ff!important;
     border-radius:50%!important;
-    background:linear-gradient(135deg,#7857ff,#ed35c5 68%,#ff963f)!important;
+    background:rgba(9,10,18,.96)!important;
     color:#fff!important;
     font-size:18px!important;
-    box-shadow:0 0 0 3px rgba(120,87,255,.12),0 0 24px rgba(237,53,197,.20)!important
+    box-shadow:0 0 0 3px rgba(148,87,255,.10),0 0 16px rgba(148,87,255,.18)!important
   }
 
-  .listener-shell .m-controls .m-utility.active{color:#ff63dc!important}
+  .listener-shell .m-controls .m-utility.active{color:#d564ff!important}
 
   .listener-shell .m-player-tools{
     grid-column:3!important;
@@ -253,83 +249,84 @@
     display:flex!important;
     align-items:center!important;
     justify-content:flex-end!important;
-    gap:16px!important;
-    min-width:0!important
+    gap:16px!important
   }
 
   .listener-shell .m-volume{
-    display:inline-flex!important;
+    display:flex!important;
     align-items:center!important;
     gap:8px!important
   }
+
   .listener-shell .m-volume-mute{
     width:28px!important;
     height:28px!important;
+    padding:0!important;
+    border:0!important;
+    background:transparent!important;
+    color:#d5d1dd!important
+  }
+
+  .listener-shell .m-volume input{
+    width:90px!important;
+    accent-color:#a95cff!important
+  }
+
+  .listener-shell .m-cast-button,
+  .listener-shell .m-queue-button{
+    width:34px!important;
+    height:34px!important;
+    min-width:34px!important;
+    min-height:34px!important;
     display:grid!important;
     place-items:center!important;
+    padding:0!important;
     border:0!important;
     background:transparent!important;
-    color:#c8c6d4!important
-  }
-  .listener-shell .m-volume input{
-    width:92px!important;
-    accent-color:#d348e7!important
-  }
-
-  .listener-shell .m-tool-toggle{display:none!important}
-
-  .listener-shell .m-queue-button{
-    width:36px!important;
-    height:36px!important;
-    border:0!important;
-    background:transparent!important;
-    color:#c9c6d5!important;
-    font-size:18px!important
+    color:#c8c4d1!important;
+    font-size:17px!important
   }
 
   .listener-shell .m-player-brand{
     display:flex!important;
     align-items:center!important;
-    gap:8px!important;
-    min-width:auto!important;
     margin-left:4px!important;
-    padding-left:14px!important;
+    padding-left:20px!important;
     border-left:1px solid rgba(255,255,255,.08)!important
   }
-  .listener-shell .m-player-brand img{
-    width:38px!important;
-    height:38px!important
+
+  .listener-shell .m-player-brand b{
+    font-size:16px!important;
+    font-weight:900!important;
+    letter-spacing:-.035em!important;
+    color:#fff!important
   }
-  .listener-shell .m-player-brand span{display:grid!important}
-  .listener-shell .m-player-brand b{font-size:14px!important}
-  .listener-shell .m-player-brand small{display:none!important}
 
   .listener-shell .m-player-timeline{
     grid-column:1 / 4!important;
     grid-row:2!important;
     display:grid!important;
-    grid-template-columns:44px minmax(0,1fr) 44px!important;
+    grid-template-columns:46px minmax(0,1fr) 46px!important;
     align-items:center!important;
     gap:10px!important;
-    width:100%!important;
-    min-width:0!important
+    width:100%!important
   }
 
   .listener-shell .m-player-time{
-    color:#aaa6ba!important;
+    color:#b6b2c0!important;
     font-size:9px!important;
     font-variant-numeric:tabular-nums!important;
     text-align:center!important
   }
 
-  .listener-shell .m-mobile-progress-row{display:none!important}
+  .listener-shell .m-mobile-progress-row,
   .listener-shell .m-player-status{display:none!important}
 }
 
-/* Tablet / mobile remains compact and functional. */
 @media (max-width:900px){
   .listener-shell .m-player-timeline{display:none!important}
-  .listener-shell .m-player-more{display:none!important}
+  .listener-shell .m-player-more,
+  .listener-shell .m-cast-button{display:none!important}
   .listener-shell .m-mobile-progress-row{
     position:absolute!important;
     left:0!important;
@@ -353,8 +350,4 @@
     pointer-events:auto!important
   }
   .listener-shell .m-player-status{display:none!important}
-}
-
-@media (prefers-reduced-motion:reduce){
-  .m-wave-column,.m-wave-column>i,.m-wave-glow,.m-wave-progress,.m-wave-playhead{transition:none!important}
 }
