@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { formatTime, useListenerPlayer, type RepeatMode } from "./listener-player";
 
 const repeatLabels: Record<RepeatMode,string>={off:"Repeat off",queue:"Repeat queue",track:"Repeat current track"};
-const BAR_COUNT=112;
+const BAR_COUNT=220;
 const idleBars=Array.from({length:BAR_COUNT},(_,index)=>.025+((index*17)%7)*.006);
 
 export default function Player(){
