@@ -89,6 +89,8 @@ export const genrePlaylists = [
   { slug:"classical", title:"Classical", subtitle:"Classical and orchestral music", releaseIds:["afterlight"] },
   { slug:"reggae", title:"Reggae", subtitle:"Reggae and related sounds", releaseIds:["bella-ciao"] },
   { slug:"latin", title:"Latin", subtitle:"Latin rhythms and crossover music", releaseIds:["bella-ciao","zero-gravity"] },
+  { slug:"metal", title:"Metal", subtitle:"Heavy riffs and powerful sounds", releaseIds:[] },
+  { slug:"punk", title:"Punk", subtitle:"Fast, direct and rebellious guitar music", releaseIds:[] },
 ] as const;
 
 export const countryGenreMap: Record<string, readonly string[]> = {
