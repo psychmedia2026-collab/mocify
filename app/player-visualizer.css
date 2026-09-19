@@ -302,6 +302,7 @@
 
 @media (min-width:1181px){
   .listener-shell .m-player.minimized{
+    box-sizing:border-box!important;
     position:fixed!important;
     left:var(--listener-mini-left,18px)!important;
     right:auto!important;
