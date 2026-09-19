@@ -70,7 +70,7 @@
 /* Radio page identity mirrors the Playlists page hierarchy */
 .radioPageIntro{margin:0 0 34px;padding:58px 0 0}
 .radioPageIntro>p{margin:0;color:#c69cff;font-size:10px;font-weight:950;letter-spacing:.18em}
-.radioPageIntro>h1{display:inline-block;margin:9px 0 13px;font-size:clamp(46px,6vw,76px);line-height:.96;font-weight:900;letter-spacing:-.06em;background:linear-gradient(90deg,#f7f7fb 0%,#f7f7fb 38%,#8b78ff 58%,#ed35c5 78%,#ff963f 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.radioPageIntro>h1{display:inline-block;margin:9px 0 13px;font-size:clamp(46px,6vw,76px);line-height:.96;font-weight:inherit;letter-spacing:-.06em;background:linear-gradient(90deg,#f7f7fb 0%,#f7f7fb 38%,#8b78ff 58%,#ed35c5 78%,#ff963f 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .radioPageIntro>span{display:block;max-width:650px;margin:0;color:#9694a4;font-size:14px;line-height:1.65}
 .radioShell .countryMasthead{margin-top:0}
-@media(max-width:760px){.radioPageIntro{padding-top:32px}.radioPageIntro>h1{font-size:46px}}
+@media(max-width:620px){.radioPageIntro{padding-top:32px}.radioPageIntro>h1{font-size:clamp(46px,6vw,76px)}}
