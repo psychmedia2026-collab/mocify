@@ -78,7 +78,73 @@ export const countryPlaylists = [
 
 export const genrePlaylists = [
   { slug:"pop", title:"Pop", subtitle:"Melodic, modern and made for repeat", releaseIds:["toca-bonbon","digital-touch","after-you"] },
-  { slug:"manele", title:"Manele", subtitle:"Modern Manele and crossover sounds", releaseIds:["toca-bonbon","money-money"] },
-  { slug:"electronic", title:"Electronic", subtitle:"Synthetic energy and future-facing sound", releaseIds:["kill-the-beat","afterlight","zero-gravity"] },
-  { slug:"trap", title:"Trap", subtitle:"Heavy rhythm, dark edges and new voices", releaseIds:["money-money","kill-the-beat"] },
+  { slug:"hip-hop-rap", title:"Hip-Hop / Rap", subtitle:"Rhythm, bars and modern production", releaseIds:["money-money","kill-the-beat"] },
+  { slug:"rnb", title:"R&B", subtitle:"Smooth vocals and modern soul", releaseIds:["after-you","digital-touch"] },
+  { slug:"rock", title:"Rock", subtitle:"Guitars, energy and alternative sounds", releaseIds:["kill-the-beat","afterlight"] },
+  { slug:"dance-electronic", title:"Dance / Electronic", subtitle:"Club, electronic and dance music", releaseIds:["kill-the-beat","zero-gravity","afterlight"] },
+  { slug:"house", title:"House", subtitle:"House grooves and club rhythms", releaseIds:["zero-gravity","afterlight"] },
+  { slug:"techno", title:"Techno", subtitle:"Driving electronic sounds", releaseIds:["kill-the-beat","afterlight"] },
+  { slug:"trap", title:"Trap", subtitle:"Heavy rhythm and modern production", releaseIds:["money-money","kill-the-beat"] },
+  { slug:"jazz", title:"Jazz", subtitle:"Jazz, fusion and improvisation", releaseIds:["afterlight"] },
+  { slug:"classical", title:"Classical", subtitle:"Classical and orchestral music", releaseIds:["afterlight"] },
+  { slug:"reggae", title:"Reggae", subtitle:"Reggae and related sounds", releaseIds:["bella-ciao"] },
+  { slug:"latin", title:"Latin", subtitle:"Latin rhythms and crossover music", releaseIds:["bella-ciao","zero-gravity"] },
 ] as const;
+
+export const countryGenreMap: Record<string, readonly string[]> = {
+ INT:["pop","hip-hop-rap","rnb","rock","dance-electronic","house","techno","trap","jazz","classical","reggae","latin"],
+ NL:["pop","hip-hop-rap","rnb","rock","dance-electronic","house","techno","trap","jazz","reggae","levenslied","nederpop","hardstyle","gabber","trance"],
+ RO:["pop","hip-hop-rap","rnb","rock","dance-electronic","house","trap","jazz","manele","lautareasca","romanian-folk","balkan"],
+ DE:["pop","hip-hop-rap","rnb","rock","dance-electronic","house","techno","trap","metal","jazz","classical","schlager","krautrock"],
+ FR:["pop","hip-hop-rap","rnb","rock","dance-electronic","house","techno","jazz","classical","chanson","french-house","varietes-francaises"],
+ ES:["pop","hip-hop-rap","rnb","rock","dance-electronic","house","latin","reggaeton","flamenco","rumba","sevillanas","jota","jazz"],
+ GB:["pop","hip-hop-rap","rnb","rock","dance-electronic","house","techno","drum-bass","grime","garage","britpop","punk","metal","folk"],
+ US:["pop","hip-hop-rap","rnb","rock","dance-electronic","house","trap","country","blues","jazz","gospel","soul","funk","bluegrass","reggae","latin"],
+};
+
+export const regionalGenres: Record<string,{slug:string;title:string;subtitle:string;releaseIds:readonly string[]}[]> = {
+ NL:[
+  {slug:"levenslied",title:"Levenslied",subtitle:"Dutch life songs and sing-along tradition",releaseIds:["fara-mine","after-you"]},
+  {slug:"nederpop",title:"Nederpop",subtitle:"Dutch-language and Dutch pop",releaseIds:["digital-touch","after-you"]},
+  {slug:"hardstyle",title:"Hardstyle",subtitle:"Hard dance with a Dutch pulse",releaseIds:["kill-the-beat","zero-gravity"]},
+  {slug:"gabber",title:"Gabber",subtitle:"Fast, hard-edged Dutch electronic music",releaseIds:["kill-the-beat"]},
+  {slug:"trance",title:"Trance",subtitle:"Melodic electronic club music",releaseIds:["zero-gravity","afterlight"]},
+ ],
+ RO:[
+  {slug:"manele",title:"Manele",subtitle:"Romanian pop-folk and modern crossover",releaseIds:["toca-bonbon","money-money"]},
+  {slug:"lautareasca",title:"Lăutărească",subtitle:"Romanian lăutari musical tradition",releaseIds:["toca-bonbon","bella-ciao"]},
+  {slug:"romanian-folk",title:"Romanian Folk",subtitle:"Traditional and contemporary Romanian folk",releaseIds:["fara-mine","bella-ciao"]},
+  {slug:"balkan",title:"Balkan",subtitle:"Balkan rhythms and crossover sounds",releaseIds:["bella-ciao","money-money"]},
+ ],
+ DE:[
+  {slug:"schlager",title:"Schlager",subtitle:"German popular sing-along music",releaseIds:["after-you","digital-touch"]},
+  {slug:"krautrock",title:"Krautrock",subtitle:"German experimental rock tradition",releaseIds:["afterlight","kill-the-beat"]},
+ ],
+ FR:[
+  {slug:"chanson",title:"Chanson",subtitle:"French lyric-driven popular song",releaseIds:["after-you","fara-mine"]},
+  {slug:"french-house",title:"French House",subtitle:"French electronic and filter-house sound",releaseIds:["zero-gravity","afterlight"]},
+  {slug:"varietes-francaises",title:"Variétés françaises",subtitle:"French popular music",releaseIds:["digital-touch","after-you"]},
+ ],
+ ES:[
+  {slug:"reggaeton",title:"Reggaeton",subtitle:"Latin urban dance rhythms",releaseIds:["bella-ciao","zero-gravity"]},
+  {slug:"flamenco",title:"Flamenco",subtitle:"Spanish flamenco tradition and crossover",releaseIds:["bella-ciao","fara-mine"]},
+  {slug:"rumba",title:"Rumba",subtitle:"Spanish rumba and rhythmic crossover",releaseIds:["bella-ciao","toca-bonbon"]},
+  {slug:"sevillanas",title:"Sevillanas",subtitle:"Andalusian song and dance tradition",releaseIds:["bella-ciao"]},
+  {slug:"jota",title:"Jota",subtitle:"Regional Spanish folk and dance music",releaseIds:["fara-mine"]},
+ ],
+ GB:[
+  {slug:"drum-bass",title:"Drum & Bass",subtitle:"Fast UK electronic breakbeats",releaseIds:["kill-the-beat","zero-gravity"]},
+  {slug:"grime",title:"Grime",subtitle:"UK urban electronic and rap sound",releaseIds:["money-money","kill-the-beat"]},
+  {slug:"garage",title:"UK Garage",subtitle:"UK club rhythms and vocal garage",releaseIds:["digital-touch","zero-gravity"]},
+  {slug:"britpop",title:"Britpop",subtitle:"British guitar-pop tradition",releaseIds:["after-you","afterlight"]},
+  {slug:"folk",title:"British Folk",subtitle:"Folk traditions from across the UK",releaseIds:["fara-mine","afterlight"]},
+ ],
+ US:[
+  {slug:"country",title:"Country",subtitle:"American country music",releaseIds:["after-you","fara-mine"]},
+  {slug:"blues",title:"Blues",subtitle:"American blues tradition",releaseIds:["afterlight","fara-mine"]},
+  {slug:"gospel",title:"Gospel",subtitle:"Gospel voices and spiritual roots",releaseIds:["after-you"]},
+  {slug:"soul",title:"Soul",subtitle:"Soul vocals and grooves",releaseIds:["after-you","digital-touch"]},
+  {slug:"funk",title:"Funk",subtitle:"Groove-driven American funk",releaseIds:["digital-touch","zero-gravity"]},
+  {slug:"bluegrass",title:"Bluegrass",subtitle:"American acoustic roots music",releaseIds:["fara-mine"]},
+ ],
+};
