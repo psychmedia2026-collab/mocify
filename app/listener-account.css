@@ -138,3 +138,22 @@
   -webkit-text-fill-color:transparent;
   font-weight:900;
 }
+
+/* Carry MOCIFY color through the full personal-playlist card */
+.listener-personal-list .listener-playlist-expanded{
+  background:
+    radial-gradient(circle at 10% 8%,rgba(139,120,255,.18),transparent 30%),
+    radial-gradient(circle at 88% 22%,rgba(237,53,197,.13),transparent 34%),
+    linear-gradient(135deg,rgba(32,19,66,.98) 0%,rgba(25,13,48,.98) 46%,rgba(20,10,35,.99) 100%)!important;
+}
+.listener-personal-list .library-inline-tracks{
+  background:
+    linear-gradient(110deg,rgba(123,66,255,.09),rgba(237,53,197,.055) 58%,rgba(255,150,63,.025))!important;
+  border-top-color:rgba(180,112,255,.16)!important;
+}
+.listener-personal-list .library-inline-track{
+  border-bottom-color:rgba(184,119,255,.09);
+}
+.listener-personal-list .library-inline-track:hover{
+  background:linear-gradient(90deg,rgba(123,66,255,.12),rgba(237,53,197,.07),transparent);
+}
