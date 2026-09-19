@@ -7,13 +7,13 @@ import {useListenerPlayer} from "../listener-player";
 
 const top40Ids=["toca-bonbon","bella-ciao","fara-mine","money-money","kill-the-beat","digital-touch","after-you","zero-gravity","afterlight"];
 function getTracks(ids:readonly string[]){return ids.map(id=>releases.find(r=>r.id===id)).filter((r):r is (typeof releases)[number]=>Boolean(r));}
-function titleForCountry(code:string,name:string){if(code==="INT")return"MOCIFY Top 40";if(code==="GB")return"UK Top 40";if(code==="US")return"US Top 40";return name+" Top 40";}
+function chartTitle(code:string,name:string,size:number){const prefix=code==="INT"?"MOCIFY":code==="GB"?"UK":code==="US"?"US":name;return prefix+" Top "+size;}
 export default function PlaylistsPage(){
  const[selectedCountry,setSelectedCountry]=useState("INT"),[query,setQuery]=useState("");
  const boardRef=useRef<HTMLDivElement>(null),player=useListenerPlayer();
  const country=countryPlaylists.find(p=>p.code===selectedCountry)??countryPlaylists[0];
  const allGenres=useMemo(()=>[...genrePlaylists,...Object.values(regionalGenres).flat()],[]);
- const playlistColumns=useMemo(()=>{const wanted=countryGenreMap[selectedCountry]??countryGenreMap.INT;const selectedGenres=wanted.map(slug=>allGenres.find(g=>g.slug===slug)).filter((g):g is NonNullable<typeof g>=>Boolean(g));return[{slug:"top40",title:titleForCountry(selectedCountry,country.country),subtitle:country.subtitle,kicker:selectedCountry==="INT"?"INTERNATIONAL":"COUNTRY CHART",releaseIds:selectedCountry==="INT"?top40Ids:country.releaseIds},...selectedGenres.map(g=>({...g,kicker:"GENRE"}))]},[selectedCountry,country,allGenres]);
+ const playlistColumns=useMemo(()=>{const wanted=countryGenreMap[selectedCountry]??countryGenreMap.INT;const selectedGenres=wanted.map(slug=>allGenres.find(g=>g.slug===slug)).filter((g):g is NonNullable<typeof g>=>Boolean(g));const ids=selectedCountry==="INT"?top40Ids:country.releaseIds;return[40,100,1000].map(size=>({slug:"top"+size,title:chartTitle(selectedCountry,country.country,size),subtitle:size===40?country.subtitle:"The "+size+" most streamed tracks in this market.",kicker:selectedCountry==="INT"?"INTERNATIONAL CHART":"COUNTRY CHART",releaseIds:ids})).concat(selectedGenres.map(g=>({...g,kicker:"GENRE"})))},[selectedCountry,country,allGenres]);
  const filtered=playlistColumns.filter(p=>!query.trim()||p.title.toLowerCase().includes(query.toLowerCase())||p.subtitle.toLowerCase().includes(query.toLowerCase()));
  const playable=(ids:readonly string[])=>getTracks(ids).filter(track=>"audioSrc"in track&&Boolean(track.audioSrc));
  const playList=(ids:readonly string[],shuffle=false)=>{let tracks=playable(ids);if(shuffle)tracks=[...tracks].sort(()=>Math.random()-.5);if(tracks[0])player.selectTrack(tracks[0],tracks,true)};
