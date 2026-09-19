@@ -17,8 +17,9 @@ export default function PlaylistsPage(){
   const selectedGenres=wanted.map(slug=>allGenres.find(g=>g.slug===slug)).filter((g):g is NonNullable<typeof g>=>Boolean(g));
   return [{slug:"top40",title:selectedCountry==="INT"?"MOCIFY Top 40":country.country+" Top 40",kicker:selectedCountry==="INT"?"INTERNATIONAL":"COUNTRY CHART",releaseIds:selectedCountry==="INT"?top40Ids:country.releaseIds},...selectedGenres.map(g=>({...g,kicker:"GENRE"}))];
  },[selectedCountry,country,allGenres]);
- function playList(ids:readonly string[]){const tracks=getTracks(ids);if(tracks[0])player.playTrack(tracks[0]);}
- function playTrack(id:string){const track=releases.find(r=>r.id===id);if(track)player.playTrack(track);}
+ function playable(ids:readonly string[]){return getTracks(ids).filter(track=>"audioSrc" in track&&Boolean(track.audioSrc));}
+ function playList(ids:readonly string[]){const tracks=playable(ids);if(tracks[0])player.selectTrack(tracks[0],tracks,true);}
+ function playTrack(id:string,ids:readonly string[]){const tracks=playable(ids);const track=tracks.find(r=>r.id===id);if(track)player.selectTrack(track,tracks,true);}
  function scrollBoard(direction:number){boardRef.current?.scrollBy({left:direction*346,behavior:"smooth"});}
  return <Shell active="playlists">
   <section className="playlist-page page-wrap">
@@ -29,7 +30,7 @@ export default function PlaylistsPage(){
    <div className="playlist-board" ref={boardRef} aria-label="MOCIFY playlists">
     {playlistColumns.map(column=><section className="playlist-column" id={column.slug} key={column.slug}>
       <header><div><small>{column.kicker}</small><h2>{column.title}</h2></div><button type="button" onClick={()=>playList(column.releaseIds)} aria-label={"Play "+column.title}>▶</button></header>
-      <div className="playlist-song-list">{getTracks(column.releaseIds).map((track,index)=><button type="button" className="playlist-song" key={track.id} onClick={()=>playTrack(track.id)} aria-label={"Play "+track.title+" by "+track.artist}>
+      <div className="playlist-song-list">{getTracks(column.releaseIds).map((track,index)=><button type="button" className="playlist-song" key={track.id} onClick={()=>playTrack(track.id,column.releaseIds)} aria-label={"Play "+track.title+" by "+track.artist}>
        <span className="playlist-rank">{index+1}</span><span className={"playlist-song-cover "+track.art} aria-hidden="true"/><span className="playlist-song-copy"><b>{track.title}</b><span>{track.artist}</span></span><span className="playlist-row-play">▶</span>
       </button>)}</div>
     </section>)}
