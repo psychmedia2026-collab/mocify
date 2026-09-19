@@ -3,6 +3,7 @@ export const navigation = [
   { label: "Home", href: "/", icon: "⌂" },
   { label: "Explore", href: "/explore", icon: "⌕" },
   { label: "Artists", href: "/artists", icon: "◉" },
+  { label: "Playlists", href: "/playlists", icon: "▤" },
   { label: "Radio", href: "/radio", icon: "◖" },
   { label: "Premium", href: "/premium", icon: "✦" },
 ];
@@ -16,6 +17,7 @@ export const quickNavigation = [
   { label: "Home", href: "/", icon: "⌂" },
   { label: "Explore", href: "/explore", icon: "⌕" },
   { label: "Artists", href: "/artists", icon: "◉" },
+  { label: "Playlists", href: "/playlists", icon: "▤" },
   { label: "MOCIFY Radio", href: "/radio", icon: "◖" },
   { label: "Library", href: "/library", icon: "♡" },
   { label: "Premium", href: "/premium", icon: "✦" },
@@ -61,3 +63,22 @@ export const artistTracks = releases.filter((release) => release.artist === feat
   href: "href" in release ? release.href : featuredArtist.href,
 }));
 export const genres = ["Manele", "Trap", "Pop", "Afrohouse", "Arabic", "Dance", "R&B", "Electronic", "Rock", "Other"];
+
+
+export const countryPlaylists = [
+  { code:"INT", country:"International", title:"MOCIFY International", subtitle:"AI music without borders", flag:"🌐", releaseIds:["toca-bonbon","bella-ciao","digital-touch","kill-the-beat"] },
+  { code:"NL", country:"Netherlands", title:"MOCIFY Netherlands", subtitle:"AI sounds from the Netherlands", flag:"🇳🇱", releaseIds:["digital-touch","after-you","zero-gravity"] },
+  { code:"RO", country:"Romania", title:"MOCIFY Romania", subtitle:"Romanian AI releases and new voices", flag:"🇷🇴", releaseIds:["toca-bonbon","bella-ciao","fara-mine","money-money"] },
+  { code:"DE", country:"Germany", title:"MOCIFY Germany", subtitle:"Electronic, pop and emerging AI music", flag:"🇩🇪", releaseIds:["kill-the-beat","digital-touch","afterlight"] },
+  { code:"FR", country:"France", title:"MOCIFY France", subtitle:"Fresh AI pop and electronic discoveries", flag:"🇫🇷", releaseIds:["after-you","afterlight","digital-touch"] },
+  { code:"ES", country:"Spain", title:"MOCIFY Spain", subtitle:"Warm, rhythmic and electronic AI sounds", flag:"🇪🇸", releaseIds:["bella-ciao","zero-gravity","after-you"] },
+  { code:"GB", country:"United Kingdom", title:"MOCIFY United Kingdom", subtitle:"New AI pop, R&B and electronic music", flag:"🇬🇧", releaseIds:["digital-touch","after-you","kill-the-beat"] },
+  { code:"US", country:"United States", title:"MOCIFY United States", subtitle:"AI pop, trap and electronic discoveries", flag:"🇺🇸", releaseIds:["kill-the-beat","zero-gravity","digital-touch"] },
+] as const;
+
+export const genrePlaylists = [
+  { slug:"pop", title:"AI Pop", subtitle:"Melodic, modern and made for repeat", releaseIds:["toca-bonbon","digital-touch","after-you"] },
+  { slug:"manele", title:"Manele AI", subtitle:"Modern Manele and crossover sounds", releaseIds:["toca-bonbon","money-money"] },
+  { slug:"electronic", title:"Electronic AI", subtitle:"Synthetic energy and future-facing sound", releaseIds:["kill-the-beat","afterlight","zero-gravity"] },
+  { slug:"trap", title:"AI Trap", subtitle:"Heavy rhythm, dark edges and new voices", releaseIds:["money-money","kill-the-beat"] },
+] as const;
