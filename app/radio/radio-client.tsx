@@ -20,7 +20,7 @@ const copy={
  id:{market:"PASAR RADIO LOKAL",title:"Radio per negara",text:"Setiap negara memiliki chart sendiri berdasarkan stream pendengar di negara tersebut.",start:"Mulai radio negara",now:"SEDANG DIPUTAR",chart:"Chart per negara",rank:"Peringkat",song:"Lagu",streams:"Stream negara",trend:"28h",play:"Putar",top40:"Top 40",top100:"Top 100",top1000:"Top 1000",note:"Ranking prototipe: setiap negara dihitung terpisah. Produksi akan menggunakan event stream terverifikasi dari backend.",available:"track katalog tersedia",selected:"NEGARA RADIO TERPILIH"},
  ja:{market:"ローカルラジオ市場",title:"国別ラジオ",text:"各国のリスナーによる再生数をもとに、その国独自のチャートを作成します。",start:"国別ラジオを開始",now:"現在放送中",chart:"国別チャート",rank:"順位",song:"曲",streams:"国内再生数",trend:"28日",play:"再生",top40:"Top 40",top100:"Top 100",top1000:"Top 1000",note:"プロトタイプでは国ごとに個別計算。本番ではバックエンドの検証済み再生イベントを使用します。",available:"利用可能なカタログ曲",selected:"選択中のラジオ国"},
  ko:{market:"로컬 라디오 시장",title:"국가별 라디오",text:"각 국가는 해당 국가 리스너의 스트림 수에 따라 별도의 차트를 가집니다.",start:"국가 라디오 시작",now:"현재 재생 중",chart:"국가별 차트",rank:"순위",song:"곡",streams:"국가 스트림",trend:"28일",play:"재생",top40:"Top 40",top100:"Top 100",top1000:"Top 1000",note:"프로토타입 순위: 국가별로 별도 계산됩니다. 운영에서는 백엔드의 검증된 스트림 이벤트를 사용합니다.",available:"사용 가능한 카탈로그 트랙",selected:"선택한 라디오 국가"},
- hi:{market:"स्थानीय रेडियो बाज़ार",title:"देश के अनुसार रेडियो",text:"हर देश की अपनी चार्ट होती है, जो उस देश के श्रोताओं के स्ट्रीम पर आधारित है।",start:"देश का रेडियो शुरू करें",now:"अभी रेडियो पर",chart:"देशवार चार्ट",rank:"रैंक",song:"गीत",streams:"देश के स्ट्रीम",trend:"28 दिन",play:"चलाएँ",top40:"Top 40",top100:"Top 100",top1000:"Top 1000",note:"प्रोटोटाइप रैंकिंग: हर देश अलग गणना होता है। प्रोडक्शन में बैकएंड के सत्यापित स्ट्रीम इवेंट उपयोग होंगे।",available:"उपलब्ध कैटलॉग ट्रैक"}
+ hi:{market:"स्थानीय रेडियो बाज़ार",title:"देश के अनुसार रेडियो",text:"हर देश की अपनी चार्ट होती है, जो उस देश के श्रोताओं के स्ट्रीम पर आधारित है।",start:"देश का रेडियो शुरू करें",now:"अभी रेडियो पर",chart:"देशवार चार्ट",rank:"रैंक",song:"गीत",streams:"देश के स्ट्रीम",trend:"28 दिन",play:"चलाएँ",top40:"Top 40",top100:"Top 100",top1000:"Top 1000",note:"प्रोटोटाइप रैंकिंग: हर देश अलग गणना होता है। प्रोडक्शन में बैकएंड के सत्यापित स्ट्रीम इवेंट उपयोग होंगे।",available:"उपलब्ध कैटलॉग ट्रैक",selected:"चुना हुआ रेडियो देश"}
 }as const;
 
 export default function RadioClient(){
@@ -30,7 +30,7 @@ export default function RadioClient(){
  const[revision,setRevision]=useState(0);
  const{currentTrack,isPlaying,selectTrack,togglePlay}=useListenerPlayer();
 
- useEffect(()=>{let saved="";try{saved=localStorage.getItem(LISTENER_COUNTRY_KEY)||""}catch{}const next=saved||localeCountry[locale]||"US";setPlayerCountry(next);try{localStorage.setItem(LISTENER_COUNTRY_KEY,next)}catch{},selected:"चुना हुआ रेडियो देश"},[locale]);
+ useEffect(()=>{let saved="";try{saved=localStorage.getItem(LISTENER_COUNTRY_KEY)||""}catch{}const next=saved||localeCountry[locale]||"US";setPlayerCountry(next);try{localStorage.setItem(LISTENER_COUNTRY_KEY,next)}catch{},[locale]);
  useEffect(()=>{const refresh=()=>setRevision(v=>v+1);addEventListener("mocify-country-stream",refresh);return()=>removeEventListener("mocify-country-stream",refresh)},[]);
 
  const displayNames=useMemo(()=>{try{return new Intl.DisplayNames([locale],{type:"region"})}catch{return null}},[locale]);
