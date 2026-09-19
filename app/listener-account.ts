@@ -15,6 +15,7 @@ export const clearListenerSession=()=>{localStorage.removeItem(LISTENER_SESSION_
 export const readIds=(key:string)=>read<string[]>(key,[]);
 export const toggleId=(key:string,id:string)=>{const ids=readIds(key),next=ids.includes(id)?ids.filter(x=>x!==id):[...ids,id];write(key,next);return next.includes(id)};
 export const readPlaylists=()=>read<ListenerPlaylist[]>(PLAYLIST_KEY,[]);
+export const ensureStarterPlaylist=()=>{const list=readPlaylists();if(list.length)return list;const starter:ListenerPlaylist={id:"pl-mocify-favorites",name:"MOCIFY Mix",cover:"art-a",trackIds:["toca-bonbon","bella-ciao","fara-mine"],createdAt:Date.now()};savePlaylists([starter]);return[starter]};
 export const savePlaylists=(v:ListenerPlaylist[])=>write(PLAYLIST_KEY,v);
 export const createPlaylist=(name:string,cover="art-a")=>{const list=readPlaylists(),p={id:"pl-"+Date.now(),name:name.trim()||"New playlist",cover,trackIds:[],createdAt:Date.now()};savePlaylists([p,...list]);return p};
 export const toggleTrackInPlaylist=(playlistId:string,trackId:string)=>{savePlaylists(readPlaylists().map(p=>p.id===playlistId?{...p,trackIds:p.trackIds.includes(trackId)?p.trackIds.filter(x=>x!==trackId):[...p.trackIds,trackId]}:p))};
