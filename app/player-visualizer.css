@@ -388,7 +388,7 @@
     display:flex!important;
     align-items:center!important;
     gap:1px!important;
-    padding-right:15px!important
+    padding-right:6px!important
   }
 
   .listener-shell .m-player.minimized .m-player-mini-controls button{
