@@ -49,7 +49,7 @@ export default function RadioClient(){
 
  return <div className={styles.radioShell}>
   <section className={`${styles.countryMasthead} ${styles["country_"+playerCountry.toLowerCase()]||""}`}>
-   <div className={styles.radioMarketMain}><span className={styles.radioIdentity}>MOCIFY RADIO</span><div><span>{countryFlag(playerCountry)}</span><strong>{countryName(playerCountry)}</strong></div><p>{t.text}</p></div>
+   <div className={styles.radioMarketMain}><div><span>{countryFlag(playerCountry)}</span><strong>{countryName(playerCountry)}</strong></div><p>{t.text}</p></div>
    <select className={styles.countrySelect} value={playerCountry} onChange={e=>changeCountry(e.target.value)} aria-label={t.title}>{countries.map(c=><option key={c.code} value={c.code}>{countryFlag(c.code)} {c.name}</option>)}</select>
    <button className={styles.startRadio} onClick={startRadio} disabled={!radioQueue.length}>{currentBelongs&&isPlaying?"Ⅱ":"▶"} {t.start}</button>
   </section>
