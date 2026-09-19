@@ -157,3 +157,12 @@
 .listener-personal-list .library-inline-track:hover{
   background:linear-gradient(90deg,rgba(123,66,255,.12),rgba(237,53,197,.07),transparent);
 }
+
+/* Individual Library playlist header colors */
+.listener-personal-list .listener-playlist-summary{background:var(--playlist-head)!important}
+.listener-personal-list .playlist-theme-0{--playlist-head:linear-gradient(120deg,rgba(92,35,156,.94),rgba(69,25,117,.92))}
+.listener-personal-list .playlist-theme-1{--playlist-head:linear-gradient(120deg,rgba(154,27,105,.92),rgba(92,24,117,.92))}
+.listener-personal-list .playlist-theme-2{--playlist-head:linear-gradient(120deg,rgba(32,73,151,.92),rgba(63,31,129,.92))}
+.listener-personal-list .playlist-theme-3{--playlist-head:linear-gradient(120deg,rgba(171,67,36,.90),rgba(111,31,91,.92))}
+.listener-personal-list .playlist-theme-4{--playlist-head:linear-gradient(120deg,rgba(18,113,119,.90),rgba(42,45,128,.92))}
+.listener-personal-list .playlist-theme-5{--playlist-head:linear-gradient(120deg,rgba(116,83,20,.90),rgba(119,37,87,.92))}
