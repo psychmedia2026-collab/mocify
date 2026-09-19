@@ -32,3 +32,35 @@
 .listener-playlist-modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:20px}
 .listener-playlist-modal-actions .m-primary,.listener-playlist-modal-actions .m-secondary{min-height:40px;padding:0 16px}
 .listener-playlist-modal-actions .m-primary:disabled{opacity:.45;cursor:not-allowed}
+
+
+/* Your playlists: horizontal card row, matching MOCIFY's browse/radio rhythm */
+.listener-personal-playlists{grid-column:1/-1;width:100%;min-width:0}
+.listener-personal-playlists .listener-personal-list{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(230px,1fr))!important;
+  gap:14px!important;
+  overflow-x:auto;
+  padding:2px 0 10px;
+  scroll-snap-type:x proximity;
+}
+.listener-personal-list .listener-playlist-expanded{
+  min-width:230px;
+  scroll-snap-align:start;
+}
+.listener-personal-list .listener-playlist-summary{
+  min-height:68px;
+}
+.listener-personal-list .library-inline-tracks{
+  max-height:220px;
+  overflow-y:auto;
+}
+@media(max-width:1100px){
+  .listener-personal-playlists .listener-personal-list{grid-template-columns:repeat(3,minmax(230px,1fr))!important}
+}
+@media(max-width:820px){
+  .listener-personal-playlists .listener-personal-list{grid-template-columns:repeat(2,minmax(230px,1fr))!important}
+}
+@media(max-width:560px){
+  .listener-personal-playlists .listener-personal-list{grid-template-columns:repeat(2,230px)!important}
+}
