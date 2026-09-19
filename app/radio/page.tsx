@@ -1,3 +1,4 @@
 "use client";
-import { Shell } from "../components"; import SectionHero from "../section-hero"; import RadioClient from "./radio-client"; import {useLanguage} from "../i18n/language-provider";
-export default function RadioPage(){const {dictionary}=useLanguage(); return <Shell active="radio"><div className="page-wrap mockup-page-top"><SectionHero theme="radio" {...dictionary.heroes.radio} href="#radio-player"/></div><section id="radio-player" className="page-wrap mockup-section scroll-mt-24"><div className="mockup-heading"><h2>{dictionary.pages.radio.currently}</h2></div><RadioClient/></section></Shell>}
+import { Shell } from "../components";
+import RadioClient from "./radio-client";
+export default function RadioPage(){return <Shell active="radio"><section id="radio-player" className="page-wrap mockup-page-top scroll-mt-24"><RadioClient/></section></Shell>}
