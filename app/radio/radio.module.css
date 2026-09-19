@@ -66,3 +66,18 @@
  .radioShell .countryMasthead{grid-template-columns:1fr}
  .radioShell .countryMasthead .startRadio{width:100%}
 }
+
+.radioIdentity{
+  display:inline-flex;
+  align-items:center;
+  margin:0 0 7px;
+  font-size:9px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:.16em;
+  background:linear-gradient(90deg,#9d7cff,#ed35c5 62%,#ff963f);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  text-transform:uppercase;
+}
