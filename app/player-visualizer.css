@@ -309,7 +309,7 @@
     top:var(--listener-mini-top,520px)!important;
     bottom:auto!important;
     width:var(--listener-mini-width,170px)!important;
-    min-width:150px!important;
+    min-width:0!important;
     max-width:none!important;
     height:84px!important;
     min-height:84px!important;
