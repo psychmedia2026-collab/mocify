@@ -68,9 +68,9 @@
 }
 
 /* Radio page identity mirrors the Playlists page hierarchy */
-.radioPageIntro{margin:0 0 24px;padding:0 8px}
-.radioPageIntro>p{margin:0 0 9px;color:#c69cff;font-size:10px;font-weight:950;letter-spacing:.18em}
-.radioPageIntro>h1{display:inline-block;margin:0;font-size:clamp(42px,4.2vw,72px);line-height:.98;font-weight:900;letter-spacing:-.055em;background:linear-gradient(90deg,#f7f7fb 0%,#f7f7fb 38%,#8a63ff 60%,#ed35c5 80%,#ff914d 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
-.radioPageIntro>span{display:block;margin-top:14px;color:#9697a7;font-size:14px;line-height:1.5}
+.radioPageIntro{margin:0 0 34px;padding:58px 0 0}
+.radioPageIntro>p{margin:0;color:#c69cff;font-size:10px;font-weight:950;letter-spacing:.18em}
+.radioPageIntro>h1{display:inline-block;margin:9px 0 13px;font-size:clamp(46px,6vw,76px);line-height:.96;font-weight:900;letter-spacing:-.06em;background:linear-gradient(90deg,#f7f7fb 0%,#f7f7fb 38%,#8b78ff 58%,#ed35c5 78%,#ff963f 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.radioPageIntro>span{display:block;max-width:650px;margin:0;color:#9694a4;font-size:14px;line-height:1.65}
 .radioShell .countryMasthead{margin-top:0}
-@media(max-width:760px){.radioPageIntro{padding:0}.radioPageIntro>h1{font-size:42px}}
+@media(max-width:760px){.radioPageIntro{padding-top:32px}.radioPageIntro>h1{font-size:46px}}
