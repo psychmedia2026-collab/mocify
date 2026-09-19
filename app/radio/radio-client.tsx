@@ -35,6 +35,7 @@ export default function RadioClient(){
 
  const displayNames=useMemo(()=>{try{return new Intl.DisplayNames([locale],{type:"region"})}catch{return null}},[locale]);
  const countryName=(code:string)=>displayNames?.of(code)||code;
+ const countryFlag=(code:string)=>code.toUpperCase().replace(/./g,char=>String.fromCodePoint(127397+char.charCodeAt(0)));
  const countries=useMemo(()=>countryCodes.map(code=>({code,name:countryName(code)})).sort((a,b)=>a.name.localeCompare(b.name,locale)),[displayNames,locale]);
  const chart=useMemo(()=>getCountryChart(playerCountry,size),[playerCountry,size,revision]);
  const radioQueue=useMemo(()=>getRadioQueue(playerCountry),[playerCountry,revision]);
@@ -48,7 +49,7 @@ export default function RadioClient(){
  return <div className={styles.radioShell}>
   <section className={styles.countryBar}>
    <div className={styles.countryCopy}><small>{t.market}</small><h2>{t.title}</h2><p>{t.text}</p></div>
-   <select className={styles.countrySelect} value={playerCountry} onChange={e=>changeCountry(e.target.value)} aria-label={t.title}>{countries.map(c=><option key={c.code} value={c.code}>{c.name}</option>)}</select>
+   <select className={styles.countrySelect} value={playerCountry} onChange={e=>changeCountry(e.target.value)} aria-label={t.title}>{countries.map(c=><option key={c.code} value={c.code}>{countryFlag(c.code)} {c.name}</option>)}</select>
   </section>
 
   <div className={styles.radioActions}><button className={styles.startRadio} onClick={startRadio} disabled={!radioQueue.length}>{currentBelongs&&isPlaying?"Ⅱ":"▶"} {t.start} · {countryName(playerCountry)}</button><span className={styles.stationNote}>MOCIFY {countryName(playerCountry)} Radio</span></div>
