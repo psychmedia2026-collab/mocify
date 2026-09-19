@@ -30,7 +30,7 @@ export default function RadioClient(){
  const[revision,setRevision]=useState(0);
  const{currentTrack,isPlaying,selectTrack,togglePlay}=useListenerPlayer();
 
- useEffect(()=>{let saved="";try{saved=localStorage.getItem(LISTENER_COUNTRY_KEY)||""}catch{}const next=saved||localeCountry[locale]||"US";setPlayerCountry(next);try{localStorage.setItem(LISTENER_COUNTRY_KEY,next)}catch{},[locale]);
+ useEffect(()=>{let saved="";try{saved=localStorage.getItem(LISTENER_COUNTRY_KEY)||""}catch{}const next=saved||localeCountry[locale]||"US";setPlayerCountry(next);try{localStorage.setItem(LISTENER_COUNTRY_KEY,next)}catch{}},[locale]);
  useEffect(()=>{const refresh=()=>setRevision(v=>v+1);addEventListener("mocify-country-stream",refresh);return()=>removeEventListener("mocify-country-stream",refresh)},[]);
 
  const displayNames=useMemo(()=>{try{return new Intl.DisplayNames([locale],{type:"region"})}catch{return null}},[locale]);
