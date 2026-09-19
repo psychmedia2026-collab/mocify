@@ -48,15 +48,13 @@ export default function RadioClient(){
  const playEntry=(track:any)=>{if(currentTrack.id===track.id)togglePlay();else selectTrack(track,radioQueue,true)};
 
  return <div className={styles.radioShell}>
-  <div className={`${styles.countryMasthead} ${styles["country_"+playerCountry.toLowerCase()]||""}`}><small>{t.selected}</small><div><span>{countryFlag(playerCountry)}</span><strong>{countryName(playerCountry)}</strong></div></div>
-  <section className={styles.countryBar}>
-   <div className={styles.countryCopy}><small>{t.market}</small><h2>{t.title}</h2><p>{t.text}</p></div>
+  <section className={`${styles.countryMasthead} ${styles["country_"+playerCountry.toLowerCase()]||""}`}>
+   <div className={styles.radioMarketMain}><small>{t.selected}</small><div><span>{countryFlag(playerCountry)}</span><strong>{countryName(playerCountry)}</strong></div><p>{t.text}</p></div>
    <select className={styles.countrySelect} value={playerCountry} onChange={e=>changeCountry(e.target.value)} aria-label={t.title}>{countries.map(c=><option key={c.code} value={c.code}>{countryFlag(c.code)} {c.name}</option>)}</select>
+   <button className={styles.startRadio} onClick={startRadio} disabled={!radioQueue.length}>{currentBelongs&&isPlaying?"Ⅱ":"▶"} {t.start}</button>
   </section>
 
-  <div className={styles.radioActions}><button className={styles.startRadio} onClick={startRadio} disabled={!radioQueue.length}>{currentBelongs&&isPlaying?"Ⅱ":"▶"} {t.start} · {countryName(playerCountry)}</button><span className={styles.stationNote}>MOCIFY {countryName(playerCountry)} Radio</span></div>
-
-  <div className={styles.nowPlaying}><div><strong>{currentTrack.title}</strong><span>{currentTrack.artist} · {currentTrack.genre}</span></div><em>{t.now}</em></div>
+  <div className={styles.nowPlaying}><div><small>{t.now}</small><strong>{currentTrack.title}</strong><span>{currentTrack.artist} · {currentTrack.genre}</span></div></div>
 
   <section className={styles.charts}>
    <header className={styles.chartHead}><div><small>MOCIFY {countryName(playerCountry)}</small><h2>{t.chart}</h2></div><div className={styles.tabs}>{([40,100,1000] as RadioChartSize[]).map(value=><button key={value} className={size===value?styles.active:""} onClick={()=>setSize(value)}>{value===40?t.top40:value===100?t.top100:t.top1000}</button>)}</div></header>
