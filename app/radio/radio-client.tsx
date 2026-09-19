@@ -48,6 +48,7 @@ export default function RadioClient(){
  const playEntry=(track:any)=>{if(currentTrack.id===track.id)togglePlay();else selectTrack(track,radioQueue,true)};
 
  return <div className={styles.radioShell}>
+  <header className={styles.radioPageIntro}><p>MOCIFY RADIO</p><h1>{t.title}</h1><span>{t.text}</span></header>
   <section className={`${styles.countryMasthead} ${styles["country_"+playerCountry.toLowerCase()]||""}`}>
    <div className={styles.radioMarketMain}><div><span>{countryFlag(playerCountry)}</span><strong>{countryName(playerCountry)}</strong></div><p>{t.text}</p></div>
    <select className={styles.countrySelect} value={playerCountry} onChange={e=>changeCountry(e.target.value)} aria-label={t.title}>{countries.map(c=><option key={c.code} value={c.code}>{countryFlag(c.code)} {c.name}</option>)}</select>
