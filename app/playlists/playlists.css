@@ -6,7 +6,7 @@
 .mocify-country-masthead>small{display:block;margin-bottom:5px;color:#777584;font-size:8px;font-weight:900;letter-spacing:.18em}
 .mocify-country-masthead>div{display:flex;align-items:center;gap:12px}
 .mocify-country-masthead span{font-size:28px;filter:drop-shadow(0 0 12px rgba(255,255,255,.08))}
-.mocify-country-masthead strong{font-size:clamp(30px,4vw,52px);font-weight:950;letter-spacing:-.055em;line-height:1;background:var(--country-colors);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mocify-country-masthead strong{font-size:clamp(30px,4vw,52px);font-weight:950;letter-spacing:-.055em;line-height:1;background:var(--country-colors);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.72);paint-order:stroke fill;filter:drop-shadow(0 2px 3px rgba(0,0,0,.85))}
 .mocify-country-masthead.country-nl{--country-colors:linear-gradient(90deg,#ae1c28 0 33%,#fff 33% 66%,#21468b 66%)}
 .mocify-country-masthead.country-ro{--country-colors:linear-gradient(90deg,#002b7f 0 33%,#fcd116 33% 66%,#ce1126 66%)}
 .mocify-country-masthead.country-de{--country-colors:linear-gradient(90deg,#111 0 33%,#dd0000 33% 66%,#ffce00 66%)}
