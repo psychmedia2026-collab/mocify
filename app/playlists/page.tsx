@@ -15,7 +15,7 @@ export default function PlaylistsPage(){
  const playlistColumns=useMemo(()=>{
   const wanted=countryGenreMap[selectedCountry]??countryGenreMap.INT;
   const selectedGenres=wanted.map(slug=>allGenres.find(g=>g.slug===slug)).filter((g):g is NonNullable<typeof g>=>Boolean(g));
-  return [{slug:"top40",title:selectedCountry==="INT"?"MOCIFY Top 40":country.country+" Top 40",kicker:selectedCountry==="INT"?"INTERNATIONAL":"COUNTRY CHART",releaseIds:selectedCountry==="INT"?top40Ids:country.releaseIds},...selectedGenres.map(g=>({...g,kicker:"GENRE"}))];
+  return [{slug:"top40",title:selectedCountry==="INT"?"MOCIFY Top 40":selectedCountry==="GB"?"UK Top 40":country.country+" Top 40",kicker:selectedCountry==="INT"?"INTERNATIONAL":"COUNTRY CHART",releaseIds:selectedCountry==="INT"?top40Ids:country.releaseIds},...selectedGenres.map(g=>({...g,kicker:"GENRE"}))];
  },[selectedCountry,country,allGenres]);
  function playable(ids:readonly string[]){return getTracks(ids).filter(track=>"audioSrc" in track&&Boolean(track.audioSrc));}
  function playList(ids:readonly string[]){const tracks=playable(ids);if(tracks[0])player.selectTrack(tracks[0],tracks,true);}
