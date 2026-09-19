@@ -64,3 +64,30 @@
 @media(max-width:560px){
   .listener-personal-playlists .listener-personal-list{grid-template-columns:repeat(2,230px)!important}
 }
+
+
+/* Compact Create playlist action in section heading */
+.listener-personal-playlists .listener-personal-heading{
+  min-height:42px;
+  margin-bottom:14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.listener-personal-playlists .listener-personal-heading h2{margin:0}
+.listener-personal-playlists .listener-create-playlist-button{
+  width:auto;
+  min-width:142px;
+  min-height:36px;
+  margin:0;
+  padding:0 15px;
+  border-radius:10px;
+  flex:0 0 auto;
+  font-size:9px;
+  box-shadow:0 7px 20px rgba(191,52,216,.16);
+}
+@media(max-width:560px){
+  .listener-personal-playlists .listener-personal-heading{align-items:flex-start}
+  .listener-personal-playlists .listener-create-playlist-button{min-width:0;padding:0 12px}
+}
