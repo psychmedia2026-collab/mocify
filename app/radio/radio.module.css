@@ -3,9 +3,9 @@
 .countryMasthead>small{display:block;margin-bottom:5px;color:#777584;font-size:8px;font-weight:900;letter-spacing:.18em}
 .countryMasthead>div{display:flex;align-items:center;gap:12px}
 .countryMasthead span{font-size:28px;filter:drop-shadow(0 0 12px rgba(255,255,255,.08))}
-.countryMasthead strong{font-size:clamp(30px,4vw,52px);font-weight:950;letter-spacing:-.055em;line-height:1;position:relative;color:#f7f7fb;background:none;-webkit-background-clip:initial;background-clip:initial;-webkit-text-stroke:0;filter:none;text-shadow:0 2px 16px rgba(0,0,0,.45)}
+.countryMasthead strong{font-size:clamp(30px,4vw,52px);font-weight:950;letter-spacing:-.055em;line-height:1;position:relative;color:transparent;background:linear-gradient(105deg,#ffffff 0%,#9d7cff 18%,#6d43ff 34%,#ed35c5 56%,#ff5f9e 72%,#ff963f 91%,#ffffff 100%);background-size:180% 100%;background-position:center;-webkit-background-clip:text;background-clip:text;-webkit-text-stroke:0;filter:drop-shadow(0 5px 18px rgba(160,64,255,.18));text-shadow:none}
 
-.countryMasthead strong::after{content:"";display:block;width:min(100%,220px);height:4px;margin-top:8px;border-radius:999px;background:var(--country-colors);box-shadow:0 0 14px rgba(255,255,255,.08)}
+.countryMasthead strong::after{content:"";display:block;width:min(100%,220px);height:4px;margin-top:8px;border-radius:999px;background:linear-gradient(90deg,#7857ff,#ed35c5,#ff963f);box-shadow:0 0 14px rgba(255,255,255,.08)}
 .country_nl{--country-colors:linear-gradient(90deg,#ae1c28 0 33%,#fff 33% 66%,#21468b 66%)}
 .country_ro{--country-colors:linear-gradient(90deg,#002b7f 0 33%,#fcd116 33% 66%,#ce1126 66%)}
 .country_de{--country-colors:linear-gradient(90deg,#111 0 33%,#dd0000 33% 66%,#ffce00 66%)}
