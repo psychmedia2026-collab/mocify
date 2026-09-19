@@ -57,3 +57,21 @@
 }
 .playlist-country-select select:hover{border-color:rgba(237,53,197,.58);box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 0 22px rgba(150,72,255,.10)}
 .playlist-country-select select:focus{border-color:#b45cff;box-shadow:0 0 0 3px rgba(180,92,255,.11),0 0 24px rgba(237,53,197,.10)}
+
+/* Unified selected market + country selector */
+.mocify-country-masthead{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(240px,300px);
+  gap:24px;
+  align-items:center;
+}
+.mocify-market-main{min-width:0}
+.mocify-market-main>small{display:block;margin-bottom:6px}
+.mocify-market-main>div{display:flex;align-items:center;gap:12px}
+.playlist-country-select-inline{align-self:center;margin:0}
+.playlist-country-select-inline small{display:block;margin:0 0 7px}
+.playlist-country-select-inline select{width:100%}
+@media(max-width:760px){
+ .mocify-country-masthead{grid-template-columns:1fr}
+ .playlist-country-select-inline{width:100%}
+}
