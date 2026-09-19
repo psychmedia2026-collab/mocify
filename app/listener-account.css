@@ -91,3 +91,19 @@
   .listener-personal-playlists .listener-personal-heading{align-items:flex-start}
   .listener-personal-playlists .listener-create-playlist-button{min-width:0;padding:0 12px}
 }
+
+
+/* MOCIFY-style personal playlist titles */
+.listener-personal-list .listener-playlist-summary span>b{
+  display:inline-block;
+  max-width:100%;
+  font-size:14px;
+  font-weight:950;
+  letter-spacing:-.025em;
+  line-height:1.15;
+  background:linear-gradient(90deg,#ffffff 0%,#c9b7ff 32%,#f04bd2 68%,#ff9a4a 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  text-shadow:0 0 22px rgba(214,62,221,.12);
+}
