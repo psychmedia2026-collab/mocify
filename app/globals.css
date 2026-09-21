@@ -60,3 +60,5 @@ button { cursor: pointer; }
 .playlist-action-create button:disabled{opacity:.45;cursor:not-allowed}
 .playlist-action-done{justify-content:center;margin-top:8px;background:rgba(255,255,255,.06);font-weight:700}
 @media(max-width:640px){.playlist-action-popover{position:fixed;left:16px;right:16px;bottom:92px;width:auto}}
+
+.playlist-action-error,.listener-playlist-name-error{display:block;margin:7px 0 0;color:#ff8aa0;font-size:10px;font-weight:750;line-height:1.35}
