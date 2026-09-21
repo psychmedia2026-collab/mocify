@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { useLanguage } from "./i18n/language-provider";
 
-type Theme = "explore" | "artists" | "radio" | "premium" | "library";
+type Theme = "explore" | "artists" | "radio" | "premium" | "library" | "playlists";
 
 type Props = {theme:Theme;kicker:string;title:string;accent?:string;text:string;cta:string;href:string};
 
 export default function SectionHero({theme,href}:Props){
   const { dictionary } = useLanguage();
-  const hero = dictionary.heroes[theme];
+  const fallback={kicker:"MOCIFY PLAYLISTS",title:"Charts &",accent:"Genres",text:"Discover charts, genres and local sounds from around the world.",cta:"Browse Playlists"};
+  const hero = theme==="playlists"?fallback:dictionary.heroes[theme];
 
   return <section className={`section-cinematic-hero section-cinematic-${theme}`}>
     <div className="section-cinematic-art" aria-hidden="true"><i/><i/><i/></div>
