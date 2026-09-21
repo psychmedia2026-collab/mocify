@@ -160,3 +160,16 @@
 
 /* Every personal playlist supplies its own stable MOCIFY gradient. */
 .listener-personal-list .listener-playlist-summary{background:var(--playlist-head)!important}
+
+/* Keep playlist metadata readable on every generated header gradient. */
+.listener-personal-list .listener-playlist-summary span>small{
+  display:block!important;
+  margin-top:6px!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+  opacity:.92!important;
+  font-size:10px!important;
+  font-weight:800!important;
+  line-height:1.2!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.72),0 0 8px rgba(0,0,0,.32)!important;
+}
