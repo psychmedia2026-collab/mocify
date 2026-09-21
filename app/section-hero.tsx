@@ -9,7 +9,7 @@ type Props = {theme:Theme;kicker:string;title:string;accent?:string;text:string;
 
 export default function SectionHero({theme,href}:Props){
   const { dictionary } = useLanguage();
-  const fallback={kicker:"MOCIFY PLAYLISTS",title:"Charts &",accent:"Genres",text:"Discover charts, genres and local sounds from around the world.",cta:"Browse Playlists"};
+  const fallback={kicker,title,accent,text,cta};
   const hero = theme==="playlists"?fallback:dictionary.heroes[theme];
 
   return <section className={`section-cinematic-hero section-cinematic-${theme}`}>
