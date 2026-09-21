@@ -24,7 +24,6 @@ const detailCopy={
  hi:{all:"सभी प्लेलिस्ट",unavailable:"प्लेलिस्ट उपलब्ध नहीं",unavailableText:"यह जॉनर चुने गए देश के कैटलॉग का हिस्सा नहीं है।",chart:"देश चार्ट",playlist:"MOCIFY प्लेलिस्ट",tracks:"ट्रैक",play:"सभी चलाएँ",shuffle:"शफ़ल",saved:"सेव किया",save:"सेव करें",track:"ट्रैक",artist:"कलाकार",duration:"अवधि",empty:"अभी कोई रिलीज़ नहीं",emptyText:"मेल खाने वाली रिलीज़ जुड़ते ही यह प्लेलिस्ट अपने आप भर जाएगी।"}
 } as const;
 const top40Ids=["toca-bonbon","bella-ciao","fara-mine","money-money","kill-the-beat","digital-touch","after-you","zero-gravity","afterlight"];
-const getTracks=(ids:readonly string[],code:string,genreTitle?:string)=>{const catalog=[...combinedReleases(releases)];const fixed=ids.map(id=>catalog.find(r=>r.id===id)).filter(Boolean);const dynamic=catalog.filter(r=>r.id.startsWith("published-")&&(!r.country||r.country==="INT"||r.country===code)&&(!genreTitle||r.genre.toLowerCase().includes(genreTitle.toLowerCase())));return [...dynamic,...fixed.filter(r=>!dynamic.some(d=>d.id===r?.id))].filter(Boolean) as typeof catalog};
 const chartTitle=(code:string,name:string,size:number)=>(code==="INT"?"MOCIFY":code==="GB"?"UK":code==="US"?"US":name)+" Top "+size;
 export default function PlaylistDetail(){
  const {locale}=useLanguage(),t=(detailCopy as any)[locale]??detailCopy.en;
