@@ -74,3 +74,6 @@
 .radioPageIntro>span{display:block;max-width:650px;margin:0;color:#9694a4;font-size:14px;line-height:1.65}
 .radioShell .countryMasthead{margin-top:0}
 @media(max-width:620px){.radioPageIntro{padding-top:32px}.radioPageIntro>h1{font-size:clamp(46px,6vw,76px)}}
+
+.trackActions{display:flex;align-items:center;justify-content:flex-end;gap:7px}
+.trackActions :global(.playlist-action-popover){bottom:auto;top:42px}
