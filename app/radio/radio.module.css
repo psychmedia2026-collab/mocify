@@ -87,3 +87,7 @@
 .radioIntroRow{grid-template-columns:minmax(0,1fr) auto}
 .radioSearch{width:360px;max-width:360px}
 @media(max-width:900px){.radioSearch{width:100%;max-width:360px;justify-self:start}}
+
+/* Optical alignment: place Radio search lower beside the intro copy */
+.radioIntroRow .radioSearch{transform:translateY(26px)}
+@media(max-width:900px){.radioIntroRow .radioSearch{transform:none}}
