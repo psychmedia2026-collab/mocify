@@ -1,5 +1,5 @@
 import {releases,type Release} from "../data";
-import {combinedReleases,type PublishedRelease} from "../listener-account";
+import {combinedReleases,hydratedPublishedReleases,type PublishedRelease} from "../listener-account";
 
 export type RadioChartSize=40|100|1000;
 export type CountryChartEntry={rank:number;track:Release|PublishedRelease;streams:number;change:number};
@@ -52,4 +52,10 @@ export function getCountryChart(country:string,size:RadioChartSize):CountryChart
 }
 export function getRadioQueue(country:string){
  return getCountryChart(country,40).map(x=>x.track).filter(track=>"audioSrc"in track&&typeof track.audioSrc==="string");
+}
+
+
+export async function getHydratedRadioQueue(country:string){
+ const code=country.toUpperCase(),published=await hydratedPublishedReleases(),catalog=[...published,...releases];
+ return catalog.filter(track=>(!track.country||track.country==="INT"||track.country===code)&&Boolean(track.audioSrc)).sort((a,b)=>prototypeStreams(code,b.id)-prototypeStreams(code,a.id));
 }
