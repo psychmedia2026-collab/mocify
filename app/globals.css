@@ -42,3 +42,21 @@ button { cursor: pointer; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
 }
+
+/* Listener playlist picker */
+.playlist-action{position:relative;display:inline-flex}
+.release-playlist-add{width:34px;height:34px;border:1px solid rgba(255,255,255,.13);border-radius:50%;background:rgba(255,255,255,.04);color:#fff;font-size:18px;cursor:pointer;transition:.18s ease}
+.release-playlist-add:hover,.release-playlist-add:focus-visible{border-color:rgba(236,72,153,.7);background:rgba(168,85,247,.16);outline:none}
+.playlist-action-popover{position:absolute;right:0;bottom:44px;z-index:80;width:min(300px,80vw);padding:14px;border:1px solid rgba(255,255,255,.13);border-radius:16px;background:rgba(12,10,24,.98);box-shadow:0 20px 55px rgba(0,0,0,.5);backdrop-filter:blur(18px)}
+.playlist-action-popover>strong{display:block;margin:0 0 10px;font-size:13px}
+.playlist-action-list{display:grid;gap:5px;max-height:210px;overflow:auto}
+.playlist-action-list button,.playlist-action-new,.playlist-action-done{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;border:0;border-radius:10px;background:transparent;color:#ddd;padding:9px 10px;text-align:left;cursor:pointer}
+.playlist-action-list button:hover,.playlist-action-list button.selected,.playlist-action-new:hover{background:rgba(168,85,247,.14);color:#fff}
+.playlist-action-list button.selected b{color:#f472b6}
+.playlist-action-new{margin-top:7px;border-top:1px solid rgba(255,255,255,.08);border-radius:0;padding-top:12px}
+.playlist-action-create{display:flex;gap:7px;margin-top:9px}
+.playlist-action-create input{min-width:0;flex:1;border:1px solid rgba(255,255,255,.12);border-radius:9px;background:#090812;color:#fff;padding:9px}
+.playlist-action-create button{border:0;border-radius:9px;background:linear-gradient(90deg,#7c3aed,#ec4899);color:#fff;font-weight:800;padding:0 10px;cursor:pointer}
+.playlist-action-create button:disabled{opacity:.45;cursor:not-allowed}
+.playlist-action-done{justify-content:center;margin-top:8px;background:rgba(255,255,255,.06);font-weight:700}
+@media(max-width:640px){.playlist-action-popover{position:fixed;left:16px;right:16px;bottom:92px;width:auto}}
