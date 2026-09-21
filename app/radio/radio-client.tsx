@@ -5,6 +5,7 @@ import {useListenerPlayer} from "../listener-player";
 import {useLanguage} from "../i18n/language-provider";
 import {countryCodes,getCountryChart,getHydratedRadioQueue,LISTENER_COUNTRY_KEY,localeCountry,type RadioChartSize} from "./radio-system";
 import styles from "./radio.module.css";
+import {AddToPlaylist} from "../components";
 
 const copy={
  en:{market:"LOCAL RADIO MARKET",title:"Radio by country",text:"Each country has its own chart, driven by streams from listeners in that country.",start:"Start country radio",now:"NOW PLAYING",chart:"Country charts",rank:"Rank",song:"Song",streams:"Country streams",trend:"28d",play:"Play",top40:"Top 40",top100:"Top 100",top1000:"Top 1000",note:"Prototype ranking engine: every country is calculated separately. Production will use verified listener stream events from the backend.",available:"available catalog tracks shown",selected:"SELECTED RADIO COUNTRY"},
@@ -62,7 +63,7 @@ export default function RadioClient(){
    <div className={styles.chartMeta}>Top {size} · {countryName(playerCountry)} · {chart.length} {t.available}</div>
    <div className={styles.scroll}><div className={styles.chartTable}>
     <div className={styles.chartHeader}><span>{t.rank}</span><span>{t.song}</span><span>{t.streams}</span><span>{t.trend}</span><span>{t.play}</span></div>
-    {chart.map(({rank,track,streams,change})=>{const playable="audioSrc"in track&&typeof track.audioSrc==="string";const playing=currentTrack.id===track.id&&isPlaying;return <div className={styles.chartRow} key={track.id}><span className={styles.rank}>{rank}</span><div className={styles.trackCell}><span className={`${styles.cover} ${track.art}`}/><span className={styles.trackCopy}><b>{track.title}</b><small>{track.artist} · {track.genre}</small></span></div><span className={styles.streams}>{new Intl.NumberFormat(locale,{notation:"compact",maximumFractionDigits:1}).format(streams)}</span><span className={`${styles.trend} ${change>=0?styles.up:styles.down}`}>{change>=0?"↑":"↓"} {Math.abs(change).toFixed(1)}%</span><button className={`${styles.play} ${playing?styles.playing:""}`} disabled={!playable} onClick={()=>playEntry(track)} aria-label={`${t.play} ${track.title}`}>{playing?"Ⅱ":"▶"}</button></div>})}
+    {chart.map(({rank,track,streams,change})=>{const playable="audioSrc"in track&&typeof track.audioSrc==="string";const playing=currentTrack.id===track.id&&isPlaying;return <div className={styles.chartRow} key={track.id}><span className={styles.rank}>{rank}</span><div className={styles.trackCell}><span className={`${styles.cover} ${track.art}`}/><span className={styles.trackCopy}><b>{track.title}</b><small>{track.artist} · {track.genre}</small></span></div><span className={styles.streams}>{new Intl.NumberFormat(locale,{notation:"compact",maximumFractionDigits:1}).format(streams)}</span><span className={`${styles.trend} ${change>=0?styles.up:styles.down}`}>{change>=0?"↑":"↓"} {Math.abs(change).toFixed(1)}%</span><span className={styles.trackActions}><button className={`${styles.play} ${playing?styles.playing:""}`} disabled={!playable} onClick={()=>playEntry(track)} aria-label={`${t.play} ${track.title}`}>{playing?"Ⅱ":"▶"}</button><AddToPlaylist trackId={track.id}/></span></div>})}
    </div></div>
    <div className={styles.prototype}>{t.note}</div>
   </section>
