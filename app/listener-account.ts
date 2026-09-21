@@ -23,6 +23,8 @@ export const removePlaylist=(id:string)=>savePlaylists(readPlaylists().filter(p=
 export const addHistory=(id:string)=>{const ids=readIds(HISTORY_KEY).filter(x=>x!==id);write(HISTORY_KEY,[id,...ids].slice(0,30))};
 export const readPublishedReleases=()=>read<PublishedRelease[]>(PUBLISHED_KEY,[]);
 export const publishPrototypeRelease=(release:PublishedRelease)=>write(PUBLISHED_KEY,[release,...readPublishedReleases().filter(r=>r.id!==release.id)]);
+export const removePublishedRelease=(id:string)=>write(PUBLISHED_KEY,readPublishedReleases().filter(r=>r.id!==id));
+export const updatePublishedRelease=(id:string,patch:Partial<PublishedRelease>)=>write(PUBLISHED_KEY,readPublishedReleases().map(r=>r.id===id?{...r,...patch,id}:r));
 export const combinedReleases=(base:readonly Release[])=>[...readPublishedReleases(),...base] as readonly (Release|PublishedRelease)[];
 
 
