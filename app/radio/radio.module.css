@@ -91,3 +91,8 @@
 /* Optical alignment: place Radio search lower beside the intro copy */
 .radioIntroRow .radioSearch{transform:translateY(26px)}
 @media(max-width:900px){.radioIntroRow .radioSearch{transform:none}}
+
+/* Align Radio search with the descriptive line beneath the title */
+.radioIntroRow{align-items:end}
+.radioIntroRow .radioSearch{transform:translateY(-1px)}
+@media(max-width:900px){.radioIntroRow{align-items:stretch}.radioIntroRow .radioSearch{transform:none}}
