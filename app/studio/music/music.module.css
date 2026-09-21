@@ -3,3 +3,21 @@
 .headingActions>a{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border:1px solid #f36ad6!important;border-radius:10px;background:linear-gradient(100deg,#8249ff 0%,#c63cff 48%,#ff4fb8 78%,#ff8b5f 100%)!important;color:#fff!important;font-weight:850;text-decoration:none;box-shadow:0 10px 28px #9b3dff55,0 0 24px #ed35c533;transition:transform .18s ease,filter .18s ease,box-shadow .18s ease}.headingActions>a:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 14px 34px #9b3dff70,0 0 30px #ed35c544}.headingActions>a:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
 .inlineEdit{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.inlineEdit input{min-width:150px;max-width:240px;border:1px solid rgba(255,255,255,.14);border-radius:8px;background:rgba(0,0,0,.28);color:#fff;padding:7px 9px;font:inherit;font-size:12px;outline:none}.inlineEdit input:focus{border-color:rgba(196,86,255,.62);box-shadow:0 0 0 3px rgba(196,86,255,.08)}.inlineEdit button{border:1px solid rgba(255,255,255,.12);border-radius:8px;background:rgba(255,255,255,.06);color:#ddd;padding:6px 8px;font-size:10px;font-weight:800;cursor:pointer}.inlineEdit button:hover{background:rgba(255,255,255,.11);color:#fff}
+
+/* Final small-screen My Music pass */
+@media(max-width:600px){
+ .heading{margin-inline:0;padding:20px 18px;min-height:250px;aspect-ratio:auto;background-position:62% center}
+ .heading h1{font-size:38px}
+ .headingActions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+ .headingActions>a{width:100%;padding-inline:10px;text-align:center}
+ .toolbar{margin-inline:0}
+ .filters{width:100%;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+ .filters::-webkit-scrollbar{display:none}
+ .filters button{flex:0 0 auto}
+ .table{margin-inline:0}
+ .row{padding:12px}
+ .actions{padding-left:0;gap:5px;overflow-x:auto}
+ .actions button,.actions a{flex:0 0 auto}
+ .inlineEdit{align-items:stretch}
+ .inlineEdit input{width:100%;min-width:0;max-width:none}
+}
