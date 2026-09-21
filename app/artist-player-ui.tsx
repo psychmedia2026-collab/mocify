@@ -4,6 +4,7 @@ import Link from "next/link";
 import {useEffect,useMemo,useRef,useState} from "react";
 import {getActiveArtist} from "./artist-access";
 import {releases} from "./data";
+import{hydratedPublishedReleases}from"./listener-account";
 
 type ArtistTrack={id:string;title:string;artist:string;genre:string;art:string;href?:string;audioSrc:string};
 type RepeatMode="off"|"queue"|"track";
@@ -64,9 +65,9 @@ export default function ArtistPlayer(){
  const progress=duration>0?Math.min(100,currentTime/duration*100):0;
  const favorite=Boolean(hasTrack&&favoriteIds.includes(track.id));
 
- const loadArtist=()=>{const active=getActiveArtist();const name=active?.name??"Andigo";setArtistName(name);const own=staticArtistTracks(name);setQueue(own);queueRef.current=own;setIndex(0);indexRef.current=0;setCurrentTime(0);setDuration(0);setPlaying(false);if(audioRef.current){audioRef.current.pause();audioRef.current.src=own[0]?.audioSrc??"";if(own[0])audioRef.current.load()}};
+ const loadArtist=()=>{const active=getActiveArtist();const name=active?.name??"Andigo";setArtistName(name);void hydratedPublishedReleases().then(p=>{const own=[...p,...releases].filter(r=>r.artist.toLowerCase()===name.toLowerCase()&&Boolean(r.audioSrc)).map(r=>({...r,audioSrc:r.audioSrc!}));setQueue(own);queueRef.current=own;setIndex(0);indexRef.current=0;setCurrentTime(0);setDuration(0);setPlaying(false);if(audioRef.current){audioRef.current.pause();audioRef.current.src=own[0]?.audioSrc??"";if(own[0])audioRef.current.load()}})};
 
- useEffect(()=>{loadArtist();const sync=()=>loadArtist();addEventListener("mocify-active-artist-change",sync);return()=>removeEventListener("mocify-active-artist-change",sync)},[]);
+ useEffect(()=>{loadArtist();const sync=()=>loadArtist();addEventListener("mocify-active-artist-change",sync);addEventListener("mocify-library-change",sync);return()=>{removeEventListener("mocify-active-artist-change",sync);removeEventListener("mocify-library-change",sync)}},[]);
  useEffect(()=>{queueRef.current=queue},[queue]);useEffect(()=>{indexRef.current=index},[index]);useEffect(()=>{repeatRef.current=repeat},[repeat]);useEffect(()=>{shuffleRef.current=shuffle},[shuffle]);
  useEffect(()=>{try{const raw=localStorage.getItem("mocify-artist-favorite-track-ids");const parsed=raw?JSON.parse(raw):[];if(Array.isArray(parsed))setFavoriteIds(parsed.filter((x):x is string=>typeof x==="string"))}catch{}},[]);
  useEffect(()=>{try{setMinimized(localStorage.getItem("mocify-artist-player-minimized")==="1")}catch{}},[]);
