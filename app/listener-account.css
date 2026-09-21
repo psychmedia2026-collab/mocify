@@ -178,3 +178,15 @@
 .listener-library .section-local-search{width:min(100%,360px);max-width:360px;height:42px;padding:0 7px 0 13px;border:1px solid rgba(255,255,255,.11);border-radius:999px;background:rgba(12,10,27,.88);box-shadow:none}
 .listener-library .section-local-search input{width:100%;min-width:0;height:40px;padding:0;border:0;border-radius:0;background:transparent;color:#fff;font:inherit;font-size:12px;outline:0}
 .listener-library .section-local-search>button{width:30px;height:30px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.06);color:#d9d5e2;font-size:15px}
+
+/* Final mobile Library pass */
+@media(max-width:560px){
+ .listener-personal-playlists .listener-personal-list{display:flex!important;grid-template-columns:none!important;gap:12px!important;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x mandatory;padding-bottom:12px}
+ .listener-personal-list .listener-playlist-expanded{flex:0 0 min(84vw,300px);min-width:0;scroll-snap-align:start}
+ .listener-personal-playlists .listener-personal-heading{gap:10px}
+ .listener-personal-playlists .listener-personal-heading h2{font-size:clamp(20px,7vw,28px)}
+ .library-inline-track{grid-template-columns:32px minmax(0,1fr) 28px 28px!important}
+ .listener-playlist-modal-backdrop{padding:12px}
+ .listener-playlist-modal{padding:20px 16px}
+ .listener-playlist-modal-actions{display:grid;grid-template-columns:1fr 1fr}
+}
