@@ -3,7 +3,7 @@ import type {Release} from "./data";
 export const LISTENER_ACCOUNT_KEY="mocify-listener-account",LISTENER_SESSION_KEY="mocify-listener-session",LIKED_KEY="mocify-saved-track-ids",FOLLOWED_KEY="mocify-followed-artists",PLAYLIST_KEY="mocify-listener-playlists",SAVED_PLAYLIST_KEY="mocify-saved-playlists",HISTORY_KEY="mocify-listening-history",PUBLISHED_KEY="mocify-published-releases";
 export type ListenerAccount={displayName:string;email:string;passwordHash:string;country:string;language:string;avatar?:string};
 export type ListenerPlaylist={id:string;name:string;cover:string;trackIds:string[];createdAt:number};
-export type PublishedRelease={id:string;title:string;artist:string;genre:string;art:string;audioSrc?:string;duration?:string;country?:string};
+export type PublishedRelease={id:string;title:string;artist:string;genre:string;art:string;audioSrc?:string;duration?:string;country?:string;href?:string;detailReady?:boolean};
 const read=<T,>(key:string,fallback:T):T=>{if(typeof window==="undefined")return fallback;try{const v=JSON.parse(localStorage.getItem(key)||"null");return v??fallback}catch{return fallback}};
 const write=(key:string,value:unknown)=>{localStorage.setItem(key,JSON.stringify(value));window.dispatchEvent(new Event("mocify-library-change"))};
 export const hashListenerPassword=async(value:string)=>Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(value)))).map(b=>b.toString(16).padStart(2,"0")).join("");
