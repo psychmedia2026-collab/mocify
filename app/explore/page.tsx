@@ -7,7 +7,7 @@ import {Shell,ReleaseCard} from "../components";
 import SectionHero from "../section-hero";
 import {useLanguage} from "../i18n/language-provider";
 import {useEffect,useState} from "react";
-import {combinedReleases,hydratedPublishedReleases} from "../listener-account";
+import {hydratedPublishedReleases} from "../listener-account";
 
 export default function ExplorePage(){
   const params=useSearchParams(); const query=(params.get("q")??"").trim(); const normalized=query.toLocaleLowerCase();
