@@ -3,7 +3,7 @@
 import {useEffect,useMemo,useState} from "react";
 import {useListenerPlayer} from "../listener-player";
 import {useLanguage} from "../i18n/language-provider";
-import {countryCodes,getCountryChart,getRadioQueue,LISTENER_COUNTRY_KEY,localeCountry,type RadioChartSize} from "./radio-system";
+import {countryCodes,getCountryChart,getHydratedRadioQueue,LISTENER_COUNTRY_KEY,localeCountry,type RadioChartSize} from "./radio-system";
 import styles from "./radio.module.css";
 
 const copy={
@@ -27,11 +27,11 @@ export default function RadioClient(){
  const{locale}=useLanguage();const t=(copy as any)[locale]??copy.en;
  const[playerCountry,setPlayerCountry]=useState("US");
  const[size,setSize]=useState<RadioChartSize>(40);
- const[revision,setRevision]=useState(0);
+ const[revision,setRevision]=useState(0);const[radioQueue,setRadioQueue]=useState<any[]>([]);
  const{currentTrack,isPlaying,selectTrack,togglePlay}=useListenerPlayer();
 
  useEffect(()=>{let saved="";try{saved=localStorage.getItem(LISTENER_COUNTRY_KEY)||""}catch{}const next=saved||localeCountry[locale]||"US";setPlayerCountry(next);try{localStorage.setItem(LISTENER_COUNTRY_KEY,next)}catch{}},[locale]);
- useEffect(()=>{const refresh=()=>setRevision(v=>v+1);addEventListener("mocify-country-stream",refresh);return()=>removeEventListener("mocify-country-stream",refresh)},[]);
+ useEffect(()=>{const refresh=()=>setRevision(v=>v+1);addEventListener("mocify-country-stream",refresh);addEventListener("mocify-library-change",refresh);return()=>{removeEventListener("mocify-country-stream",refresh);removeEventListener("mocify-library-change",refresh)}},[]);
 
  const[displayNames,setDisplayNames]=useState<Intl.DisplayNames|null>(null);
  useEffect(()=>{try{setDisplayNames(new Intl.DisplayNames([locale],{type:"region"}))}catch{setDisplayNames(null)}},[locale]);
@@ -39,7 +39,7 @@ export default function RadioClient(){
  const countryFlag=(code:string)=>code.toUpperCase().replace(/./g,char=>String.fromCodePoint(127397+char.charCodeAt(0)));
  const countries=useMemo(()=>countryCodes.map(code=>({code,name:countryName(code)})).sort((a,b)=>a.name.localeCompare(b.name,locale)),[displayNames,locale]);
  const chart=useMemo(()=>getCountryChart(playerCountry,size),[playerCountry,size,revision]);
- const radioQueue=useMemo(()=>getRadioQueue(playerCountry),[playerCountry,revision]);
+ useEffect(()=>{void getHydratedRadioQueue(playerCountry).then(setRadioQueue)},[playerCountry,revision]);
  const radioIds=useMemo(()=>new Set(radioQueue.map(x=>x.id)),[radioQueue]);
  const currentBelongs=radioIds.has(currentTrack.id);
 
