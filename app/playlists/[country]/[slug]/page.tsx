@@ -5,7 +5,7 @@ import {Shell} from "../../../components";
 import {countryGenreMap,countryPlaylists,genrePlaylists,regionalGenres,releases} from "../../../data";
 import {useListenerPlayer} from "../../../listener-player";
 import {useEffect,useState} from "react";
-import {SAVED_PLAYLIST_KEY,readIds,toggleId,combinedReleases} from "../../../listener-account";
+import {SAVED_PLAYLIST_KEY,readIds,toggleId,combinedReleases,hydratedPublishedReleases,type PublishedRelease} from "../../../listener-account";
 import {useLanguage} from "../../../i18n/language-provider";
 const detailCopy={
  en:{all:"All playlists",unavailable:"Playlist not available",unavailableText:"This genre is not part of the selected country's playlist catalog.",chart:"COUNTRY CHART",playlist:"MOCIFY PLAYLIST",tracks:"tracks",play:"Play all",shuffle:"Shuffle",saved:"Saved",save:"Save",track:"Track",artist:"Artist",duration:"Duration",empty:"No releases yet",emptyText:"This playlist is ready and will automatically fill when matching releases are added to the catalog."},
@@ -28,13 +28,13 @@ const getTracks=(ids:readonly string[],code:string,genreTitle?:string)=>{const c
 const chartTitle=(code:string,name:string,size:number)=>(code==="INT"?"MOCIFY":code==="GB"?"UK":code==="US"?"US":name)+" Top "+size;
 export default function PlaylistDetail(){
  const {locale}=useLanguage(),t=(detailCopy as any)[locale]??detailCopy.en;
- const params=useParams<{country:string;slug:string}>(),[saved,setSaved]=useState(false),code=(params.country||"int").toUpperCase(),slug=params.slug||"top40",player=useListenerPlayer();
- const playlistPath="/playlists/"+code.toLowerCase()+"/"+slug;useEffect(()=>setSaved(readIds(SAVED_PLAYLIST_KEY).includes(playlistPath)),[playlistPath]);
+ const params=useParams<{country:string;slug:string}>(),[saved,setSaved]=useState(false),[catalog,setCatalog]=useState<(typeof releases[number]|PublishedRelease)[]>(()=>[...combinedReleases(releases)]),code=(params.country||"int").toUpperCase(),slug=params.slug||"top40",player=useListenerPlayer();
+ const playlistPath="/playlists/"+code.toLowerCase()+"/"+slug;useEffect(()=>{setSaved(readIds(SAVED_PLAYLIST_KEY).includes(playlistPath));const sync=()=>{void hydratedPublishedReleases().then(p=>setCatalog([...p,...releases]))};sync();addEventListener("mocify-library-change",sync);return()=>removeEventListener("mocify-library-change",sync)},[playlistPath]);
  const country=countryPlaylists.find(p=>p.code===code)??countryPlaylists[0],countryName=code==="INT"?"International":(new Intl.DisplayNames([locale],{type:"region"}).of(code)??country.country),allGenres=[...genrePlaylists,...Object.values(regionalGenres).flat()];
  const genre=allGenres.find(g=>g.slug===slug),allowed=(countryGenreMap[code]??countryGenreMap.INT).includes(slug);
  const chartSize=slug==="top40"?40:slug==="top100"?100:slug==="top1000"?1000:null;const playlist=chartSize?{title:chartTitle(code,countryName,chartSize),subtitle:chartSize===40?country.subtitle:"The "+chartSize+" most streamed tracks in this market.",releaseIds:code==="INT"?top40Ids:country.releaseIds}:allowed&&genre?genre:null;
  if(!playlist)return <Shell active="playlists"><section className="playlist-detail page-wrap"><Link href="/playlists">← {t.all}</Link><h1>{t.unavailable}</h1><p>{t.unavailableText}</p></section></Shell>;
- const tracks=getTracks(playlist.releaseIds,code,genre?.title),playable=tracks.filter(t=>"audioSrc"in t&&Boolean(t.audioSrc));
+ const fixed=playlist.releaseIds.map(id=>catalog.find(r=>r.id===id)).filter(Boolean),dynamic=catalog.filter(r=>r.id.startsWith("published-")&&(!r.country||r.country==="INT"||r.country===code)&&(!genre?.title||r.genre.toLowerCase().includes(genre.title.toLowerCase()))),tracks=[...dynamic,...fixed.filter(r=>!dynamic.some(d=>d.id===r?.id))].filter(Boolean) as typeof catalog,playable=tracks.filter(t=>"audioSrc"in t&&Boolean(t.audioSrc));
  const playAll=(shuffle=false)=>{let queue=playable;if(shuffle)queue=[...queue].sort(()=>Math.random()-.5);if(queue[0])player.selectTrack(queue[0],queue,true)};
  const playOne=(id:string)=>{const track=playable.find(t=>t.id===id);if(track)player.selectTrack(track,playable,true)};
  return <Shell active="playlists"><section className="playlist-detail page-wrap">
