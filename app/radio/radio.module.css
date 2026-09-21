@@ -96,3 +96,19 @@
 .radioIntroRow{align-items:end}
 .radioIntroRow .radioSearch{transform:translateY(-1px)}
 @media(max-width:900px){.radioIntroRow{align-items:stretch}.radioIntroRow .radioSearch{transform:none}}
+
+/* Final mobile Radio pass */
+@media(max-width:760px){
+ .chartHead{padding:16px}
+ .chartMeta{padding-inline:16px}
+ .scroll{margin-inline:-2px;overscroll-behavior-inline:contain}
+ .chartTable{min-width:650px}
+ .chartHeader,.chartRow{grid-template-columns:44px minmax(220px,1.6fr) minmax(100px,.65fr) 72px 80px;padding-inline:14px}
+ .radioShell .countryMasthead{padding:17px}
+ .countryMasthead strong{font-size:clamp(28px,10vw,42px)}
+ .radioIntroRow{gap:14px}
+}
+@media(max-width:480px){
+ .chartTable{min-width:610px}
+ .tabs button{flex:0 0 auto}
+}
