@@ -24,3 +24,11 @@ export const addHistory=(id:string)=>{const ids=readIds(HISTORY_KEY).filter(x=>x
 export const readPublishedReleases=()=>read<PublishedRelease[]>(PUBLISHED_KEY,[]);
 export const publishPrototypeRelease=(release:PublishedRelease)=>write(PUBLISHED_KEY,[release,...readPublishedReleases().filter(r=>r.id!==release.id)]);
 export const combinedReleases=(base:readonly Release[])=>[...readPublishedReleases(),...base] as readonly (Release|PublishedRelease)[];
+
+
+const AUDIO_DB="mocify-prototype-audio",AUDIO_STORE="tracks";
+function openAudioDb():Promise<IDBDatabase>{return new Promise((resolve,reject)=>{const request=indexedDB.open(AUDIO_DB,1);request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains(AUDIO_STORE))request.result.createObjectStore(AUDIO_STORE)};request.onsuccess=()=>resolve(request.result);request.onerror=()=>reject(request.error)})}
+export async function storePrototypeAudio(id:string,file:Blob){if(typeof indexedDB==="undefined")return;const db=await openAudioDb();await new Promise<void>((resolve,reject)=>{const tx=db.transaction(AUDIO_STORE,"readwrite");tx.objectStore(AUDIO_STORE).put(file,id);tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error)});db.close()}
+export async function readPrototypeAudio(id:string):Promise<Blob|null>{if(typeof indexedDB==="undefined")return null;const db=await openAudioDb();const blob=await new Promise<Blob|null>((resolve,reject)=>{const tx=db.transaction(AUDIO_STORE,"readonly"),request=tx.objectStore(AUDIO_STORE).get(id);request.onsuccess=()=>resolve(request.result instanceof Blob?request.result:null);request.onerror=()=>reject(request.error)});db.close();return blob}
+export async function hydratedPublishedReleases(){const list=readPublishedReleases();return Promise.all(list.map(async release=>{try{const blob=await readPrototypeAudio(release.id);return blob?{...release,audioSrc:URL.createObjectURL(blob)}:release}catch{return release}}))}
+export const renamePlaylist=(id:string,name:string)=>{const value=name.trim();if(!value)return;savePlaylists(readPlaylists().map(p=>p.id===id?{...p,name:value}:p))};
