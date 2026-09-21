@@ -5,7 +5,7 @@ import {Shell} from "../../../components";
 import {countryGenreMap,countryPlaylists,genrePlaylists,regionalGenres,releases} from "../../../data";
 import {useListenerPlayer} from "../../../listener-player";
 import {useEffect,useState} from "react";
-import {SAVED_PLAYLIST_KEY,readIds,toggleId} from "../../../listener-account";
+import {SAVED_PLAYLIST_KEY,readIds,toggleId,combinedReleases} from "../../../listener-account";
 import {useLanguage} from "../../../i18n/language-provider";
 const detailCopy={
  en:{all:"All playlists",unavailable:"Playlist not available",unavailableText:"This genre is not part of the selected country's playlist catalog.",chart:"COUNTRY CHART",playlist:"MOCIFY PLAYLIST",tracks:"tracks",play:"Play all",shuffle:"Shuffle",saved:"Saved",save:"Save",track:"Track",artist:"Artist",duration:"Duration",empty:"No releases yet",emptyText:"This playlist is ready and will automatically fill when matching releases are added to the catalog."},
@@ -24,7 +24,7 @@ const detailCopy={
  hi:{all:"सभी प्लेलिस्ट",unavailable:"प्लेलिस्ट उपलब्ध नहीं",unavailableText:"यह जॉनर चुने गए देश के कैटलॉग का हिस्सा नहीं है।",chart:"देश चार्ट",playlist:"MOCIFY प्लेलिस्ट",tracks:"ट्रैक",play:"सभी चलाएँ",shuffle:"शफ़ल",saved:"सेव किया",save:"सेव करें",track:"ट्रैक",artist:"कलाकार",duration:"अवधि",empty:"अभी कोई रिलीज़ नहीं",emptyText:"मेल खाने वाली रिलीज़ जुड़ते ही यह प्लेलिस्ट अपने आप भर जाएगी।"}
 } as const;
 const top40Ids=["toca-bonbon","bella-ciao","fara-mine","money-money","kill-the-beat","digital-touch","after-you","zero-gravity","afterlight"];
-const getTracks=(ids:readonly string[])=>ids.map(id=>releases.find(r=>r.id===id)).filter((r):r is (typeof releases)[number]=>Boolean(r));
+const getTracks=(ids:readonly string[],code:string,genreTitle?:string)=>{const catalog=[...combinedReleases(releases)];const fixed=ids.map(id=>catalog.find(r=>r.id===id)).filter(Boolean);const dynamic=catalog.filter(r=>r.id.startsWith("published-")&&(!r.country||r.country==="INT"||r.country===code)&&(!genreTitle||r.genre.toLowerCase().includes(genreTitle.toLowerCase())));return [...dynamic,...fixed.filter(r=>!dynamic.some(d=>d.id===r?.id))].filter(Boolean) as typeof catalog};
 const chartTitle=(code:string,name:string,size:number)=>(code==="INT"?"MOCIFY":code==="GB"?"UK":code==="US"?"US":name)+" Top "+size;
 export default function PlaylistDetail(){
  const {locale}=useLanguage(),t=(detailCopy as any)[locale]??detailCopy.en;
@@ -34,7 +34,7 @@ export default function PlaylistDetail(){
  const genre=allGenres.find(g=>g.slug===slug),allowed=(countryGenreMap[code]??countryGenreMap.INT).includes(slug);
  const chartSize=slug==="top40"?40:slug==="top100"?100:slug==="top1000"?1000:null;const playlist=chartSize?{title:chartTitle(code,countryName,chartSize),subtitle:chartSize===40?country.subtitle:"The "+chartSize+" most streamed tracks in this market.",releaseIds:code==="INT"?top40Ids:country.releaseIds}:allowed&&genre?genre:null;
  if(!playlist)return <Shell active="playlists"><section className="playlist-detail page-wrap"><Link href="/playlists">← {t.all}</Link><h1>{t.unavailable}</h1><p>{t.unavailableText}</p></section></Shell>;
- const tracks=getTracks(playlist.releaseIds),playable=tracks.filter(t=>"audioSrc"in t&&Boolean(t.audioSrc));
+ const tracks=getTracks(playlist.releaseIds,code,genre?.title),playable=tracks.filter(t=>"audioSrc"in t&&Boolean(t.audioSrc));
  const playAll=(shuffle=false)=>{let queue=playable;if(shuffle)queue=[...queue].sort(()=>Math.random()-.5);if(queue[0])player.selectTrack(queue[0],queue,true)};
  const playOne=(id:string)=>{const track=playable.find(t=>t.id===id);if(track)player.selectTrack(track,playable,true)};
  return <Shell active="playlists"><section className="playlist-detail page-wrap">
