@@ -242,3 +242,12 @@
 }
 
 .search-result-track{display:flex;align-items:center;gap:12px}.search-result-track-link{min-width:0;flex:1}.search-result-track>.playlist-action-wrap{flex:0 0 auto}
+
+.explore-search{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;max-width:920px;margin:28px auto 4px;padding:8px 9px 8px 18px;border:1px solid rgba(255,255,255,.11);border-radius:18px;background:linear-gradient(120deg,rgba(20,15,45,.96),rgba(10,10,24,.96));box-shadow:0 16px 45px rgba(0,0,0,.2),0 0 28px rgba(132,69,255,.08)}
+.explore-search:focus-within{border-color:rgba(196,91,255,.5);box-shadow:0 16px 45px rgba(0,0,0,.22),0 0 30px rgba(191,69,255,.14)}
+.explore-search-icon{font-size:25px;color:#bcb5d1;line-height:1}
+.explore-search input{min-width:0;width:100%;height:46px;border:0;outline:0;background:transparent;color:#fff;font:inherit;font-size:15px}
+.explore-search input::placeholder{color:#817b91}
+.explore-search button{height:44px;padding:0 24px;border:0;border-radius:12px;background:linear-gradient(100deg,#9b4dff,#ed4fc9);color:#fff;font:inherit;font-weight:800;cursor:pointer}
+.explore-search button:hover{filter:brightness(1.08)}
+@media(max-width:640px){.explore-search{margin-top:20px;padding-left:14px;gap:8px}.explore-search button{padding:0 15px}.explore-search-icon{font-size:21px}}
