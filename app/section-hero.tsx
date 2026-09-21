@@ -7,7 +7,7 @@ type Theme = "explore" | "artists" | "radio" | "premium" | "library" | "playlist
 
 type Props = {theme:Theme;kicker:string;title:string;accent?:string;text:string;cta:string;href:string};
 
-export default function SectionHero({theme,href}:Props){
+export default function SectionHero({theme,kicker,title,accent,text,cta,href}:Props){
   const { dictionary } = useLanguage();
   const fallback={kicker,title,accent,text,cta};
   const hero = theme==="playlists"?fallback:dictionary.heroes[theme];
