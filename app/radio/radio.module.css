@@ -77,3 +77,8 @@
 
 .trackActions{display:flex;align-items:center;justify-content:flex-end;gap:7px}
 .trackActions :global(.playlist-action-popover){bottom:auto;top:42px}
+
+.radioIntroRow{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,560px);align-items:center;gap:42px;margin-bottom:22px}
+.radioIntroRow .radioPageIntro{margin:0}
+.radioSearch{width:100%;max-width:none;margin:0;justify-self:end}
+@media(max-width:900px){.radioIntroRow{grid-template-columns:1fr;gap:18px}.radioSearch{max-width:none;justify-self:stretch}}
