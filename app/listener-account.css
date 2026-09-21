@@ -173,3 +173,8 @@
   line-height:1.2!important;
   text-shadow:0 1px 3px rgba(0,0,0,.72),0 0 8px rgba(0,0,0,.32)!important;
 }
+
+/* Library search follows the shared compact subpage search, not generic library input styling */
+.listener-library .section-local-search{width:min(100%,360px);max-width:360px;height:42px;padding:0 7px 0 13px;border:1px solid rgba(255,255,255,.11);border-radius:999px;background:rgba(12,10,27,.88);box-shadow:none}
+.listener-library .section-local-search input{width:100%;min-width:0;height:40px;padding:0;border:0;border-radius:0;background:transparent;color:#fff;font:inherit;font-size:12px;outline:0}
+.listener-library .section-local-search>button{width:30px;height:30px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.06);color:#d9d5e2;font-size:15px}
