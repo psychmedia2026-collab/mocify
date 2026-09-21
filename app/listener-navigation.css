@@ -240,3 +240,5 @@
   .radio-hero { grid-template-columns: 1fr; padding: 34px 26px; }
   .search-results-grid { grid-template-columns: 1fr; }
 }
+
+.search-result-track{display:flex;align-items:center;gap:12px}.search-result-track-link{min-width:0;flex:1}.search-result-track>.playlist-action-wrap{flex:0 0 auto}
