@@ -27,12 +27,13 @@ const top40Ids=["toca-bonbon","bella-ciao","fara-mine","money-money","kill-the-b
 const getTracks=(ids:readonly string[])=>ids.map(id=>releases.find(r=>r.id===id)).filter((r):r is (typeof releases)[number]=>Boolean(r));
 const chartTitle=(code:string,name:string,size:number)=>(code==="INT"?"MOCIFY":code==="GB"?"UK":code==="US"?"US":name)+" Top "+size;
 export default function PlaylistDetail(){
- const {locale}=useLanguage(),t=(detailCopy as any)[locale]??detailCopy.en;\n const params=useParams<{country:string;slug:string}>(),[saved,setSaved]=useState(false),code=(params.country||"int").toUpperCase(),slug=params.slug||"top40",player=useListenerPlayer();
+ const {locale}=useLanguage(),t=(detailCopy as any)[locale]??detailCopy.en;
+ const params=useParams<{country:string;slug:string}>(),[saved,setSaved]=useState(false),code=(params.country||"int").toUpperCase(),slug=params.slug||"top40",player=useListenerPlayer();
  const playlistPath="/playlists/"+code.toLowerCase()+"/"+slug;useEffect(()=>setSaved(readIds(SAVED_PLAYLIST_KEY).includes(playlistPath)),[playlistPath]);
  const country=countryPlaylists.find(p=>p.code===code)??countryPlaylists[0],allGenres=[...genrePlaylists,...Object.values(regionalGenres).flat()];
  const genre=allGenres.find(g=>g.slug===slug),allowed=(countryGenreMap[code]??countryGenreMap.INT).includes(slug);
  const chartSize=slug==="top40"?40:slug==="top100"?100:slug==="top1000"?1000:null;const playlist=chartSize?{title:chartTitle(code,country.country,chartSize),subtitle:chartSize===40?country.subtitle:"The "+chartSize+" most streamed tracks in this market.",releaseIds:code==="INT"?top40Ids:country.releaseIds}:allowed&&genre?genre:null;
- if(!playlist)return <Shell active="playlists"><section className="playlist-detail page-wrap"><Link href="/playlists">← Playlists</Link><h1>Playlist not available</h1><p>This genre is not part of the selected country's playlist catalog.</p></section></Shell>;
+ if(!playlist)return <Shell active="playlists"><section className="playlist-detail page-wrap"><Link href="/playlists">← {t.all}</Link><h1>{t.unavailable}</h1><p>{t.unavailableText}</p></section></Shell>;
  const tracks=getTracks(playlist.releaseIds),playable=tracks.filter(t=>"audioSrc"in t&&Boolean(t.audioSrc));
  const playAll=(shuffle=false)=>{let queue=playable;if(shuffle)queue=[...queue].sort(()=>Math.random()-.5);if(queue[0])player.selectTrack(queue[0],queue,true)};
  const playOne=(id:string)=>{const track=playable.find(t=>t.id===id);if(track)player.selectTrack(track,playable,true)};
