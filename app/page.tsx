@@ -7,12 +7,12 @@ import Link from "next/link";
 import {Shell,ReleaseCard} from "./components";
 import {useLanguage} from "./i18n/language-provider";
 import {useEffect,useState} from "react";
-import {combinedReleases} from "./listener-account";
+import {combinedReleases,hydratedPublishedReleases} from "./listener-account";
 
 const featureIcons=["✦","♫","♢","◎"];
 
 export default function Home(){
-  const {dictionary}=useLanguage(); const t=dictionary.pages.home; const[catalog,setCatalog]=useState(()=>[...releases] as any[]);useEffect(()=>{const sync=()=>setCatalog([...combinedReleases(releases)]);sync();addEventListener("mocify-library-change",sync);return()=>removeEventListener("mocify-library-change",sync)},[]);
+  const {dictionary}=useLanguage(); const t=dictionary.pages.home; const[catalog,setCatalog]=useState(()=>[...releases] as any[]);useEffect(()=>{const sync=()=>{void hydratedPublishedReleases().then(p=>setCatalog([...p,...releases]))};sync();addEventListener("mocify-library-change",sync);return()=>removeEventListener("mocify-library-change",sync)},[]);
   return <Shell active="home">
     <section className="home-hero page-wrap"><div className="home-copy"><h1>{t.heroLine1}<br/><span>{t.heroLine2}<br/>{t.heroLine3}</span></h1><p>{t.intro}</p><div className="home-actions"><Link className="m-primary hero-cta" href="/explore">{t.start} <b>→</b></Link></div></div>
       <div className="hero-portrait"><div className="hero-glow"/><Image className="hero-photo" src={hero} unoptimized preload alt={t.heroAlt}/></div>
