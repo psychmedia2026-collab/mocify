@@ -26,7 +26,7 @@ const copy={
 
 export default function RadioClient(){
  const{locale}=useLanguage();const t=(copy as any)[locale]??copy.en;
- const[playerCountry,setPlayerCountry]=useState("US");
+ const[playerCountry,setPlayerCountry]=useState("US");const[search,setSearch]=useState("");
  const[size,setSize]=useState<RadioChartSize>(40);
  const[revision,setRevision]=useState(0);const[radioQueue,setRadioQueue]=useState<any[]>([]);
  const{currentTrack,isPlaying,selectTrack,togglePlay}=useListenerPlayer();
@@ -38,7 +38,7 @@ export default function RadioClient(){
  useEffect(()=>{try{setDisplayNames(new Intl.DisplayNames([locale],{type:"region"}))}catch{setDisplayNames(null)}},[locale]);
  const countryName=(code:string)=>displayNames?.of(code)||code;
  const countryFlag=(code:string)=>code.toUpperCase().replace(/./g,char=>String.fromCodePoint(127397+char.charCodeAt(0)));
- const countries=useMemo(()=>countryCodes.map(code=>({code,name:countryName(code)})).sort((a,b)=>a.name.localeCompare(b.name,locale)),[displayNames,locale]);
+ const countries=useMemo(()=>countryCodes.map(code=>({code,name:countryName(code)})).sort((a,b)=>a.name.localeCompare(b.name,locale)),[displayNames,locale]);const visibleCountries=search.trim()?countries.filter(c=>`${c.name} ${c.code}`.toLocaleLowerCase().includes(search.trim().toLocaleLowerCase())):countries;
  const chart=useMemo(()=>getCountryChart(playerCountry,size),[playerCountry,size,revision]);
  useEffect(()=>{void getHydratedRadioQueue(playerCountry).then(setRadioQueue)},[playerCountry,revision]);
  const radioIds=useMemo(()=>new Set(radioQueue.map(x=>x.id)),[radioQueue]);
@@ -48,11 +48,11 @@ export default function RadioClient(){
  const startRadio=()=>{if(!radioQueue.length)return;const first=radioQueue[0];if(currentTrack.id===first.id)togglePlay();else selectTrack(first,radioQueue,true)};
  const playEntry=(track:any)=>{if(currentTrack.id===track.id)togglePlay();else selectTrack(track,radioQueue,true)};
 
- return <div className={styles.radioShell}>
+ return <div className={styles.radioShell}><div className="section-local-search"><span aria-hidden="true">⌕</span><input type="search" value={search} onChange={e=>setSearch(e.target.value)} placeholder={t.title} aria-label={t.title}/>{search&&<button type="button" onClick={()=>setSearch("")}>×</button>}</div>
   <header className={styles.radioPageIntro}><p>MOCIFY RADIO</p><h1>{t.title}</h1><span>{t.text}</span></header>
   <section className={`${styles.countryMasthead} ${styles["country_"+playerCountry.toLowerCase()]||""}`}>
    <div className={styles.radioMarketMain}><div><span>{countryFlag(playerCountry)}</span><strong>{countryName(playerCountry)}</strong></div><p>{t.text}</p></div>
-   <select className={styles.countrySelect} value={playerCountry} onChange={e=>changeCountry(e.target.value)} aria-label={t.title}>{countries.map(c=><option key={c.code} value={c.code}>{countryFlag(c.code)} {c.name}</option>)}</select>
+   <select className={styles.countrySelect} value={playerCountry} onChange={e=>changeCountry(e.target.value)} aria-label={t.title}>{visibleCountries.map(c=><option key={c.code} value={c.code}>{countryFlag(c.code)} {c.name}</option>)}</select>
    <button className={styles.startRadio} onClick={startRadio} disabled={!radioQueue.length}>{currentBelongs&&isPlaying?"Ⅱ":"▶"} {t.start}</button>
   </section>
 
