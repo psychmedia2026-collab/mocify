@@ -287,7 +287,7 @@
 .m-player-save.active{color:#ff63dc!important;filter:drop-shadow(0 0 5px rgba(255,99,220,.32))}
 .m-player-save.active svg{fill:currentColor;stroke:currentColor}
 .m-player-more.active{color:#fff!important}
-.m-player-more-menu{position:absolute;z-index:90;left:50%;top:38px;width:158px;padding:7px;border:1px solid rgba(147,105,255,.28);border-radius:11px;background:rgba(8,7,21,.98);box-shadow:0 14px 34px rgba(0,0,0,.34),0 0 18px rgba(120,87,255,.12);transform:translateX(-50%);display:grid;gap:2px}
+.m-player-more-menu{position:absolute;z-index:90;left:50%;bottom:38px;top:auto;width:158px;padding:7px;border:1px solid rgba(147,105,255,.28);border-radius:11px;background:rgba(8,7,21,.98);box-shadow:0 14px 34px rgba(0,0,0,.34),0 0 18px rgba(120,87,255,.12);transform:translateX(-50%);display:grid;gap:2px}
 .m-player-more-menu button,.m-player-more-menu a{width:100%;padding:9px 10px;border:0;border-radius:8px;background:transparent;color:#dcd8e7;text-align:left;font:inherit;font-size:11px;cursor:pointer}
 .m-player-more-menu button:hover,.m-player-more-menu a:hover{background:rgba(255,255,255,.06);color:#fff}
 /* Listener mini-player: docks directly below the "Upload your music" CTA. */
