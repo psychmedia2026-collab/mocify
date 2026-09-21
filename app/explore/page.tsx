@@ -7,11 +7,11 @@ import {Shell,ReleaseCard} from "../components";
 import SectionHero from "../section-hero";
 import {useLanguage} from "../i18n/language-provider";
 import {useEffect,useState} from "react";
-import {combinedReleases} from "../listener-account";
+import {combinedReleases,hydratedPublishedReleases} from "../listener-account";
 
 export default function ExplorePage(){
   const params=useSearchParams(); const query=(params.get("q")??"").trim(); const normalized=query.toLocaleLowerCase();
-  const {dictionary}=useLanguage(); const t=dictionary.pages.explore; const h=dictionary.heroes.explore; const[catalog,setCatalog]=useState(()=>[...releases] as any[]);useEffect(()=>{const sync=()=>setCatalog([...combinedReleases(releases)]);sync();addEventListener("mocify-library-change",sync);return()=>removeEventListener("mocify-library-change",sync)},[]);
+  const {dictionary}=useLanguage(); const t=dictionary.pages.explore; const h=dictionary.heroes.explore; const[catalog,setCatalog]=useState(()=>[...releases] as any[]);useEffect(()=>{const sync=()=>{void hydratedPublishedReleases().then(p=>setCatalog([...p,...releases]))};sync();addEventListener("mocify-library-change",sync);return()=>removeEventListener("mocify-library-change",sync)},[]);
   const trackMatches=normalized?catalog.filter(r=>`${r.title} ${r.artist} ${r.genre}`.toLocaleLowerCase().includes(normalized)):[];
   const artistMatches=normalized?artists.filter(a=>`${a.name} ${a.genre}`.toLocaleLowerCase().includes(normalized)):[];
   const genreMatches=normalized?genres.filter(g=>g.toLocaleLowerCase().includes(normalized)):[];const playlistCatalog=[...genrePlaylists,...Object.values(regionalGenres).flat()];const playlistMatches=normalized?playlistCatalog.filter((p,i,a)=>a.findIndex(x=>x.slug===p.slug)===i&&`${p.title} ${p.subtitle}`.toLocaleLowerCase().includes(normalized)):[];const countryMatches=normalized?countryPlaylists.filter(p=>`${p.country} ${p.title}`.toLocaleLowerCase().includes(normalized)):[]; const totalMatches=trackMatches.length+artistMatches.length+genreMatches.length+playlistMatches.length+countryMatches.length;
