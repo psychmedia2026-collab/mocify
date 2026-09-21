@@ -64,6 +64,14 @@ button { cursor: pointer; }
 .playlist-action-error,.listener-playlist-name-error{display:block;margin:7px 0 0;color:#ff8aa0;font-size:10px;font-weight:750;line-height:1.35}
 
 /* Dedicated MOCIFY Playlists hero artwork */
+.playlist-hero-art,.playlist-hero-art *{box-sizing:border-box}
+.playlist-hero-art{display:block!important}
+.playlist-hero-art .playlist-hero-stack{display:block!important}
+.playlist-hero-art .playlist-hero-card{display:block!important}
+.playlist-hero-art .playlist-hero-card i{display:block!important}
+.playlist-hero-art .playlist-hero-song{display:flex!important}
+.playlist-hero-art .playlist-hero-bars{display:flex!important}
+.playlist-hero-art .playlist-hero-orbit{display:grid!important}
 .section-cinematic-playlists{position:relative;isolation:isolate;overflow:hidden;background:
  radial-gradient(circle at 79% 48%,rgba(237,53,197,.17),transparent 25%),
  radial-gradient(circle at 67% 32%,rgba(120,87,255,.18),transparent 28%),
