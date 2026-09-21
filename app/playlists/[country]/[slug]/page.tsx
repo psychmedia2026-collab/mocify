@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import {useParams} from "next/navigation";
-import {Shell} from "../../../components";
+import {Shell,AddToPlaylist} from "../../../components";
 import {countryGenreMap,countryPlaylists,genrePlaylists,regionalGenres,releases} from "../../../data";
 import {useListenerPlayer} from "../../../listener-player";
 import {useEffect,useState} from "react";
@@ -39,6 +39,6 @@ export default function PlaylistDetail(){
  return <Shell active="playlists"><section className="playlist-detail page-wrap">
   <Link className="playlist-back" href="/playlists">← {t.all}</Link>
   <header className="playlist-detail-hero"><div className="playlist-detail-art"><span>{country.flag}</span><b>{chartSize?String(chartSize):"♫"}</b></div><div><small>{chartSize?t.chart:t.playlist} · {countryName}</small><h1>{playlist.title}</h1><p>{playlist.subtitle}</p><span>{tracks.length} {t.tracks}</span><div className="playlist-detail-actions"><button className="m-primary" disabled={!playable.length} onClick={()=>playAll(false)}>▶ {t.play}</button><button className="m-secondary" disabled={playable.length<2} onClick={()=>playAll(true)}>⤨ {t.shuffle}</button><button className="m-secondary" onClick={()=>setSaved(toggleId(SAVED_PLAYLIST_KEY,playlistPath))}>{saved?"♥ "+t.saved:"♡ "+t.save}</button></div></div></header>
-  <div className="playlist-detail-list"><div className="playlist-detail-row head"><span>#</span><span>{t.track}</span><span>{t.artist}</span><span>{t.duration}</span><span></span></div>{tracks.length?tracks.map((track,i)=><button className="playlist-detail-row" key={track.id} onClick={()=>playOne(track.id)}><span>{i+1}</span><span className="detail-track"><i className={track.art}/><b>{track.title}</b></span><span>{track.artist}</span><span>{"duration"in track?track.duration:"—"}</span><span>▶</span></button>):<div className="playlist-detail-empty"><h3>{t.empty}</h3><p>{t.emptyText}</p></div>}</div>
+  <div className="playlist-detail-list"><div className="playlist-detail-row head"><span>#</span><span>{t.track}</span><span>{t.artist}</span><span>{t.duration}</span><span></span></div>{tracks.length?tracks.map((track,i)=><div className="playlist-detail-row" key={track.id}><span>{i+1}</span><button type="button" className="detail-track playlist-detail-track-play" onClick={()=>playOne(track.id)}><i className={track.art}/><b>{track.title}</b></button><span>{track.artist}</span><span>{"duration"in track?track.duration:"—"}</span><span className="playlist-detail-track-actions"><button type="button" className="playlist-detail-play-one" onClick={()=>playOne(track.id)}>▶</button><AddToPlaylist trackId={track.id}/></span></div>):<div className="playlist-detail-empty"><h3>{t.empty}</h3><p>{t.emptyText}</p></div>}</div>
  </section></Shell>
 }
