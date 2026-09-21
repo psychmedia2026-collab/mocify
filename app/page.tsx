@@ -7,7 +7,7 @@ import Link from "next/link";
 import {Shell,ReleaseCard} from "./components";
 import {useLanguage} from "./i18n/language-provider";
 import {useEffect,useState} from "react";
-import {combinedReleases,hydratedPublishedReleases} from "./listener-account";
+import {hydratedPublishedReleases} from "./listener-account";
 
 const featureIcons=["✦","♫","♢","◎"];
 
