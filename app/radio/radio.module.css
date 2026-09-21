@@ -82,3 +82,8 @@
 .radioIntroRow .radioPageIntro{margin:0}
 .radioSearch{width:100%;max-width:none;margin:0;justify-self:end}
 @media(max-width:900px){.radioIntroRow{grid-template-columns:1fr;gap:18px}.radioSearch{max-width:none;justify-self:stretch}}
+
+/* Keep Radio contextual search identical in scale to other subpages */
+.radioIntroRow{grid-template-columns:minmax(0,1fr) auto}
+.radioSearch{width:360px;max-width:360px}
+@media(max-width:900px){.radioSearch{width:100%;max-width:360px;justify-self:start}}
