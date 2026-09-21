@@ -1,7 +1,8 @@
 import {releases,type Release} from "../data";
+import {combinedReleases,type PublishedRelease} from "../listener-account";
 
 export type RadioChartSize=40|100|1000;
-export type CountryChartEntry={rank:number;track:Release;streams:number;change:number};
+export type CountryChartEntry={rank:number;track:Release|PublishedRelease;streams:number;change:number};
 
 export const LISTENER_COUNTRY_KEY="mocify-listener-country";
 const STREAM_KEY="mocify-country-streams-v1";
@@ -40,7 +41,7 @@ export function recordCountryStream(country:string,trackId:string){
 export function getCountryChart(country:string,size:RadioChartSize):CountryChartEntry[]{
  const code=country.toUpperCase();
  const stored=readStored()[code]??{};
- return releases.map(track=>({
+ return combinedReleases(releases).filter(track=>!track.country||track.country==="INT"||track.country===code).map(track=>({
    track,
    streams:prototypeStreams(code,track.id)+(stored[track.id]??0),
    change:prototypeChange(code,track.id),
