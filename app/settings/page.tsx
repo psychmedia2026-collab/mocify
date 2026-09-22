@@ -9,7 +9,7 @@ const countries=[["NL","🇳🇱 Netherlands"],["RO","🇷🇴 Romania"],["GB","
 const languages=[["nl","Nederlands"],["en","English"],["ro","Română"],["de","Deutsch"],["fr","Français"],["es","Español"]] as const;
 
 export default function Settings(){
- const router=useRouter(),[account,setAccount]=useState<ListenerAccount|null>(null),[saved,setSaved]=useState(false);
+ const router=useRouter(),[account,setAccount]=useState<ListenerAccount|null>(null),[saved,setSaved]=useState(false),[autoplay,setAutoplay]=useState(true),[explicit,setExplicit]=useState(true),[emails,setEmails]=useState(true);
  useEffect(()=>{if(!readListenerSession()){router.replace("/login?next=/settings");return}setAccount(readListenerAccount())},[router]);
  if(!account)return <Shell><section className="page-wrap listener-profile"><p>Loading settings…</p></section></Shell>;
  function save(e:FormEvent<HTMLFormElement>){e.preventDefault();const f=new FormData(e.currentTarget),next={...account!,country:String(f.get("country")),language:String(f.get("language")),radioCountry:String(f.get("radioCountry")),playlistCountry:String(f.get("playlistCountry"))};saveListenerAccount(next);setAccount(next);setSaved(true);window.setTimeout(()=>setSaved(false),2200)}
@@ -18,6 +18,6 @@ export default function Settings(){
   <label>Interface language<select name="language" defaultValue={account.language}>{languages.map(([v,l])=><option key={v} value={v}>{l}</option>)}</select></label>
   <label>Default Radio country<select name="radioCountry" defaultValue={account.radioCountry||account.country}>{countries.map(([v,l])=><option key={v} value={v}>{l}</option>)}</select></label>
   <label>Default playlist country<select name="playlistCountry" defaultValue={account.playlistCountry||account.country}>{countries.map(([v,l])=><option key={v} value={v}>{l}</option>)}</select></label>
-  <button className="m-primary" type="submit">{saved?"✓ Settings saved":"Save settings"}</button>{saved&&<p role="status" className="listener-settings-saved">Your settings have been saved.</p>}
+  <fieldset className="listener-settings-group"><legend>Playback & content</legend><label><input type="checkbox" checked={autoplay} onChange={e=>setAutoplay(e.target.checked)}/> Autoplay similar music</label><label><input type="checkbox" checked={explicit} onChange={e=>setExplicit(e.target.checked)}/> Allow explicit content</label></fieldset><fieldset className="listener-settings-group"><legend>Notifications & privacy</legend><label><input type="checkbox" checked={emails} onChange={e=>setEmails(e.target.checked)}/> Product and music email updates</label><Link href="/profile">Manage profile and subscription</Link></fieldset><button className="m-primary" type="submit">{saved?"✓ Settings saved":"Save settings"}</button>{saved&&<p role="status" className="listener-settings-saved">Your settings have been saved.</p>}
  </form></div></section></Shell>
 }
