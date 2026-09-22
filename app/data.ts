@@ -24,15 +24,15 @@ export const quickNavigation = [
 ];
 
 export const artists = [
-  { name: "Andigo", genre: "AI POP", initials: "AN", gradientCss: "linear-gradient(145deg,#f04bd6 0%,#6944db 52%,#080b18 100%)", avatarCss: "linear-gradient(145deg,#e33fc5,#5b34c9 72%,#111522)", href: "/artist/andigo", profileReady: true },
-  { name: "Sabrina", genre: "DARK POP", initials: "SA", gradientCss: "linear-gradient(145deg,#8c5cff 0%,#d7378e 55%,#090a18 100%)", avatarCss: "linear-gradient(145deg,#8f58ff,#b82b75 72%,#111522)", href: "/artist/sabrina", profileReady: false },
-  { name: "DJ Kairo", genre: "ELECTRONIC", initials: "DK", gradientCss: "linear-gradient(145deg,#20d8e8 0%,#3444c0 55%,#080b18 100%)", avatarCss: "linear-gradient(145deg,#21cddd,#3442b6 72%,#111522)", href: "/artist/dj-kairo", profileReady: false },
-  { name: "Loredana AI", genre: "MANELE", initials: "LA", gradientCss: "linear-gradient(145deg,#ff9b46 0%,#c62d9e 55%,#341054 100%)", avatarCss: "linear-gradient(145deg,#ff913d,#c72e9e 72%,#321052)", href: "/artist/loredana-ai", profileReady: false },
-  { name: "Rami", genre: "R&B", initials: "RA", gradientCss: "linear-gradient(145deg,#3f78ff 0%,#5d36a8 55%,#080b18 100%)", avatarCss: "linear-gradient(145deg,#4d70ed,#482d88 72%,#111522)", href: "/artist/rami", profileReady: false },
-  { name: "Zeyna", genre: "AFROHOUSE", initials: "ZE", gradientCss: "linear-gradient(145deg,#f84ca9 0%,#8d2ab8 55%,#2d1459 100%)", avatarCss: "linear-gradient(145deg,#ef4aa4,#7624a1 72%,#2d1459)", href: "/artist/zeyna", profileReady: false },
-  { name: "SAYNO", genre: "TRAP", initials: "SY", gradientCss: "linear-gradient(145deg,#9b46ef 0%,#4331a9 55%,#050508 100%)", avatarCss: "linear-gradient(145deg,#9a45ee,#4b2ca2 72%,#111522)", href: "/artist/sayno", profileReady: false },
-  { name: "Balkan Vibes", genre: "BALKAN", initials: "BV", gradientCss: "linear-gradient(145deg,#1bd4d5 0%,#a827a4 55%,#0d1020 100%)", avatarCss: "linear-gradient(145deg,#1bc8cf,#85269c 72%,#111522)", href: "/artist/balkan-vibes", profileReady: false },
-  { name: "MIRA-7", genre: "AMBIENT", initials: "M7", gradientCss: "linear-gradient(145deg,#4fc1df 0%,#4a58bb 55%,#111526 100%)", avatarCss: "linear-gradient(145deg,#4bb6d6,#4755ad 72%,#111526)", href: "/artist/mira-7", profileReady: false },
+  { name: "Andigo", genre: "AI POP", initials: "AN", gradientCss: "linear-gradient(145deg,#f04bd6 0%,#6944db 52%,#080b18 100%)", avatarCss: "linear-gradient(145deg,#e33fc5,#5b34c9 72%,#111522)", href: "/artist/andigo" },
+  { name: "Sabrina", genre: "DARK POP", initials: "SA", gradientCss: "linear-gradient(145deg,#8c5cff 0%,#d7378e 55%,#090a18 100%)", avatarCss: "linear-gradient(145deg,#8f58ff,#b82b75 72%,#111522)", href: "/artist/sabrina" },
+  { name: "DJ Kairo", genre: "ELECTRONIC", initials: "DK", gradientCss: "linear-gradient(145deg,#20d8e8 0%,#3444c0 55%,#080b18 100%)", avatarCss: "linear-gradient(145deg,#21cddd,#3442b6 72%,#111522)", href: "/artist/dj-kairo" },
+  { name: "Loredana AI", genre: "MANELE", initials: "LA", gradientCss: "linear-gradient(145deg,#ff9b46 0%,#c62d9e 55%,#341054 100%)", avatarCss: "linear-gradient(145deg,#ff913d,#c72e9e 72%,#321052)", href: "/artist/loredana-ai" },
+  { name: "Rami", genre: "R&B", initials: "RA", gradientCss: "linear-gradient(145deg,#3f78ff 0%,#5d36a8 55%,#080b18 100%)", avatarCss: "linear-gradient(145deg,#4d70ed,#482d88 72%,#111522)", href: "/artist/rami" },
+  { name: "Zeyna", genre: "AFROHOUSE", initials: "ZE", gradientCss: "linear-gradient(145deg,#f84ca9 0%,#8d2ab8 55%,#2d1459 100%)", avatarCss: "linear-gradient(145deg,#ef4aa4,#7624a1 72%,#2d1459)", href: "/artist/zeyna" },
+  { name: "SAYNO", genre: "TRAP", initials: "SY", gradientCss: "linear-gradient(145deg,#9b46ef 0%,#4331a9 55%,#050508 100%)", avatarCss: "linear-gradient(145deg,#9a45ee,#4b2ca2 72%,#111522)", href: "/artist/sayno" },
+  { name: "Balkan Vibes", genre: "BALKAN", initials: "BV", gradientCss: "linear-gradient(145deg,#1bd4d5 0%,#a827a4 55%,#0d1020 100%)", avatarCss: "linear-gradient(145deg,#1bc8cf,#85269c 72%,#111522)", href: "/artist/balkan-vibes" },
+  { name: "MIRA-7", genre: "AMBIENT", initials: "M7", gradientCss: "linear-gradient(145deg,#4fc1df 0%,#4a58bb 55%,#111526 100%)", avatarCss: "linear-gradient(145deg,#4bb6d6,#4755ad 72%,#111526)", href: "/artist/mira-7" },
 ];
 
 export const featuredArtist = artists[0];
