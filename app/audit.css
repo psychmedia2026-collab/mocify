@@ -236,9 +236,4 @@
   box-shadow: 0 0 25px rgba(237,53,197,.16);
 }
 
-/* Keep small-screen labels readable without crowding the layout. */
-@media (max-width:430px) {
-  .prototype-badge { font-size: 7px; padding-inline: 5px; }
-  .prototype-control { gap: 7px; }
-  .premium-plan-button { white-space: normal; }
-}
+@media (max-width:430px) { .premium-plan-button { white-space: normal; } }
