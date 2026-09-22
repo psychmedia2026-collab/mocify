@@ -292,3 +292,16 @@ button { cursor: pointer; }
 .mocify-settings-form .listener-settings-group input[type="checkbox"]:checked{background:#7857ff!important;border-color:#8f75ff!important}
 .mocify-settings-form .listener-settings-group input[type="checkbox"]:checked::after{left:20px!important;background:#fff!important}
 @media(max-width:900px){.mocify-settings-columns{grid-template-columns:1fr}}
+
+
+/* Make Settings select controls unmistakably dropdowns */
+.mocify-settings-form select{
+  cursor:pointer!important;
+  background-color:#0d0e18!important;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23c8c5d3' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")!important;
+  background-repeat:no-repeat!important;
+  background-position:right 13px center!important;
+  background-size:14px 14px!important;
+}
+.mocify-settings-form select:hover{border-color:rgba(167,126,255,.48)!important;background-color:#121321!important}
+.mocify-settings-form select:focus{outline:none!important;border-color:#8f75ff!important;box-shadow:0 0 0 3px rgba(120,87,255,.14)!important}
