@@ -163,3 +163,13 @@ button { cursor: pointer; }
   top:auto!important;
   transform:translateX(-50%)!important;
 }
+
+
+/* Keep playlist picker above its own song/card and inside the content lane. */
+.release-card:has(.playlist-action-popover) .playlist-action-popover{
+  left:auto!important;
+  right:0!important;
+  bottom:44px!important;
+  top:auto!important;
+  transform:none!important;
+}
