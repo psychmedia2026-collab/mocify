@@ -213,3 +213,7 @@
 }
 .listener-auth-card select:hover{border-color:rgba(167,126,255,.48);background-color:#121321}
 .listener-auth-card select:focus{outline:none;border-color:#8f75ff;box-shadow:0 0 0 3px rgba(120,87,255,.14)}
+
+.listener-signup-plan{display:grid;gap:4px;margin:16px 0 2px;padding:13px 14px;border:1px solid rgba(153,112,255,.28);border-radius:11px;background:linear-gradient(90deg,rgba(120,87,255,.09),rgba(237,53,197,.055))}
+.listener-signup-plan span,.listener-signup-plan small{color:#918e9d;font-size:10px}
+.listener-signup-plan strong{color:#f4efff;font-size:14px}
