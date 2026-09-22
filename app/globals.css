@@ -237,3 +237,27 @@ button { cursor: pointer; }
   .listener-shell .m-player-track-copy small{font-size:11px!important}
   .listener-shell .m-progress-row{font-size:11px!important}
 }
+
+
+/* MOCIFY Settings */
+.mocify-settings-form{display:grid!important;gap:18px!important}
+.mocify-settings-section{padding:22px;border:1px solid rgba(255,255,255,.09);border-radius:18px;background:linear-gradient(145deg,rgba(18,14,39,.82),rgba(7,9,18,.96));box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}
+.mocify-settings-heading{display:flex;gap:13px;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.075)}
+.mocify-settings-heading>span{display:grid;place-items:center;width:34px;height:34px;flex:0 0 34px;border:1px solid rgba(178,92,255,.38);border-radius:10px;background:linear-gradient(135deg,rgba(120,87,255,.2),rgba(237,53,197,.13));color:#d7b9ff;font-size:11px;font-weight:900}
+.mocify-settings-heading h2{margin:0;color:#fff;font-size:18px;letter-spacing:-.02em}
+.mocify-settings-heading p{margin:5px 0 0;color:#898797;font-size:13px;line-height:1.45}
+.mocify-settings-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px 18px}
+.mocify-settings-form label{display:grid!important;gap:8px!important;color:#c9c6d3!important;font-size:13px!important;font-weight:800}
+.mocify-settings-form select{width:100%;min-height:46px;padding:0 12px;border:1px solid rgba(255,255,255,.12);border-radius:11px;background:#090a13;color:#fff;font-size:14px!important}
+.mocify-settings-form .listener-settings-group{display:grid;gap:10px;margin:0;padding:0;border:0}
+.mocify-settings-form .listener-settings-group label{display:grid!important;grid-template-columns:42px minmax(0,1fr);align-items:center;min-height:50px;padding:10px 13px;border:1px solid rgba(255,255,255,.075);border-radius:12px;background:rgba(255,255,255,.025)}
+.mocify-settings-form .listener-settings-group input[type="checkbox"]{appearance:none;-webkit-appearance:none;width:36px;height:20px;margin:0;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:#171824;position:relative;cursor:pointer;transition:.18s ease}
+.mocify-settings-form .listener-settings-group input[type="checkbox"]::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#8b8996;transition:.18s ease}
+.mocify-settings-form .listener-settings-group input[type="checkbox"]:checked{border-color:rgba(237,53,197,.65);background:linear-gradient(90deg,#7857ff,#ed35c5)}
+.mocify-settings-form .listener-settings-group input[type="checkbox"]:checked::after{left:18px;background:#fff}
+.mocify-settings-account-link{display:flex;align-items:center;justify-content:space-between;margin-top:4px;padding:14px;border:1px solid rgba(120,87,255,.2);border-radius:12px;color:#d9ccff;font-size:13px;font-weight:800;background:rgba(120,87,255,.055)}
+.mocify-settings-account-link:hover{border-color:rgba(237,53,197,.4);background:rgba(237,53,197,.07)}
+.mocify-settings-save{display:flex;align-items:center;gap:16px;padding-top:3px}
+.mocify-settings-save .m-primary{min-width:160px}
+.listener-settings-saved{margin:0;color:#b9f7d0;font-size:13px}
+@media(max-width:700px){.mocify-settings-fields{grid-template-columns:1fr}.mocify-settings-section{padding:17px}.mocify-settings-save{align-items:flex-start;flex-direction:column}}
