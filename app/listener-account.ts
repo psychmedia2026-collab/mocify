@@ -26,7 +26,7 @@ export const readPublishedReleases=()=>read<PublishedRelease[]>(PUBLISHED_KEY,[]
 const releaseIsVisible=(r:PublishedRelease)=>{if(r.status==="draft")return false;if(r.status==="scheduled"){if(!r.releaseDate)return false;const releaseAt=new Date(r.releaseDate+"T00:00:00").getTime();return Number.isFinite(releaseAt)&&releaseAt<=Date.now()}return !r.releaseDate||new Date(r.releaseDate+"T00:00:00").getTime()<=Date.now()};
 export const readPublicPublishedReleases=()=>readPublishedReleases().filter(releaseIsVisible);
 export const publishPrototypeRelease=(release:PublishedRelease)=>write(PUBLISHED_KEY,[release,...readPublishedReleases().filter(r=>r.id!==release.id)]);
-export const removePublishedRelease=(id:string)=>{write(PUBLISHED_KEY,readPublishedReleases().filter(r=>r.id!==id));void deletePrototypeAudio(id)};
+export const removePublishedRelease=(id:string)=>{write(PUBLISHED_KEY,readPublishedReleases().filter(r=>r.id!==id));write(LIKED_KEY,readIds(LIKED_KEY).filter(x=>x!==id));write(HISTORY_KEY,readIds(HISTORY_KEY).filter(x=>x!==id));savePlaylists(readPlaylists().map(p=>({...p,trackIds:p.trackIds.filter(x=>x!==id)})));void deletePrototypeAudio(id)};
 export const updatePublishedRelease=(id:string,patch:Partial<PublishedRelease>)=>write(PUBLISHED_KEY,readPublishedReleases().map(r=>r.id===id?{...r,...patch,id}:r));
 export const combinedReleases=(base:readonly Release[])=>[...readPublicPublishedReleases(),...base] as readonly (Release|PublishedRelease)[];
 
