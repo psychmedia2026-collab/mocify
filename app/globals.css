@@ -396,3 +396,21 @@ button { cursor: pointer; }
 .mocify-guest-gate p{margin:0 auto 20px;max-width:350px;color:#aaa7b4;font-size:13px;line-height:1.55}
 .mocify-guest-gate>div{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
 .mocify-guest-gate .m-primary,.mocify-guest-gate .m-secondary{margin:0!important}
+
+
+/* Keep guest gate above the complete MOCIFY shell, including header/player stacking contexts */
+.mocify-guest-gate-backdrop{
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+  z-index:2147483647!important;
+  overflow:auto!important;
+  isolation:isolate;
+}
+.mocify-guest-gate{
+  z-index:1!important;
+  margin:auto!important;
+  max-height:calc(100dvh - 40px);
+  overflow:auto;
+}
