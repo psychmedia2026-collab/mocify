@@ -34,7 +34,7 @@
       linear-gradient(105deg,rgba(4,8,25,.985) 0%,rgba(15,10,46,.985) 50%,rgba(54,8,47,.96) 100%) padding-box,
       linear-gradient(90deg,rgba(2,217,255,.72),rgba(120,87,255,.70) 48%,rgba(237,53,197,.78)) border-box!important;
     box-shadow:0 10px 34px rgba(0,0,0,.34),0 0 24px rgba(120,87,255,.14)!important;
-    backdrop-filter:blur(22px) saturate(1.08)!important;
+    -webkit-backdrop-filter:blur(22px) saturate(1.08)!important;backdrop-filter:blur(22px) saturate(1.08)!important;
     overflow:visible!important
   }
 
