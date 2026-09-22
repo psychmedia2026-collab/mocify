@@ -21,7 +21,7 @@ const meta={
   max:{name:"Artist Max",icon:"♛",price:"€19.99",tone:"max"}
 }as const;
 
-export default function ManagePlanPage(){
+function ManagePlanPageContent(){
   const router=useRouter();
   const params=useSearchParams();
   const{locale}=useLanguage();
@@ -96,3 +96,5 @@ export default function ManagePlanPage(){
     </div>
   </div></section></ArtistPortalShell>
 }
+
+export default function ManagePlanPage(){return <Suspense fallback={null}><ManagePlanPageContent/></Suspense>}
