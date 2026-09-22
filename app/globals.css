@@ -385,3 +385,14 @@ button { cursor: pointer; }
 .mocify-payment-reassurance{margin:16px 0;color:#aaa7b4;font-size:13px;line-height:1.55}
 .mocify-payment-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .mocify-payment-actions .m-primary,.mocify-payment-actions .m-secondary{margin:0!important}
+
+
+/* Guest mode: personal actions require a Free or Premium account */
+.mocify-guest-gate-backdrop{position:fixed;inset:0;z-index:1200;display:grid;place-items:center;padding:20px;background:rgba(2,3,9,.72);backdrop-filter:blur(8px)}
+.mocify-guest-gate{position:relative;width:min(440px,100%);padding:28px;border:1px solid rgba(153,112,255,.3);border-radius:20px;background:linear-gradient(145deg,#151126,#090b14);box-shadow:0 24px 80px rgba(0,0,0,.48);text-align:center}
+.mocify-guest-gate-close{position:absolute;right:13px;top:10px;border:0;background:transparent;color:#8e8b98;font-size:25px;cursor:pointer}
+.mocify-guest-gate-lock{display:grid;place-items:center;width:48px;height:48px;margin:0 auto 14px;border:1px solid rgba(186,119,255,.3);border-radius:50%;background:rgba(120,87,255,.1);color:#d6baff;font-size:22px}
+.mocify-guest-gate h2{margin:0 0 8px;color:#fff;font-size:22px}
+.mocify-guest-gate p{margin:0 auto 20px;max-width:350px;color:#aaa7b4;font-size:13px;line-height:1.55}
+.mocify-guest-gate>div{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.mocify-guest-gate .m-primary,.mocify-guest-gate .m-secondary{margin:0!important}
