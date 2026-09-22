@@ -1,6 +1,6 @@
 "use client";
 
-import {useEffect,useMemo,useState} from "react";
+import {useEffect,useMemo,useState,type FormEvent} from "react";
 import {useListenerPlayer} from "../listener-player";
 import {useLanguage} from "../i18n/language-provider";
 import {countryCodes,getCountryChart,getHydratedRadioQueue,LISTENER_COUNTRY_KEY,localeCountry,type RadioChartSize} from "./radio-system";
@@ -45,10 +45,11 @@ export default function RadioClient(){
  const currentBelongs=radioIds.has(currentTrack.id);
 
  const changeCountry=(country:string)=>{setPlayerCountry(country);try{localStorage.setItem(LISTENER_COUNTRY_KEY,country)}catch{}};
+ const submitCountrySearch=(event:FormEvent<HTMLFormElement>)=>{event.preventDefault();const first=visibleCountries[0];if(first){changeCountry(first.code);setSearch("")}};
  const startRadio=()=>{if(!radioQueue.length)return;const first=radioQueue[0];if(currentTrack.id===first.id)togglePlay();else selectTrack(first,radioQueue,true)};
  const playEntry=(track:any)=>{if(currentTrack.id===track.id)togglePlay();else selectTrack(track,radioQueue,true)};
 
- return <div className={styles.radioShell}><div className={styles.radioIntroRow}><header className={styles.radioPageIntro}><p>MOCIFY RADIO</p><h1>{t.title}</h1><span>{t.text}</span></header><div className={`section-local-search ${styles.radioSearch}`}><span aria-hidden="true">⌕</span><input type="search" value={search} onChange={e=>setSearch(e.target.value)} placeholder={t.title} aria-label={t.title}/>{search&&<button type="button" onClick={()=>setSearch("")}>×</button>}</div></div>
+ return <div className={styles.radioShell}><div className={styles.radioIntroRow}><header className={styles.radioPageIntro}><p>MOCIFY RADIO</p><h1>{t.title}</h1><span>{t.text}</span></header><form className={`section-local-search ${styles.radioSearch}`} role="search" onSubmit={submitCountrySearch}><span aria-hidden="true">⌕</span><input type="search" value={search} onChange={e=>setSearch(e.target.value)} placeholder={t.title} aria-label={t.title}/>{search&&<button type="button" onClick={()=>setSearch("")} aria-label="Clear search">×</button>}<button type="submit" aria-label={t.title}>→</button></form></div>
   <section className={`${styles.countryMasthead} ${styles["country_"+playerCountry.toLowerCase()]||""}`}>
    <div className={styles.radioMarketMain}><div><span>{countryFlag(playerCountry)}</span><strong>{countryName(playerCountry)}</strong></div><p>{t.text}</p></div>
    <select className={styles.countrySelect} value={playerCountry} onChange={e=>changeCountry(e.target.value)} aria-label={t.title}>{visibleCountries.map(c=><option key={c.code} value={c.code}>{countryFlag(c.code)} {c.name}</option>)}</select>
