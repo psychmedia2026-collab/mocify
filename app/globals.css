@@ -414,3 +414,23 @@ button { cursor: pointer; }
   max-height:calc(100dvh - 40px);
   overflow:auto;
 }
+
+
+/* Plans: Guest / Free / Premium at-a-glance comparison */
+.listener-plan-grid-three{grid-template-columns:repeat(3,minmax(0,1fr))!important;max-width:none!important}
+.listener-plan-current{cursor:default;opacity:.72}
+.plan-compare-section{padding-top:8px!important}
+.plan-compare-section .mockup-heading p{margin:5px 0 0;color:#777d8d;font-size:11px}
+.plan-compare-wrap{overflow-x:auto;border:1px solid rgba(255,255,255,.08);border-radius:18px;background:linear-gradient(145deg,#0b0e19,#070911)}
+.plan-compare{width:100%;min-width:720px;border-collapse:collapse}
+.plan-compare th,.plan-compare td{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.06)}
+.plan-compare thead th{background:rgba(255,255,255,.025);color:#f1eff5;font-size:12px;text-align:center}
+.plan-compare thead th:first-child{text-align:left}
+.plan-compare thead small{display:block;margin-top:4px;color:#74717e;font-size:8px;font-weight:700}
+.plan-compare tbody th{color:#aaa7b4;font-size:11px;font-weight:650;text-align:left}
+.plan-compare tbody td{text-align:center}
+.plan-compare tbody tr:last-child th,.plan-compare tbody tr:last-child td{border-bottom:0}
+.plan-compare .premium-col{background:rgba(120,87,255,.035)}
+.plan-yes{color:#d86cff;font-size:15px;font-weight:900}
+.plan-no{color:#4f4e59;font-size:14px}
+@media(max-width:900px){.listener-plan-grid-three{grid-template-columns:1fr!important}}
