@@ -261,3 +261,23 @@ button { cursor: pointer; }
 .mocify-settings-save .m-primary{min-width:160px}
 .listener-settings-saved{margin:0;color:#b9f7d0;font-size:13px}
 @media(max-width:700px){.mocify-settings-fields{grid-template-columns:1fr}.mocify-settings-section{padding:17px}.mocify-settings-save{align-items:flex-start;flex-direction:column}}
+
+
+/* Settings refinement: compact, premium MOCIFY control panel */
+.mocify-settings-form{gap:14px!important}
+.mocify-settings-section{padding:20px!important;border-radius:16px!important;background:linear-gradient(145deg,rgba(14,12,30,.72),rgba(7,8,16,.94))!important}
+.mocify-settings-heading{align-items:center!important;margin-bottom:16px!important;padding-bottom:14px!important}
+.mocify-settings-heading>span{width:30px!important;height:30px!important;flex-basis:30px!important;border-radius:9px!important;font-size:10px!important}
+.mocify-settings-heading h2{font-size:17px!important}
+.mocify-settings-heading p{font-size:12px!important;margin-top:3px!important}
+.mocify-settings-fields{gap:14px 16px!important}
+.mocify-settings-form label{gap:7px!important;font-size:13px!important}
+.mocify-settings-form select{appearance:none;-webkit-appearance:none;min-height:44px!important;padding:0 38px 0 13px!important;border:1px solid rgba(255,255,255,.11)!important;border-radius:10px!important;background:linear-gradient(180deg,#151624,#0b0c15)!important;color:#f5f3f8!important;font-weight:700!important;box-shadow:none!important}
+.mocify-settings-form .listener-settings-group{gap:8px!important}
+.mocify-settings-form .listener-settings-group label{display:flex!important;gap:13px!important;min-height:48px!important;padding:10px 13px!important;background:rgba(255,255,255,.018)!important;border-color:rgba(255,255,255,.07)!important}
+.mocify-settings-form .listener-settings-group input[type="checkbox"]{width:38px!important;height:22px!important;flex:0 0 38px!important;border:1px solid rgba(255,255,255,.16)!important;background:#171823!important;box-shadow:none!important}
+.mocify-settings-form .listener-settings-group input[type="checkbox"]::after{top:3px!important;left:3px!important;width:14px!important;height:14px!important;background:#777987!important;box-shadow:none!important}
+.mocify-settings-form .listener-settings-group input[type="checkbox"]:checked{background:linear-gradient(90deg,#7857ff,#ed35c5)!important;border-color:transparent!important}
+.mocify-settings-form .listener-settings-group input[type="checkbox"]:checked::after{left:19px!important;background:#fff!important}
+.mocify-settings-account-link{min-height:48px!important;padding:0 14px!important;background:rgba(120,87,255,.035)!important}
+.mocify-settings-save{padding:5px 0 2px!important}
