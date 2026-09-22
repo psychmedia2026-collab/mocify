@@ -1,14 +1,14 @@
 "use client";
 import type {Release} from "./data";
 export const LISTENER_ACCOUNT_KEY="mocify-listener-account",LISTENER_SESSION_KEY="mocify-listener-session",LIKED_KEY="mocify-saved-track-ids",FOLLOWED_KEY="mocify-followed-artists",PLAYLIST_KEY="mocify-listener-playlists",SAVED_PLAYLIST_KEY="mocify-saved-playlists",HISTORY_KEY="mocify-listening-history",PUBLISHED_KEY="mocify-published-releases";
-export type ListenerAccount={displayName:string;email:string;passwordHash:string;country:string;language:string;radioCountry?:string;playlistCountry?:string;avatar?:string};
+export type ListenerAccount={displayName:string;email:string;passwordHash:string;country:string;language:string;radioCountry?:string;playlistCountry?:string;avatar?:string;registeredAt?:number;subscription?:{plan:"free"|"premium";startedAt?:number;renewsAt?:number;cancelAtPeriodEnd?:boolean}};
 export type ListenerPlaylist={id:string;name:string;cover:string;trackIds:string[];createdAt:number};
 export type PublishedRelease={id:string;title:string;artist:string;genre:string;art:string;audioSrc?:string;duration?:string;country?:string;href?:string;detailReady?:boolean;releaseDate?:string;status?:"published"|"scheduled"|"draft";createdAt?:number;tool?:string};
 const read=<T,>(key:string,fallback:T):T=>{if(typeof window==="undefined")return fallback;try{const v=JSON.parse(localStorage.getItem(key)||"null");return v??fallback}catch{return fallback}};
 const write=(key:string,value:unknown)=>{localStorage.setItem(key,JSON.stringify(value));window.dispatchEvent(new Event("mocify-library-change"))};
 export const hashListenerPassword=async(value:string)=>Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(value)))).map(b=>b.toString(16).padStart(2,"0")).join("");
 export const readListenerAccount=()=>read<ListenerAccount|null>(LISTENER_ACCOUNT_KEY,null);
-export const saveListenerAccount=(v:ListenerAccount)=>{write(LISTENER_ACCOUNT_KEY,v);if(typeof window!=="undefined"){if(v.language)localStorage.setItem("mocify-interface-language",v.language);const radio=v.radioCountry||v.country;if(radio)localStorage.setItem("mocify-listener-radio-country",radio);const playlist=v.playlistCountry||v.country;if(playlist)localStorage.setItem("mocify-listener-playlist-country",playlist);window.dispatchEvent(new Event("mocify-account-preferences-change"))}};
+export const saveListenerAccount=(v:ListenerAccount)=>{if(!v.registeredAt)v.registeredAt=Date.now();if(!v.subscription)v.subscription={plan:"free"};write(LISTENER_ACCOUNT_KEY,v);if(typeof window!=="undefined"){if(v.language)localStorage.setItem("mocify-interface-language",v.language);const radio=v.radioCountry||v.country;if(radio)localStorage.setItem("mocify-listener-radio-country",radio);const playlist=v.playlistCountry||v.country;if(playlist)localStorage.setItem("mocify-listener-playlist-country",playlist);window.dispatchEvent(new Event("mocify-account-preferences-change"))}};
 export const readListenerSession=()=>read<{email:string;displayName:string}|null>(LISTENER_SESSION_KEY,null);
 export const saveListenerSession=(v:{email:string;displayName:string})=>write(LISTENER_SESSION_KEY,v);
 export const clearListenerSession=()=>{localStorage.removeItem(LISTENER_SESSION_KEY);window.dispatchEvent(new Event("mocify-library-change"))};
