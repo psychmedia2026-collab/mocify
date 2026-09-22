@@ -170,9 +170,6 @@
 
 .search-result-item small { color: #8d8d99; }
 .search-result-item b { display: block; margin-top: 5px; }
-.search-result-unavailable { opacity: .72; }
-.search-result-unavailable span { display: block; margin-top: 8px; color: #bca9d5; font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-
 .radio-hero {
   display: grid;
   grid-template-columns: minmax(0,1.1fr) minmax(300px,.9fr);
