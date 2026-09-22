@@ -375,3 +375,13 @@ button { cursor: pointer; }
 
 .listener-logout{cursor:pointer!important;background:transparent!important;color:#a7a4b0!important}
 .listener-logout:hover{color:#fff!important;border-color:rgba(255,255,255,.2)!important}
+
+
+/* Failed Premium payment fallback */
+.mocify-payment-failed{max-width:650px;margin:auto}
+.mocify-payment-status-icon{display:grid;place-items:center;width:42px;height:42px;margin-bottom:14px;border:1px solid rgba(255,119,143,.28);border-radius:50%;background:rgba(255,87,116,.08);color:#ff8ba0;font-size:21px;font-weight:900}
+.mocify-payment-failed .page-kicker{color:#ff8ba0!important}
+.mocify-checkout-free-badge{justify-self:start;margin-top:7px;padding:5px 8px;border:1px solid rgba(153,112,255,.45);border-radius:999px;background:linear-gradient(90deg,#6546d7,#a33bd2);color:#fff!important;font-size:9px!important;font-weight:900;letter-spacing:.07em}
+.mocify-payment-reassurance{margin:16px 0;color:#aaa7b4;font-size:13px;line-height:1.55}
+.mocify-payment-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.mocify-payment-actions .m-primary,.mocify-payment-actions .m-secondary{margin:0!important}
