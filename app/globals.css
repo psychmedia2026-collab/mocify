@@ -371,3 +371,7 @@ button { cursor: pointer; }
 .mocify-checkout-payment h2{margin:0 0 6px;font-size:17px}
 .mocify-checkout-payment p{margin:0 0 14px;color:#9996a3;font-size:13px;line-height:1.5}
 .mocify-checkout-payment .m-primary:disabled{opacity:.55;cursor:not-allowed;box-shadow:none}
+
+
+.listener-logout{cursor:pointer!important;background:transparent!important;color:#a7a4b0!important}
+.listener-logout:hover{color:#fff!important;border-color:rgba(255,255,255,.2)!important}
