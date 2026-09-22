@@ -76,3 +76,19 @@ button { cursor: pointer; }
 .legal-page h1{margin:8px 0 28px;font-size:clamp(44px,7vw,76px);letter-spacing:-.055em}
 .legal-page p:not(.page-kicker){max-width:760px;color:rgba(255,255,255,.72);font-size:17px;line-height:1.75}
 .legal-page p+p{margin-top:18px}
+
+
+/* Release-card playback control: keep the interactive play button perfectly circular. */
+.release-card-actions .release-play-button{
+  width:34px;
+  height:34px;
+  min-width:34px;
+  min-height:34px;
+  flex:0 0 34px;
+  padding:0;
+  border-radius:50%;
+  display:inline-grid;
+  place-items:center;
+  line-height:1;
+  aspect-ratio:1 / 1;
+}
