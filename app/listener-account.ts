@@ -23,7 +23,7 @@ export const toggleTrackInPlaylist=(playlistId:string,trackId:string)=>{savePlay
 export const removePlaylist=(id:string)=>savePlaylists(readPlaylists().filter(p=>p.id!==id));
 export const addHistory=(id:string)=>{const ids=readIds(HISTORY_KEY).filter(x=>x!==id);write(HISTORY_KEY,[id,...ids].slice(0,30))};
 export const readPublishedReleases=()=>read<PublishedRelease[]>(PUBLISHED_KEY,[]);
-const releaseIsVisible=(r:PublishedRelease)=>r.status!=="draft"&&r.status!=="scheduled"&&(!r.releaseDate||new Date(r.releaseDate+"T00:00:00").getTime()<=Date.now());
+const releaseIsVisible=(r:PublishedRelease)=>{if(r.status==="draft")return false;if(r.status==="scheduled"){if(!r.releaseDate)return false;const releaseAt=new Date(r.releaseDate+"T00:00:00").getTime();return Number.isFinite(releaseAt)&&releaseAt<=Date.now()}return !r.releaseDate||new Date(r.releaseDate+"T00:00:00").getTime()<=Date.now()};
 export const readPublicPublishedReleases=()=>readPublishedReleases().filter(releaseIsVisible);
 export const publishPrototypeRelease=(release:PublishedRelease)=>write(PUBLISHED_KEY,[release,...readPublishedReleases().filter(r=>r.id!==release.id)]);
 export const removePublishedRelease=(id:string)=>{write(PUBLISHED_KEY,readPublishedReleases().filter(r=>r.id!==id));void deletePrototypeAudio(id)};
