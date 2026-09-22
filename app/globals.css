@@ -127,3 +127,14 @@ button { cursor: pointer; }
 .release-card-actions > .release-play-button:disabled{
   flex:0 0 34px !important;
 }
+
+
+/* Playlist picker must float above the fixed listener sidebar instead of being clipped/covered. */
+.playlist-action-popover{
+  z-index:120!important;
+}
+.release-card,
+.release-card-actions,
+.playlist-action{
+  overflow:visible;
+}
