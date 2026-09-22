@@ -173,3 +173,25 @@ button { cursor: pointer; }
   top:auto!important;
   transform:none!important;
 }
+
+
+/* Desktop listener layout: playlist picker opens above the whole song card,
+   never over the fixed quick navigation. */
+@media (min-width:1201px){
+  .listener-shell .release-card:has(.playlist-action-popover){
+    position:relative;
+  }
+  .listener-shell .release-card:has(.playlist-action-popover) .playlist-action{
+    position:static;
+  }
+  .listener-shell .release-card:has(.playlist-action-popover) .playlist-action-popover{
+    left:0!important;
+    right:0!important;
+    bottom:calc(100% + 10px)!important;
+    top:auto!important;
+    width:100%!important;
+    max-width:none!important;
+    transform:none!important;
+    box-sizing:border-box;
+  }
+}
