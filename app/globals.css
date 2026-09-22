@@ -62,3 +62,11 @@ button { cursor: pointer; }
 @media(max-width:640px){.playlist-action-popover{position:fixed;left:16px;right:16px;bottom:92px;width:auto}}
 
 .playlist-action-error,.listener-playlist-name-error{display:block;margin:7px 0 0;color:#ff8aa0;font-size:10px;font-weight:750;line-height:1.35}
+
+/* Catalog artist profile */
+.artist-catalog-profile{padding-top:28px;padding-bottom:90px}
+.artist-catalog-hero{min-height:300px;display:flex;align-items:flex-end;gap:24px;padding:34px;border:1px solid rgba(255,255,255,.1);border-radius:24px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.28)}
+.artist-catalog-hero h1{margin:5px 0 7px;font-size:clamp(42px,7vw,76px);line-height:.9;letter-spacing:-.055em}
+.artist-catalog-hero>div>p:last-child{color:rgba(255,255,255,.7);font-weight:800;letter-spacing:.08em}
+.artist-catalog-avatar{display:grid;place-items:center;width:116px;height:116px;flex:0 0 116px;border:1px solid rgba(255,255,255,.16);border-radius:50%;font-size:30px;font-weight:950;box-shadow:0 18px 48px rgba(0,0,0,.28)}
+@media(max-width:600px){.artist-catalog-hero{min-height:260px;align-items:flex-end;padding:24px 20px}.artist-catalog-avatar{width:82px;height:82px;flex-basis:82px;font-size:22px}.artist-catalog-hero h1{font-size:clamp(36px,12vw,54px)}}
