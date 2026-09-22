@@ -320,3 +320,11 @@ button { cursor: pointer; }
 .listener-subscription-footer{margin-top:14px}
 .listener-subscription-footer p{margin:0;color:#aaa7b5;font-size:12px}
 @media(max-width:650px){.listener-subscription-grid{grid-template-columns:1fr}}
+
+
+/* Signed-in account plan indicator */
+.listener-profile-link{display:inline-flex!important;align-items:center!important;gap:7px!important}
+.listener-profile-dot{font-size:8px;color:#b9b8c2}
+.listener-header-plan{display:inline-flex;align-items:center;height:20px;padding:0 7px;border-radius:999px;font-size:9px;font-weight:900;letter-spacing:.07em;text-transform:uppercase}
+.listener-header-plan.free{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.055);color:#aaa8b4}
+.listener-header-plan.premium{border:1px solid rgba(222,74,218,.32);background:linear-gradient(90deg,rgba(120,87,255,.16),rgba(237,53,197,.16));color:#e8b8ff}
