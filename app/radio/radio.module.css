@@ -112,3 +112,23 @@
  .chartTable{min-width:610px}
  .tabs button{flex:0 0 auto}
 }
+
+
+/* Safari: prevent chart play control from being squeezed by the action flex row. */
+.trackActions>.play{
+  box-sizing:border-box;
+  width:34px!important;
+  height:34px!important;
+  min-width:34px!important;
+  min-height:34px!important;
+  max-width:34px!important;
+  max-height:34px!important;
+  flex:0 0 34px!important;
+  padding:0!important;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%!important;
+  line-height:1;
+  overflow:hidden;
+}
