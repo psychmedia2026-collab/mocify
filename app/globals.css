@@ -337,3 +337,11 @@ button { cursor: pointer; }
   color:#fff!important;
   text-shadow:0 1px 1px rgba(0,0,0,.28);
 }
+
+
+.listener-subscription-upgrade{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:14px;padding:14px;border:1px solid rgba(153,112,255,.18);border-radius:12px;background:linear-gradient(90deg,rgba(120,87,255,.07),rgba(237,53,197,.035))}
+.listener-subscription-upgrade>div{display:grid;gap:3px}
+.listener-subscription-upgrade strong{color:#f5f2fa;font-size:13px}
+.listener-subscription-upgrade span{color:#8e8b99;font-size:11px}
+.listener-subscription-upgrade .m-primary{white-space:nowrap}
+@media(max-width:650px){.listener-subscription-upgrade{align-items:flex-start;flex-direction:column}}
