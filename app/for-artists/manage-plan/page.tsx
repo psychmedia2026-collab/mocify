@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import {useEffect,useMemo,useState} from "react";
+import { Suspense, useEffect,useMemo,useState } from "react";
 import {useRouter,useSearchParams} from "next/navigation";
 import {ArtistPortalShell} from "../../artist-components";
 import {useLanguage} from "../../i18n/language-provider";
