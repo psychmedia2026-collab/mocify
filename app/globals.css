@@ -305,3 +305,18 @@ button { cursor: pointer; }
 }
 .mocify-settings-form select:hover{border-color:rgba(167,126,255,.48)!important;background-color:#121321!important}
 .mocify-settings-form select:focus{outline:none!important;border-color:#8f75ff!important;box-shadow:0 0 0 3px rgba(120,87,255,.14)!important}
+
+
+/* Profile subscription card */
+.listener-subscription-card{margin-top:8px;padding:20px!important;border:1px solid rgba(255,255,255,.09);border-radius:16px;background:linear-gradient(145deg,rgba(17,13,35,.8),rgba(7,9,18,.96))}
+.listener-subscription-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.075)}
+.listener-subscription-head .page-kicker{margin:0 0 5px;color:#b991ff!important;font-size:11px!important;letter-spacing:.18em}
+.listener-subscription-head h2{margin:0;color:#fff;font-size:20px;letter-spacing:-.02em}
+.listener-plan-badge{padding:6px 10px;border:1px solid rgba(164,116,255,.3);border-radius:999px;background:rgba(120,87,255,.09);color:#cfbaff;font-size:10px;font-weight:900;letter-spacing:.1em}
+.listener-subscription-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
+.listener-subscription-grid>div{display:grid;gap:5px;padding:13px 14px;border:1px solid rgba(255,255,255,.065);border-radius:11px;background:rgba(255,255,255,.02)}
+.listener-subscription-grid span{color:#858391;font-size:11px;font-weight:700}
+.listener-subscription-grid strong{color:#f2f0f5;font-size:13px;font-weight:800}
+.listener-subscription-footer{margin-top:14px}
+.listener-subscription-footer p{margin:0;color:#aaa7b5;font-size:12px}
+@media(max-width:650px){.listener-subscription-grid{grid-template-columns:1fr}}
