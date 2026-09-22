@@ -8,6 +8,19 @@ export const MANAGED_ARTISTS_KEY="mocify-managed-artists";
 export const ACTIVE_ARTIST_KEY="mocify-active-artist";
 export const ARTIST_BILLING_END_KEY="mocify-artist-billing-period-end";
 export const ARTIST_PENDING_PLAN_KEY="mocify-artist-pending-plan";
+export const ARTIST_AI_CREDITS_KEY="mocify-artist-ai-cover-credits";
+export const ARTIST_AI_USAGE_KEY="mocify-artist-ai-cover-usage";
+
+export const ARTIST_AI_COVER_MONTHLY_ALLOWANCE:Record<ArtistPlanTier,number>={free:1,pro:10,max:30};
+export const ARTIST_AI_COVER_HARD_CAP:Record<ArtistPlanTier,number>={free:1,pro:10,max:30};
+export type ArtistAiCoverUsage={period:string;used:number;estimatedCostUsd:number};
+const aiPeriod=()=>new Date().toISOString().slice(0,7);
+export function readArtistAiCoverUsage():ArtistAiCoverUsage{if(typeof window==="undefined")return{period:aiPeriod(),used:0,estimatedCostUsd:0};try{const raw=JSON.parse(localStorage.getItem(ARTIST_AI_USAGE_KEY)||"null");if(raw?.period===aiPeriod())return{period:raw.period,used:Number(raw.used)||0,estimatedCostUsd:Number(raw.estimatedCostUsd)||0}}catch{}return{period:aiPeriod(),used:0,estimatedCostUsd:0}}
+export function getArtistAiCoverAllowance(plan:ArtistPlanTier){return Math.min(ARTIST_AI_COVER_MONTHLY_ALLOWANCE[plan],ARTIST_AI_COVER_HARD_CAP[plan])}
+export function getArtistAiCoverBalance(plan:ArtistPlanTier){const usage=readArtistAiCoverUsage();return Math.max(0,getArtistAiCoverAllowance(plan)-usage.used)}
+export function canGenerateArtistAiCover(plan:ArtistPlanTier){return getArtistAiCoverBalance(plan)>0}
+export function recordArtistAiCoverGeneration(plan:ArtistPlanTier,estimatedCostUsd=0){if(typeof window==="undefined"||!canGenerateArtistAiCover(plan))return false;const usage=readArtistAiCoverUsage(),next={period:aiPeriod(),used:usage.used+1,estimatedCostUsd:usage.estimatedCostUsd+Math.max(0,estimatedCostUsd)};localStorage.setItem(ARTIST_AI_USAGE_KEY,JSON.stringify(next));window.dispatchEvent(new Event("mocify-ai-credit-change"));return true}
+
 
 export const DEMO_ARTIST_ACCOUNTS={
  free:{email:"free@mocify.ai",password:"MocifyFree2026!",artistName:"Free Test Artist",plan:"free" as ArtistPlanTier,role:"artist" as const},
