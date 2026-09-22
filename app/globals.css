@@ -345,3 +345,15 @@ button { cursor: pointer; }
 .listener-subscription-upgrade span{color:#8e8b99;font-size:11px}
 .listener-subscription-upgrade .m-primary{white-space:nowrap}
 @media(max-width:650px){.listener-subscription-upgrade{align-items:flex-start;flex-direction:column}}
+
+
+/* Membership management */
+.listener-free-close{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:12px;padding:12px 2px 0;border-top:1px solid rgba(255,255,255,.065)}
+.listener-free-close>span{color:#7f7d89;font-size:11px}
+.m-danger-link{appearance:none;border:0;background:transparent;color:#d88d9b;font:inherit;font-size:12px;font-weight:800;cursor:pointer;padding:7px 0}
+.m-danger-link:hover{color:#ffacba;text-decoration:underline}
+.listener-membership-actions{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:2px}
+.listener-membership-notice{display:grid;gap:4px;padding:12px 14px;border:1px solid rgba(153,112,255,.16);border-radius:11px;background:rgba(120,87,255,.05)}
+.listener-membership-notice strong{color:#e6ddff;font-size:12px}
+.listener-membership-notice span{color:#9793a2;font-size:11px}
+@media(max-width:650px){.listener-free-close,.listener-membership-actions{align-items:flex-start;flex-direction:column}}
