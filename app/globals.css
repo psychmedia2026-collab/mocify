@@ -138,3 +138,18 @@ button { cursor: pointer; }
 .playlist-action{
   overflow:visible;
 }
+
+
+/* Open playlist card must establish a stacking context above the fixed quick menu. */
+.release-card:has(.playlist-action-popover){
+  position:relative;
+  z-index:90!important;
+}
+.release-card:has(.playlist-action-popover) .release-card-actions,
+.release-card:has(.playlist-action-popover) .playlist-action{
+  position:relative;
+  z-index:91!important;
+}
+.release-card:has(.playlist-action-popover) .playlist-action-popover{
+  z-index:92!important;
+}
