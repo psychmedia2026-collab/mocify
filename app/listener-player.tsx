@@ -5,7 +5,7 @@ import { releases, type Release } from "./data";
 import {LISTENER_COUNTRY_KEY,recordCountryStream} from "./radio/radio-system";
 import {addHistory} from "./listener-account";
 
-export type PlaybackTrack = Pick<Release, "id" | "title" | "artist" | "genre" | "art"> & { href?: string; audioSrc?: string; };
+export type PlaybackTrack = { id:string; title:string; artist:string; genre:string; art:string; href?:string; audioSrc?:string; country?:string; duration?:string; };
 export type RepeatMode = "off" | "queue" | "track";
 
 const catalogQueue: PlaybackTrack[] = releases.filter((track) => "audioSrc" in track && typeof track.audioSrc === "string").map((track) => ({ id:track.id,title:track.title,artist:track.artist,genre:track.genre,art:track.art,href:"href" in track?track.href:undefined,audioSrc:"audioSrc" in track&&typeof track.audioSrc==="string"?track.audioSrc:undefined }));
