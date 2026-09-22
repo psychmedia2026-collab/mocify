@@ -31,7 +31,7 @@ The production build currently uses `next build --webpack`. Development keeps th
 - `/library` — prototype library
 - `/upload` — upload prototype
 - `/login` and `/signup` — account prototypes
-- `/premium` — prototype plans
+- `/plans` — subscription plans (`/premium` redirects here)
 - `/settings` — prototype settings
 
 ## Visual direction
