@@ -2,7 +2,8 @@ import {releases,type Release} from "../data";
 import {combinedReleases,hydratedPublishedReleases,type PublishedRelease} from "../listener-account";
 
 export type RadioChartSize=40|100|1000;
-export type CountryChartEntry={rank:number;track:Release|PublishedRelease;streams:number;change:number};
+export type CatalogTrack={id:string;title:string;artist:string;genre:string;art:string;href?:string;audioSrc?:string;country?:string;duration?:string};
+export type CountryChartEntry={rank:number;track:CatalogTrack;streams:number;change:number};
 
 export const LISTENER_COUNTRY_KEY="mocify-listener-country";
 const STREAM_KEY="mocify-country-streams-v1";
@@ -41,7 +42,7 @@ export function recordCountryStream(country:string,trackId:string){
 export function getCountryChart(country:string,size:RadioChartSize):CountryChartEntry[]{
  const code=country.toUpperCase();
  const stored=readStored()[code]??{};
- return combinedReleases(releases).filter(track=>!track.country||track.country==="INT"||track.country===code).map(track=>({
+ return (combinedReleases(releases) as readonly CatalogTrack[]).filter(track=>!track.country||track.country==="INT"||track.country===code).map(track=>({
    track,
    streams:prototypeStreams(code,track.id)+(stored[track.id]??0),
    change:prototypeChange(code,track.id),
@@ -56,6 +57,6 @@ export function getRadioQueue(country:string){
 
 
 export async function getHydratedRadioQueue(country:string){
- const code=country.toUpperCase(),published=await hydratedPublishedReleases(),catalog=[...published,...releases];
+ const code=country.toUpperCase(),published=await hydratedPublishedReleases(),catalog=[...published,...releases] as CatalogTrack[];
  return catalog.filter(track=>(!track.country||track.country==="INT"||track.country===code)&&Boolean(track.audioSrc)).sort((a,b)=>prototypeStreams(code,b.id)-prototypeStreams(code,a.id));
 }
