@@ -153,3 +153,13 @@ button { cursor: pointer; }
 .release-card:has(.playlist-action-popover) .playlist-action-popover{
   z-index:92!important;
 }
+
+
+/* Playlist picker: centered directly above its song action, never shifted toward sidebar. */
+.playlist-action-popover{
+  left:50%!important;
+  right:auto!important;
+  bottom:44px!important;
+  top:auto!important;
+  transform:translateX(-50%)!important;
+}
