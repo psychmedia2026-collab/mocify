@@ -3,7 +3,7 @@ import Link from "next/link";
 import {useParams} from "next/navigation";
 import {Shell,AddToPlaylist} from "../../../components";
 import {countryGenreMap,countryPlaylists,genrePlaylists,regionalGenres,releases} from "../../../data";
-import {useListenerPlayer} from "../../../listener-player";
+import {useListenerPlayer,type PlaybackTrack} from "../../../listener-player";
 import {useEffect,useState} from "react";
 import {SAVED_PLAYLIST_KEY,readIds,toggleId,combinedReleases,hydratedPublishedReleases,type PublishedRelease} from "../../../listener-account";
 import {useLanguage} from "../../../i18n/language-provider";
@@ -33,7 +33,7 @@ export default function PlaylistDetail(){
  const genre=allGenres.find(g=>g.slug===slug),allowed=(countryGenreMap[code]??countryGenreMap.INT).includes(slug);
  const chartSize=slug==="top40"?40:slug==="top100"?100:slug==="top1000"?1000:null;const playlist=chartSize?{title:chartTitle(code,countryName,chartSize),subtitle:chartSize===40?country.subtitle:t.chartSubtitle.replace("{n}",String(chartSize)),releaseIds:code==="INT"?top40Ids:country.releaseIds}:allowed&&genre?genre:null;
  if(!playlist)return <Shell active="playlists"><section className="playlist-detail page-wrap"><Link href="/playlists">← {t.all}</Link><h1>{t.unavailable}</h1><p>{t.unavailableText}</p></section></Shell>;
- const fixed=playlist.releaseIds.map(id=>catalog.find(r=>r.id===id)).filter(Boolean),dynamic=catalog.filter(r=>r.id.startsWith("published-")&&(!r.country||r.country==="INT"||r.country===code)&&(!genre?.title||r.genre.toLowerCase().includes(genre.title.toLowerCase()))),tracks=[...dynamic,...fixed.filter(r=>!dynamic.some(d=>d.id===r?.id))].filter(Boolean) as typeof catalog,playable=tracks.filter((t):t is typeof t & {audioSrc:string}=>"audioSrc"in t&&typeof t.audioSrc==="string");
+ const fixed=playlist.releaseIds.map(id=>catalog.find(r=>r.id===id)).filter((r):r is NonNullable<typeof r>=>Boolean(r)),dynamic=catalog.filter(r=>{const item=r as PlaybackTrack;return item.id.startsWith("published-")&&(!item.country||item.country==="INT"||item.country===code)&&(!genre?.title||item.genre.toLowerCase().includes(genre.title.toLowerCase()))}),tracks=[...dynamic,...fixed.filter(r=>!dynamic.some(d=>d.id===r.id))] as PlaybackTrack[],playable=tracks.filter((t):t is PlaybackTrack&{audioSrc:string}=>typeof t.audioSrc==="string");
  const playAll=(shuffle=false)=>{let queue=playable;if(shuffle)queue=[...queue].sort(()=>Math.random()-.5);if(queue[0])player.selectTrack(queue[0],queue,true)};
  const playOne=(id:string)=>{const track=playable.find(t=>t.id===id);if(track)player.selectTrack(track,playable,true)};
  return <Shell active="playlists"><section className="playlist-detail page-wrap">
