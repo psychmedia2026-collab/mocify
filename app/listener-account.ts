@@ -1,7 +1,7 @@
 "use client";
 import type {Release} from "./data";
 export const LISTENER_ACCOUNT_KEY="mocify-listener-account",LISTENER_SESSION_KEY="mocify-listener-session",LIKED_KEY="mocify-saved-track-ids",FOLLOWED_KEY="mocify-followed-artists",PLAYLIST_KEY="mocify-listener-playlists",SAVED_PLAYLIST_KEY="mocify-saved-playlists",HISTORY_KEY="mocify-listening-history",PUBLISHED_KEY="mocify-published-releases";
-export type ListenerAccount={displayName:string;email:string;passwordHash:string;country:string;language:string;radioCountry?:string;playlistCountry?:string;avatar?:string;registeredAt?:number;subscription?:{plan:"free"|"premium";startedAt?:number;renewsAt?:number;cancelAtPeriodEnd?:boolean}};
+export type ListenerAccount={displayName:string;email:string;passwordHash:string;country:string;language:string;radioCountry?:string;playlistCountry?:string;avatar?:string;registeredAt?:number;subscription?:{plan:"free"|"premium";startedAt?:number;renewsAt?:number;cancelAtPeriodEnd?:boolean;scheduledAction?:"downgrade"|"close"}};
 export type ListenerPlaylist={id:string;name:string;cover:string;trackIds:string[];createdAt:number};
 export type PublishedRelease={id:string;title:string;artist:string;genre:string;art:string;audioSrc?:string;duration?:string;country?:string;href?:string;detailReady?:boolean;releaseDate?:string;status?:"published"|"scheduled"|"draft";createdAt?:number;tool?:string};
 const read=<T,>(key:string,fallback:T):T=>{if(typeof window==="undefined")return fallback;try{const v=JSON.parse(localStorage.getItem(key)||"null");return v??fallback}catch{return fallback}};
@@ -12,6 +12,7 @@ export const saveListenerAccount=(v:ListenerAccount)=>{if(!v.registeredAt)v.regi
 export const readListenerSession=()=>read<{email:string;displayName:string}|null>(LISTENER_SESSION_KEY,null);
 export const saveListenerSession=(v:{email:string;displayName:string})=>write(LISTENER_SESSION_KEY,v);
 export const clearListenerSession=()=>{localStorage.removeItem(LISTENER_SESSION_KEY);window.dispatchEvent(new Event("mocify-library-change"))};
+export const deleteListenerAccount=()=>{localStorage.removeItem(LISTENER_ACCOUNT_KEY);localStorage.removeItem(LISTENER_SESSION_KEY);localStorage.removeItem(LIKED_KEY);localStorage.removeItem(FOLLOWED_KEY);localStorage.removeItem(PLAYLIST_KEY);localStorage.removeItem(SAVED_PLAYLIST_KEY);localStorage.removeItem(HISTORY_KEY);window.dispatchEvent(new Event("mocify-library-change"));window.dispatchEvent(new Event("mocify-account-preferences-change"))};
 export const readIds=(key:string)=>read<string[]>(key,[]);
 export const toggleId=(key:string,id:string)=>{const ids=readIds(key),next=ids.includes(id)?ids.filter(x=>x!==id):[...ids,id];write(key,next);return next.includes(id)};
 export const readPlaylists=()=>read<ListenerPlaylist[]>(PLAYLIST_KEY,[]);
