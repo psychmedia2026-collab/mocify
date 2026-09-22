@@ -6,10 +6,10 @@ import Link from "next/link";
 import {Shell,ReleaseCard,AddToPlaylist} from "../components";
 import SectionHero from "../section-hero";
 import {useLanguage} from "../i18n/language-provider";
-import {useEffect,useState,type FormEvent} from "react";
+import {Suspense,useEffect,useState,type FormEvent} from "react";
 import {hydratedPublishedReleases} from "../listener-account";
 
-export default function ExplorePage(){
+function ExploreContent(){
   const router=useRouter(); const params=useSearchParams(); const query=(params.get("q")??"").trim(); const normalized=query.toLocaleLowerCase();
   const {dictionary}=useLanguage(); const t=dictionary.pages.explore; const h=dictionary.heroes.explore; const[catalog,setCatalog]=useState(()=>[...releases] as any[]);useEffect(()=>{const sync=()=>{void hydratedPublishedReleases().then(p=>setCatalog([...p,...releases]))};sync();addEventListener("mocify-library-change",sync);return()=>removeEventListener("mocify-library-change",sync)},[]);
   const trackMatches=normalized?catalog.filter(r=>`${r.title} ${r.artist} ${r.genre}`.toLocaleLowerCase().includes(normalized)):[];
@@ -24,3 +24,5 @@ export default function ExplorePage(){
     <section id="genres" className="scroll-mt-24 pb-12"><div className="home-heading"><div><p className="page-kicker">{t.browse}</p><h2>{t.genres}</h2></div></div><div className="flex flex-wrap gap-3">{genres.map(g=><Link href={`/explore?q=${encodeURIComponent(g)}`} key={g} className="genre-pill">{g}</Link>)}</div></section>
   </div></Shell>;
 }
+
+export default function ExplorePage(){return <Suspense fallback={null}><ExploreContent/></Suspense>}
