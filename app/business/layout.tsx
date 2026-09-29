@@ -1,0 +1,3 @@
+import Link from "next/link";
+import "./business.css";
+export default function BusinessLayout({children}:{children:React.ReactNode}){return <div className="businessShell"><header className="businessHeader"><Link href="/business" className="businessBrand">MOCIFY <span>BUSINESS</span></Link><nav className="businessNav"><Link href="/business/background-music">Background Music</Link><Link href="/business/licensing">Licensing</Link><Link href="/business/catalog">Catalogue</Link><Link href="/business/pricing">Pricing</Link><Link href="/business/dashboard">Dashboard</Link></nav></header>{children}</div>}
