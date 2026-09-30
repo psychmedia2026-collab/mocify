@@ -1,4 +1,10 @@
 import Link from "next/link";
 import "./admin.css";
-const nav=[["/admin","Overview"],["/admin/users","Users"],["/admin/artists","Artists"],["/admin/content","Music & Content"],["/admin/playlists","Playlists & Radio"],["/admin/subscriptions","Subscriptions"],["/admin/promote","Promote & Ads"],["/admin/business","Business"],["/admin/licenses","Licenses"],["/admin/payments","Payments"],["/admin/reports","Reports"],["/admin/settings","Settings"]];
-export default function AdminLayout({children}:{children:React.ReactNode}){return <div className="adminShell"><aside className="adminSide"><div className="adminBrand">MOCIFY <span>ADMIN</span></div><nav className="adminNav">{nav.map(([href,label])=><Link key={href} href={href}>{label}</Link>)}</nav></aside><main className="adminMain">{children}</main></div>}
+const groups=[
+ {title:"Overview",items:[["/admin","Dashboard","⌂"]]},
+ {title:"People",items:[["/admin/users","Listeners","◎"],["/admin/artists","Artists","♫"],["/admin/business","Businesses","▣"]]},
+ {title:"Content",items:[["/admin/content","Music & releases","♪"],["/admin/playlists","Playlists & radio","▶"],["/admin/promote","Promote & ads","↗"]]},
+ {title:"Money",items:[["/admin/subscriptions","Subscriptions","◇"],["/admin/licenses","Licenses","▤"],["/admin/payments","Payments & payouts","€"]]},
+ {title:"Control",items:[["/admin/reports","Reports & moderation","!"],["/admin/settings","Platform settings","⚙"]]}
+];
+export default function AdminLayout({children}:{children:React.ReactNode}){return <div className="adminShell"><aside className="adminSide"><div className="adminBrand">MOCIFY <span>ADMIN</span></div><div className="adminSideStatus"><i></i><span>Admin workspace</span></div><nav className="adminNav">{groups.map(g=><div className="adminNavGroup" key={g.title}><div className="adminNavTitle">{g.title}</div>{g.items.map(([href,label,icon])=><Link key={href} href={href}><span className="adminNavIcon">{icon}</span><span>{label}</span></Link>)}</div>)}</nav><div className="adminSideFoot"><strong>Frontend mode</strong><span>Mock data · backend later</span></div></aside><div className="adminWorkspace"><header className="adminGlobalBar"><div className="adminGlobalSearch"><span>⌕</span><input aria-label="Search admin" placeholder="Search accounts, artists, tracks, campaigns…"/><kbd>⌘ K</kbd></div><div className="adminGlobalActions"><button aria-label="Notifications">● <span>17</span></button><div className="adminAvatar">SA</div></div></header><main className="adminMain">{children}</main></div></div>}
