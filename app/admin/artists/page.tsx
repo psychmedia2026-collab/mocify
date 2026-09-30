@@ -1,7 +1,2 @@
-import Link from "next/link";
-const artists=[
- {name:"Andigo",slug:"andigo",email:"andigo@mocify.demo",verification:"Verified",catalogue:"24 tracks",streams:"1.84M",status:"Active"},
- {name:"Nova Ray",slug:"nova-ray",email:"nova@mocify.demo",verification:"Pending",catalogue:"3 tracks",streams:"42.8K",status:"Review"},
- {name:"Mira Vale",slug:"mira-vale",email:"mira@mocify.demo",verification:"Verified",catalogue:"18 tracks",streams:"916K",status:"Active"}
-];
-export default function ArtistsPage(){return <><div className="adminPageHead"><div><div className="adminEyebrow">CREATORS</div><h1 className="adminTitle">Artists</h1><p className="adminMuted">Open an artist account to see the complete catalogue, streams per song, releases, revenue, Promote activity and account information.</p></div><button className="adminPrimaryBtn">+ Add artist</button></div><div className="adminArtistSearch"><span>⌕</span><input placeholder="Search artist, email, track or status…"/><select><option>All verification</option><option>Verified</option><option>Pending</option></select></div><div className="adminTableWrap adminArtistTable"><table className="adminTable"><thead><tr><th>Artist</th><th>Verification</th><th>Catalogue</th><th>Total streams</th><th>Status</th><th></th></tr></thead><tbody>{artists.map(a=><tr key={a.slug}><td><Link className="adminArtistLink" href={`/admin/artists/${a.slug}`}><strong>{a.name}</strong><small>{a.email}</small></Link></td><td>{a.verification}</td><td>{a.catalogue}</td><td><strong>{a.streams}</strong></td><td><span className="adminBadge">{a.status}</span></td><td><Link className="adminOpenBtn" href={`/admin/artists/${a.slug}`}>Open account →</Link></td></tr>)}</tbody></table></div></>}
+import ArtistsClient from "./ArtistsClient";
+export default function ArtistsPage(){return <ArtistsClient/>}
