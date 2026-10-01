@@ -1,0 +1,1 @@
+import {NextResponse} from 'next/server';import {trackDetail} from '@/lib/server/platform-admin';export const runtime='nodejs';export async function GET(_req:Request,{params}:{params:Promise<{id:string}>}){const{id}=await params;const track=await trackDetail(id);return track?NextResponse.json({ok:true,track}):NextResponse.json({ok:false,error:'Track not found'},{status:404});}
