@@ -1,5 +1,68 @@
 "use client";
-import Link from "next/link";import{useMemo,useState}from"react";import{useAdminLanguage}from"../AdminLanguage";
-type Plan="Artist Free"|"Artist Pro"|"Artist Max";
-const artists=[{id:"ART-000001",name:"Andigo",slug:"andigo",email:"andigo@mocify.demo",verification:"Verified",plan:"Artist Max" as Plan,catalogue:"24 tracks",streams:"1.84M",status:"Active"},{id:"ART-000002",name:"Nova Ray",slug:"nova-ray",email:"nova@mocify.demo",verification:"Pending",plan:"Artist Free" as Plan,catalogue:"3 tracks",streams:"42.8K",status:"Review"},{id:"ART-000003",name:"Mira Vale",slug:"mira-vale",email:"mira@mocify.demo",verification:"Verified",plan:"Artist Pro" as Plan,catalogue:"18 tracks",streams:"916K",status:"Active"},...Array.from({length:35},(_,i)=>({id:`ART-${String(i+4).padStart(6,"0")}`,name:["Luna Grey","Theo Miles","Aya North","Kairo","Elena Voss","Riven","Nico Sol"][i%7]+" "+(i+1),slug:i%3===0?"andigo":i%3===1?"nova-ray":"mira-vale",email:`artist${i+4}@mocify.demo`,verification:i%5===0?"Pending":"Verified",plan:(["Artist Free","Artist Pro","Artist Max"] as Plan[])[i%3],catalogue:`${2+(i*7)%39} tracks`,streams:`${18+i*37}.${i%9}K`,status:i%5===0?"Review":"Active"}))];
-export default function ArtistsClient(){const{t}=useAdminLanguage();const[q,setQ]=useState("");const[v,setV]=useState("All verification");const[p,setP]=useState("All plans");const shown=useMemo(()=>{const needle=q.trim().toLowerCase();return artists.filter(a=>(v==="All verification"||a.verification===v)&&(p==="All plans"||a.plan===p)&&(!needle||Object.values(a).join(" ").toLowerCase().includes(needle)))},[q,v,p]);const planClass=(plan:Plan)=>plan==="Artist Max"?"revenue":plan==="Artist Pro"?"premium":"free";return <><div className="adminPageHead"><div><div className="adminEyebrow">{t("MAKERS","CREATORS")}</div><h1 className="adminTitle">{t("Artiesten","Artists")}</h1><p className="adminMuted">{t("Iedere artiest heeft een permanent MOCIFY Artiest-ID en een duidelijk zichtbaar Artist Free-, Pro- of Max-abonnement.","Every artist has a permanent MOCIFY Artist ID and a clearly visible Artist Free, Pro or Max plan.")}</p></div><button className="adminPrimaryBtn" onClick={()=>alert(t("Frontenddemo: artiest toevoegen wordt later aan de backend gekoppeld.","Frontend demo: Add artist will connect to the backend later."))}>+ {t("Artiest toevoegen","Add artist")}</button></div><div className="adminArtistSearch"><span>⌕</span><input value={q} onChange={e=>setQ(e.target.value)} placeholder={t("Zoek Artiest-ID, naam, e-mail, abonnement, status of catalogus…","Search Artist ID, name, email, plan, status or catalogue…")}/><select value={p} onChange={e=>setP(e.target.value)}><option value="All plans">{t("Alle abonnementen","All plans")}</option><option>Artist Free</option><option>Artist Pro</option><option>Artist Max</option></select><select value={v} onChange={e=>setV(e.target.value)}><option value="All verification">{t("Alle verificaties","All verification")}</option><option value="Verified">{t("Geverifieerd","Verified")}</option><option value="Pending">{t("In afwachting","Pending")}</option></select></div><div className="adminArtistCount">{shown.length} {t("artiesten gevonden","artists found")}</div><div className="adminTableWrap adminArtistTable adminArtistScroll" style={{maxHeight:"560px",overflowY:"auto"}}><table className="adminTable"><thead><tr><th>{t("ARTIEST-ID","ARTIST ID")}</th><th>{t("ARTIEST","ARTIST")}</th><th>{t("ABONNEMENT","PLAN")}</th><th>{t("VERIFICATIE","VERIFICATION")}</th><th>{t("CATALOGUS","CATALOGUE")}</th><th>{t("TOTALE STREAMS","TOTAL STREAMS")}</th><th>STATUS</th><th></th></tr></thead><tbody>{shown.map(a=><tr key={a.id}><td><strong>{a.id}</strong></td><td><Link className="adminArtistLink" href={`/admin/artists/${a.slug}`}><strong>{a.name}</strong><small>{a.email}</small></Link></td><td><span className={`adminBadge ${planClass(a.plan)}`}><strong>{a.plan}</strong></span></td><td>{a.verification==="Verified"?t("Geverifieerd","Verified"):t("In afwachting","Pending")}</td><td>{a.catalogue}</td><td><strong>{a.streams}</strong></td><td><span className="adminBadge">{a.status==="Active"?t("Actief","Active"):t("Beoordelen","Review")}</span></td><td><Link className="adminOpenBtn" href={`/admin/artists/${a.slug}`}>{t("Account openen","Open account")} →</Link></td></tr>)}</tbody></table></div></>}
+
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
+import { useAdminLanguage } from "../AdminLanguage";
+
+type ApiPlan = "ARTIST_FREE" | "ARTIST_PRO" | "ARTIST_MAX";
+type Plan = "Artist Free" | "Artist Pro" | "Artist Max";
+type Artist = {
+  id: string;
+  name: string;
+  email: string;
+  plan: ApiPlan;
+  verification: string;
+  status: string;
+  countryCode: string | null;
+  trackCount: number;
+  totalStreams: number;
+};
+
+const planLabel = (plan: ApiPlan): Plan =>
+  plan === "ARTIST_MAX" ? "Artist Max" : plan === "ARTIST_PRO" ? "Artist Pro" : "Artist Free";
+
+const formatStreams = (value: number) =>
+  new Intl.NumberFormat("en", { notation: "compact", maximumFractionDigits: 1 }).format(value);
+
+export default function ArtistsClient() {
+  const { t } = useAdminLanguage();
+  const [artists, setArtists] = useState<Artist[]>([]);
+  const [q, setQ] = useState("");
+  const [v, setV] = useState("ALL");
+  const [p, setP] = useState("ALL");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let active = true;
+    fetch("/api/admin/artists", { cache: "no-store" })
+      .then(async (response) => {
+        const data = await response.json();
+        if (!response.ok || !data.ok) throw new Error(data.error || "Artist database query failed");
+        if (active) setArtists(data.artists);
+      })
+      .catch(() => active && setError(t("Artiesten konden niet uit de database worden geladen.", "Artists could not be loaded from the database.")))
+      .finally(() => active && setLoading(false));
+    return () => { active = false; };
+  }, [t]);
+
+  const shown = useMemo(() => {
+    const needle = q.trim().toLowerCase();
+    return artists.filter((a) => {
+      const label = planLabel(a.plan);
+      const verificationMatches = v === "ALL" || a.verification === v;
+      const planMatches = p === "ALL" || label === p;
+      const haystack = [a.id, a.name, a.email, label, a.verification, a.status, a.countryCode ?? "", a.trackCount, a.totalStreams].join(" ").toLowerCase();
+      return verificationMatches && planMatches && (!needle || haystack.includes(needle));
+    });
+  }, [artists, q, v, p]);
+
+  const planClass = (plan: Plan) => plan === "Artist Max" ? "revenue" : plan === "Artist Pro" ? "premium" : "free";
+
+  return <>
+    <div className="adminPageHead"><div><div className="adminEyebrow">{t("MAKERS", "CREATORS")}</div><h1 className="adminTitle">{t("Artiesten", "Artists")}</h1><p className="adminMuted">{t("Iedere artiest heeft een permanent MOCIFY Artiest-ID en een duidelijk zichtbaar Artist Free-, Pro- of Max-abonnement.", "Every artist has a permanent MOCIFY Artist ID and a clearly visible Artist Free, Pro or Max plan.")}</p></div><button className="adminPrimaryBtn" onClick={() => alert(t("De databasekoppeling is actief. Het invoerformulier bouwen we als volgende stap.", "The database connection is active. The creation form is the next step."))}>+ {t("Artiest toevoegen", "Add artist")}</button></div>
+    <div className="adminArtistSearch"><span>⌕</span><input value={q} onChange={e => setQ(e.target.value)} placeholder={t("Zoek Artiest-ID, naam, e-mail, abonnement, status of catalogus…", "Search Artist ID, name, email, plan, status or catalogue…")}/><select value={p} onChange={e => setP(e.target.value)}><option value="ALL">{t("Alle abonnementen", "All plans")}</option><option>Artist Free</option><option>Artist Pro</option><option>Artist Max</option></select><select value={v} onChange={e => setV(e.target.value)}><option value="ALL">{t("Alle verificaties", "All verification")}</option><option value="VERIFIED">{t("Geverifieerd", "Verified")}</option><option value="PENDING">{t("In afwachting", "Pending")}</option><option value="REJECTED">{t("Afgewezen", "Rejected")}</option></select></div>
+    <div className="adminArtistCount">{loading ? t("Database laden…", "Loading database…") : error || `${shown.length} ${t("artiesten gevonden", "artists found")}`}</div>
+    <div className="adminTableWrap adminArtistTable adminArtistScroll" style={{maxHeight:"560px",overflowY:"auto"}}><table className="adminTable"><thead><tr><th>{t("ARTIEST-ID","ARTIST ID")}</th><th>{t("ARTIEST","ARTIST")}</th><th>{t("ABONNEMENT","PLAN")}</th><th>{t("VERIFICATIE","VERIFICATION")}</th><th>{t("CATALOGUS","CATALOGUE")}</th><th>{t("TOTALE STREAMS","TOTAL STREAMS")}</th><th>STATUS</th><th></th></tr></thead><tbody>{shown.map(a => { const label = planLabel(a.plan); return <tr key={a.id}><td><strong>{a.id}</strong></td><td><Link className="adminArtistLink" href={`/admin/artists/${a.id}`}><strong>{a.name}</strong><small>{a.email}</small></Link></td><td><span className={`adminBadge ${planClass(label)}`}><strong>{label}</strong></span></td><td>{a.verification === "VERIFIED" ? t("Geverifieerd","Verified") : a.verification === "REJECTED" ? t("Afgewezen","Rejected") : t("In afwachting","Pending")}</td><td>{a.trackCount} {t("tracks","tracks")}</td><td><strong>{formatStreams(a.totalStreams)}</strong></td><td><span className="adminBadge">{a.status === "ACTIVE" ? t("Actief","Active") : a.status === "SUSPENDED" ? t("Geschorst","Suspended") : t("Gesloten","Closed")}</span></td><td><Link className="adminOpenBtn" href={`/admin/artists/${a.id}`}>{t("Account openen","Open account")} →</Link></td></tr>})}</tbody></table></div>
+  </>;
+}
