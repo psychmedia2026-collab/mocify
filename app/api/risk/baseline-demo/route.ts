@@ -1,0 +1,2 @@
+import{NextRequest,NextResponse}from"next/server";import{runBaselineDemo}from"../../../../lib/risk/baseline-demo";
+export async function GET(req:NextRequest){const raw=req.nextUrl.searchParams.get("streams");const parsed=raw===null?1840:Number(raw);const streams=Number.isFinite(parsed)&&parsed>=0?Math.round(parsed):1840;return NextResponse.json({warning:"Development-only baseline simulation. Historical data is fictitious.",...runBaselineDemo(streams)});}
