@@ -1,68 +1,12 @@
 "use client";
-
-import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-import { useAdminLanguage } from "../AdminLanguage";
-
-type ApiPlan = "ARTIST_FREE" | "ARTIST_PRO" | "ARTIST_MAX";
-type Plan = "Artist Free" | "Artist Pro" | "Artist Max";
-type Artist = {
-  id: string;
-  name: string;
-  email: string;
-  plan: ApiPlan;
-  verification: string;
-  status: string;
-  countryCode: string | null;
-  trackCount: number;
-  totalStreams: number;
-};
-
-const planLabel = (plan: ApiPlan): Plan =>
-  plan === "ARTIST_MAX" ? "Artist Max" : plan === "ARTIST_PRO" ? "Artist Pro" : "Artist Free";
-
-const formatStreams = (value: number) =>
-  new Intl.NumberFormat("en", { notation: "compact", maximumFractionDigits: 1 }).format(value);
-
-export default function ArtistsClient() {
-  const { t } = useAdminLanguage();
-  const [artists, setArtists] = useState<Artist[]>([]);
-  const [q, setQ] = useState("");
-  const [v, setV] = useState("ALL");
-  const [p, setP] = useState("ALL");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    let active = true;
-    fetch("/api/admin/artists", { cache: "no-store" })
-      .then(async (response) => {
-        const data = await response.json();
-        if (!response.ok || !data.ok) throw new Error(data.error || "Artist database query failed");
-        if (active) setArtists(data.artists);
-      })
-      .catch(() => active && setError(t("Artiesten konden niet uit de database worden geladen.", "Artists could not be loaded from the database.")))
-      .finally(() => active && setLoading(false));
-    return () => { active = false; };
-  }, [t]);
-
-  const shown = useMemo(() => {
-    const needle = q.trim().toLowerCase();
-    return artists.filter((a) => {
-      const label = planLabel(a.plan);
-      const verificationMatches = v === "ALL" || a.verification === v;
-      const planMatches = p === "ALL" || label === p;
-      const haystack = [a.id, a.name, a.email, label, a.verification, a.status, a.countryCode ?? "", a.trackCount, a.totalStreams].join(" ").toLowerCase();
-      return verificationMatches && planMatches && (!needle || haystack.includes(needle));
-    });
-  }, [artists, q, v, p]);
-
-  const planClass = (plan: Plan) => plan === "Artist Max" ? "revenue" : plan === "Artist Pro" ? "premium" : "free";
-
-  return <>
-    <div className="adminPageHead"><div><div className="adminEyebrow">{t("MAKERS", "CREATORS")}</div><h1 className="adminTitle">{t("Artiesten", "Artists")}</h1><p className="adminMuted">{t("Iedere artiest heeft een permanent MOCIFY Artiest-ID en een duidelijk zichtbaar Artist Free-, Pro- of Max-abonnement.", "Every artist has a permanent MOCIFY Artist ID and a clearly visible Artist Free, Pro or Max plan.")}</p></div><button className="adminPrimaryBtn" onClick={() => alert(t("De databasekoppeling is actief. Het invoerformulier bouwen we als volgende stap.", "The database connection is active. The creation form is the next step."))}>+ {t("Artiest toevoegen", "Add artist")}</button></div>
-    <div className="adminArtistSearch"><span>⌕</span><input value={q} onChange={e => setQ(e.target.value)} placeholder={t("Zoek Artiest-ID, naam, e-mail, abonnement, status of catalogus…", "Search Artist ID, name, email, plan, status or catalogue…")}/><select value={p} onChange={e => setP(e.target.value)}><option value="ALL">{t("Alle abonnementen", "All plans")}</option><option>Artist Free</option><option>Artist Pro</option><option>Artist Max</option></select><select value={v} onChange={e => setV(e.target.value)}><option value="ALL">{t("Alle verificaties", "All verification")}</option><option value="VERIFIED">{t("Geverifieerd", "Verified")}</option><option value="PENDING">{t("In afwachting", "Pending")}</option><option value="REJECTED">{t("Afgewezen", "Rejected")}</option></select></div>
-    <div className="adminArtistCount">{loading ? t("Database laden…", "Loading database…") : error || `${shown.length} ${t("artiesten gevonden", "artists found")}`}</div>
-    <div className="adminTableWrap adminArtistTable adminArtistScroll" style={{maxHeight:"560px",overflowY:"auto"}}><table className="adminTable"><thead><tr><th>{t("ARTIEST-ID","ARTIST ID")}</th><th>{t("ARTIEST","ARTIST")}</th><th>{t("ABONNEMENT","PLAN")}</th><th>{t("VERIFICATIE","VERIFICATION")}</th><th>{t("CATALOGUS","CATALOGUE")}</th><th>{t("TOTALE STREAMS","TOTAL STREAMS")}</th><th>STATUS</th><th></th></tr></thead><tbody>{shown.map(a => { const label = planLabel(a.plan); return <tr key={a.id}><td><strong>{a.id}</strong></td><td><Link className="adminArtistLink" href={`/admin/artists/${a.id}`}><strong>{a.name}</strong><small>{a.email}</small></Link></td><td><span className={`adminBadge ${planClass(label)}`}><strong>{label}</strong></span></td><td>{a.verification === "VERIFIED" ? t("Geverifieerd","Verified") : a.verification === "REJECTED" ? t("Afgewezen","Rejected") : t("In afwachting","Pending")}</td><td>{a.trackCount} {t("tracks","tracks")}</td><td><strong>{formatStreams(a.totalStreams)}</strong></td><td><span className="adminBadge">{a.status === "ACTIVE" ? t("Actief","Active") : a.status === "SUSPENDED" ? t("Geschorst","Suspended") : t("Gesloten","Closed")}</span></td><td><Link className="adminOpenBtn" href={`/admin/artists/${a.id}`}>{t("Account openen","Open account")} →</Link></td></tr>})}</tbody></table></div>
-  </>;
-}
+import Link from "next/link";import {useEffect,useMemo,useState} from "react";import {useAdminLanguage} from "../AdminLanguage";
+type ApiPlan="ARTIST_FREE"|"ARTIST_PRO"|"ARTIST_MAX";type Plan="Artist Free"|"Artist Pro"|"Artist Max";type Artist={id:string;name:string;email:string;plan:ApiPlan;verification:string;status:string;countryCode:string|null;trackCount:number;totalStreams:number};
+const planLabel=(plan:ApiPlan):Plan=>plan==="ARTIST_MAX"?"Artist Max":plan==="ARTIST_PRO"?"Artist Pro":"Artist Free";const formatStreams=(v:number)=>new Intl.NumberFormat("en",{notation:"compact",maximumFractionDigits:1}).format(v);
+export default function ArtistsClient(){const{t}=useAdminLanguage();const[artists,setArtists]=useState<Artist[]>([]);const[q,setQ]=useState("");const[v,setV]=useState("ALL");const[p,setP]=useState("ALL");const[loading,setLoading]=useState(true);const[error,setError]=useState("");const[showAdd,setShowAdd]=useState(false);const[saving,setSaving]=useState(false);const[form,setForm]=useState({email:"",displayName:"",legalName:"",countryCode:"NL",plan:"ARTIST_FREE"});
+const load=async()=>{setLoading(true);setError("");try{const r=await fetch("/api/admin/artists",{cache:"no-store"});const d=await r.json();if(!r.ok||!d.ok)throw new Error();setArtists(d.artists);}catch{setError(t("Artiesten konden niet uit de database worden geladen.","Artists could not be loaded from the database."));}finally{setLoading(false);}};useEffect(()=>{load();},[]);
+const create=async(e:React.FormEvent)=>{e.preventDefault();setSaving(true);setError("");try{const r=await fetch("/api/admin/artists",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(form)});const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||"Create failed");setShowAdd(false);setForm({email:"",displayName:"",legalName:"",countryCode:"NL",plan:"ARTIST_FREE"});await load();}catch(err){setError(err instanceof Error?err.message:"Create failed");}finally{setSaving(false);}};
+const shown=useMemo(()=>{const n=q.trim().toLowerCase();return artists.filter(a=>{const l=planLabel(a.plan);return(v==="ALL"||a.verification===v)&&(p==="ALL"||l===p)&&(!n||[a.id,a.name,a.email,l,a.verification,a.status,a.countryCode??"",a.trackCount,a.totalStreams].join(" ").toLowerCase().includes(n));});},[artists,q,v,p]);const planClass=(x:Plan)=>x==="Artist Max"?"revenue":x==="Artist Pro"?"premium":"free";
+return <><div className="adminPageHead"><div><div className="adminEyebrow">{t("MAKERS","CREATORS")}</div><h1 className="adminTitle">{t("Artiesten","Artists")}</h1><p className="adminMuted">{t("Iedere artiest heeft een permanent MOCIFY Artiest-ID en een zichtbaar abonnement.","Every artist has a permanent MOCIFY Artist ID and visible plan.")}</p></div><button className="adminPrimaryBtn" onClick={()=>setShowAdd(x=>!x)}>+ {t("Artiest toevoegen","Add artist")}</button></div>
+{showAdd&&<form onSubmit={create} className="adminRevenue" style={{marginBottom:20}}><div className="adminEyebrow">{t("NIEUWE ARTIEST","NEW ARTIST")}</div><h2>{t("Artiestaccount aanmaken","Create artist account")}</h2><div className="adminArtistSearch" style={{marginTop:16}}><input required type="email" placeholder="E-mail" value={form.email} onChange={e=>setForm({...form,email:e.target.value})}/><input required placeholder={t("Artiestennaam","Artist name")} value={form.displayName} onChange={e=>setForm({...form,displayName:e.target.value})}/><input placeholder={t("Wettelijke naam","Legal name")} value={form.legalName} onChange={e=>setForm({...form,legalName:e.target.value})}/><input maxLength={2} placeholder="NL" value={form.countryCode} onChange={e=>setForm({...form,countryCode:e.target.value.toUpperCase()})}/><select value={form.plan} onChange={e=>setForm({...form,plan:e.target.value})}><option value="ARTIST_FREE">Artist Free</option><option value="ARTIST_PRO">Artist Pro</option><option value="ARTIST_MAX">Artist Max</option></select><button disabled={saving} className="adminPrimaryBtn">{saving?t("Opslaan…","Saving…"):t("Aanmaken","Create")}</button></div></form>}
+<div className="adminArtistSearch"><span>⌕</span><input value={q} onChange={e=>setQ(e.target.value)} placeholder={t("Zoek Artiest-ID, naam, e-mail, abonnement, status of catalogus…","Search Artist ID, name, email, plan, status or catalogue…")}/><select value={p} onChange={e=>setP(e.target.value)}><option value="ALL">{t("Alle abonnementen","All plans")}</option><option>Artist Free</option><option>Artist Pro</option><option>Artist Max</option></select><select value={v} onChange={e=>setV(e.target.value)}><option value="ALL">{t("Alle verificaties","All verification")}</option><option value="ACTIVE">{t("Geverifieerd","Verified")}</option><option value="PENDING">{t("In afwachting","Pending")}</option><option value="BLOCKED">{t("Geblokkeerd","Blocked")}</option></select></div><div className="adminArtistCount">{loading?t("Database laden…","Loading database…"):error||`${shown.length} ${t("artiesten gevonden","artists found")}`}</div>
+<div className="adminTableWrap adminArtistTable adminArtistScroll" style={{maxHeight:"560px",overflowY:"auto"}}><table className="adminTable"><thead><tr><th>{t("ARTIEST-ID","ARTIST ID")}</th><th>{t("ARTIEST","ARTIST")}</th><th>{t("ABONNEMENT","PLAN")}</th><th>{t("VERIFICATIE","VERIFICATION")}</th><th>{t("CATALOGUS","CATALOGUE")}</th><th>{t("TOTALE STREAMS","TOTAL STREAMS")}</th><th>STATUS</th><th></th></tr></thead><tbody>{shown.map(a=>{const l=planLabel(a.plan);return <tr key={a.id}><td><strong>{a.id}</strong></td><td><Link className="adminArtistLink" href={`/admin/artists/${a.id}`}><strong>{a.name}</strong><small>{a.email}</small></Link></td><td><span className={`adminBadge ${planClass(l)}`}><strong>{l}</strong></span></td><td>{a.verification==="ACTIVE"?t("Geverifieerd","Verified"):a.verification==="BLOCKED"?t("Geblokkeerd","Blocked"):t("In afwachting","Pending")}</td><td>{a.trackCount} tracks</td><td><strong>{formatStreams(a.totalStreams)}</strong></td><td><span className="adminBadge">{a.status}</span></td><td><Link className="adminOpenBtn" href={`/admin/artists/${a.id}`}>{t("Account openen","Open account")} →</Link></td></tr>})}</tbody></table></div></>}
