@@ -1,0 +1,2 @@
+export const RISK_ENGINE_VERSION="0.1.0";
+export const riskConfig={levels:{monitor:30,review:50,hold:70},velocity:{ratioWarn:4,ratioCritical:10,maxPoints:25},repeat:{warn:40,critical:120,maxPoints:20},timing:{minimumSeconds:2,regularWindowSeconds:1,maxPoints:12},cluster:{warn:8,critical:30,maxPoints:25},session:{warnHours:12,criticalHours:20,maxPoints:12},payoutChangePoints:18,verifiedCampaignCredit:-12} as const;
