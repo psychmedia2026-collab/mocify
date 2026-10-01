@@ -1,0 +1,15 @@
+BEGIN;
+ALTER TABLE email_outbox ADD COLUMN IF NOT EXISTS public_id text;
+UPDATE email_outbox SET public_id='MAIL-'||upper(substr(replace(gen_random_uuid()::text,'-',''),1,16)) WHERE public_id IS NULL;
+ALTER TABLE email_outbox ADD COLUMN IF NOT EXISTS status text NOT NULL DEFAULT 'PENDING';
+ALTER TABLE email_outbox ADD COLUMN IF NOT EXISTS attempts integer NOT NULL DEFAULT 0;
+ALTER TABLE email_outbox ADD COLUMN IF NOT EXISTS next_attempt_at timestamptz NOT NULL DEFAULT now();
+ALTER TABLE email_outbox ADD COLUMN IF NOT EXISTS sent_at timestamptz;
+ALTER TABLE email_outbox ADD COLUMN IF NOT EXISTS last_error text;
+CREATE INDEX IF NOT EXISTS email_outbox_delivery_idx ON email_outbox(status,next_attempt_at);
+ALTER TABLE media_assets ADD COLUMN IF NOT EXISTS deleted_at timestamptz;
+ALTER TABLE media_assets ADD COLUMN IF NOT EXISTS replaced_by_id uuid REFERENCES media_assets(id);
+ALTER TABLE tracks ADD COLUMN IF NOT EXISTS audio_asset_id uuid REFERENCES media_assets(id);
+ALTER TABLE tracks ADD COLUMN IF NOT EXISTS cover_asset_id uuid REFERENCES media_assets(id);
+ALTER TABLE tracks ADD COLUMN IF NOT EXISTS deleted_at timestamptz;
+COMMIT;
