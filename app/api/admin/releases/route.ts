@@ -1,0 +1,3 @@
+import { NextRequest,NextResponse } from 'next/server'; import {createRelease,listReleases} from '@/lib/server/operations'; export const runtime='nodejs';export const dynamic='force-dynamic';
+export async function GET(){try{return NextResponse.json({ok:true,releases:await listReleases()});}catch(e){console.error(e);return NextResponse.json({ok:false,error:'Release query failed'},{status:500});}}
+export async function POST(req:NextRequest){try{const b=await req.json();if(!b.artistId||!b.title)return NextResponse.json({ok:false,error:'artistId and title are required'},{status:400});return NextResponse.json({ok:true,release:await createRelease(b)},{status:201});}catch(e){console.error(e);return NextResponse.json({ok:false,error:'Release creation failed'},{status:400});}}
