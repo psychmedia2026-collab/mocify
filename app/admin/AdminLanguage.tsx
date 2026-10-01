@@ -1,0 +1,7 @@
+"use client";
+import{createContext,useContext,useEffect,useState}from"react";
+export type AdminLanguage="nl"|"en";
+const Context=createContext<{language:AdminLanguage;setLanguage:(v:AdminLanguage)=>void;t:(nl:string,en:string)=>string}>({language:"nl",setLanguage:()=>{},t:nl=>nl});
+export function AdminLanguageProvider({children}:{children:React.ReactNode}){const[language,setLanguageState]=useState<AdminLanguage>("nl");useEffect(()=>{const saved=localStorage.getItem("mocify-admin-language");if(saved==="en"||saved==="nl")setLanguageState(saved)},[]);const setLanguage=(v:AdminLanguage)=>{setLanguageState(v);localStorage.setItem("mocify-admin-language",v)};return <Context.Provider value={{language,setLanguage,t:(nl,en)=>language==="nl"?nl:en}}>{children}</Context.Provider>}
+export function useAdminLanguage(){return useContext(Context)}
+export function AdminLanguageSwitch(){const{language,setLanguage}=useAdminLanguage();return <div style={{display:"flex",gap:4,padding:4,border:"1px solid #33415f",borderRadius:10,background:"#0c1324"}} aria-label="Admin language"><button type="button" onClick={()=>setLanguage("nl")} style={{border:0,borderRadius:7,padding:"7px 10px",cursor:"pointer",fontWeight:800,background:language==="nl"?"#7c4ce0":"transparent",color:"white"}}>NL</button><button type="button" onClick={()=>setLanguage("en")} style={{border:0,borderRadius:7,padding:"7px 10px",cursor:"pointer",fontWeight:800,background:language==="en"?"#7c4ce0":"transparent",color:"white"}}>EN</button></div>}
