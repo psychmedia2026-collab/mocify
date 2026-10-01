@@ -1,0 +1,1 @@
+import 'server-only';import {cookies} from 'next/headers';import {sessionAccount} from './auth';export async function requireAccount(){const c=await cookies();const raw=c.get('mocify_session')?.value;if(!raw)throw new Error('Unauthorized');const a=await sessionAccount(raw);if(!a)throw new Error('Unauthorized');return a;}
